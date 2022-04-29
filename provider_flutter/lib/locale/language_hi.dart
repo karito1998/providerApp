@@ -463,6 +463,8 @@ class LanguageHi extends Languages {
 
   @override
   String lblInvalidUrl = 'अवैध यूआरएल:';
+  @override
+  String lblInvalidEmail = 'अवैध यूआरएल:';
 
   @override
   String errorPasswordLength = 'पासवर्ड की लंबाई से अधिक होना चाहिए';

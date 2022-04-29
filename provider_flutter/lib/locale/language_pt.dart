@@ -462,6 +462,8 @@ class LanguagePt extends Languages {
 
   @override
   String lblInvalidUrl = 'URL inválida:';
+  @override
+  String lblInvalidEmail = 'Email inválida';
 
   @override
   String errorPasswordLength = 'O comprimento da senha deve ser mais do que';

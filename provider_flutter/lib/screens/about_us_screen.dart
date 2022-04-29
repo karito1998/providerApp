@@ -77,13 +77,13 @@ class AboutUsScreenState extends State<AboutUsScreen> {
                   launchUrlCustomTab(appStore.privacyPolicy.isNotEmpty ? appStore.privacyPolicy.validate() : privacyPolicyUrl);
                 } else if (index == 2) {
                   if (appStore.inquiryEmail.isNotEmpty) {
-                    launchUrl(MAIL_TO + appStore.inquiryEmail.validate());
+                    launchUri(MAIL_TO + appStore.inquiryEmail.validate());
                   } else {
                     launchUrlCustomTab(helpSupportUrl);
                   }
                 } else if (index == 3) {
                   if (appStore.helplineNumber.isNotEmpty) {
-                    launchUrl(TEL + appStore.helplineNumber.validate());
+                    launchUri(TEL + appStore.helplineNumber.validate());
                   } else {
                     //TODO Translate
                     toast("Not Available Helpline Number");

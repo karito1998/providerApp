@@ -5,7 +5,7 @@ const mAppName = 'HelpiRD';
 //endregion
 
 //region AppBase URl
-const url = 'https://helpird.com/#'; // Don't add slash at the end of the url
+const url = 'https://helpird.com'; // Don't add slash at the end of the url
 const mBaseUrl = "$url/api/";
 
 const termsConditionUrl = 'https://iqonic.design/terms-of-use/';

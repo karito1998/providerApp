@@ -150,7 +150,7 @@ class BasicInfoComponentState extends State<BasicInfoComponent> {
                       color: primaryColor,
                       elevation: 0,
                       onTap: () {
-                        launchUrl(TEL + contactNumber.validate());
+                        launchUri(TEL + contactNumber.validate());
                       },
                     ).expand(),
                   if (contactNumber.validate().isNotEmpty) 24.width,

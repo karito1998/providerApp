@@ -310,6 +310,7 @@ abstract class Languages {
   String get lblNoDataFound;
 
   String get lblInvalidUrl;
+  String get lblInvalidEmail;
 
   String get errorPasswordLength;
 

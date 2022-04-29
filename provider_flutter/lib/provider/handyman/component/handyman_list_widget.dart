@@ -246,7 +246,7 @@ class _HandymanListWidgetState extends State<HandymanListWidget> {
                             ).flexible()
                           ],
                         ).onTap(() {
-                          launchUrl('mailto:' + widget.data.email.validate());
+                          launchUri('mailto:' + widget.data.email.validate());
                         }),
                         12.height,
                       ],
@@ -285,7 +285,7 @@ class _HandymanListWidgetState extends State<HandymanListWidget> {
                         ).flexible()
                       ],
                     ).onTap(() {
-                      launchUrl(TEL + widget.data.contactNumber.validate());
+                      launchUri(TEL + widget.data.contactNumber.validate());
                     }),
                 ],
               ).expand(),

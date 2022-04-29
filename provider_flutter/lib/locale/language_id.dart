@@ -462,6 +462,8 @@ class LanguageId extends Languages {
 
   @override
   String lblInvalidUrl = 'URL tidak valid:';
+  @override
+  String lblInvalidEmail = 'Email tidak valid';
 
   @override
   String errorPasswordLength = 'Panjang kata sandi harus lebih dari';

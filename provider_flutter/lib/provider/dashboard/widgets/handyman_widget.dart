@@ -90,7 +90,7 @@ class _HandymanWidgetState extends State<HandymanWidget> {
                       if (widget.data!.contactNumber.validate().isNotEmpty)
                         TextIcon(
                           onTap: () {
-                            launchUrl(TEL + widget.data!.contactNumber.validate());
+                            launchUri(TEL + widget.data!.contactNumber.validate());
                           },
                           prefix: Container(
                             padding: EdgeInsets.all(8),
@@ -104,7 +104,7 @@ class _HandymanWidgetState extends State<HandymanWidget> {
                       if (widget.data!.email.validate().isNotEmpty)
                         TextIcon(
                           onTap: () {
-                            launchUrl('mailto:' + widget.data!.email.validate());
+                            launchUri('mailto:' + widget.data!.email.validate());
                           },
                           prefix: Container(
                             padding: EdgeInsets.all(8),

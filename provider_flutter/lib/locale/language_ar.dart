@@ -464,6 +464,9 @@ class LanguageAr extends Languages {
   String lblInvalidUrl = 'URL غير صالح:';
 
   @override
+  String lblInvalidEmail = 'غير صالح:';
+
+  @override
   String errorPasswordLength = 'يجب أن يكون طول كلمة المرور أكثر من';
 
   @override

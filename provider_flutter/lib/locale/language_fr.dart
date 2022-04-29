@@ -463,6 +463,8 @@ class LanguageFr extends Languages {
 
   @override
   String lblInvalidUrl = 'URL invalide:';
+  @override
+  String lblInvalidEmail = 'Email invalide';
 
   @override
   String errorPasswordLength = 'La longueur du mot de passe doit être plus que';

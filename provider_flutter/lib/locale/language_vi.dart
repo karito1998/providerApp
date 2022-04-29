@@ -464,6 +464,8 @@ class LanguageVi extends Languages {
 
   @override
   String lblInvalidUrl = 'URL không hợp lệ:';
+  @override
+  String lblInvalidEmail = 'Email không hợp lệ';
 
   @override
   String errorPasswordLength = 'Chiều dài mật khẩu phải nhiều hơn';

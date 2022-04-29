@@ -162,7 +162,7 @@ Widget statusButton(double width, String btnTxt, Color color, Color txtcolor, {F
   );
 }
 
-Future<void> launchUrl(String url, {bool forceWebView = false, bool forceSafariVC = false}) async {
+Future<void> launchUri(String url, {bool forceWebView = false, bool forceSafariVC = false}) async {
   await url_launcher.launch(url, forceWebView: forceWebView, enableJavaScript: true, forceSafariVC: forceSafariVC).catchError((e) {
     toast('Invalid URL: $url');
   });

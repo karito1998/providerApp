@@ -463,6 +463,8 @@ class LanguageTr extends Languages {
 
   @override
   String lblInvalidUrl = 'Geçersiz URL:';
+  @override
+  String lblInvalidEmail = 'Geçersiz Email';
 
   @override
   String errorPasswordLength = 'Şifre uzunluğu daha fazla olmalı';

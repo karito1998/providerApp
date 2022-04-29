@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+
   cupertino_icons: ^1.0.4
   nb_utils: ^4.4.13
   mobx: ^2.0.6+1
@@ -32,6 +33,7 @@ dependencies:
   flutter_custom_tabs: ^1.0.4
 
   #image:
+  flutter_svg: ^1.0.3
   path_provider: ^2.0.8
   image_picker: ^0.8.4+5
   multi_image_picker: ^4.8.1

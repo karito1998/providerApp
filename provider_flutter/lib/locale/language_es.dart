@@ -77,7 +77,7 @@ class LanguageEs extends Languages {
   String rememberMe = 'Recuérdame';
 
   @override
-  String forgotPasswordTitleTxt = 'Ingresa el correo electrónico para restablecer \ n su contraseña';
+  String forgotPasswordTitleTxt = 'Ingresa el correo electrónico para restablecer su contraseña';
 
   @override
   String resetPassword = 'Restablecer la contraseña';
@@ -464,7 +464,10 @@ class LanguageEs extends Languages {
   String lblInvalidUrl = 'URL invalida:';
 
   @override
-  String errorPasswordLength = 'La longitud de la contraseña debe ser más de';
+  String lblInvalidEmail = 'El correo no es valido';
+
+  @override
+  String errorPasswordLength = 'La contraseña debe contener más de';
 
   @override
   String hintEmailAddress = 'Correo electrónico';
@@ -553,7 +556,7 @@ class LanguageEs extends Languages {
 
 
   @override
-  String lblsignuptitle = "Hola usuario!";
+  String lblsignuptitle = "¡Bienvenido!";
 
 
   @override
@@ -561,11 +564,11 @@ class LanguageEs extends Languages {
 
 
   @override
-  String lblLogin = "Acceso";
+  String lblLogin = "Iniciar sesion";
 
 
   @override
-  String lblsignup = "Registrarse";
+  String lblsignup = "Regístrate";
 
 
   @override

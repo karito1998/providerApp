@@ -1,3 +1,4 @@
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -147,6 +148,9 @@ class _SignInScreenState extends State<SignInScreen> {
           });
         }
       }).catchError((e) {
+        if(e.toString() == "These credentials do not match our records." )
+          toast("No pudimos encontrar un usuario con estas credenciales", print: true);
+        else
         toast(e.toString(), print: true);
         appStore.setLoading(false);
       });
@@ -180,7 +184,13 @@ class _SignInScreenState extends State<SignInScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    32.height,
+                    Center(child: Image.asset(
+                      //"images/app_images/logo.svg",
+                      "images/setting_icon/ic_splash_logo.png",
+                      height: 100.0,
+                      alignment: Alignment.center,
+                    )),
+                    16.height,
                     Text(context.translate.lbllogintitle, style: boldTextStyle(size: 22)).center(),
                     16.height,
                     Text(
@@ -195,8 +205,9 @@ class _SignInScreenState extends State<SignInScreen> {
                       focus: emailFocus,
                       nextFocus: passwordFocus,
                       errorThisFieldRequired: context.translate.hintRequired,
+                      errorInvalidEmail: context.translate.lblInvalidEmail,
                       decoration: inputDecoration(context, hint: context.translate.hintEmailAddress),
-                      suffix: ic_message.iconImage(size: 10).paddingAll(14),
+
                       autoFillHints: [AutofillHints.email],
                     ),
                     16.height,
@@ -205,7 +216,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       controller: passwordCont,
                       focus: passwordFocus,
                       errorThisFieldRequired: context.translate.hintRequired,
-                      errorMinimumPasswordLength: "${context.translate.errorPasswordLength} $passwordLengthGlobal",
+                      errorMinimumPasswordLength: "${context.translate.errorPasswordLength} $passwordLengthGlobal caracteres",
                       decoration: inputDecoration(context, hint: context.translate.hintPassword),
                       autoFillHints: [AutofillHints.password],
                       onFieldSubmitted: (s) {
@@ -213,9 +224,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       },
                     ),
                     8.height,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
+
                         Row(
                           children: [
                             2.width,
@@ -234,6 +243,9 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                           ],
                         ),
+                    Row(
+                      children: [
+                        Expanded(child:SizedBox(height: 1,)),
                         TextButton(
                           child: Text(
                             context.translate.forgotPassword,
@@ -286,6 +298,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       alignment: WrapAlignment.center,
                       spacing: 16,
                       children: [
+                      /*
                         OutlinedButton(
                           onPressed: () {
                             emailCont.text = DEFAULT_PROVIDER_EMAIL;
@@ -299,13 +312,14 @@ class _SignInScreenState extends State<SignInScreen> {
                             passwordCont.text = DEFAULT_PASS;
                           },
                           child: Text("Demo Handyman", style: boldTextStyle(color: primaryColor, size: 14)),
-                        ).withWidth(context.width() / 2 - 24),
-                        TextButton(
+                        ).withWidth(context.width() / 2 - 24),*/
+                        Center (child:TextButton(
                           child: Text("Reset", style: secondaryTextStyle()),
                           onPressed: () {
                             emailCont.clear();
                             passwordCont.clear();
                           },
+                        ),
                         ),
                       ],
                     ),

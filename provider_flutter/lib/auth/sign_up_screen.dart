@@ -88,16 +88,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
           //
         }).catchError((e) {
           if (e.toString() == USER_CANNOT_LOGIN) {
-            toast("Please Login Again");
+            toast("Registro completo, por favor inicia sesion");
             SignInScreen().launch(context, isNewTask: true);
           } else if (e.toString() == USER_NOT_CREATED) {
-            toast("Please Login Again");
+            toast("Registro completo, por favor inicia sesion");
             SignInScreen().launch(context, isNewTask: true);
           }
         });
 
         appStore.setLoading(false);
       }).catchError((e) {
+        appStore.setLoading(false);
+        if(e.toString() == "The username has already been taken." )
+          toast("El usuario ya existe.", print: true);
+        if(e.toString() == "The contact number must be between 10 and 12 digits." )
+          toast("El numero de contacto debe contener entre 10 y 12 digitos", print: true);
+        else
         log(e.toString());
       });
     }
@@ -197,6 +203,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       controller: passwordCont,
                       focus: passwordFocus,
                       errorThisFieldRequired: context.translate.hintRequired,
+                      errorMinimumPasswordLength: "${context.translate.errorPasswordLength} $passwordLengthGlobal caracteres",
                       decoration: inputDecoration(context, hint: context.translate.hintPassword),
                       onFieldSubmitted: (s) {
                         register();
