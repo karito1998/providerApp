@@ -464,8 +464,6 @@ class LanguageVi extends Languages {
 
   @override
   String lblInvalidUrl = 'URL không hợp lệ:';
-  @override
-  String lblInvalidEmail = 'Email không hợp lệ';
 
   @override
   String errorPasswordLength = 'Chiều dài mật khẩu phải nhiều hơn';
@@ -902,4 +900,67 @@ class LanguageVi extends Languages {
 
   @override
   String lblEnterMinute = "Nhập phút tối đa 60 phút";
+
+  @override
+  String lblSelectSubCategory = "Chọn tiểu thể loại";
+
+  @override
+  String lblServiceProof = "Bằng chứng dịch vụ";
+
+  @override
+  String lblTitle = "Tiêu đề";
+
+  @override
+  String lblAddImage = "Thêm hình ảnh";
+
+  @override
+  String lblSubmit = "Nộp";
+
+  @override
+  String lblNotHelpLineNum = "Không có số đường dây trợ giúp không có sẵn";
+
+  @override
+  String lblWalletHistory = "Lịch sử ví";
+
+  @override
+  String lblServiceRatings = "Xếp hạng dịch vụ";
+
+  @override
+  String lblNoServiceRatings = "Không có xếp hạng dịch vụ";
+
+  @override
+  String lblEmail = "E-mail";
+
+  @override
+  String lblWallet = "Cái ví";
+
+  @override
+  String lblSelectUserType = "E-mail";
+
+  @override
+  String lblIAgree = "Cái ví";
+
+  @override
+  String lblTermsOfService = "Chọn loại người dùng";
+
+  @override
+  String lblLoginAgain = "tôi đồng ý với";
+
+  @override
+  String lblTermCondition = "Điều khoản dịch vụ";
+
+  @override
+  String lblServiceTotalTime = "Xin vui lòng đăng nhập lại";
+
+  @override
+  String lblHelpLineNum = "Số đường dây trợ giúp";
+
+  @override
+  String lblReasonCancelling = "Lý do để hủy đặt phòng này";
+
+  @override
+  String lblReasonRejecting = "Lý do từ chối đặt phòng này";
+
+  @override
+  String lblFailed = "Lý do tại sao đặt phòng này không thành công";
 }

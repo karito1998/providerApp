@@ -463,8 +463,6 @@ class LanguageFr extends Languages {
 
   @override
   String lblInvalidUrl = 'URL invalide:';
-  @override
-  String lblInvalidEmail = 'Email invalide';
 
   @override
   String errorPasswordLength = 'La longueur du mot de passe doit être plus que';
@@ -900,5 +898,68 @@ class LanguageFr extends Languages {
 
   @override
   String lblEnterMinute = "Entrez une minute jusqu'à 60 minutes";
+
+  @override
+  String lblSelectSubCategory = "Sélectionner la sous-catégorie";
+
+  @override
+  String lblServiceProof = "Preuve de service";
+
+  @override
+  String lblTitle = "Titre";
+
+  @override
+  String lblAddImage = "Ajouter une image";
+
+  @override
+  String lblSubmit = "Soumettre";
+
+  @override
+  String lblNotHelpLineNum = "NON DISPONIBLE NUMÉRO DE HELPLINE";
+
+  @override
+  String lblWalletHistory = "Histoire du portefeuille";
+
+  @override
+  String lblServiceRatings = "Notes de service";
+
+  @override
+  String lblNoServiceRatings = "Aucune note de service";
+
+  @override
+  String lblEmail = "E-mail";
+
+  @override
+  String lblWallet = "Porte monnaie";
+
+  @override
+  String lblSelectUserType = "E-mail";
+
+  @override
+  String lblIAgree = "Porte monnaie";
+
+  @override
+  String lblTermsOfService = "Sélectionner le type d'utilisateur";
+
+  @override
+  String lblLoginAgain = "je suis d'accord avec le";
+
+  @override
+  String lblTermCondition = "Conditions d'utilisation";
+
+  @override
+  String lblServiceTotalTime = "Veuillez vous connecter à nouveau";
+
+  @override
+  String lblHelpLineNum = "Numéro d'assistance téléphonique";
+
+  @override
+  String lblReasonCancelling = "Raison d'annuler cette réservation";
+
+  @override
+  String lblReasonRejecting = "Raison de rejeter cette réservation";
+
+  @override
+  String lblFailed = "Raison pour laquelle cette réservation est échouée";
 
 }

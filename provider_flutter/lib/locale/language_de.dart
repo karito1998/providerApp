@@ -464,9 +464,6 @@ class LanguageDe extends Languages {
   String lblInvalidUrl = 'Ungültige URL:';
 
   @override
-  String lblInvalidEmail = 'Ungültige Email';
-
-  @override
   String errorPasswordLength = 'Die Passwortlänge sollte mehr als sein';
 
   @override
@@ -901,4 +898,67 @@ class LanguageDe extends Languages {
 
   @override
   String lblEnterMinute = "Geben Sie bis zu 60 Minuten ein";
+
+  @override
+  String lblSelectSubCategory = "Wählen Sie Unterkategorie";
+
+  @override
+  String lblServiceProof = "Service -Beweis";
+
+  @override
+  String lblTitle = "Titel";
+
+  @override
+  String lblAddImage = "Bild hinzufügen";
+
+  @override
+  String lblSubmit = "Einreichen";
+
+  @override
+  String lblNotHelpLineNum = "Keine verfügbare Helpline -Nummer";
+
+  @override
+  String lblWalletHistory = "Brieftaschengeschichte";
+
+  @override
+  String lblServiceRatings = "Servicemittel";
+
+  @override
+  String lblNoServiceRatings = "Keine Servicemittel";
+
+  @override
+  String lblEmail = "Email";
+
+  @override
+  String lblWallet = "Brieftasche";
+
+  @override
+  String lblSelectUserType = "Email";
+
+  @override
+  String lblIAgree = "Brieftasche";
+
+  @override
+  String lblTermsOfService = "Wählen Sie Benutzerart";
+
+  @override
+  String lblLoginAgain = "Ich stimme dem zu";
+
+  @override
+  String lblTermCondition = "Nutzungsbedingungen";
+
+  @override
+  String lblServiceTotalTime = "Bitte melden Sie sich erneut an";
+
+  @override
+  String lblHelpLineNum = "Helpline -Nummer";
+
+  @override
+  String lblReasonCancelling = "Grund für die Absage dieser Buchung";
+
+  @override
+  String lblReasonRejecting = "Grund für die Ablehnung dieser Buchung";
+
+  @override
+  String lblFailed = "Grund, warum diese Buchung gescheitert ist";
 }

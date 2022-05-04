@@ -42,8 +42,8 @@ class StripeServices {
       'amount': '${(totalAmount.toInt() * 100)}',
 
       ///TODO: UnComment Currency Code..
-      // 'currency': '${appStore.currencyCode}',
-      'currency': 'INR',
+      'currency': '${appStore.currencyCode}',
+      // 'currency': 'INR',
     };
 
     log(request.bodyFields);
@@ -83,13 +83,12 @@ class StripeServices {
             (value) async {
               savePayment(data: data, paymentMethod: PAYMENT_METHOD_STRIPE, paymentStatus: SERVICE_PAYMENT_STATUS_PAID);
               onPaymentComplete?.call();
-              savePayment(data: data, paymentMethod: PAYMENT_METHOD_STRIPE, paymentStatus: "paid");
             },
           ).catchError((e) {
             log("presentPaymentSheet ${e.toString()}");
           });
         } else if (response.statusCode == 400) {
-          toast("Testing Credential cannot pay more then 500 ");
+          toast("Testing Credential cannot pay more then 500");
         }
       }).catchError((e) {
         appStore.setLoading(false);

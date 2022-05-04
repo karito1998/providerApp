@@ -48,7 +48,7 @@ class PriceCommonWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(context.translate.hintPrice, style: boldTextStyle()).expand(),
-                  PriceWidget(price: serviceDetail.price.validate(), color: textSecondaryColorGlobal, isBoldText: false).flexible(),
+                  PriceWidget(price: serviceDetail.price.validate(), color: textSecondaryColorGlobal, isBoldText: false, size: 18).flexible(),
                 ],
               ),
               if (bookingDetail.type == ServiceTypeFixed)
@@ -62,7 +62,7 @@ class PriceCommonWidget extends StatelessWidget {
                         Text(context.translate.lblSubTotal, style: boldTextStyle()),
                         8.width,
                         Text(
-                          '${appStore.currencySymbol}${price(serviceDetail.price.validate())} * ${bookingDetail.quantity}  = ${appStore.currencySymbol}${(price(serviceDetail.price.validate()) * bookingDetail.quantity.validate())}',
+                          '${appStore.currencySymbol}${price(serviceDetail.price.validate())} * ${bookingDetail.quantity} = ${appStore.currencySymbol}${(price(serviceDetail.price.validate() * bookingDetail.quantity.validate()))}',
                           style: secondaryTextStyle(size: 18),
                         ).flexible(),
                       ],
@@ -139,7 +139,7 @@ class PriceCommonWidget extends StatelessWidget {
                     children: [
                       6.height,
                       Text(
-                        "On basis of ${calculateTimer(bookingDetail.durationDiff.validate().toInt())} ${getMinHour(durationDiff: bookingDetail.durationDiff.validate())}",
+                        "${context.translate.lblOnBasisOf} ${calculateTimer(bookingDetail.durationDiff.validate().toInt())} ${getMinHour(durationDiff: bookingDetail.durationDiff.validate())}",
                         style: secondaryTextStyle(),
                         textAlign: TextAlign.right,
                       ),

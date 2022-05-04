@@ -35,10 +35,32 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-3940256099942544~1458002511</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>https</string>
+		<string>http</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>yourdomain.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
+			</dict>
+		</dict>
+	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Provider app requires access to the Camera to upload your profile photo.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Provider app requires address permission access to get the current location of the user instead of typing address manually. </string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Provider app requires address permission access to get the current location of the user instead of typing address manually. </string>
 	<key>NSLocationWhenInUseUsageDescription</key>
@@ -46,7 +68,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Provider app requires access to the photo library to upload your profile photo.</string>
 	<key>Privacy-Location Usage Description</key>
-	<string>Booking System app requires address permission access to get the current location of the user instead of typing address manually. </string>
+	<string>Provider app requires address permission access to get the current location of the user instead of typing address manually. </string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>

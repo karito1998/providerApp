@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/booking_detail_response.dart';
 import 'package:handyman_provider_flutter/models/service_model.dart';
 import 'package:handyman_provider_flutter/models/user_data.dart';
-import 'package:handyman_provider_flutter/screens/chatting_screen.dart';
+import 'package:handyman_provider_flutter/screens/chat/user_chat_screen.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
@@ -11,6 +12,7 @@ import 'package:handyman_provider_flutter/utils/extensions/string_extension.dart
 import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:handyman_provider_flutter/widgets/disabled_rating_bar_widget.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BasicInfoComponent extends StatefulWidget {
   final UserData? handymanData;
@@ -56,6 +58,11 @@ class BasicInfoComponentState extends State<BasicInfoComponent> {
       contactNumber = widget.customerData!.contactNumber.validate();
       address = widget.customerData!.address.validate();
       userData = widget.customerData!;
+      await userService.getUser(email: widget.customerData!.email.validate()).then((value) {
+        widget.customerData!.uid = value.uid;
+      }).catchError((e) {
+        log(e.toString());
+      });
     } else if (widget.flag == 1) {
       profileId = widget.handymanData!.id.validate();
       name = widget.handymanData!.displayName.validate();
@@ -63,6 +70,11 @@ class BasicInfoComponentState extends State<BasicInfoComponent> {
       contactNumber = widget.handymanData!.contactNumber.validate();
       address = widget.handymanData!.address.validate();
       userData = widget.handymanData!;
+      await userService.getUser(email: widget.handymanData!.email.validate()).then((value) {
+        widget.handymanData!.uid = value.uid;
+      }).catchError((e) {
+        log(e.toString());
+      });
     } else {
       profileId = widget.providerData!.id.validate();
       name = widget.providerData!.displayName.validate();
@@ -111,7 +123,9 @@ class BasicInfoComponentState extends State<BasicInfoComponent> {
                             6.width,
                             Text(userData.email.validate(), style: secondaryTextStyle()).flexible(),
                           ],
-                        ),
+                        ).onTap(() {
+                          launchMail(userData.email.validate());
+                        }),
                       if (widget.bookingDetail != null && widget.flag == 0)
                         Column(
                           children: [
@@ -125,7 +139,9 @@ class BasicInfoComponentState extends State<BasicInfoComponent> {
                               ],
                             ),
                           ],
-                        ),
+                        ).onTap(() {
+                          commonLaunchUrl('$GOOGLE_MAP_PREFIX${Uri.encodeFull(widget.bookingDetail!.address.validate())}', launchMode: LaunchMode.externalApplication);
+                        }),
                       if (widget.flag == 1) DisabledRatingBarWidget(rating: userData.handymanRating.validate().toDouble(), size: 14),
                     ],
                   ).expand()
@@ -150,7 +166,7 @@ class BasicInfoComponentState extends State<BasicInfoComponent> {
                       color: primaryColor,
                       elevation: 0,
                       onTap: () {
-                        launchUri(TEL + contactNumber.validate());
+                        launchCall(contactNumber.validate());
                       },
                     ).expand(),
                   if (contactNumber.validate().isNotEmpty) 24.width,
@@ -166,8 +182,8 @@ class BasicInfoComponentState extends State<BasicInfoComponent> {
                     width: context.width(),
                     elevation: 0,
                     color: context.scaffoldBackgroundColor,
-                    onTap: () {
-                      ChattingScreen(userData: userData).launch(context);
+                    onTap: () async {
+                      UserChatScreen(receiverUser: userData).launch(context);
                     },
                   ).expand(),
                 ],

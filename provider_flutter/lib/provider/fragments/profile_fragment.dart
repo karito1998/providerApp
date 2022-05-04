@@ -11,7 +11,7 @@ import 'package:handyman_provider_flutter/networks/rest_apis.dart';
 import 'package:handyman_provider_flutter/provider/handyman/all_handyman_list_screen.dart';
 import 'package:handyman_provider_flutter/provider/service_address/service_addresses_screen.dart';
 import 'package:handyman_provider_flutter/provider/services/service_list_screen.dart';
-import 'package:handyman_provider_flutter/provider/sub_scription/subscription_History_screen.dart';
+import 'package:handyman_provider_flutter/provider/subscription/subscription_history_screen.dart';
 import 'package:handyman_provider_flutter/provider/taxes/taxes_screen.dart';
 import 'package:handyman_provider_flutter/screens/about_us_screen.dart';
 import 'package:handyman_provider_flutter/screens/languages_screen.dart';
@@ -23,6 +23,8 @@ import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../wallet/wallet_history_screen.dart';
 
 class ProfileFragment extends StatefulWidget {
   final List<Handyman>? list;
@@ -110,7 +112,7 @@ class ProfileFragmentState extends State<ProfileFragment> {
                   ),
                 ],
               ).center().visible(appStore.isLoggedIn),
-              if (getBoolAsync(IS_PLAN_SUBSCRIBE))
+              if (appStore.earningTypeSubscription && appStore.isPlanSubscribe)
                 Column(
                   children: [
                     32.height,
@@ -154,8 +156,8 @@ class ProfileFragmentState extends State<ProfileFragment> {
                 ),
                 child: Column(
                   children: [
-                    24.height,
-                    if (getStringAsync(EARNING_TYPE) != EARNING_TYPE_COMMISSION)
+                    16.height,
+                    if (appStore.earningTypeSubscription)
                       SettingItemWidget(
                         leading: Image.asset(services, height: 20, width: 20, color: appStore.isDarkMode ? white : gray.withOpacity(0.8)),
                         title: context.translate.lblSubscriptionHistory,
@@ -166,7 +168,7 @@ class ProfileFragmentState extends State<ProfileFragment> {
                           });
                         },
                       ),
-                    if (getStringAsync(EARNING_TYPE) != EARNING_TYPE_COMMISSION) Divider(height: 0, thickness: 1, indent: 15.0, endIndent: 15.0).visible(appStore.isLoggedIn),
+                    if (appStore.earningTypeSubscription) Divider(height: 0, thickness: 1, indent: 15.0, endIndent: 15.0).visible(appStore.isLoggedIn),
                     SettingItemWidget(
                       leading: Image.asset(services, height: 20, width: 20, color: appStore.isDarkMode ? white : gray.withOpacity(0.8)),
                       title: context.translate.lblServices,
@@ -227,6 +229,26 @@ class ProfileFragmentState extends State<ProfileFragment> {
                         TaxesScreen().launch(context, pageRouteAnimation: PageRouteAnimation.Slide);
                       },
                     ),
+                    if (appStore.earningTypeCommission)
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Divider(height: 0, thickness: 1, indent: 15.0, endIndent: 15.0).visible(appStore.isLoggedIn),
+                          SettingItemWidget(
+                            leading: Image.asset(
+                              percent_line,
+                              height: 20,
+                              width: 20,
+                              color: appStore.isDarkMode ? white : gray.withOpacity(0.8),
+                            ),
+                            title: context.translate.lblWalletHistory,
+                            trailing: Icon(Icons.chevron_right, color: appStore.isDarkMode ? white : gray.withOpacity(0.8), size: 24),
+                            onTap: () {
+                              WalletHistoryScreen().launch(context, pageRouteAnimation: PageRouteAnimation.Slide);
+                            },
+                          ),
+                        ],
+                      ),
                     Divider(height: 0, thickness: 1, indent: 15.0, endIndent: 15.0).visible(appStore.isLoggedIn),
                     SettingItemWidget(
                       leading: Image.asset(

@@ -38,6 +38,7 @@ class _BookingSummaryDialogState extends State<BookingSummaryDialog> {
 
       appStore.setLoading(false);
     }).catchError((e) {
+      finish(context);
       appStore.setLoading(false);
       toast(e.toString());
     });
@@ -79,7 +80,7 @@ class _BookingSummaryDialogState extends State<BookingSummaryDialog> {
                   ),
                 ),
                 SingleChildScrollView(
-                  padding: EdgeInsets.only(right: 16, left: 16, top: 16),
+                  padding: EdgeInsets.only(right: 16, left: 16, top: 16,bottom: 74),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,

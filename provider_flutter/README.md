@@ -1,9 +1,4 @@
-# helpird_provider
-1. Change DataBaseURL in utils/constant
-2. Change primary color
-3. Change language
-4. Correct spanish words
-5. Change URLs
+# handyman_provider_flutter
 
 A new Flutter project.
 

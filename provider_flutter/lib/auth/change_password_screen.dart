@@ -7,6 +7,8 @@ import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
+import 'package:handyman_provider_flutter/utils/extensions/string_extension.dart';
+import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:handyman_provider_flutter/utils/model_keys.dart';
 import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -101,6 +103,8 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       textFieldType: TextFieldType.PASSWORD,
                       controller: oldPasswordCont,
                       focus: oldPasswordFocus,
+                      suffixPasswordVisibleWidget: ic_show.iconImage(size: 10).paddingAll(14),
+                      suffixPasswordInvisibleWidget: ic_hide.iconImage(size: 10).paddingAll(14),
                       validator: (s) {
                         if (s!.isEmpty)
                           return context.translate.lblRequired;
@@ -115,6 +119,8 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       textFieldType: TextFieldType.PASSWORD,
                       controller: newPasswordCont,
                       focus: newPasswordFocus,
+                      suffixPasswordVisibleWidget: ic_show.iconImage(size: 10).paddingAll(14),
+                      suffixPasswordInvisibleWidget: ic_hide.iconImage(size: 10).paddingAll(14),
                       validator: (s) {
                         if (s!.isEmpty)
                           return context.translate.lblRequired;
@@ -129,6 +135,8 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       textFieldType: TextFieldType.PASSWORD,
                       controller: reenterPasswordCont,
                       focus: reenterPasswordFocus,
+                      suffixPasswordVisibleWidget: ic_show.iconImage(size: 10).paddingAll(14),
+                      suffixPasswordInvisibleWidget: ic_hide.iconImage(size: 10).paddingAll(14),
                       validator: (v) {
                         if (newPasswordCont.text != v) {
                           return context.translate.passwordNotMatch;

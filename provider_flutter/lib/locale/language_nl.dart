@@ -464,9 +464,6 @@ class LanguageNl extends Languages {
   String lblInvalidUrl = 'Ongeldige URL:';
 
   @override
-  String lblInvalidEmail = 'Ongeldige Email';
-
-  @override
   String errorPasswordLength = 'Wachtwoordlengte moet meer zijn dan';
 
   @override
@@ -900,4 +897,67 @@ class LanguageNl extends Languages {
 
   @override
   String lblEnterMinute = "Voer tot 60 minuten tot 60 minuten in";
+
+  @override
+  String lblSelectSubCategory = "Selecteer Subcategorie";
+
+  @override
+  String lblServiceProof = "Servicebestendig";
+
+  @override
+  String lblTitle = "Titel";
+
+  @override
+  String lblAddImage = "Voeg afbeelding toe";
+
+  @override
+  String lblSubmit = "Indienen";
+
+  @override
+  String lblNotHelpLineNum = "Niet beschikbaar hulplijnnummer";
+
+  @override
+  String lblWalletHistory = "Portemonnee geschiedenis";
+
+  @override
+  String lblServiceRatings = "Service -beoordelingen";
+
+  @override
+  String lblNoServiceRatings = "Geen servicebeoordelingen";
+
+  @override
+  String lblEmail = "E -mail";
+
+  @override
+  String lblWallet = "Portemonnee";
+
+  @override
+  String lblSelectUserType = "E -mail";
+
+  @override
+  String lblIAgree = "Portemonnee";
+
+  @override
+  String lblTermsOfService = "Selecteer Gebruikersype";
+
+  @override
+  String lblLoginAgain = "Ik ga akkoord met de";
+
+  @override
+  String lblTermCondition = "Servicevoorwaarden";
+
+  @override
+  String lblServiceTotalTime = "Log alsjeblieft nogmaals in";
+
+  @override
+  String lblHelpLineNum = "Hulplijnnummer";
+
+  @override
+  String lblReasonCancelling = "Reden voor het annuleren van deze boeking";
+
+  @override
+  String lblReasonRejecting = "Reden om deze boeking af te wijzen";
+
+  @override
+  String lblFailed = "Reden waarom deze boeking is mislukt";
 }

@@ -462,8 +462,6 @@ class LanguageId extends Languages {
 
   @override
   String lblInvalidUrl = 'URL tidak valid:';
-  @override
-  String lblInvalidEmail = 'Email tidak valid';
 
   @override
   String errorPasswordLength = 'Panjang kata sandi harus lebih dari';
@@ -899,4 +897,67 @@ class LanguageId extends Languages {
 
   @override
   String lblEnterMinute = "Masukkan menit hingga 60 menit";
+
+  @override
+  String lblSelectSubCategory = "Pilih Subkategori";
+
+  @override
+  String lblServiceProof = "Bukti Layanan";
+
+  @override
+  String lblTitle = "Judul";
+
+  @override
+  String lblAddImage = "Menambahkan gambar";
+
+  @override
+  String lblSubmit = "Kirim";
+
+  @override
+  String lblNotHelpLineNum = "Tidak tersedia nomor saluran bantuan";
+
+  @override
+  String lblWalletHistory = "Sejarah Dompet";
+
+  @override
+  String lblServiceRatings = "Peringkat Layanan";
+
+  @override
+  String lblNoServiceRatings = "Tidak ada peringkat layanan";
+
+  @override
+  String lblEmail = "Surel";
+
+  @override
+  String lblWallet = "Dompet";
+
+  @override
+  String lblSelectUserType = "Surel";
+
+  @override
+  String lblIAgree = "Dompet";
+
+  @override
+  String lblTermsOfService = "Pilih jenis pengguna";
+
+  @override
+  String lblLoginAgain = "Saya setuju dengan";
+
+  @override
+  String lblTermCondition = "Ketentuan Layanan";
+
+  @override
+  String lblServiceTotalTime = "Harap masuk lagi";
+
+  @override
+  String lblHelpLineNum = "Nomor Helpline";
+
+  @override
+  String lblReasonCancelling = "Alasan Membatalkan Pemesanan Ini";
+
+  @override
+  String lblReasonRejecting = "Alasan menolak pemesanan ini";
+
+  @override
+  String lblFailed = "Alasan mengapa pemesanan ini gagal";
 }

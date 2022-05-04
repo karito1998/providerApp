@@ -5,14 +5,15 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:handyman_provider_flutter/chat_services/auth_services.dart';
-import 'package:handyman_provider_flutter/chat_services/chat_messages_service.dart';
-import 'package:handyman_provider_flutter/chat_services/user_services.dart';
 import 'package:handyman_provider_flutter/components/no_internet_component.dart';
 import 'package:handyman_provider_flutter/locale/applocalizations.dart';
 import 'package:handyman_provider_flutter/locale/languag_es.dart';
 import 'package:handyman_provider_flutter/models/file_model.dart';
 import 'package:handyman_provider_flutter/models/revenue_chart_data.dart';
+import 'package:handyman_provider_flutter/networks/firebase_services/auth_services.dart';
+import 'package:handyman_provider_flutter/networks/firebase_services/chat_messages_service.dart';
+import 'package:handyman_provider_flutter/networks/firebase_services/notification_service.dart';
+import 'package:handyman_provider_flutter/networks/firebase_services/user_services.dart';
 import 'package:handyman_provider_flutter/provider/booking/p_booking_detail_screen.dart';
 import 'package:handyman_provider_flutter/screens/splash_screen.dart';
 import 'package:handyman_provider_flutter/store/AppStore.dart';
@@ -23,7 +24,6 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 import 'app_theme.dart';
-import 'chat_services/notification_service.dart';
 
 //region Mobx Stores
 AppStore appStore = AppStore();
@@ -45,11 +45,6 @@ NotificationService notificationService = NotificationService();
 //region Chart Model
 late List<FileModel> fileList = [];
 List<RevenueChartData> chartData = [];
-//endregion
-
-//region AdMobs
-bool bannerReady = false;
-bool interstitialReady = false;
 //endregion
 
 //region Chat Variable

@@ -7,7 +7,6 @@ import 'package:handyman_provider_flutter/utils/data_provider.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:package_info/package_info.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AboutUsScreen extends StatefulWidget {
   @override
@@ -77,23 +76,22 @@ class AboutUsScreenState extends State<AboutUsScreen> {
                   launchUrlCustomTab(appStore.privacyPolicy.isNotEmpty ? appStore.privacyPolicy.validate() : privacyPolicyUrl);
                 } else if (index == 2) {
                   if (appStore.inquiryEmail.isNotEmpty) {
-                    launchUri(MAIL_TO + appStore.inquiryEmail.validate());
+                    launchMail(appStore.inquiryEmail.validate());
                   } else {
                     launchUrlCustomTab(helpSupportUrl);
                   }
                 } else if (index == 3) {
                   if (appStore.helplineNumber.isNotEmpty) {
-                    launchUri(TEL + appStore.helplineNumber.validate());
+                    launchCall(appStore.helplineNumber.validate());
                   } else {
-                    //TODO Translate
-                    toast("Not Available Helpline Number");
+                    toast(context.translate.lblNotHelpLineNum);
                   }
                 } else if (index == 4) {
                   {
                     PackageInfo.fromPlatform().then((value) {
                       String package = '';
                       if (isAndroid) package = value.packageName;
-                      launch('${isAndroid ? playStoreBaseURL : appStoreBaseURL}$package');
+                      commonLaunchUrl('${isAndroid ? playStoreBaseURL : appStoreBaseURL}$package');
                     });
                   }
                 }

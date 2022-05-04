@@ -2,7 +2,7 @@ import 'package:handyman_provider_flutter/locale/languag_es.dart';
 
 class LanguageEs extends Languages {
   @override
-  String planAboutToExpire(int days) => 'Tu plan expira en $days dias';
+  String planAboutToExpire(int days) => 'Your Plan Is About to Expire In $days Days';
 
   @override
   String appName = 'Proveedor';
@@ -14,7 +14,7 @@ class LanguageEs extends Languages {
   String welcome = 'Bienvenido';
 
   @override
-  String back = 'Regresar';
+  String back = 'espalda !';
 
   @override
   String handyman = 'Personal de mantenimiento';
@@ -23,37 +23,37 @@ class LanguageEs extends Languages {
   String signIn = 'Iniciar sesión';
 
   @override
-  String signUp = 'Registrarse';
+  String signUp = 'Inscribirse';
 
   @override
-  String signInTitle = 'Iniciar sesión en tu \ Ncuenta';
+  String signInTitle = 'Iniciar sesión en tu \ Naccount';
 
   @override
-  String signUpTitle = 'Regístrese en su \ Ncuenta';
+  String signUpTitle = 'Regístrese en su \ Naccount';
 
   @override
-  String hintNameTxt = 'Nombre';
+  String hintNameTxt = 'Introduzca su nombre';
 
   @override
-  String hintFirstNameTxt = 'Primer nombre';
+  String hintFirstNameTxt = 'Ponga su primer nombre';
 
   @override
-  String hintLastNameTxt = 'Apellido';
+  String hintLastNameTxt = 'Ingrese su apellido';
 
   @override
-  String hintContactNumberTxt = 'Número de contacto';
+  String hintContactNumberTxt = 'Ingrese su número de contacto';
 
   @override
-  String hintEmailAddressTxt = 'Dirección de correo electrónico';
+  String hintEmailAddressTxt = 'Ingrese su dirección de correo electrónico';
 
   @override
-  String hintUserNameTxt = 'Nombre de usuario';
+  String hintUserNameTxt = 'Ingrese su nombre de usuario';
 
   @override
-  String hintPasswordTxt = 'Contraseña';
+  String hintPasswordTxt = 'Ingresa tu contraseña';
 
   @override
-  String hintReenterPasswordTxt = 'Confirma tu contraseña';
+  String hintReenterPasswordTxt = 'reingresa tu contraseña';
 
   @override
   String confirm = 'Confirmar';
@@ -62,7 +62,7 @@ class LanguageEs extends Languages {
   String hintEmailTxt = 'Introduce tu correo electrónico';
 
   @override
-  String hintConfirmPasswordTxt = 'Ingresa su contraseña de confirmación';
+  String hintConfirmPasswordTxt = 'Ingrese su contraseña de confirmación';
 
   @override
   String forgotPassword = '¿Has olvidado tu contraseña?';
@@ -77,13 +77,13 @@ class LanguageEs extends Languages {
   String rememberMe = 'Recuérdame';
 
   @override
-  String forgotPasswordTitleTxt = 'Ingresa el correo electrónico para restablecer su contraseña';
+  String forgotPasswordTitleTxt = 'Ingrese el correo electrónico para restablecer \ n su contraseña';
 
   @override
   String resetPassword = 'Restablecer la contraseña';
 
   @override
-  String loginSuccessfully = 'Sesion Iniciada';
+  String loginSuccessfully = 'Inicia sesión con éxito';
 
   @override
   String editProfile = 'Editar perfil';
@@ -98,7 +98,7 @@ class LanguageEs extends Languages {
   String language = 'Idiomas';
 
   @override
-  String supportLanguage = 'Elije el idioma que prefieres';
+  String supportLanguage = 'Elija el lenguaje de la aplicación que prefierte';
 
   @override
   String appTheme = 'Tema de la aplicación';
@@ -119,10 +119,10 @@ class LanguageEs extends Languages {
   String selectCountry = 'Seleccionar país';
 
   @override
-  String selectState = 'Selecciona estado';
+  String selectState = 'Seleccione estado';
 
   @override
-  String selectCity = 'Selecciona ciudad';
+  String selectCity = 'Ciudad selecta';
 
   @override
   String changePassword = 'Cambiar la contraseña';
@@ -134,10 +134,10 @@ class LanguageEs extends Languages {
   String doNotHaveAccount = '¿No tienes una cuenta?';
 
   @override
-  String hintNewPasswordTxt = 'Introduce una nueva contraseña';
+  String hintNewPasswordTxt = 'Introduzca su nueva contraseña';
 
   @override
-  String hintOldPasswordTxt = 'Ingresa tu contraseña anterior';
+  String hintOldPasswordTxt = 'Ingrese su contraseña anterior';
 
   @override
   String home = 'Hogar';
@@ -152,7 +152,7 @@ class LanguageEs extends Languages {
   String accept = 'Aceptar';
 
   @override
-  String decline = 'Rechazar';
+  String decline = 'Disminución';
 
   @override
   String noDataFound = 'Datos no encontrados';
@@ -167,7 +167,7 @@ class LanguageEs extends Languages {
   String darkMode = 'Modo oscuro';
 
   @override
-  String lightMode = 'Modo claro';
+  String lightMode = 'Modo de luz';
 
   @override
   String systemDefault = 'Modo de sistema';
@@ -176,7 +176,7 @@ class LanguageEs extends Languages {
   String serviceDetail = 'Detalle de servicio';
 
   @override
-  String confirmationRequestTxt = '¿Estás seguro?';
+  String confirmationRequestTxt = '¿Está seguro?';
 
   @override
   String notAvailable = 'No disponible';
@@ -191,7 +191,7 @@ class LanguageEs extends Languages {
   String cantLogin = 'No puedes ingresar';
 
   @override
-  String pleaseContactAdmin = 'Por favor, pónte en contacto con el administrador';
+  String pleaseContactAdmin = 'Por favor, póngase en contacto con el administrador';
 
   @override
   String lblOk = 'OK';
@@ -233,10 +233,10 @@ class LanguageEs extends Languages {
   String lblReason = 'Razón';
 
   @override
-  String cantChangePw = 'No puedes cambiar la contraseña de esta cuenta';
+  String cantChangePw = 'Usted no puede cambiar la contraseña de esta cuenta';
 
   @override
-  String lblSelectHandyman = 'Por favor selecciona Handyman';
+  String lblSelectHandyman = 'Por favor seleccione Handyman';
 
   @override
   String lblAssign = 'Asignar';
@@ -266,22 +266,22 @@ class LanguageEs extends Languages {
   String lblAddHandyman = 'Añadir manitas';
 
   @override
-  String hintName = 'Ingresa el nombre';
+  String hintName = 'Ingrese el nombre';
 
   @override
-  String hintLastName = 'Introduce el apellido';
+  String hintLastName = 'Introduzca el apellido';
 
   @override
-  String hintEmail = 'Introduce la dirección de correo electrónico';
+  String hintEmail = 'Introduzca la dirección de correo electrónico';
 
   @override
-  String hintUserName = 'Introduce su nombre de usuario';
+  String hintUserName = 'Introduzca su nombre de usuario';
 
   @override
-  String hintContact = 'Ingresa el número de contacto';
+  String hintContact = 'Ingrese el número de contacto';
 
   @override
-  String hintPass = 'Introduce la contraseña';
+  String hintPass = 'Introducir la contraseña';
 
   @override
   String lblBooking = 'Reserva';
@@ -317,22 +317,22 @@ class LanguageEs extends Languages {
   String hintAddService = 'Añadir servicio';
 
   @override
-  String hintServiceName = 'Ingresa el nombre del servicio';
+  String hintServiceName = 'Ingrese el nombre del servicio';
 
   @override
   String hintSelectCategory = 'selecciona una categoría';
 
   @override
-  String hintSelectType = 'Selecciona tipo';
+  String hintSelectType = 'Seleccione tipo';
 
   @override
-  String hintSelectStatus = 'Selecciona Estado';
+  String hintSelectStatus = 'Seleccione Estado';
 
   @override
   String hintPrice = 'Precio';
 
   @override
-  String hintDiscount = 'Descuento';
+  String hintDiscount = 'descuento';
 
   @override
   String hintDuration = 'Duración';
@@ -392,7 +392,7 @@ class LanguageEs extends Languages {
   String lblAudio = 'Audio';
 
   @override
-  String selectAddress = 'Selecciona Direccion';
+  String selectAddress = 'Seleccione Servicio Addresses';
 
   @override
   String btnSave = 'Ahorrar';
@@ -419,7 +419,7 @@ class LanguageEs extends Languages {
   String lblEditService = 'Servicio de edición';
 
   @override
-  String selectImgNote = "Nota: puedes cargar imágenes  \ 'jpg \', \ 'png \', \ 'jpeg \'";
+  String selectImgNote = "Nota: puede cargar imágenes con \ 'jpg \', \ 'png \', \ 'jpeg \' extensiones y puede seleccionar varias imágenes";
 
   @override
   String lblDurationHr = 'Duración: horas';
@@ -434,10 +434,10 @@ class LanguageEs extends Languages {
   String lblWriteMsg = 'Escribe un mensaje...';
 
   @override
-  String lblWaitForAcceptReq = 'Por favor, espera a que el administrador acepte su solicitud';
+  String lblWaitForAcceptReq = 'Por favor, espere a que el administrador acepte su solicitud';
 
   @override
-  String lblContactAdmin = 'Pónte en contacto con Admin';
+  String lblContactAdmin = 'Póngase en contacto con Admin';
 
   @override
   String lblAddServiceAddress = 'Añadir dirección de servicio';
@@ -446,7 +446,7 @@ class LanguageEs extends Languages {
   String lblAvailableAddress = 'Direcciones de servicio disponibles';
 
   @override
-  String lblEnterValidEmailPw = 'Ingresa el correo electrónico válido y la contraseña';
+  String lblEnterValidEmailPw = 'Ingrese el correo electrónico válido y la contraseña';
 
   @override
   String lblSomethingWrong = 'Algo salió mal';
@@ -464,10 +464,7 @@ class LanguageEs extends Languages {
   String lblInvalidUrl = 'URL invalida:';
 
   @override
-  String lblInvalidEmail = 'El correo no es valido';
-
-  @override
-  String errorPasswordLength = 'La contraseña debe contener más de';
+  String errorPasswordLength = 'La longitud de la contraseña debe ser más de';
 
   @override
   String hintEmailAddress = 'Correo electrónico';
@@ -488,10 +485,10 @@ class LanguageEs extends Languages {
   String hintContactNumber = 'Número de contacto';
 
   @override
-  String hintEnterProperData = 'Por favor ingresa datos correctos';
+  String hintEnterProperData = 'Por favor ingrese datos correctos';
 
   @override
-  String hintRequired = 'Este campo es obligatorio';
+  String hintRequired = 'Este fileld es obligatorio';
 
   @override
   String lblUnAuthorized = "El usuario de Demo no se puede otorgar para esta acción.";
@@ -506,7 +503,7 @@ class LanguageEs extends Languages {
   String toastSuccess = "El documento del proveedor ha sido guardado con éxito";
 
   @override
-  String lblSelectDoc = "Selecciona Documento";
+  String lblSelectDoc = "Seleccione Documento";
 
   @override
   String lblAddDoc = "Añadir documentos";
@@ -515,7 +512,7 @@ class LanguageEs extends Languages {
   String lblAppSetting = "Ajustes de Aplicacion";
 
   @override
-  String lblRateUs = "Calificanos";
+  String lblRateUs = "Nos califica";
 
   @override
   String lblTermsAndConditions = "Términos y condiciones";
@@ -524,7 +521,7 @@ class LanguageEs extends Languages {
   String lblPrivacyPolicy = "Política de privacidad";
 
   @override
-  String lblHelpAndSupport = "Ayuda";
+  String lblHelpAndSupport = "Ayuda y apoyo";
 
   @override
   String lblVersion = "V";
@@ -548,15 +545,15 @@ class LanguageEs extends Languages {
   String lblMyTax = "Mi impuesto";
 
   @override
-  String lbllogintitle = "¡Hola de nuevo!";
+  String lbllogintitle = "Hola de nuevo !";
 
 
   @override
-  String lblloginsubtitle = "Bienvenido de nuevo, te has perdido por mucho tiempo.";
+  String lblloginsubtitle = "Bienvenido de nuevo, se ha perdido por mucho tiempo.";
 
 
   @override
-  String lblsignuptitle = "¡Bienvenido!";
+  String lblsignuptitle = "Hola usuario!";
 
 
   @override
@@ -564,11 +561,11 @@ class LanguageEs extends Languages {
 
 
   @override
-  String lblLogin = "Iniciar sesion";
+  String lblLogin = "Acceso";
 
 
   @override
-  String lblsignup = "Regístrate";
+  String lblsignup = "Inscribirse";
 
 
   @override
@@ -604,7 +601,7 @@ class LanguageEs extends Languages {
 
 
   @override
-  String lblAboutHandyman = "Sobre HelpiRD";
+  String lblAboutHandyman = "Sobre Handyman";
 
 
   @override
@@ -665,7 +662,7 @@ class LanguageEs extends Languages {
   String lblMarkAllAsRead = "Marcar todo como leido";
 
   @override
-  String lblCloseAppMsg = "Presiona de nuevo para salir de la aplicación";
+  String lblCloseAppMsg = "Presione de nuevo para salir de la aplicación";
 
   @override
   String lblAddress = "Habla a";
@@ -743,13 +740,13 @@ class LanguageEs extends Languages {
   String lblDeactivate = "Desactivar";
 
   @override
-  String lblOpps = "Opps";
+  String lblOpps = "Oppes";
 
   @override
-  String lblNoInternet = "Algo mal con tu conexión, inténtalo de nuevo.";
+  String lblNoInternet = "Algo mal con su conexión, inténtalo de nuevo.";
 
   @override
-  String lblRetry = "Reintentar";
+  String lblRetry = "REVER";
 
   @override
   String lblBookingSummary = "Resumen de la reserva";
@@ -764,141 +761,204 @@ class LanguageEs extends Languages {
   String lblDeleteAddress = "Eliminar dirección";
 
   @override
-  String lblDeleteAddressMsg = "¿Estás seguro de que deseas eliminar esta dirección?";
+  String lblDeleteAddressMsg = "¿Está seguro de que desea eliminar esta dirección?";
 
 
   @override
-  String lblChoosePaymentMethod = "";
+  String lblChoosePaymentMethod = "Elige el método de pago";
 
   @override
-  String lblNoPayments = "";
+  String lblNoPayments = "Sin pagos";
 
   @override
-  String lblPayWith = "";
+  String lblPayWith = "Quieres pagar con";
 
   @override
-  String lblProceed = "";
+  String lblProceed = "Proceder";
 
   @override
-  String lblPricingPlan = "";
+  String lblPricingPlan = "Plan de precios";
 
   @override
-  String lblSelectPlan = "";
+  String lblSelectPlan = "Obtenga elige tu mejor plan";
 
   @override
-  String lblMakePayment = "";
+  String lblMakePayment = "Hacer el pago";
 
   @override
-  String lblRestore = "";
+  String lblRestore = "Restaurar";
 
   @override
-  String lblForceDelete = "";
+  String lblForceDelete = "Fuerza Eliminar";
 
   @override
-  String lblActivated = "";
+  String lblActivated = "Activado";
 
   @override
-  String lblDeactivated = "";
+  String lblDeactivated = "Desactivado";
 
   @override
-  String lblNoDescriptionAvailable = "";
+  String lblNoDescriptionAvailable = "No hay descripción disponible";
 
   @override
-  String lblFAQs = "";
+  String lblFAQs = "Preguntas frecuentes";
 
   @override
-  String lblGetDirection = "";
+  String lblGetDirection = "Obtener una dirección";
 
   @override
-  String lblDeleteTitle = "";
+  String lblDeleteTitle = "¡Oh no, te vas!";
 
   @override
-  String lblDeleteSubTitle = "";
+  String lblDeleteSubTitle = "¿Quieres cerrar sesión?";
 
   @override
-  String lblUpcomingServices = "";
+  String lblUpcomingServices = "Próximos servicios";
 
   @override
-  String lblTodayServices = "";
+  String lblTodayServices = "Servicios de hoy";
 
   @override
-  String lblPlanExpired = "";
+  String lblPlanExpired = "¡Opps! El plan expiró";
 
   @override
-  String lblPlanSubTitle = "";
+  String lblPlanSubTitle = "Su plan anterior ha caducado";
 
   @override
-  String btnTxtBuyNow = "";
+  String btnTxtBuyNow = "Compra ahora";
 
   @override
-  String lblChooseYourPlan = "";
+  String lblChooseYourPlan = "Elige tu plan";
 
   @override
-  String lblRenewSubTitle = "";
+  String lblRenewSubTitle = "Compre un nuevo plan para obtener nuevas reservas de servicios";
 
   @override
-  String lblReminder = "";
+  String lblReminder = "Recordatorio";
 
   @override
-  String lblRenew = "";
+  String lblRenew = "Renovar";
 
   @override
-  String lblCurrentPlan = "";
+  String lblCurrentPlan = "Plan actual";
 
   @override
-  String lblValidTill = "";
+  String lblValidTill = "Válida hasta";
 
   @override
-  String lblSearchHere = "";
+  String lblSearchHere = "Busca aquí...";
 
   @override
-  String lblEarningList = "";
+  String lblEarningList = "Lista de ganancias";
 
   @override
-  String lblNoChatFound = "";
+  String lblNoChatFound = "No se encontró chat";
 
   @override
-  String lblIsSuccessFullyActivated = "";
+  String lblIsSuccessFullyActivated = "se activa con éxito";
 
   @override
-  String lblSubscriptionTitle = "";
+  String lblSubscriptionTitle = "¿Estás seguro de que quieres cancelar el plan actual?";
 
   @override
-  String lblPlan = "";
+  String lblPlan = "Plan";
 
   @override
-  String lblCancelPlan = "";
+  String lblCancelPlan = "Plan de cancelación";
 
   @override
-  String lblSubscriptionHistory = "";
+  String lblSubscriptionHistory = "Historial de suscripción";
 
   @override
-  String lblDemoProvider = "";
+  String lblDemoProvider = "Proveedor de demostración";
 
   @override
-  String lblDemoHandyman = "";
+  String lblDemoHandyman = "Manipulador de demostración";
 
   @override
-  String lblReset = "";
+  String lblReset = "Reiniciar";
 
   @override
-  String lblRequired = "";
+  String lblRequired = "Este campo es obligatorio";
 
   @override
-  String lblGiveReason = "";
+  String lblGiveReason = "Por favor dada la razón";
 
   @override
-  String lblTrashHandyman = "";
+  String lblTrashHandyman = "Handyman ha sido basura con éxito";
 
   @override
-  String lblPlsSelectAddress = "";
+  String lblPlsSelectAddress = "Por favor seleccionado dirección";
 
   @override
-  String lblPlsSelectCategory = "";
+  String lblPlsSelectCategory = "Por favor seleccionada Categoría";
 
   @override
-  String lblEnterHours = "";
+  String lblEnterHours = "Ingrese horas hasta 24 horas";
 
   @override
-  String lblEnterMinute = "";
+  String lblEnterMinute = "Ingrese minuto hasta 60 minutos";
+
+  @override
+  String lblSelectSubCategory = "Seleccionar subcategoría";
+
+  @override
+  String lblServiceProof = "Prueba de servicio";
+
+  @override
+  String lblTitle = "Título";
+
+  @override
+  String lblAddImage = "Añadir imagen";
+
+  @override
+  String lblSubmit = "Entregar";
+
+  @override
+  String lblNotHelpLineNum = "No disponible Número de línea de ayuda";
+
+  @override
+  String lblWalletHistory = "Historia de la billetera";
+
+  @override
+  String lblServiceRatings = "Calificaciones de servicio";
+
+  @override
+  String lblNoServiceRatings = "No hay calificaciones de servicio";
+
+  @override
+  String lblEmail = "Correo electrónico";
+
+  @override
+  String lblWallet = "Cartera";
+
+  @override
+  String lblSelectUserType = "Correo electrónico";
+
+  @override
+  String lblIAgree = "Cartera";
+
+  @override
+  String lblTermsOfService = "Seleccione Tipo de usuario";
+
+  @override
+  String lblLoginAgain = "Estoy de acuerdo con la";
+
+  @override
+  String lblTermCondition = "Términos de servicio";
+
+  @override
+  String lblServiceTotalTime = "Inicie sesión nuevamente";
+
+  @override
+  String lblHelpLineNum = "Número de ayuda";
+
+  @override
+  String lblReasonCancelling = "Razón para cancelar esta reserva";
+
+  @override
+  String lblReasonRejecting = "Razón para rechazar esta reserva";
+
+  @override
+  String lblFailed = "Razón por la cual esta reserva falló";
 }

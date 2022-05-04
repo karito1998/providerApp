@@ -19,7 +19,7 @@ class DisabledRatingBarWidget extends StatelessWidget {
           size: size ?? 18,
           disable: true,
           rating: rating.validate().toDouble(),
-          activeColor: primaryColor,
+          activeColor: rattingColor,
         ),
         //8.width,
         //Text(rating.validate().toString(), style: primaryTextStyle(size: size)),

@@ -1,6 +1,8 @@
 import 'package:handyman_provider_flutter/models/booking_list_response.dart';
 import 'package:handyman_provider_flutter/models/service_model.dart';
 import 'package:handyman_provider_flutter/models/user_data.dart';
+import 'package:handyman_provider_flutter/utils/constant.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 class BookingDetailResponse {
   BookingDetail? bookingDetail;
@@ -12,10 +14,22 @@ class BookingDetailResponse {
   List<UserData>? handymanData;
   CouponData? couponData;
   List<Taxes>? taxes;
+  List<ServiceProof>? serviceProof;
 
   // List<Null>? handymanData;
 
-  BookingDetailResponse({this.bookingDetail, this.service, this.customer, this.bookingActivity, this.ratingData, this.providerData, this.handymanData, this.couponData, this.taxes});
+  BookingDetailResponse({
+    this.bookingDetail,
+    this.service,
+    this.customer,
+    this.bookingActivity,
+    this.ratingData,
+    this.providerData,
+    this.handymanData,
+    this.couponData,
+    this.taxes,
+    this.serviceProof,
+  });
 
   BookingDetailResponse.fromJson(Map<String, dynamic> json) {
     bookingDetail = json['booking_detail'] != null ? new BookingDetail.fromJson(json['booking_detail']) : null;
@@ -40,6 +54,12 @@ class BookingDetailResponse {
       handymanData = [];
       json['handyman_data'].forEach((v) {
         handymanData!.add(new UserData.fromJson(v));
+      });
+    }
+    if (json['service_proof'] != null) {
+      serviceProof = [];
+      json['service_proof'].forEach((v) {
+        serviceProof!.add(new ServiceProof.fromJson(v));
       });
     }
   }
@@ -67,9 +87,11 @@ class BookingDetailResponse {
     if (this.providerData != null) {
       data['provider_data'] = this.providerData!.toJson();
     }
-
     if (this.handymanData != null) {
       data['handyman_data'] = this.handymanData!.map((v) => v.toJson()).toList();
+    }
+    if (this.serviceProof != null) {
+      data['service_proof'] = this.serviceProof!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -145,6 +167,8 @@ class BookingDetail {
   int? booking_address_id;
   List<Taxes>? taxes;
   num? totalAmount;
+
+  bool get isHourlyService => type!.validate() == ServiceTypeHourly;
 
   BookingDetail({
     this.id,
@@ -428,7 +452,7 @@ class ProviderData {
   String? firstName;
   String? lastName;
   String? username;
-  String? providerId;
+  int? providerId;
   int? status;
   String? description;
   String? userType;
@@ -563,6 +587,7 @@ class HandymanData {
   String? profileImage;
   String? timeZone;
   String? lastNotificationSeen;
+  int? handyman_rating;
 
   HandymanData(
       {this.id,
@@ -588,7 +613,8 @@ class HandymanData {
       this.updatedAt,
       this.profileImage,
       this.timeZone,
-      this.lastNotificationSeen});
+      this.lastNotificationSeen,
+      this.handyman_rating});
 
   HandymanData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -615,6 +641,7 @@ class HandymanData {
     profileImage = json['profile_image'];
     timeZone = json['time_zone'];
     lastNotificationSeen = json['last_notification_seen'];
+    handyman_rating = json['handyman_rating'];
   }
 
   Map<String, dynamic> toJson() {
@@ -643,6 +670,57 @@ class HandymanData {
     data['profile_image'] = this.profileImage;
     data['time_zone'] = this.timeZone;
     data['last_notification_seen'] = this.lastNotificationSeen;
+    data['handyman_rating'] = this.handyman_rating;
+    return data;
+  }
+}
+
+class ServiceProof {
+  int? id;
+  String? title;
+  String? description;
+  int? serviceId;
+  int? bookingId;
+  int? userId;
+  String? handymanName;
+  String? serviceName;
+  List<String>? attachments;
+
+  ServiceProof({
+    this.id,
+    this.title,
+    this.description,
+    this.serviceId,
+    this.bookingId,
+    this.userId,
+    this.handymanName,
+    this.serviceName,
+    this.attachments,
+  });
+
+  ServiceProof.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    title = json['title'];
+    description = json['description'];
+    serviceId = json['service_id'];
+    bookingId = json['booking_id'];
+    userId = json['user_id'];
+    handymanName = json['handyman_name'];
+    serviceName = json['service_name'];
+    attachments = json['attachments'].cast<String>();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['title'] = this.title;
+    data['description'] = this.description;
+    data['service_id'] = this.serviceId;
+    data['booking_id'] = this.bookingId;
+    data['user_id'] = this.userId;
+    data['handyman_name'] = this.handymanName;
+    data['service_name'] = this.serviceName;
+    data['attachments'] = this.attachments;
     return data;
   }
 }

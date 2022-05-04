@@ -52,7 +52,7 @@ class AppLocalizations extends LocalizationsDelegate<Languages> {
       case 'sq':
         return LanguageSq();
       default:
-        return LanguageEs();
+        return LanguageEn();
     }
   }
 

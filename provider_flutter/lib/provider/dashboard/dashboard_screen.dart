@@ -7,7 +7,7 @@ import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/provider/fragments/home_fragment.dart';
 import 'package:handyman_provider_flutter/provider/fragments/payment_fragment.dart';
 import 'package:handyman_provider_flutter/provider/fragments/profile_fragment.dart';
-import 'package:handyman_provider_flutter/screens/chat_screen.dart';
+import 'package:handyman_provider_flutter/screens/chat/user_chat_list_screen.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
@@ -105,7 +105,7 @@ class DashboardScreenState extends State<DashboardScreen> {
             IconButton(
               icon: chat.iconImage(color: white, size: 20),
               onPressed: () async {
-                ChatScreen().launch(context);
+                UserChatListScreen().launch(context);
               },
             ),
             IconButton(

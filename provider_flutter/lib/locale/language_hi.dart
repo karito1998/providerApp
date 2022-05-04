@@ -463,8 +463,6 @@ class LanguageHi extends Languages {
 
   @override
   String lblInvalidUrl = 'अवैध यूआरएल:';
-  @override
-  String lblInvalidEmail = 'अवैध यूआरएल:';
 
   @override
   String errorPasswordLength = 'पासवर्ड की लंबाई से अधिक होना चाहिए';
@@ -550,104 +548,80 @@ class LanguageHi extends Languages {
   @override
   String lbllogintitle = " फिर से हैलो !";
 
-
   @override
   String lblloginsubtitle = "आपका स्वागत है, आप लंबे समय से चूक गए हैं";
-
 
   @override
   String lblsignuptitle = "हैलो उपयोगकर्ता!";
 
-
   @override
-  String lblsignupsubtitle = " बेहतर अनुभव के लिए अपना खाता बनाएं";
-
+  String lblsignupsubtitle = "बेहतर अनुभव के लिए अपना खाता बनाएं";
 
   @override
   String lblLogin = "लॉग इन करें";
 
+  @override
+  String lblsignup = "साइन अप करें";
 
   @override
-  String lblsignup = " साइन अप करें";
-
-
-  @override
-  String lblUserType = " उपयोगकर्ता का प्रकार";
-
+  String lblUserType = "उपयोगकर्ता का प्रकार";
 
   @override
   String lblPurchaseCode = "पूर्ण स्रोत कोड खरीदें";
 
-
   @override
-  String lblFeatureProduct = " यह चित्रित उत्पाद है";
-
+  String lblFeatureProduct = "यह चित्रित उत्पाद है";
 
   @override
   String lblHours = "घंटा";
 
-
   @override
-  String lblRating = " रेटिंग";
-
+  String lblRating = "रेटिंग";
 
   @override
   String lblOff = "बंद";
 
+  @override
+  String lblHr = "मानव संसाधन";
 
   @override
-  String lblHr = " मानव संसाधन";
-
-
-  @override
-  String lblDate = " तारीख";
-
+  String lblDate = "तारीख";
 
   @override
   String lblAboutHandyman = "हैंन्डमैन के बारे में";
 
-
   @override
   String lblAboutCustomer = "ग्राहक के बारे में";
-
 
   @override
   String lblPaymentDetail = "भुगतान विवरण";
 
+  @override
+  String lblId = "पहचान";
 
   @override
-  String lblId = " पहचान";
-
-
-  @override
-  String lblMethod = " तरीका";
-
+  String lblMethod = "तरीका";
 
   @override
-  String lblStatus = " स्थिति";
-
+  String lblStatus = "स्थिति";
 
   @override
   String lblPriceDetail = "मूल्य विवरण";
 
-
   @override
-  String lblSubTotal = " उप कुल";
-
+  String lblSubTotal = "उप कुल";
 
   @override
   String lblTax = "कर";
 
   @override
-  String lblCoupon = " कूपन";
-
+  String lblCoupon = "कूपन";
 
   @override
   String lblTotalAmount = "कुल राशि";
 
   @override
   String lblOnBasisOf = "के आधार पर";
-
 
   @override
   String lblCheckStatus = "अवस्था जांच";
@@ -656,10 +630,10 @@ class LanguageHi extends Languages {
   String lblReady = "तैयार";
 
   @override
-  String lblCancel = " रद्द करें";
+  String lblCancel = "रद्द करें";
 
   @override
-  String lblUnreadNotification = " अपठित अधिसूचना";
+  String lblUnreadNotification = "अपठित अधिसूचना";
 
   @override
   String lblMarkAllAsRead = "सभी को पढ़ा हुआ मार्क करें";
@@ -671,15 +645,13 @@ class LanguageHi extends Languages {
   String lblAddress = "पता";
 
   @override
-  String lblType = " प्रकार";
+  String lblType = "प्रकार";
 
   @override
-  String lblStatusType = " स्थिति";
-
+  String lblStatusType = "स्थिति";
 
   @override
-  String lblHandymanType = " हैंडमैन प्रकार";
-
+  String lblHandymanType = "हैंडमैन प्रकार";
 
   @override
   String lblFixed = "फिक्स्ड";
@@ -694,7 +666,7 @@ class LanguageHi extends Languages {
   String lblUpcomingBooking = "आगामी बुकिंग";
 
   @override
-  String lblTodayBooking = " आज बुकिंग";
+  String lblTodayBooking = "आज बुकिंग";
 
   @override
   String lblNoReviewYet = "अभी तक कोई समीक्षा नहीं";
@@ -703,14 +675,13 @@ class LanguageHi extends Languages {
   String lblAllReview = "सभी समीक्षा";
 
   @override
-  String lblWaitingForResponse = " प्रतिक्रिया के लिए प्रतीक्षा कर रहा हूँ";
+  String lblWaitingForResponse = "प्रतिक्रिया के लिए प्रतीक्षा कर रहा हूँ";
 
   @override
-  String lblConfirmPayment = " भुगतान की पुष्टि करें";
+  String lblConfirmPayment = "भुगतान की पुष्टि करें";
 
   @override
   String lblWaitingForPayment = "भुगतान की प्रतीक्षा करना";
-
 
   @override
   String lblOnGoing = "चल रही है";
@@ -725,13 +696,13 @@ class LanguageHi extends Languages {
   String lblDay = "दिन";
 
   @override
-  String lblYear = " वर्ष";
+  String lblYear = "वर्ष";
 
   @override
-  String lblExperience = " अनुभव";
+  String lblExperience = "अनुभव";
 
   @override
-  String lblOf = " (ओं) का";
+  String lblOf = "(ओं) का";
 
   @override
   String lblSelectAddress = "पता का चयन करें";
@@ -765,7 +736,6 @@ class LanguageHi extends Languages {
 
   @override
   String lblDeleteAddressMsg = "क्या आप वाकई इस पते को हटाना चाहते हैं";
-
 
   @override
   String lblChoosePaymentMethod = "भुगतान विधि चुनें";
@@ -901,4 +871,67 @@ class LanguageHi extends Languages {
 
   @override
   String lblEnterMinute = "60 मिनट तक मिनट दर्ज करें";
+
+  @override
+  String lblSelectSubCategory = "उपश्रेणी का चयन करें";
+
+  @override
+  String lblServiceProof = "सेवा प्रमाण";
+
+  @override
+  String lblTitle = "शीर्षक";
+
+  @override
+  String lblAddImage = "छवि जोड़ें";
+
+  @override
+  String lblSubmit = "प्रस्तुत";
+
+  @override
+  String lblNotHelpLineNum = "उपलब्ध हेल्पलाइन नंबर नहीं";
+
+  @override
+  String lblWalletHistory = "बटुए का इतिहास";
+
+  @override
+  String lblServiceRatings = "सेवा रेटिंग";
+
+  @override
+  String lblNoServiceRatings = "कोई सेवा रेटिंग नहीं";
+
+  @override
+  String lblEmail = "ईमेल";
+
+  @override
+  String lblWallet = "बटुआ";
+
+  @override
+  String lblSelectUserType = "ईमेल";
+
+  @override
+  String lblIAgree = "बटुआ";
+
+  @override
+  String lblTermsOfService = "उपयोगकर्ता प्रकार का चयन करें";
+
+  @override
+  String lblLoginAgain = "मैं इसके लिए सहमत हूँ";
+
+  @override
+  String lblTermCondition = "सेवा की शर्तें";
+
+  @override
+  String lblServiceTotalTime = "कृपया फिर भाग लें";
+
+  @override
+  String lblHelpLineNum = "हेल्पलाइन नंबर";
+
+  @override
+  String lblReasonCancelling = "इस बुकिंग को रद्द करने का कारण";
+
+  @override
+  String lblReasonRejecting = "इस बुकिंग को अस्वीकार करने का कारण";
+
+  @override
+  String lblFailed = "कारण यह बुकिंग विफल क्यों है";
 }

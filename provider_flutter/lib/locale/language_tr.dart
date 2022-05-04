@@ -463,8 +463,6 @@ class LanguageTr extends Languages {
 
   @override
   String lblInvalidUrl = 'Geçersiz URL:';
-  @override
-  String lblInvalidEmail = 'Geçersiz Email';
 
   @override
   String errorPasswordLength = 'Şifre uzunluğu daha fazla olmalı';
@@ -901,4 +899,67 @@ class LanguageTr extends Languages {
 
   @override
   String lblEnterMinute = "60 dakikaya kadar dakikayı girin";
+
+  @override
+  String lblSelectSubCategory = "Alt Kategori'yi seçin";
+
+  @override
+  String lblServiceProof = "Hizmet geçirmez";
+
+  @override
+  String lblTitle = "Başlık";
+
+  @override
+  String lblAddImage = "Resim eklemek";
+
+  @override
+  String lblSubmit = "Göndermek";
+
+  @override
+  String lblNotHelpLineNum = "Mevcut Yardım Hattı Numarası";
+
+  @override
+  String lblWalletHistory = "Cüzdan tarihi";
+
+  @override
+  String lblServiceRatings = "Hizmet Derecelendirmeleri";
+
+  @override
+  String lblNoServiceRatings = "Servis Değerleri Yok";
+
+  @override
+  String lblEmail = "E -posta";
+
+  @override
+  String lblWallet = "Cüzdan";
+
+  @override
+  String lblSelectUserType = "E -posta";
+
+  @override
+  String lblIAgree = "Cüzdan";
+
+  @override
+  String lblTermsOfService = "Kullanıcı Türünü Seçin";
+
+  @override
+  String lblLoginAgain = "Katılıyorum";
+
+  @override
+  String lblTermCondition = "Kullanım Şartları";
+
+  @override
+  String lblServiceTotalTime = "Lütfen tekrar giriş yapın";
+
+  @override
+  String lblHelpLineNum = "Yardım hattı numarası";
+
+  @override
+  String lblReasonCancelling = "Bu rezervasyonu iptal etmenin nedeni";
+
+  @override
+  String lblReasonRejecting = "Bu rezervasyonu reddetmenin nedeni";
+
+  @override
+  String lblFailed = "Bu rezervasyonun başarısız olmasının nedeni";
 }

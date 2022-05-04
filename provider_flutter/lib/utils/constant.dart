@@ -1,22 +1,23 @@
 import 'package:nb_utils/nb_utils.dart';
 
 //region App Name
-const mAppName = 'HelpiRD';
+const mAppName = 'Handyman Services';
 //endregion
 
 //region AppBase URl
-const url = 'https://helpird.com'; // Don't add slash at the end of the url
+const url = 'https://wordpress.iqonic.design/product/mobile/booking-service'; // Don't add slash at the end of the url
 const mBaseUrl = "$url/api/";
 
 const termsConditionUrl = 'https://iqonic.design/terms-of-use/';
 const privacyPolicyUrl = 'https://iqonic.design/privacy-policy/';
 const purchaseUrl = 'https://codecanyon.net/item/handyman-service-flutter-ondemand-home-services-app-with-complete-solution/33776097?s_rank=5';
 const helpSupportUrl = 'https://iqonic.desky.support/';
+const packageName = "com.iqonic.provider"; // Don't Change it.
 //endregion
 
 //region Configs
 const decimalPoint = 2;
-const defaultLanguage = 'es';
+const defaultLanguage = 'en';
 const perPageItem = 25;
 const planRemainingDays = 15;
 //endregion
@@ -34,14 +35,18 @@ const mOneSignalChannelId = "0ee01f0d-2e1c-4554-9050-27dd9c020292";
 const mOneSignalRestKey = "NzFhNDZjYTEtOWUzYS00NzgxLThlZDktODYyYWZmOTQ1ODJk";
 //endregion
 
-//endregion
-
 //region Messages
 var passwordLengthMsg = 'Password length should be more than $passwordLengthGlobal';
 //endregion
 
 //region MapKey
 const API_KEY = 'AIzaSyCHJwjZjGSOBc18-3mJM8tCqDYoV3Nk9tQ';
+//endregion
+
+//region Countdown
+const startTimer = "startTimer";
+const pauseTimer = "pauseTimer";
+const resumeTimer = "resumeTimer";
 //endregion
 
 //region LiveStream Keys
@@ -106,11 +111,15 @@ const UserTypeHandyman = 'handyman';
 const UserStatusCode = 1;
 //endregion
 
+//region ProviderType
+const ProviderTypeFreelance = 'freelance';
+const ProviderTypeCompany = 'company';
+//endregion
+
 //region Notification Mark as Read
 const MarkAsRead = 'markas_read';
 //endregion
 
-//region service type
 //region SERVICE TYPE
 
 const ServiceTypeHourly = 'hourly';
@@ -118,9 +127,11 @@ const ServiceTypeFixed = 'fixed';
 const TXT_HOURLY = 'hr';
 //endregion
 
+//region Errors
 const USER_NOT_CREATED = "User not created";
 const USER_CANNOT_LOGIN = "User can't login";
 const USER_NOT_FOUND = "User not found";
+//endregion
 
 //region service payment method
 const COD = 'cash';
@@ -131,9 +142,11 @@ const PAID = 'paid';
 const PENDING = 'pending';
 //endregion
 
+//region ProviderStore
 const RESTORE = "restore";
 const FORCE_DELETE = "forcedelete";
 const type = "type";
+//endregion
 
 //region default handyman login
 const DEFAULT_PROVIDER_EMAIL = 'demo@provider.com';
@@ -146,15 +159,6 @@ const CURRENCY_COUNTRY_SYMBOL = 'CURRENCY_COUNTRY_SYMBOL';
 const CURRENCY_COUNTRY_CODE = 'CURRENCY_COUNTRY_CODE';
 const CURRENCY_COUNTRY_ID = 'CURRENCY_COUNTRY_ID';
 //endregion
-
-//region ADS
-const showMobileAds = true;
-const INITIAL_AD_COUNT = 'INITIAL_AD_COUNT';
-const SHOW_INITIAL_AD_NUMBER = 3;
-const maxFailedLoadAttempts = 3;
-const bannerAdIdForAndroid = 'ca-app-pub-3940256099942544/6300978111';
-const bannerAdIdForIos = 'ca-app-pub-3940256099942544/2934735716';
-//endregions
 
 //region Mail And Tel URL
 const MAIL_TO = 'mailto:';
@@ -169,7 +173,10 @@ const CHAT_DATA_IMAGES = "chatImages";
 
 const IS_ENTER_KEY = "IS_ENTER_KEY";
 const SELECTED_WALLPAPER = "SELECTED_WALLPAPER";
+const SELECT_SUBCATEGORY = "SELECT_SUBCATEGORY";
+const SELECT_USER_TYPE = "SELECT_USER_TYPE";
 const PER_PAGE_CHAT_COUNT = 50;
+const PER_PAGE_CHAT_LIST_COUNT = 10;
 
 const TEXT = "TEXT";
 const IMAGE = "IMAGE";
@@ -240,5 +247,14 @@ const SUBSCRIPTION_STATUS_INACTIVE = 'inactive';
 //region EARNING TYPE
 const EARNING_TYPE = 'EARNING_TYPE';
 const EARNING_TYPE_COMMISSION = 'commission';
+const EARNING_TYPE_SUBSCRIPTION = 'subscription';
 const FREE = 'free';
 //endregion
+
+//region WALLET TYPE
+const ADD_WALLET = 'add_wallet';
+const UPDATE_WALLET = 'update_wallet';
+const WALLET_PAYOUT_TRANSFER = 'wallet_payout_transfer';
+//endregion
+
+const GOOGLE_MAP_PREFIX = 'https://www.google.com/maps/search/?api=1&query=';

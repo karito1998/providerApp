@@ -1,12 +1,12 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=C:\Users\001979661\Downloads\flutter_windows_2.2.3-stable\flutter"
-export "FLUTTER_APPLICATION_PATH=C:\Users\001979661\Documents\Flutter_projects\providerApp\provider_flutter"
+export "FLUTTER_ROOT=/home/gmits-ankit/Android/flutter"
+export "FLUTTER_APPLICATION_PATH=/home/gmits-ankit/dev/live/provider_flutter"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
-export "FLUTTER_TARGET=lib\main.dart"
+export "FLUTTER_TARGET=lib/main.dart"
 export "FLUTTER_BUILD_DIR=build"
-export "FLUTTER_BUILD_NAME=2.0.0"
-export "FLUTTER_BUILD_NUMBER=2.0.0"
+export "FLUTTER_BUILD_NAME=4.0.0"
+export "FLUTTER_BUILD_NUMBER=4.0.0"
 export "DART_OBFUSCATION=false"
 export "TRACK_WIDGET_CREATION=false"
 export "TREE_SHAKE_ICONS=false"

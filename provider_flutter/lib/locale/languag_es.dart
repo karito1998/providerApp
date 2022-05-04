@@ -310,7 +310,6 @@ abstract class Languages {
   String get lblNoDataFound;
 
   String get lblInvalidUrl;
-  String get lblInvalidEmail;
 
   String get errorPasswordLength;
 
@@ -583,4 +582,47 @@ abstract class Languages {
   String get lblEnterHours;
 
   String get lblEnterMinute;
+
+  // Add Localization
+  String get lblSelectSubCategory;
+
+  String get lblServiceProof;
+
+  String get lblTitle;
+
+  String get lblAddImage;
+
+  String get lblSubmit;
+
+  String get lblNotHelpLineNum;
+
+  String get lblWalletHistory;
+
+  String get lblServiceRatings;
+
+  String get lblNoServiceRatings;
+
+  String get lblEmail;
+
+  String get lblWallet;
+
+  String get lblSelectUserType;
+
+  String get lblIAgree;
+
+  String get lblTermsOfService;
+
+  String get lblLoginAgain;
+
+  String get lblTermCondition;
+
+  String get lblServiceTotalTime;
+
+  String get lblHelpLineNum;
+
+  String get lblReasonCancelling;
+
+  String get lblReasonRejecting;
+
+  String get lblFailed;
 }

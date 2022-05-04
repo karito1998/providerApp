@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/booking_detail_response.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
@@ -13,6 +10,7 @@ import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:handyman_provider_flutter/utils/widget/spin_kit_chasing_dots.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Widget cachedImage(
   String? url, {
@@ -70,16 +68,6 @@ String commonPrice(num price) {
   return formatter.format(price);
 }
 
-//ads
-String? getBannerAdUnitId() {
-  if (Platform.isIOS) {
-    return bannerAdIdForIos;
-  } else if (Platform.isAndroid) {
-    return bannerAdIdForAndroid;
-  }
-  return '';
-}
-
 class LoaderWidget extends StatefulWidget {
   @override
   _LoaderWidgetState createState() => _LoaderWidgetState();
@@ -118,11 +106,11 @@ Widget aboutCustomerWidget({BuildContext? context, BookingDetail? bookingDetail}
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      Text(context!.translate.lblAboutCustomer, style: boldTextStyle(size: 16)),
+      Text(context!.translate.lblAboutCustomer, style: boldTextStyle(size: 18)),
       OutlinedButton(
         child: Text(context.translate.lblGetDirection, style: boldTextStyle(color: primaryColor)),
         onPressed: () {
-          launchMap(bookingDetail!.address.validate());
+          commonLaunchUrl('$GOOGLE_MAP_PREFIX${Uri.encodeFull(bookingDetail!.address.validate())}', launchMode: LaunchMode.externalApplication);
         },
       ),
     ],

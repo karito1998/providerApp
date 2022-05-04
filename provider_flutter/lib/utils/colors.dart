@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-const primaryColor = Color(0xff04B4AE);
+const primaryColor = Color(0xff5f60b9);
 const secondaryPrimaryColor = Color(0xfff1f1f6);
 
 const cardColor = Color(0xFFF6F7F9);
-const aquaColor = Color(0xff17c2e3);
 
 //Text Color
 const appTextPrimaryColor = Color(0xff1C1F34);
@@ -34,3 +33,9 @@ const update_booking_status = Color(0xFFFD6922);
 const cancel_booking = Color(0xFFC41520);
 const payment_message_status = Color(0xFFFFBD49);
 const defaultActivityStatus = Color(0xFF3CAE5C);
+
+const add_wallet = Color(0xFF3CAE5C);
+const update_wallet = Color(0xFFFFBD49);
+const wallet_payout_transfer = Color(0xFFFD6922);
+
+const rattingColor = Color(0xffff8800);

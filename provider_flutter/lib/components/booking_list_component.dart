@@ -4,7 +4,7 @@ import 'package:handyman_provider_flutter/handyman/screen/handyman_booking_detai
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/booking_list_response.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
-import 'package:handyman_provider_flutter/provider/booking/booking_summary_Dialog.dart';
+import 'package:handyman_provider_flutter/provider/booking/booking_summary_dialog.dart';
 import 'package:handyman_provider_flutter/provider/booking/p_booking_detail_screen.dart';
 import 'package:handyman_provider_flutter/provider/handyman/assign_handyman_Dialog.dart';
 import 'package:handyman_provider_flutter/utils/app_common.dart';
@@ -45,7 +45,7 @@ class BookingListComponentState extends State<BookingListComponent> {
 
   Future<void> updateBooking(int bookingId, String updatedStatus, int index) async {
     appStore.setLoading(true);
-    var request = {
+    Map request = {
       CommonKeys.id: bookingId,
       BookingUpdateKeys.status: updatedStatus,
     };
@@ -228,26 +228,29 @@ class BookingListComponentState extends State<BookingListComponent> {
               ],
             ),
           16.height,
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  Image.asset(total_booking, height: 18, width: 18, color: context.iconColor),
-                  8.width,
-                  Text(context.translate.paymentStatus, style: primaryTextStyle(size: 14)).expand(),
-                ],
-              ).expand(),
-              Text(
-                widget.bookingData!.payment_status.validate() == PAID ? context.translate.paymentReceived : context.translate.paymentPending,
-                style: boldTextStyle(size: 14, color: widget.bookingData!.payment_status.validate() == PAID ? Colors.green : Colors.red),
-              ).flexible(),
-            ],
-          ),
-          8.height,
-          Divider(thickness: 1).visible(widget.bookingData!.status == BookingStatusKeys.pending),
-          8.height,
+          if (widget.bookingData!.payment_status != null)
+            Column(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Image.asset(total_booking, height: 18, width: 18, color: context.iconColor),
+                        8.width,
+                        Text(context.translate.paymentStatus, style: primaryTextStyle(size: 14)).expand(),
+                      ],
+                    ).expand(),
+                    Text(
+                      getPaymentStatusText(widget.bookingData!.payment_status),
+                      style: boldTextStyle(size: 14, color: widget.bookingData!.payment_status.validate() == PAID ? Colors.green : Colors.red),
+                    ).flexible(),
+                  ],
+                ),
+                8.height,
+              ],
+            ),
           if (isUserTypeProvider && widget.bookingData!.status == BookingStatusKeys.pending || (isUserTypeHandyman && widget.bookingData!.status == BookingStatusKeys.accept))
             Row(
               children: [
@@ -288,27 +291,31 @@ class BookingListComponentState extends State<BookingListComponent> {
                 ).expand(),
               ],
             ),
-          8.height,
           if (isUserTypeProvider && widget.bookingData!.handyman!.isEmpty && widget.bookingData!.status == BookingStatusKeys.accept)
-            AppButton(
-              width: context.width(),
-              child: Text(context.translate.lblAssignHandyman, style: boldTextStyle(color: white)),
-              color: primaryColor,
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (_) {
-                    return AssignHandymanDialog(
-                      bookingId: widget.bookingData!.id,
-                      serviceAddressId: widget.bookingData!.booking_address_id,
-                      onUpdate: () {
-                        setState(() {});
-                        LiveStream().emit(LiveStreamUpdateBookings);
+            Column(
+              children: [
+                8.height,
+                AppButton(
+                  width: context.width(),
+                  child: Text(context.translate.lblAssignHandyman, style: boldTextStyle(color: white)),
+                  color: primaryColor,
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (_) {
+                        return AssignHandymanDialog(
+                          bookingId: widget.bookingData!.id,
+                          serviceAddressId: widget.bookingData!.booking_address_id,
+                          onUpdate: () {
+                            setState(() {});
+                            LiveStream().emit(LiveStreamUpdateBookings);
+                          },
+                        );
                       },
                     );
                   },
-                );
-              },
+                ),
+              ],
             ),
         ],
       ),

@@ -89,6 +89,8 @@ Future<MultipartRequest> getMultiPartRequest(String endPoint, {String? baseUrl})
 Future<void> sendMultiPartRequest(MultipartRequest multiPartRequest, {Function(dynamic)? onSuccess, Function(dynamic)? onError}) async {
   http.Response response = await http.Response.fromStream(await multiPartRequest.send());
 
+  log('response : ${response.body}');
+
   if (response.statusCode.isSuccessful()) {
     if (response.body.isJson()) {
       onSuccess?.call(response.body);

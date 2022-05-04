@@ -464,9 +464,6 @@ class LanguageAr extends Languages {
   String lblInvalidUrl = 'URL غير صالح:';
 
   @override
-  String lblInvalidEmail = 'غير صالح:';
-
-  @override
   String errorPasswordLength = 'يجب أن يكون طول كلمة المرور أكثر من';
 
   @override
@@ -900,4 +897,67 @@ class LanguageAr extends Languages {
 
   @override
   String lblEnterMinute = "أدخل الدقيقة حتى 60 دقيقة";
+
+  @override
+  String lblSelectSubCategory = "حدد الفئة الفرعية";
+
+  @override
+  String lblServiceProof = "دليل الخدمة";
+
+  @override
+  String lblTitle = "عنوان";
+
+  @override
+  String lblAddImage = "إضافة صورة";
+
+  @override
+  String lblSubmit = "إرسال";
+
+  @override
+  String lblNotHelpLineNum = "غير متوفر رقم خط المساعدة";
+
+  @override
+  String lblWalletHistory = "تاريخ المحفظة";
+
+  @override
+  String lblServiceRatings = "تقييمات الخدمة";
+
+  @override
+  String lblNoServiceRatings = "لا تصنيفات الخدمة";
+
+  @override
+  String lblEmail = "بريد الالكتروني";
+
+  @override
+  String lblWallet = "محفظة";
+
+  @override
+  String lblSelectUserType = "بريد الالكتروني";
+
+  @override
+  String lblIAgree = "محفظة";
+
+  @override
+  String lblTermsOfService = "حدد نوع المستخدم";
+
+  @override
+  String lblLoginAgain = "أنا أوافق على";
+
+  @override
+  String lblTermCondition = "شروط الخدمة";
+
+  @override
+  String lblServiceTotalTime = "الرجاد الدخول على الحساب من جديد";
+
+  @override
+  String lblHelpLineNum = "رقم خط المساعدة";
+
+  @override
+  String lblReasonCancelling = "سبب إلغاء هذا الحجز";
+
+  @override
+  String lblReasonRejecting = "سبب رفض هذا الحجز";
+
+  @override
+  String lblFailed = "سبب فشل هذا الحجز";
 }

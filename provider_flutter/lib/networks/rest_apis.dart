@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:handyman_provider_flutter/auth/sign_in_screen.dart';
 import 'package:handyman_provider_flutter/main.dart';
-import 'package:handyman_provider_flutter/models/PlanListResponse.dart';
 import 'package:handyman_provider_flutter/models/base_response.dart';
 import 'package:handyman_provider_flutter/models/booking_detail_response.dart';
 import 'package:handyman_provider_flutter/models/booking_list_response.dart';
@@ -16,8 +15,11 @@ import 'package:handyman_provider_flutter/models/handyman_dashboard_response.dar
 import 'package:handyman_provider_flutter/models/login_response.dart';
 import 'package:handyman_provider_flutter/models/notification_list_response.dart';
 import 'package:handyman_provider_flutter/models/payment_list_reasponse.dart';
+import 'package:handyman_provider_flutter/models/plan_list_response.dart';
+import 'package:handyman_provider_flutter/models/plan_request_model.dart';
 import 'package:handyman_provider_flutter/models/profile_update_response.dart';
 import 'package:handyman_provider_flutter/models/provider_document_list_response.dart';
+import 'package:handyman_provider_flutter/models/provider_info_model.dart';
 import 'package:handyman_provider_flutter/models/provider_subscription_model.dart';
 import 'package:handyman_provider_flutter/models/register_response.dart';
 import 'package:handyman_provider_flutter/models/search_list_response.dart';
@@ -31,6 +33,7 @@ import 'package:handyman_provider_flutter/models/total_earning_response.dart';
 import 'package:handyman_provider_flutter/models/user_data.dart';
 import 'package:handyman_provider_flutter/models/user_info_response.dart';
 import 'package:handyman_provider_flutter/models/user_list_response.dart';
+import 'package:handyman_provider_flutter/models/user_type_response.dart';
 import 'package:handyman_provider_flutter/networks/network_utils.dart';
 import 'package:handyman_provider_flutter/provider/dashboard/dashboard_screen.dart';
 import 'package:handyman_provider_flutter/utils/app_common.dart';
@@ -39,9 +42,10 @@ import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
-import 'package:handyman_provider_flutter/utils/model_keys.dart';
 import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
+
+import '../models/wallet_history_list_response.dart';
 
 //region Auth API
 Future<void> logout(BuildContext context) async {
@@ -135,7 +139,6 @@ Future<RegisterResponse> registerUser(Map request) async {
 
 Future<LoginResponse> loginUser(Map request) async {
   LoginResponse res = LoginResponse.fromJson(await (handleResponse(await buildHttpResponse('login', request: request, method: HttpMethod.POST))));
-  await saveUserData(res.data!);
 
   return res;
 }
@@ -153,12 +156,15 @@ Future<void> saveUserData(UserData data) async {
     await appStore.setUserProfile(data.profileImage.validate());
     await appStore.setCountryId(data.countryId.validate());
     await appStore.setStateId(data.stateId.validate());
-    await appStore.setUId(data.uid.validate());
+    await userService.getUser(email: data.email.validate()).then((value) async {
+      await appStore.setUId(value.uid.validate());
+    }).catchError((e) {
+      log(e.toString());
+    });
     await appStore.setCityId(data.cityId.validate());
     await appStore.setProviderId(data.providerId.validate());
     if (data.serviceAddressId != null) await appStore.setServiceAddressId(data.serviceAddressId!);
     await appStore.setCreatedAt(data.createdAt.validate());
-
     if (data.subscription != null) {
       await setSaveSubscription(
         isSubscribe: data.isSubscribe,
@@ -180,6 +186,10 @@ Future<BaseResponse> changeUserPassword(Map request) async {
 
 Future<UserInfoResponse> getUserDetail(int id) async {
   return UserInfoResponse.fromJson(await handleResponse(await buildHttpResponse('user-detail?id=$id', method: HttpMethod.GET)));
+}
+
+Future<HandymanInfoResponse> getProviderDetail(int id) async {
+  return HandymanInfoResponse.fromJson(await handleResponse(await buildHttpResponse('user-detail?id=$id', method: HttpMethod.GET)));
 }
 
 Future<BaseResponse> forgotPassword(Map request) async {
@@ -223,8 +233,7 @@ Future<BookingListResponse> getBookingList(int page, {var perPage = perPageItem,
 }
 
 Future<SearchListResponse> getSearchList(int page, {var perPage = perPageItem, int? categoryId, int? providerId, String? search}) async {
-  return SearchListResponse.fromJson(
-      await handleResponse(await buildHttpResponse('search-list?per_page=$perPage&page=$page&search=$search&provider_id=$providerId', method: HttpMethod.GET)));
+  return SearchListResponse.fromJson(await handleResponse(await buildHttpResponse('search-list?per_page=$perPage&page=$page&search=$search&provider_id=$providerId', method: HttpMethod.GET)));
 }
 
 Future<BookingDetailResponse> bookingDetail(Map request) async {
@@ -275,12 +284,14 @@ Future<DashboardResponse> providerDashboard() async {
     );
   }
 
-  if (data.is_subscribed == 1) {
+  log(data.earningType);
+
+  if (data.earningType == EARNING_TYPE_SUBSCRIPTION) {
     await setValue(IS_PLAN_SUBSCRIBE, true);
   } else {
     await setValue(IS_PLAN_SUBSCRIBE, false);
   }
-  await setValue(EARNING_TYPE, data.earningType.validate());
+  appStore.setEarningType(data.earningType.validate());
   appStore.setPrivacyPolicy(data.privacy_policy.validate());
   appStore.setTermConditions(data.term_conditions.validate());
   appStore.setInquiryEmail(data.inquriy_email.validate());
@@ -313,11 +324,9 @@ Future<ProfileUpdateResponse> deleteProviderDoc(int? id) async {
 //region Service API
 Future<ServiceResponse> getServiceList(int page, int providerId, {String? searchTxt, bool isSearch = false, int? categoryId, bool isCategoryWise = false}) async {
   if (isCategoryWise) {
-    return ServiceResponse.fromJson(
-        await handleResponse(await buildHttpResponse('service-list?per_page=$perPageItem&category_id=$categoryId&page=$page&provider_id=$providerId', method: HttpMethod.GET)));
+    return ServiceResponse.fromJson(await handleResponse(await buildHttpResponse('service-list?per_page=$perPageItem&category_id=$categoryId&page=$page&provider_id=$providerId', method: HttpMethod.GET)));
   } else if (isSearch) {
-    return ServiceResponse.fromJson(
-        await handleResponse(await buildHttpResponse('service-list?per_page=$perPageItem&page=$page&search=$searchTxt&provider_id=$providerId', method: HttpMethod.GET)));
+    return ServiceResponse.fromJson(await handleResponse(await buildHttpResponse('service-list?per_page=$perPageItem&page=$page&search=$searchTxt&provider_id=$providerId', method: HttpMethod.GET)));
   } else {
     return ServiceResponse.fromJson(await handleResponse(await buildHttpResponse('service-list?per_page=$perPageItem&page=$page&provider_id=$providerId', method: HttpMethod.GET)));
   }
@@ -357,6 +366,12 @@ Future<CategoryResponse> getCategoryList() async {
 }
 //endregion
 
+//region SubCategory Api
+Future<CategoryResponse> getSubCategoryList({required int catId}) async {
+  return CategoryResponse.fromJson(await handleResponse(await buildHttpResponse('subcategory-list?category_id=$catId', method: HttpMethod.GET)));
+}
+//endregion
+
 //region Handyman API
 Future<BaseResponse> updateHandymanStatus(Map request) async {
   return BaseResponse.fromJson(await handleResponse(await buildHttpResponse('user-update-status', request: request, method: HttpMethod.POST)));
@@ -364,8 +379,7 @@ Future<BaseResponse> updateHandymanStatus(Map request) async {
 
 Future<UserListResponse> getHandyman({bool isPagination = false, int? page, int? providerId, String? userTypeHandyman = "handyman"}) async {
   if (isPagination) {
-    return UserListResponse.fromJson(
-        await handleResponse(await buildHttpResponse('user-list?user_type=$userTypeHandyman&provider_id=$providerId&per_page=$perPageItem&page=$page', method: HttpMethod.GET)));
+    return UserListResponse.fromJson(await handleResponse(await buildHttpResponse('user-list?user_type=$userTypeHandyman&provider_id=$providerId&per_page=$perPageItem&page=$page', method: HttpMethod.GET)));
   } else {
     return UserListResponse.fromJson(await handleResponse(await buildHttpResponse('user-list?user_type=$userTypeHandyman&provider_id=$providerId', method: HttpMethod.GET)));
   }
@@ -387,6 +401,12 @@ Future<BaseResponse> removeAddress(int? id) async {
 }
 //endregion
 
+//region userType
+Future<UserTypeResponse> getUserType({String type = "provider"}) async {
+  return UserTypeResponse.fromJson(await handleResponse(await buildHttpResponse('type-list?type=$type')));
+}
+//endregion
+
 //region Doc API
 Future<DocumentListResponse> getDocList() async {
   return DocumentListResponse.fromJson(await handleResponse(await buildHttpResponse('document-list', method: HttpMethod.GET)));
@@ -400,8 +420,7 @@ Future<DashboardResponse> currencyConfig() async {
 
 //region TotalEarningList API
 Future<TotalEarningResponse> getTotalEarningList(int page, {var perPage = perPageItem}) async {
-  return TotalEarningResponse.fromJson(await handleResponse(
-      await buildHttpResponse('${isUserTypeProvider ? 'provider-payout-list' : 'handyman-payout-list'}?per_page="$perPage"&page=$page', method: HttpMethod.GET)));
+  return TotalEarningResponse.fromJson(await handleResponse(await buildHttpResponse('${isUserTypeProvider ? 'provider-payout-list' : 'handyman-payout-list'}?per_page="$perPage"&page=$page', method: HttpMethod.GET)));
 }
 //endregion
 
@@ -419,8 +438,7 @@ Future<ProviderSubscriptionModel> saveSubscription(Map request) async {
 }
 
 Future<SubscriptionHistoryResponse> getSubscriptionHistory(int page, {var perPage = perPageItem}) async {
-  return SubscriptionHistoryResponse.fromJson(
-      await handleResponse(await buildHttpResponse('subscription-history?per_page=$perPage&page=$page&orderby=desc', method: HttpMethod.GET)));
+  return SubscriptionHistoryResponse.fromJson(await handleResponse(await buildHttpResponse('subscription-history?per_page=$perPage&page=$page&orderby=desc', method: HttpMethod.GET)));
 }
 
 Future<void> cancelSubscription(Map request) async {
@@ -434,20 +452,26 @@ Future<void> savePayment({
   String? txtId,
 }) async {
   if (data != null) {
-    Map req = {
-      Subscription.planId: data.id.validate(),
-      Subscription.title: data.title.validate(),
-      Subscription.identifier: data.identifier.validate(),
-      Subscription.amount: data.amount.validate(),
-      Subscription.type: data.type.validate(),
-      Subscription.paymentType: paymentMethod.validate(),
-      Subscription.paymentStatus: paymentStatus.validate(),
-    };
+    PlanRequestModel planRequestModel = PlanRequestModel()
+      ..amount = data.amount
+      ..description = data.description
+      ..duration = data.duration
+      ..identifier = data.identifier
+      ..other_transaction_detail = ''
+      ..payment_status = paymentStatus.validate()
+      ..payment_type = paymentMethod.validate()
+      ..plan_id = data.id
+      ..plan_limitation = data.plan_limitation
+      ..plan_type = data.plan_type
+      ..title = data.title
+      ..txn_id = txtId
+      ..type = data.type
+      ..user_id = appStore.userId;
 
     appStore.setLoading(true);
-    log('Request : $req');
+    log('Request : $planRequestModel');
 
-    await saveSubscription(req).then((value) {
+    await saveSubscription(planRequestModel.toJson()).then((value) {
       toast("${data.title.validate()}  is successFully activated");
       // toast("${data.title.validate()} ${context.translate.lblIsSuccessFullyActivated}");
       push(DashboardScreen(index: 0), isNewTask: true);
@@ -455,6 +479,10 @@ Future<void> savePayment({
       log(e.toString());
     }).whenComplete(() => appStore.setLoading(false));
   }
+}
+
+Future<WalletHistoryListResponse> getWalletHistory(int page, {var perPage = perPageItem}) async {
+  return WalletHistoryListResponse.fromJson(await handleResponse(await buildHttpResponse('wallet-history?per_page=$perPage&page=$page&orderby=desc', method: HttpMethod.GET)));
 }
 
 //endregion

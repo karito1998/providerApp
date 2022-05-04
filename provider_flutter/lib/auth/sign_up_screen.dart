@@ -1,9 +1,14 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:handyman_provider_flutter/auth/component/dropdown_user_type_component.dart';
 import 'package:handyman_provider_flutter/auth/sign_in_screen.dart';
-import 'package:handyman_provider_flutter/components/back_widget.dart';
+import 'package:handyman_provider_flutter/components/selected_item_widget.dart';
 import 'package:handyman_provider_flutter/main.dart';
+import 'package:handyman_provider_flutter/models/user_type_response.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
@@ -11,10 +16,11 @@ import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/extensions/string_extension.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
+import 'package:handyman_provider_flutter/utils/model_keys.dart';
 import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../utils/model_keys.dart';
+bool isNew = false;
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -30,17 +36,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController userNameCont = TextEditingController();
   TextEditingController mobileCont = TextEditingController();
   TextEditingController passwordCont = TextEditingController();
-  TextEditingController cPasswordCont = TextEditingController();
 
   FocusNode fNameFocus = FocusNode();
   FocusNode lNameFocus = FocusNode();
   FocusNode emailFocus = FocusNode();
   FocusNode userNameFocus = FocusNode();
   FocusNode mobileFocus = FocusNode();
+  FocusNode userTypeFocus = FocusNode();
+  FocusNode typeFocus = FocusNode();
   FocusNode passwordFocus = FocusNode();
-  FocusNode cPasswordFocus = FocusNode();
 
-  String selectedUserTypeValue = UserTypeProvider;
+  String? selectedUserTypeValue;
+  UserTypeData? selectedUserTypeData;
+
+  bool isAcceptedTc = false;
 
   @override
   void initState() {
@@ -48,66 +57,268 @@ class _SignUpScreenState extends State<SignUpScreen> {
     init();
   }
 
-  init() async {
-    afterBuildCreated(() {
-      setStatusBarColor(appStore.isDarkMode ? scaffoldColorDark : white);
-    });
-  }
+  void init() async {}
 
   @override
   void setState(fn) {
     if (mounted) super.setState(fn);
   }
 
-  @override
-  void dispose() {
-    super.dispose();
+  //region Widgets
+
+  Widget _buildTopWidget() {
+    return Column(
+      children: [
+        Container(
+          width: 85,
+          height: 85,
+          decoration: boxDecorationWithRoundedCorners(boxShape: BoxShape.circle, backgroundColor: primaryColor),
+          child: Image.asset(profile, height: 45, width: 45, color: white),
+        ),
+        16.height,
+        Text(context.translate.lblsignuptitle, style: boldTextStyle(size: 22)),
+        16.height,
+        Text(
+          context.translate.lblsignupsubtitle,
+          style: secondaryTextStyle(size: 16),
+          textAlign: TextAlign.center,
+        ).paddingSymmetric(horizontal: 32),
+        32.height,
+      ],
+    );
   }
 
-  Future<void> register() async {
+  Widget _buildFormWidget() {
+    return Column(
+      children: [
+        AppTextField(
+          textFieldType: TextFieldType.NAME,
+          controller: fNameCont,
+          focus: fNameFocus,
+          nextFocus: lNameFocus,
+          errorThisFieldRequired: context.translate.hintRequired,
+          decoration: inputDecoration(context, hint: context.translate.hintFirstNm),
+          suffix: profile.iconImage(size: 10).paddingAll(14),
+        ),
+        16.height,
+        AppTextField(
+          textFieldType: TextFieldType.NAME,
+          controller: lNameCont,
+          focus: lNameFocus,
+          nextFocus: userNameFocus,
+          errorThisFieldRequired: context.translate.hintRequired,
+          decoration: inputDecoration(context, hint: context.translate.hintLastNm),
+          suffix: profile.iconImage(size: 10).paddingAll(14),
+        ),
+        16.height,
+        AppTextField(
+          textFieldType: TextFieldType.USERNAME,
+          controller: userNameCont,
+          focus: userNameFocus,
+          nextFocus: emailFocus,
+          errorThisFieldRequired: context.translate.hintRequired,
+          decoration: inputDecoration(context, hint: context.translate.hintUserNm),
+          suffix: profile.iconImage(size: 10).paddingAll(14),
+        ),
+        16.height,
+        AppTextField(
+          textFieldType: TextFieldType.EMAIL,
+          controller: emailCont,
+          focus: emailFocus,
+          nextFocus: mobileFocus,
+          errorThisFieldRequired: context.translate.hintRequired,
+          decoration: inputDecoration(context, hint: context.translate.hintEmailAddress),
+          suffix: ic_message.iconImage(size: 10).paddingAll(14),
+        ),
+        16.height,
+        AppTextField(
+          textFieldType: TextFieldType.PHONE,
+          controller: mobileCont,
+          focus: mobileFocus,
+          nextFocus: passwordFocus,
+          errorThisFieldRequired: context.translate.hintRequired,
+          decoration: inputDecoration(context, hint: context.translate.hintContactNumber),
+          suffix: calling.iconImage(size: 10).paddingAll(14),
+        ),
+        16.height,
+        DropdownButtonFormField<String>(
+          items: [
+            DropdownMenuItem(
+              child: Text(context.translate.provider, style: primaryTextStyle()),
+              value: UserTypeProvider,
+            ),
+            DropdownMenuItem(
+              child: Text(context.translate.handyman, style: primaryTextStyle()),
+              value: UserTypeHandyman,
+            ),
+          ],
+          focusNode: userTypeFocus,
+          decoration: inputDecoration(context, hint: context.translate.lblUserType),
+          value: selectedUserTypeValue,
+          validator: (value) {
+            if (value == null) return errorThisFieldRequired;
+            return null;
+          },
+          onChanged: (c) {
+            hideKeyboard(context);
+            selectedUserTypeValue = c.validate();
+            LiveStream().emit(SELECT_USER_TYPE, selectedUserTypeValue);
+          },
+        ),
+        16.height,
+        DropdownUserTypeComponent(
+          isValidate: true,
+          userType: selectedUserTypeValue,
+          onValueChanged: (UserTypeData value) {
+            selectedUserTypeData = value;
+            setState(() {});
+          },
+        ),
+        16.height,
+        AppTextField(
+          textFieldType: TextFieldType.PASSWORD,
+          controller: passwordCont,
+          focus: passwordFocus,
+          suffixPasswordVisibleWidget: ic_show.iconImage(size: 10).paddingAll(14),
+          suffixPasswordInvisibleWidget: ic_hide.iconImage(size: 10).paddingAll(14),
+          errorThisFieldRequired: context.translate.hintRequired,
+          decoration: inputDecoration(context, hint: context.translate.hintPassword),
+          onFieldSubmitted: (s) {
+            saveUser();
+          },
+        ),
+        20.height,
+        _buildTcAcceptWidget(),
+        8.height,
+        AppButton(
+          text: context.translate.lblsignup,
+          height: 40,
+          color: primaryColor,
+          textStyle: primaryTextStyle(color: white),
+          width: context.width() - context.navigationBarHeight,
+          onTap: () {
+            saveUser();
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFooterWidget() {
+    return Column(
+      children: [
+        16.height,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("${context.translate.alreadyHaveAccountTxt}?", style: secondaryTextStyle()),
+            TextButton(
+              onPressed: () {
+                finish(context);
+              },
+              child: Text(
+                context.translate.signIn,
+                style: boldTextStyle(
+                  color: primaryColor,
+                  decoration: TextDecoration.underline,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            )
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTcAcceptWidget() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        SelectedItemWidget(isSelected: isAcceptedTc).onTap(() async {
+          isAcceptedTc = !isAcceptedTc;
+          setState(() {});
+        }),
+        16.width,
+        RichTextWidget(list: [
+          TextSpan(text: '${context.translate.lblIAgree} ', style: secondaryTextStyle()),
+          TextSpan(
+            text: context.translate.lblTermsOfService,
+            style: boldTextStyle(color: primaryColor, size: 14),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                launch(termsConditionUrl);
+              },
+          ),
+          TextSpan(text: ' & ', style: secondaryTextStyle()),
+          TextSpan(
+            text: context.translate.lblPrivacyPolicy,
+            style: boldTextStyle(color: primaryColor, size: 14),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                launch(privacyPolicyUrl);
+              },
+          ),
+        ])
+      ],
+    ).paddingAll(16);
+  }
+
+  //endregion
+
+  //region Methods
+  void saveUser() async {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       hideKeyboard(context);
-      appStore.setLoading(true);
 
-      var request = {
-        UserKeys.firstName: fNameCont.text.trim(),
-        UserKeys.lastName: lNameCont.text.trim(),
-        UserKeys.userName: userNameCont.text.trim(),
-        UserKeys.userType: selectedUserTypeValue,
-        UserKeys.contactNumber: mobileCont.text.trim(),
-        UserKeys.email: emailCont.text.trim(),
-        UserKeys.password: DEFAULT_PASS,
-      };
+      if (isAcceptedTc) {
+        appStore.setLoading(true);
 
-      await registerUser(request).then((value) async {
-        value.data!.password = passwordCont.text.trim();
-        value.data!.user_type = UserTypeProvider;
-        // After successful entry in the mysql database it will login into firebase.
-        await authService.signUpWithEmailPassword(context, registerData: value.data!).then((value) {
-          //
+        var request = {
+          UserKeys.firstName: fNameCont.text.trim(),
+          UserKeys.lastName: lNameCont.text.trim(),
+          UserKeys.userName: userNameCont.text.trim(),
+          UserKeys.userType: selectedUserTypeValue,
+          UserKeys.contactNumber: mobileCont.text.trim(),
+          UserKeys.email: emailCont.text.trim(),
+          UserKeys.password: passwordCont.text.trim(),
+        };
+
+        if (selectedUserTypeValue == UserTypeProvider) {
+          request.putIfAbsent(UserKeys.providerTypeId, () => selectedUserTypeData!.id.toString());
+        } else {
+          request.putIfAbsent(UserKeys.handymanTypeId, () => selectedUserTypeData!.id.toString());
+        }
+
+        log(request);
+
+        await registerUser(request).then((value) async {
+          value.data!.password = passwordCont.text.trim();
+          value.data!.user_type = selectedUserTypeValue;
+
+          await authService.signUpWithEmailPassword(context, registerData: value.data!, isLogin: false).then((value) {
+//
+          }).catchError((e) {
+            if (e.toString() == USER_CANNOT_LOGIN) {
+              toast(context.translate.lblLoginAgain);
+              SignInScreen().launch(context, isNewTask: true);
+            } else if (e.toString() == USER_NOT_CREATED) {
+              toast(context.translate.lblLoginAgain);
+              SignInScreen().launch(context, isNewTask: true);
+            }
+          });
         }).catchError((e) {
-          if (e.toString() == USER_CANNOT_LOGIN) {
-            toast("Registro completo, por favor inicia sesion");
-            SignInScreen().launch(context, isNewTask: true);
-          } else if (e.toString() == USER_NOT_CREATED) {
-            toast("Registro completo, por favor inicia sesion");
-            SignInScreen().launch(context, isNewTask: true);
-          }
+          toast(e.toString(), print: true);
         });
-
-        appStore.setLoading(false);
-      }).catchError((e) {
-        appStore.setLoading(false);
-        if(e.toString() == "The username has already been taken." )
-          toast("El usuario ya existe.", print: true);
-        if(e.toString() == "The contact number must be between 10 and 12 digits." )
-          toast("El numero de contacto debe contener entre 10 y 12 digitos", print: true);
-        else
-        log(e.toString());
-      });
+      } else {
+        toast(context.translate.lblTermCondition);
+      }
     }
   }
+
+  //endregion
 
   @override
   Widget build(BuildContext context) {
@@ -116,11 +327,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         "",
         elevation: 0,
         color: context.scaffoldBackgroundColor,
-        backWidget: BackWidget(color: context.iconColor),
-        systemUiOverlayStyle: SystemUiOverlayStyle(
-          statusBarIconBrightness: appStore.isDarkMode ? Brightness.light : Brightness.dark,
-          statusBarColor: context.scaffoldBackgroundColor,
-        ),
+        systemUiOverlayStyle: SystemUiOverlayStyle(statusBarIconBrightness: getStatusBrightness(val: appStore.isDarkMode), statusBarColor: context.scaffoldBackgroundColor),
       ),
       body: SizedBox(
         width: context.width(),
@@ -132,134 +339,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 padding: EdgeInsets.all(16),
                 child: Column(
                   children: [
-                    16.height,
-                    Container(
-                      width: 85,
-                      height: 85,
-                      decoration: boxDecorationWithRoundedCorners(boxShape: BoxShape.circle, backgroundColor: primaryColor),
-                      child: Image.asset(profile, height: 45, width: 45, color: white).center(),
-                    ),
-                    16.height,
-                    Text(context.translate.lblsignuptitle, style: boldTextStyle(size: 22)).center(),
-                    16.height,
-                    Text(
-                      context.translate.lblsignupsubtitle,
-                      style: secondaryTextStyle(size: 16),
-                      textAlign: TextAlign.center,
-                    ).center().paddingSymmetric(horizontal: 32),
-                    32.height,
-                    AppTextField(
-                      textFieldType: TextFieldType.NAME,
-                      controller: fNameCont,
-                      focus: fNameFocus,
-                      nextFocus: lNameFocus,
-                      errorThisFieldRequired: context.translate.hintRequired,
-                      decoration: inputDecoration(context, hint: context.translate.hintFirstNm),
-                      suffix: profile.iconImage(size: 10).paddingAll(14),
-                    ),
-                    16.height,
-                    AppTextField(
-                      textFieldType: TextFieldType.NAME,
-                      controller: lNameCont,
-                      focus: lNameFocus,
-                      nextFocus: userNameFocus,
-                      errorThisFieldRequired: context.translate.hintRequired,
-                      decoration: inputDecoration(context, hint: context.translate.hintLastNm),
-                      suffix: profile.iconImage(size: 10).paddingAll(14),
-                    ),
-                    16.height,
-                    AppTextField(
-                      textFieldType: TextFieldType.USERNAME,
-                      controller: userNameCont,
-                      focus: userNameFocus,
-                      nextFocus: emailFocus,
-                      errorThisFieldRequired: context.translate.hintRequired,
-                      decoration: inputDecoration(context, hint: context.translate.hintUserNm),
-                      suffix: profile.iconImage(size: 10).paddingAll(14),
-                    ),
-                    16.height,
-                    AppTextField(
-                      textFieldType: TextFieldType.EMAIL,
-                      controller: emailCont,
-                      focus: emailFocus,
-                      nextFocus: mobileFocus,
-                      errorThisFieldRequired: context.translate.hintRequired,
-                      decoration: inputDecoration(context, hint: context.translate.hintEmailAddress),
-                      suffix: ic_message.iconImage(size: 10).paddingAll(14),
-                    ),
-                    16.height,
-                    AppTextField(
-                      textFieldType: TextFieldType.PHONE,
-                      controller: mobileCont,
-                      focus: mobileFocus,
-                      nextFocus: passwordFocus,
-                      errorThisFieldRequired: context.translate.hintRequired,
-                      decoration: inputDecoration(context, hint: context.translate.hintContactNumber),
-                      suffix: calling.iconImage(size: 10).paddingAll(14),
-                    ),
-                    16.height,
-                    AppTextField(
-                      textFieldType: TextFieldType.PASSWORD,
-                      controller: passwordCont,
-                      focus: passwordFocus,
-                      errorThisFieldRequired: context.translate.hintRequired,
-                      errorMinimumPasswordLength: "${context.translate.errorPasswordLength} $passwordLengthGlobal caracteres",
-                      decoration: inputDecoration(context, hint: context.translate.hintPassword),
-                      onFieldSubmitted: (s) {
-                        register();
-                      },
-                    ),
-                    16.height,
-                    DropdownButtonFormField<String>(
-                      items: [
-                        DropdownMenuItem(
-                          child: Text(context.translate.provider, style: primaryTextStyle()),
-                          value: UserTypeProvider,
-                        ),
-                        DropdownMenuItem(
-                          child: Text(context.translate.handyman, style: primaryTextStyle()),
-                          value: UserTypeHandyman,
-                        ),
-                      ],
-                      decoration: inputDecoration(context, hint: context.translate.lblUserType),
-                      value: selectedUserTypeValue,
-                      onChanged: (c) {
-                        hideKeyboard(context);
-                        selectedUserTypeValue = c.validate();
-                        setState(() {});
-                      },
-                    ),
-                    32.height,
-                    AppButton(
-                      text: context.translate.lblsignup,
-                      height: 40,
-                      color: primaryColor,
-                      textStyle: primaryTextStyle(color: white),
-                      width: context.width() - context.navigationBarHeight,
-                      onTap: () {
-                        register();
-                      },
-                    ),
-                    16.height,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text("${context.translate.alreadyHaveAccountTxt}?", style: secondaryTextStyle()),
-                        TextButton(
-                          onPressed: () {
-                            finish(context);
-                          },
-                          child: Text(
-                            context.translate.signIn,
-                            style: boldTextStyle(
-                              color: primaryColor,
-                              decoration: TextDecoration.underline,
-                              fontStyle: FontStyle.italic,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+                    _buildTopWidget(),
+                    _buildFormWidget(),
+                    _buildFooterWidget(),
                   ],
                 ),
               ),

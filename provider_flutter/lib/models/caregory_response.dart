@@ -36,8 +36,15 @@ class CategoryData {
   int? isFeatured;
   String? color;
   String? categoryImage;
+  int? category_id;
+  String? category_extension;
+  String? category_name;
+  int? services;
 
-  CategoryData({this.id, this.name, this.status, this.description, this.isFeatured, this.color, this.categoryImage});
+
+  CategoryData(this.id, this.name, this.status, this.description, this.isFeatured, this.color, this.categoryImage, this.category_id, this.category_extension, this.category_name,
+      this.services);
+  //CategoryData({this.id, this.name, this.status, this.description, this.isFeatured, this.color, this.categoryImage});
 
   CategoryData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -47,6 +54,10 @@ class CategoryData {
     isFeatured = json['is_featured'];
     color = json['color'];
     categoryImage = json['category_image'];
+    category_id = json['category_id'];
+    category_extension = json['category_extension'];
+    category_name = json['category_name'];
+    services = json['services'];
   }
 
   Map<String, dynamic> toJson() {
@@ -58,6 +69,10 @@ class CategoryData {
     data['is_featured'] = this.isFeatured;
     data['color'] = this.color;
     data['category_image'] = this.categoryImage;
+    data['category_id'] = this.category_id;
+    data['category_extension'] = this.category_extension;
+    data['category_name'] = this.category_name;
+    data['services'] = this.services;
     return data;
   }
 }

@@ -84,12 +84,17 @@ class NotificationScreenState extends State<NotificationFragment> {
 
         return GestureDetector(
           onTap: () async {
-            readNotification(id: data.data!.id.toString());
+            log(data.data!.toJson());
+            if (data.data!.type != ADD_WALLET && data.data!.type != UPDATE_WALLET && data.data!.type != WALLET_PAYOUT_TRANSFER) readNotification(id: data.data!.id.toString());
 
             if (isUserTypeHandyman) {
               HBookingDetailScreen(bookingId: data.data!.id).launch(context, pageRouteAnimation: PageRouteAnimation.Slide);
-            } else {
-              BookingDetailScreen(bookingId: data.data!.id).launch(context, pageRouteAnimation: PageRouteAnimation.Slide);
+            } else if (isUserTypeProvider) {
+              if (data.data!.type != ADD_WALLET && data.data!.type != UPDATE_WALLET && data.data!.type != WALLET_PAYOUT_TRANSFER) {
+                BookingDetailScreen(bookingId: data.data!.id).launch(context, pageRouteAnimation: PageRouteAnimation.Slide);
+              } else {
+                init();
+              }
             }
           },
           child: NotificationWidget(data: data),
@@ -121,7 +126,7 @@ class NotificationScreenState extends State<NotificationFragment> {
                         children: [
                           Row(
                             children: [
-                              Text(context.translate.lblUnreadNotification, style: boldTextStyle()).expand(),
+                              Text(context.translate.lblUnreadNotification, style: boldTextStyle(color: appStore.isDarkMode ? white : black)).expand(),
                               TextButton(
                                 onPressed: () async {
                                   appStore.setLoading(true);
@@ -146,7 +151,7 @@ class NotificationScreenState extends State<NotificationFragment> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(context.translate.notification, style: boldTextStyle()).paddingAll(8),
+                          Text(context.translate.notification, style: boldTextStyle(color: appStore.isDarkMode ? white : black)).paddingAll(8),
                           8.height,
                           listIterate(readNotificationList),
                         ],

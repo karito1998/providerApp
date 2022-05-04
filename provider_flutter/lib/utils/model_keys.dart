@@ -6,6 +6,7 @@ class CommonKeys {
   static String providerId = 'provider_id';
   static String bookingId = 'booking_id';
   static String handymanId = 'handyman_id';
+  static String userId = 'user_id';
 }
 
 class UserKeys {
@@ -15,6 +16,8 @@ class UserKeys {
   static String email = 'email';
   static String password = 'password';
   static String userType = 'user_type';
+  static String providerTypeId = 'providertype_id';
+  static String handymanTypeId = 'handymantype_id';
   static String status = 'status';
   static String providerId = 'provider_id';
   static String contactNumber = 'contact_number';
@@ -72,6 +75,7 @@ class AddServiceKey {
   static String name = 'name';
   static String providerId = 'provider_id';
   static String categoryId = 'category_id';
+  static String subCategoryId = 'subcategory_id';
   static String type = 'type';
   static String price = 'price';
   static String discountPrice = 'discount';
@@ -110,4 +114,10 @@ class Subscription {
   static String txnId = "txn_id";
   static String paymentStatus = "payment_status";
   static String otherTransactionDetail = "other_transaction_detail";
+}
+
+class SaveBookingAttachment {
+  static String title = 'title';
+  static String description = 'description';
+  static String bookingAttachment = 'booking_attachment_';
 }

@@ -59,6 +59,7 @@ class ServiceDetail {
   var priceFormat;
   int? providerId;
   String? providerName;
+  String? subCategoryName;
   List<ServiceAddressMapping>? serviceAddressMapping;
   var status;
   num? totalRating;
@@ -89,30 +90,32 @@ class ServiceDetail {
     this.totalRating,
     this.totalReview,
     this.type,
+    this.subCategoryName,
   });
 
   factory ServiceDetail.fromJson(Map<String, dynamic> json) {
     return ServiceDetail(
-      imageAttchments: json['attchments'] != null ? List<String>.from(json['attchments']) : null,
-      categoryId: json['category_id'],
-      categoryName: json['category_name'],
-      description: json['description'],
-      discount: json['discount'],
-      duration: json['duration'],
-      id: json['id'],
-      isFavourite: json['is_favourite'],
-      isFeatured: json['is_featured'],
-      name: json['name'],
-      price: json['price'],
-      priceFormat: json['price_format'],
-      providerId: json['provider_id'],
-      providerName: json['provider_name'],
-      serviceAddressMapping: json['service_address_mapping'] != null ? (json['service_address_mapping'] as List).map((i) => ServiceAddressMapping.fromJson(i)).toList() : null,
-      attchments: json['attchments_array'] != null ? (json['attchments_array'] as List).map((i) => Attachments.fromJson(i)).toList() : null,
-      status: json['status'],
-      totalRating: json['total_rating'],
-      totalReview: json['total_review'],
-      type: json['type'],
+        imageAttchments: json['attchments'] != null ? List<String>.from(json['attchments']) : null,
+        categoryId: json['category_id'],
+        categoryName: json['category_name'],
+        description: json['description'],
+        discount: json['discount'],
+        duration: json['duration'],
+        id: json['id'],
+        isFavourite: json['is_favourite'],
+        isFeatured: json['is_featured'],
+        name: json['name'],
+        price: json['price'],
+        priceFormat: json['price_format'],
+        providerId: json['provider_id'],
+        providerName: json['provider_name'],
+        serviceAddressMapping: json['service_address_mapping'] != null ? (json['service_address_mapping'] as List).map((i) => ServiceAddressMapping.fromJson(i)).toList() : null,
+        attchments: json['attchments_array'] != null ? (json['attchments_array'] as List).map((i) => Attachments.fromJson(i)).toList() : null,
+        status: json['status'],
+        totalRating: json['total_rating'],
+        totalReview: json['total_review'],
+        type: json['type'],
+        subCategoryName: json['subcategory_name'],
     );
   }
 
@@ -133,6 +136,7 @@ class ServiceDetail {
     data['total_rating'] = this.totalRating;
     data['total_review'] = this.totalReview;
     data['type'] = this.type;
+    data['subcategory_name'] = this.subCategoryName;
     if (this.imageAttchments != null) {
       data['attchments'] = this.imageAttchments;
     }

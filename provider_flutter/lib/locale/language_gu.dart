@@ -96,7 +96,7 @@ class LanguageGu extends Languages {
   String camera = 'કેમેરા';
 
   @override
-  String language = 'માલ';
+  String language = 'ભાષા';
 
   @override
   String supportLanguage = 'તમે પસંદ કરેલ એપ્લિકેશન ભાષા પસંદ કરો';
@@ -463,8 +463,6 @@ class LanguageGu extends Languages {
 
   @override
   String lblInvalidUrl = 'અમાન્ય URL:';
-  @override
-  String lblInvalidEmail = 'અમાન્ય Email';
 
   @override
   String errorPasswordLength = 'પાસવર્ડ લંબાઈ કરતાં વધુ હોવી જોઈએ';
@@ -615,7 +613,7 @@ class LanguageGu extends Languages {
 
 
   @override
-  String lblId = "Id";
+  String lblId = "આઈડી";
 
 
   @override
@@ -899,4 +897,67 @@ class LanguageGu extends Languages {
 
   @override
   String lblEnterMinute = "60 મિનિટ સુધી મિનિટ દાખલ કરો";
+
+  @override
+  String lblSelectSubCategory = "સબક ateg ટેગરી પસંદ કરો";
+
+  @override
+  String lblServiceProof = "સેવા પ્રૂફ";
+
+  @override
+  String lblTitle = "હક";
+
+  @override
+  String lblAddImage = "છબી ઉમેરો";
+
+  @override
+  String lblSubmit = "રજૂ કરવું";
+
+  @override
+  String lblNotHelpLineNum = "ઉપલબ્ધ હેલ્પલાઈન નંબર નથી";
+
+  @override
+  String lblWalletHistory = "પાકીટનો ઇતિહાસ";
+
+  @override
+  String lblServiceRatings = "સેવા રેટિંગ્સ";
+
+  @override
+  String lblNoServiceRatings = "કોઈ સેવા રેટિંગ્સ";
+
+  @override
+  String lblEmail = "ઇમેઇલ";
+
+  @override
+  String lblWallet = "વૉલેટ";
+
+  @override
+  String lblSelectUserType = "ઇમેઇલ";
+
+  @override
+  String lblIAgree = "વૉલેટ";
+
+  @override
+  String lblTermsOfService = "વપરાશકર્તા પ્રકાર પસંદ કરો";
+
+  @override
+  String lblLoginAgain = "હું સંમત છું";
+
+  @override
+  String lblTermCondition = "સેવાની શરતો";
+
+  @override
+  String lblServiceTotalTime = "કૃપા કરીને ફરીથી લ login ગિન કરો";
+
+  @override
+  String lblHelpLineNum = "હેલ્પલાઈન નંબર";
+
+  @override
+  String lblReasonCancelling = "આ બુકિંગ રદ કરવા માટેનું કારણ";
+
+  @override
+  String lblReasonRejecting = "આ બુકિંગને નકારી કા to વાનું કારણ";
+
+  @override
+  String lblFailed = "આ બુકિંગ કેમ નિષ્ફળ થયું તેનું કારણ";
 }

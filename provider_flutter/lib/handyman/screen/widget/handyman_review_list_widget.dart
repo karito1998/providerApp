@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:handyman_provider_flutter/models/handyman_review_response.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
-import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:handyman_provider_flutter/widgets/disabled_rating_bar_widget.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -38,6 +37,8 @@ class ReviewListWidget extends StatelessWidget {
                   Text('${DateTime.parse(handymanReview!.created_at.validate()).timeAgo}', style: secondaryTextStyle()),
                 ],
               ),
+              4.height,
+              Text(handymanReview!.service_name.validate(), style: primaryTextStyle(), maxLines: 1, overflow: TextOverflow.ellipsis),
               4.height,
               DisabledRatingBarWidget(rating: handymanReview!.rating.validate().toDouble().toDouble(), size: 16),
               4.height,

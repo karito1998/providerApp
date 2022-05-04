@@ -47,4 +47,17 @@ extension colorExt on String {
         return defaultActivityStatus;
     }
   }
+
+  Color get getWalletHistoryStatusColor {
+    switch (this) {
+      case "add_wallet":
+        return add_wallet;
+      case "update_wallet":
+        return update_wallet;
+      case "wallet_payout_transfer":
+        return wallet_payout_transfer;
+      default:
+        return add_wallet;
+    }
+  }
 }

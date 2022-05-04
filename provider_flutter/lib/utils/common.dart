@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
+import 'package:flutter_custom_tabs/flutter_custom_tabs.dart' as custom_tabs;
 import 'package:geocoding/geocoding.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/booking_detail_response.dart';
 import 'package:handyman_provider_flutter/models/booking_list_response.dart';
 import 'package:handyman_provider_flutter/models/dashboard_response.dart';
-import 'package:handyman_provider_flutter/models/provider_subscription_model.dart';
 import 'package:handyman_provider_flutter/models/service_model.dart';
-import 'package:handyman_provider_flutter/networks/rest_apis.dart';
-import 'package:handyman_provider_flutter/provider/dashboard/dashboard_screen.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/model_keys.dart';
@@ -17,7 +14,7 @@ import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
-import 'package:url_launcher/url_launcher.dart' as url_launcher;
+import 'package:url_launcher/url_launcher.dart';
 
 import 'colors.dart';
 import 'images.dart';
@@ -162,16 +159,22 @@ Widget statusButton(double width, String btnTxt, Color color, Color txtcolor, {F
   );
 }
 
-Future<void> launchUri(String url, {bool forceWebView = false, bool forceSafariVC = false}) async {
-  await url_launcher.launch(url, forceWebView: forceWebView, enableJavaScript: true, forceSafariVC: forceSafariVC).catchError((e) {
-    toast('Invalid URL: $url');
+Future<void> commonLaunchUrl(String address, {LaunchMode launchMode = LaunchMode.inAppWebView}) async {
+  await launchUrl(Uri.parse(address), mode: launchMode).catchError((e) {
+    toast('Invalid URL: $address');
   });
 }
 
-Future<void> launchMap(String address) async {
-  await url_launcher.launch("https://www.google.com/maps/search/?api=1&query=" + address).catchError((e) {
-    toast('Invalid URL' + ': $address');
-  });
+void launchCall(String? url) {
+  if (url.validate().isNotEmpty) {
+    commonLaunchUrl('tel:' + url!, launchMode: LaunchMode.externalApplication);
+  }
+}
+
+void launchMail(String? url) {
+  if (url.validate().isNotEmpty) {
+    commonLaunchUrl('mailto:' + url!, launchMode: LaunchMode.externalApplication);
+  }
 }
 
 Future<void> saveOneSignalPlayerId() async {
@@ -267,9 +270,9 @@ Widget circleImage({required String image, double size = 24}) {
 
 void launchUrlCustomTab(String? url) {
   if (url.validate().isNotEmpty) {
-    launch(
+    custom_tabs.launch(
       url!,
-      customTabsOption: CustomTabsOption(
+      customTabsOption: custom_tabs.CustomTabsOption(
         enableDefaultShare: true,
         enableInstantApps: true,
         enableUrlBarHiding: true,
@@ -294,7 +297,9 @@ String calculateTimer(int secTime) {
 
   String minuteLeft = minute.toString().length < 2 ? "0" + minute.toString() : minute.toString();
 
-  String result = "$hourLeft:$minuteLeft";
+  String minutes = minuteLeft == '00' ? '01' : minuteLeft;
+
+  String result = "$hourLeft:$minutes";
 
   return result;
 }
@@ -311,7 +316,12 @@ num hourlyCalculation({required int secTime, required num price}) {
   } else {
     List<String> data = time.split(":");
     if (data.first == "00") {
-      String value = (price * 1).toStringAsFixed(2);
+      String value;
+      if (secTime < 60) {
+        value = (perMinuteCharge.toDouble() * 1).toStringAsFixed(2);
+      } else {
+        value = (perMinuteCharge.toDouble() * data.last.toDouble()).toStringAsFixed(2);
+      }
       result = value.toDouble();
     } else {
       if (data.first.toInt() > 01 && data.last.toInt() == 00) {
@@ -357,4 +367,31 @@ Widget subSubscriptionPlanWidget({Color? planBgColor, String? planTitle, String?
       ],
     ),
   );
+}
+
+Brightness getStatusBrightness({required bool val}) {
+  return val ? Brightness.light : Brightness.dark;
+}
+
+String getPaymentStatusText(String? status) {
+  if (status == SERVICE_PAYMENT_STATUS_PAID) {
+    return 'Paid';
+  } else if (status == SERVICE_PAYMENT_STATUS_PENDING) {
+    return 'Pending';
+  } else if (status != null) {
+    return 'Pending Approval';
+  } else {
+    return "";
+  }
+}
+
+String getReasonText(BuildContext context, String val) {
+  if (val == BookingStatusKeys.cancelled) {
+    return context.translate.lblReasonCancelling;
+  } else if (val == BookingStatusKeys.rejected) {
+    return context.translate.lblReasonRejecting;
+  } else if (val == BookingStatusKeys.failed) {
+    return context.translate.lblFailed;
+  }
+  return '';
 }

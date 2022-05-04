@@ -464,9 +464,6 @@ class LanguageAf extends Languages {
   String lblInvalidUrl = 'Ongeldige URL:';
 
   @override
-  String lblInvalidEmail = 'Ongeldige Email';
-
-  @override
   String errorPasswordLength = 'Wagwoordlengte moet meer wees as';
 
   @override
@@ -900,4 +897,67 @@ class LanguageAf extends Languages {
 
   @override
   String lblEnterMinute = "Tik minuut tot 60 minute";
+
+  @override
+  String lblSelectSubCategory = "Kies subkategorie";
+
+  @override
+  String lblServiceProof = "Diensbewys";
+
+  @override
+  String lblTitle = "Titel";
+
+  @override
+  String lblAddImage = "Voeg beeld by";
+
+  @override
+  String lblSubmit = "Indien";
+
+  @override
+  String lblNotHelpLineNum = "Nie beskikbare hulplynnommer nie";
+
+  @override
+  String lblWalletHistory = "Beursiegeskiedenis";
+
+  @override
+  String lblServiceRatings = "Dienswaardering";
+
+  @override
+  String lblNoServiceRatings = "Geen diensgraderings nie";
+
+  @override
+  String lblEmail = "E -pos";
+
+  @override
+  String lblWallet = "Beursie";
+
+  @override
+  String lblSelectUserType = "E -pos";
+
+  @override
+  String lblIAgree = "Beursie";
+
+  @override
+  String lblTermsOfService = "Kies gebruikerstipe";
+
+  @override
+  String lblLoginAgain = "Ek stem in tot die";
+
+  @override
+  String lblTermCondition = "Diensvoorwaardes";
+
+  @override
+  String lblServiceTotalTime = "Meld asseblief weer aan";
+
+  @override
+  String lblHelpLineNum = "Hulplyn nommer";
+
+  @override
+  String lblReasonCancelling = "Rede vir die kansellasie van hierdie bespreking";
+
+  @override
+  String lblReasonRejecting = "Rede vir die verwerping van hierdie bespreking";
+
+  @override
+  String lblFailed = "Rede waarom hierdie bespreking misluk";
 }

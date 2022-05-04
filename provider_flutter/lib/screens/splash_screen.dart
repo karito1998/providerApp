@@ -25,7 +25,7 @@ class SplashScreenState extends State<SplashScreen> {
   Future<void> init() async {
     afterBuildCreated(() {
       appStore.setLanguage(getStringAsync(SELECTED_LANGUAGE_CODE, defaultValue: defaultLanguage), context: context);
-      setStatusBarColor(Colors.transparent, statusBarBrightness: Brightness.dark, statusBarIconBrightness:appStore.isDarkMode?Brightness.light: Brightness.dark);
+      setStatusBarColor(Colors.transparent, statusBarBrightness: Brightness.dark, statusBarIconBrightness: appStore.isDarkMode ? Brightness.light : Brightness.dark);
     });
     await 2.seconds.delay;
     if (!appStore.isLoggedIn) {

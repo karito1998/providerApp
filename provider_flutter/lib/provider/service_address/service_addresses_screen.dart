@@ -180,7 +180,7 @@ class ServiceAddressesScreenState extends State<ServiceAddressesScreen> {
                       textStyle: primaryTextStyle(color: white),
                       width: context.width() - context.navigationBarHeight,
                       onTap: () async {
-                        if (getStringAsync(USER_EMAIL) != DEFAULT_PROVIDER_EMAIL)
+                        if (!appStore.isTester)
                           addAddress();
                         else
                           toast(context.translate.lblUnAuthorized);

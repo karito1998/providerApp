@@ -204,7 +204,7 @@ class _PaymentScreenState extends State<PaymentScreen> implements TransactionCal
   @override
   onTransactionSuccess(String id, String txRef) {
     isPaymentProcessing = false;
-    savePayment(paymentMethod: PAYMENT_METHOD_FLUTTER_WAVE, paymentStatus: SERVICE_PAYMENT_STATUS_PAID, data: widget.selectedPricingPlan);
+    savePayment(data: widget.selectedPricingPlan, paymentMethod: PAYMENT_METHOD_FLUTTER_WAVE, paymentStatus: SERVICE_PAYMENT_STATUS_PAID);
     toast("Payment Successfully done");
   }
 
@@ -216,13 +216,13 @@ class _PaymentScreenState extends State<PaymentScreen> implements TransactionCal
       appBar: appBarWidget(context.translate.lblPayment, color: context.primaryColor, textColor: Colors.white, backWidget: BackWidget()),
       body: Stack(
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              16.height,
-              Text(context.translate.lblChoosePaymentMethod, style: boldTextStyle(size: 18)).paddingOnly(left: 16),
-              16.height,
-              if (paymentList.isNotEmpty)
+          if (paymentList.isNotEmpty)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                16.height,
+                Text(context.translate.lblChoosePaymentMethod, style: boldTextStyle(size: 18)).paddingOnly(left: 16),
+                16.height,
                 ListView.builder(
                   itemCount: paymentList.length,
                   shrinkWrap: true,
@@ -241,18 +241,8 @@ class _PaymentScreenState extends State<PaymentScreen> implements TransactionCal
                       title: Text(value.title.validate(), style: primaryTextStyle()),
                     );
                   },
-                )
-              else
-                Column(
-                  children: [
-                    24.height,
-                    Image.asset(notDataFoundImg, height: 150),
-                    16.height,
-                    Text(context.translate.lblNoPayments, style: boldTextStyle()).center(),
-                  ],
                 ),
-              Spacer(),
-              if (paymentList.isNotEmpty)
+                Spacer(),
                 AppButton(
                   onTap: () {
                     if (currentTimeValue!.type == PAYMENT_METHOD_COD) {
@@ -273,8 +263,17 @@ class _PaymentScreenState extends State<PaymentScreen> implements TransactionCal
                   color: context.primaryColor,
                   width: context.width(),
                 ).paddingAll(16),
-            ],
-          ),
+              ],
+            ),
+          if (paymentList.isEmpty)
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(notDataFoundImg, height: 150),
+                16.height,
+                Text(context.translate.lblNoPayments, style: boldTextStyle()).center(),
+              ],
+            ),
           Observer(builder: (context) => LoaderWidget().center().visible(appStore.isLoading))
         ],
       ),

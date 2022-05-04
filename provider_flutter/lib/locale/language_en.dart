@@ -464,9 +464,6 @@ class LanguageEn extends Languages {
   String lblInvalidUrl = 'Invalid URL:';
 
   @override
-  String lblInvalidEmail = 'Invalid Email';
-
-  @override
   String errorPasswordLength = 'Password length should be more than';
 
   @override
@@ -874,5 +871,68 @@ class LanguageEn extends Languages {
 
   @override
   String lblEnterMinute = "Enter Minute UpTo 60 Minute";
+
+  @override
+  String lblSelectSubCategory = "Select SubCategory";
+
+  @override
+  String lblServiceProof = "Service Proof";
+
+  @override
+  String lblTitle = "Title";
+
+  @override
+  String lblAddImage = "Add Image";
+
+  @override
+  String lblSubmit = "Submit";
+
+  @override
+  String lblNotHelpLineNum = "Helpline Number";
+
+  @override
+  String lblWalletHistory = "Wallet History";
+
+  @override
+  String lblServiceRatings = "Service Ratings";
+
+  @override
+  String lblNoServiceRatings = "No Service Ratings";
+
+  @override
+  String lblEmail = "Email";
+
+  @override
+  String lblWallet = "Wallet";
+
+  @override
+  String lblSelectUserType = "Select User Type";
+
+  @override
+  String lblIAgree = "I agree to the";
+
+  @override
+  String lblTermsOfService = "Terms of Service";
+
+  @override
+  String lblLoginAgain = "Please Login Again";
+
+  @override
+  String lblTermCondition = "Please accept terms and condition";
+
+  @override
+  String lblServiceTotalTime = "Service Total Time";
+
+  @override
+  String lblHelpLineNum = "Helpline Number";
+
+  @override
+  String lblReasonCancelling = "Reason for cancelling this booking";
+
+  @override
+  String lblReasonRejecting = "Reason for rejecting this booking";
+
+  @override
+  String lblFailed = "Reason why this booking is failed";
 
 }

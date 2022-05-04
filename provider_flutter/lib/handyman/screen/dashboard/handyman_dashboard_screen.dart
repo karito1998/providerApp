@@ -6,7 +6,7 @@ import 'package:handyman_provider_flutter/fragments/notification_fragment.dart';
 import 'package:handyman_provider_flutter/handyman/screen/fragment/handyman_fragment.dart';
 import 'package:handyman_provider_flutter/handyman/screen/fragment/handyman_profile_fragment.dart';
 import 'package:handyman_provider_flutter/main.dart';
-import 'package:handyman_provider_flutter/screens/chat_screen.dart';
+import 'package:handyman_provider_flutter/screens/chat/user_chat_list_screen.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
@@ -96,7 +96,7 @@ class _HandyDashboardScreenState extends State<HandyDashboardScreen> {
           IconButton(
             icon: Image.asset(chat, height: 20, width: 20, color: white),
             onPressed: () async {
-              ChatScreen().launch(context);
+              UserChatListScreen().launch(context);
             },
           ),
         ],

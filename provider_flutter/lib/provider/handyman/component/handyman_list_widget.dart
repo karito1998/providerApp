@@ -10,6 +10,7 @@ import 'package:handyman_provider_flutter/utils/extensions/string_extension.dart
 import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:handyman_provider_flutter/utils/model_keys.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HandymanListWidget extends StatefulWidget {
   final UserListData data;
@@ -124,7 +125,7 @@ class _HandymanListWidgetState extends State<HandymanListWidget> {
                   Row(
                     children: [
                       Text(
-                        widget.data.displayName.validate(),
+                        '${widget.data.firstName.validate()} ${widget.data.lastName.validate()}',
                         style: boldTextStyle(size: 18),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -246,7 +247,7 @@ class _HandymanListWidgetState extends State<HandymanListWidget> {
                             ).flexible()
                           ],
                         ).onTap(() {
-                          launchUri('mailto:' + widget.data.email.validate());
+                          launchMail(widget.data.email.validate());
                         }),
                         12.height,
                       ],
@@ -267,7 +268,7 @@ class _HandymanListWidgetState extends State<HandymanListWidget> {
                             ).flexible()
                           ],
                         ).onTap(() {
-                          launchMap(widget.data.address.validate());
+                          commonLaunchUrl('$GOOGLE_MAP_PREFIX${Uri.encodeFull(widget.data.address.validate())}', launchMode: LaunchMode.externalApplication);
                         }),
                         12.height,
                       ],
@@ -285,7 +286,7 @@ class _HandymanListWidgetState extends State<HandymanListWidget> {
                         ).flexible()
                       ],
                     ).onTap(() {
-                      launchUri(TEL + widget.data.contactNumber.validate());
+                      launchCall(widget.data.contactNumber.validate());
                     }),
                 ],
               ).expand(),

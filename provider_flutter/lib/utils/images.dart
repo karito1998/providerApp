@@ -1,5 +1,4 @@
 const notDataFoundImg = 'images/setting_icon/ic_no_data_found.png';
-const noInternetImg = 'images/app_images/NoInternet.png';
 const appLogo = 'images/setting_icon/ic_splash_logo.png';
 const servicesAddress = 'images/setting_icon/ic_servicesAddress.png';
 const services = 'images/setting_icon/ic_services.png';
@@ -36,6 +35,11 @@ const ic_message = "images/setting_icon/ic_message.png";
 const ic_home = "images/setting_icon/ic_home.png";
 const ic_profile2 = "images/setting_icon/ic_profile2.png";
 const ic_notification = "images/setting_icon/ic_notification.png";
+const ic_hide = "images/setting_icon/ic_hide.png";
+const ic_show = "images/setting_icon/ic_show.png";
+const chat_default_wallpaper = "images/app_images/default_wallpaper.png";
+const pricing_plan_accept = "images/setting_icon/ic_accept.png";
+const pricing_plan_reject = "images/setting_icon/ic_reject.png";
 
 const ic_fill_home = "images/setting_icon/ic_fill_home.png";
 const ic_fill_notification = "images/setting_icon/ic_fill_notification.png";
@@ -43,6 +47,5 @@ const ic_fill_profile = "images/setting_icon/ic_fill_profile.png";
 const ic_fill_wallet = "images/setting_icon/ic_fill_wallet.png";
 const splash_background = "images/app_images/splash_background.jpg";
 const splash_light_background = "images/app_images/splash_light_background.png";
-
 
 const ic_theme = "images/setting_icon/ic_theme.png";

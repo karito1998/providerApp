@@ -125,6 +125,20 @@ abstract class _AppStore with Store {
   @observable
   String createdAt = '';
 
+  @observable
+  String earningType = '';
+
+  @computed
+  bool get earningTypeCommission => earningType == EARNING_TYPE_COMMISSION;
+
+  @computed
+  bool get earningTypeSubscription => earningType == EARNING_TYPE_SUBSCRIPTION;
+
+  @action
+  Future<void> setEarningType(String val, {bool isInitializing = false}) async {
+    earningType = val;
+    if (!isInitializing) await setValue(EARNING_TYPE, val);
+  }
 
   @action
   Future<void> setTester(bool val, {bool isInitializing = false}) async {
@@ -194,7 +208,7 @@ abstract class _AppStore with Store {
 
   @action
   Future<void> setPlanSubscribeStatus(bool val, {bool isInitializing = false}) async {
-    isPlanSubscribe = val;
+    isPlanSubscribe = val && planTitle.isNotEmpty;
     if (!isInitializing) await setValue(IS_PLAN_SUBSCRIBE, val);
   }
 
@@ -331,7 +345,7 @@ abstract class _AppStore with Store {
   @action
   Future<void> setInitialAdCount(int val) async {
     countryId = val;
-    await setValue(INITIAL_AD_COUNT, val);
+    // await setValue(INITIAL_AD_COUNT, val);
   }
 
   @action

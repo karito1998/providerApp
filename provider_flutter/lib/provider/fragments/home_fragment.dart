@@ -8,7 +8,7 @@ import 'package:handyman_provider_flutter/provider/dashboard/component/commissio
 import 'package:handyman_provider_flutter/provider/dashboard/component/handyman_list_component.dart';
 import 'package:handyman_provider_flutter/provider/dashboard/component/services_list_component.dart';
 import 'package:handyman_provider_flutter/provider/dashboard/component/total_component.dart';
-import 'package:handyman_provider_flutter/provider/sub_scription/pricing_plan_screen.dart';
+import 'package:handyman_provider_flutter/provider/subscription/pricing_plan_screen.dart';
 import 'package:handyman_provider_flutter/utils/app_common.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
@@ -32,6 +32,18 @@ class _HomeFragmentState extends State<HomeFragment> {
 
   void init() async {
     //
+  }
+
+  Widget _buildHeaderWidget(DashboardResponse data) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        16.height,
+        Text("${context.translate.lblHello}, ${appStore.userFullName}", style: boldTextStyle(size: 20)).paddingLeft(16),
+        8.height,
+        Text(context.translate.lblWelcomeBack, style: secondaryTextStyle(size: 16)).paddingLeft(16),
+      ],
+    );
   }
 
   Widget planBanner(DashboardResponse data) {
@@ -97,13 +109,22 @@ class _HomeFragmentState extends State<HomeFragment> {
             FutureBuilder<DashboardResponse>(
               future: providerDashboard(),
               builder: (context, snap) {
-                if (snap.hasData) {
+                if (snap.hasError) {
+                    return Text(snap.error.toString()).center();
+                } else if (snap.hasData) {
                   return SingleChildScrollView(
                     padding: EdgeInsets.only(bottom: 16),
                     physics: AlwaysScrollableScrollPhysics(),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (snap.data!.earningType != EARNING_TYPE_COMMISSION) planBanner(snap.data!),
+                        if ((snap.data!.earningType == EARNING_TYPE_SUBSCRIPTION))
+                          Observer(
+                            builder: (context) {
+                              return planBanner(snap.data!);
+                            },
+                          ),
+                        _buildHeaderWidget(snap.data!),
                         if (snap.data!.earningType == EARNING_TYPE_COMMISSION) CommissionComponent(commission: snap.data!.commission!),
                         TotalComponent(snap: snap.data!),
                         8.height,
@@ -115,6 +136,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                     ),
                   );
                 }
+
                 return snapWidgetHelper(snap, loadingWidget: LoaderWidget());
               },
             ),

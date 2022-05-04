@@ -461,8 +461,6 @@ class LanguageSq extends Languages {
 
   @override
   String lblInvalidUrl = 'Nuk u gjet asnjë të dhëna';
-  @override
-  String lblInvalidEmail = 'Nuk u gjet asnjë të dhëna';
 
   @override
   String errorPasswordLength = 'URL e pavlefshme:';
@@ -899,4 +897,67 @@ class LanguageSq extends Languages {
 
   @override
   String lblEnterMinute = "Shkruani minutën deri në 60 minuta";
+
+  @override
+  String lblSelectSubCategory = "Zgjidhni Nënkategorinë";
+
+  @override
+  String lblServiceProof = "Prova e shërbimit";
+
+  @override
+  String lblTitle = "Titull";
+
+  @override
+  String lblAddImage = "Shto imazhin";
+
+  @override
+  String lblSubmit = "Paraqes";
+
+  @override
+  String lblNotHelpLineNum = "Nuk është në dispozicion numri i ndihmës";
+
+  @override
+  String lblWalletHistory = "Histori e portofolit";
+
+  @override
+  String lblServiceRatings = "Vlerësimet e shërbimit";
+
+  @override
+  String lblNoServiceRatings = "Nuk ka vlerësime shërbimi";
+
+  @override
+  String lblEmail = "Postë elektronike";
+
+  @override
+  String lblWallet = "Kuletë";
+
+  @override
+  String lblSelectUserType = "Postë elektronike";
+
+  @override
+  String lblIAgree = "Kuletë";
+
+  @override
+  String lblTermsOfService = "Zgjidhni llojin e përdoruesit";
+
+  @override
+  String lblLoginAgain = "Pajtohem me";
+
+  @override
+  String lblTermCondition = "Kushtet e Shërbimit";
+
+  @override
+  String lblServiceTotalTime = "Ju lutemi hyni përsëri";
+
+  @override
+  String lblHelpLineNum = "Numër i linjës së ndihmës";
+
+  @override
+  String lblReasonCancelling = "Arsyeja për anulimin e këtij prenotimi";
+
+  @override
+  String lblReasonRejecting = "Arsyeja për të refuzuar këtë prenotim";
+
+  @override
+  String lblFailed = "Arsyeja pse kjo prenotim është dështuar";
 }

@@ -149,7 +149,7 @@ class ServiceDetailScreenState extends State<ServiceDetailScreen> {
       positiveText: context.translate.lblYes,
       negativeText: context.translate.lblNo,
       onAccept: (context) async {
-        if (getStringAsync(USER_EMAIL) != DEFAULT_PROVIDER_EMAIL) {
+        if (!appStore.isTester) {
           appStore.setLoading(true);
           removeService();
         } else {
@@ -283,6 +283,11 @@ class ServiceDetailScreenState extends State<ServiceDetailScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    if (serviceDetailData.serviceDetail!.subCategoryName.validate().isNotEmpty)
+                                      Text('${serviceDetailData.serviceDetail!.categoryName} > ${serviceDetailData.serviceDetail!.subCategoryName}', style: boldTextStyle(size: 14, color: primaryColor))
+                                    else
+                                      Text('${serviceDetailData.serviceDetail!.categoryName}', style: boldTextStyle(size: 14, color: primaryColor)),
+                                    6.height,
                                     Marquee(
                                       directionMarguee: DirectionMarguee.oneDirection,
                                       child: Text(
@@ -300,10 +305,11 @@ class ServiceDetailScreenState extends State<ServiceDetailScreen> {
                                           isHourlyService: serviceDetailData.serviceDetail!.isHourlyService,
                                         ),
                                         8.width,
-                                        Text(
-                                          '(${serviceDetailData.serviceDetail!.discount.validate()}% ${context.translate.lblOff})',
-                                          style: boldTextStyle(color: Colors.green),
-                                        ),
+                                        if (serviceDetailData.serviceDetail!.discount.validate() != 0)
+                                          Text(
+                                            '(${serviceDetailData.serviceDetail!.discount.validate()}% ${context.translate.lblOff})',
+                                            style: boldTextStyle(color: Colors.green),
+                                          ),
                                       ],
                                     ),
                                     8.height,
@@ -325,7 +331,7 @@ class ServiceDetailScreenState extends State<ServiceDetailScreen> {
                                       expandedText: true,
                                       suffix: Row(
                                         children: [
-                                          Icon(Icons.star, color: primaryColor, size: 20),
+                                          Icon(Icons.star, color: rattingColor, size: 20),
                                           4.width,
                                           Text("${serviceDetailData.serviceDetail!.totalRating.validate()}", style: boldTextStyle()),
                                         ],
@@ -399,8 +405,8 @@ class ServiceDetailScreenState extends State<ServiceDetailScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(context.translate.lblFAQs, style: boldTextStyle()).paddingOnly(left: 16),
                               16.height,
+                              Text(context.translate.lblFAQs, style: boldTextStyle()).paddingOnly(left: 16),
                               ListView.builder(
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),

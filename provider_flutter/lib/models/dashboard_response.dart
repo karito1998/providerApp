@@ -35,7 +35,7 @@ class DashboardResponse {
   String? term_conditions;
   String? inquriy_email;
   String? helpline_number;
-
+  ProviderWallet? providerWallet;
 
   DashboardResponse({
     this.chartArray,
@@ -58,6 +58,7 @@ class DashboardResponse {
     this.term_conditions,
     this.inquriy_email,
     this.helpline_number,
+    this.providerWallet,
   });
 
   DashboardResponse.fromJson(Map<String, dynamic> json) {
@@ -71,10 +72,10 @@ class DashboardResponse {
     commission = json['commission'] != null ? Commission.fromJson(json['commission']) : null;
     configurations = json['configurations'] != null ? (json['configurations'] as List).map((i) => Configurations.fromJson(i)).toList() : null;
     paymentSettings = json['payment_settings'] != null ? (json['payment_settings'] as List).map((i) => PaymentSetting.fromJson(i)).toList() : null;
-    privacy_policy= json['privacy_policy'];
-    term_conditions= json['term_conditions'];
-    inquriy_email= json['inquriy_email'];
-    helpline_number= json['helpline_number'];
+    privacy_policy = json['privacy_policy'];
+    term_conditions = json['term_conditions'];
+    inquriy_email = json['inquriy_email'];
+    helpline_number = json['helpline_number'];
     if (json['service'] != null) {
       service = [];
       json['service'].forEach((v) {
@@ -112,6 +113,9 @@ class DashboardResponse {
     userNeverPurchasedPlan = is_subscribed == 0 && subscription == null;
     isPlanExpired = is_subscribed == 0 && subscription != null;
     earningType = json['earning_type'];
+    providerWallet = json['provider_wallet'] != null ? ProviderWallet.fromJson(json['provider_wallet']) : null;
+
+    // providerWallet = json['provider_wallet'] != null ? (json['provider_wallet'] as List).map((i) => ProviderWallet.fromJson(i)).toList() : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -148,6 +152,9 @@ class DashboardResponse {
     }
     data['total_revenue'] = this.totalRevenue;
     data['earning_type'] = this.earningType;
+    if (this.providerWallet != null) {
+      data['provider_wallet'] = this.providerWallet!.toJson();
+    }
     return data;
   }
 }
@@ -164,17 +171,7 @@ class LiveValue {
   String? flutterwave_encryption;
   String? paystack_public;
 
-  LiveValue(
-      {this.stripe_url,
-      this.stripe_key,
-      this.stripe_publickey,
-      this.razor_url,
-      this.razor_key,
-      this.razor_secret,
-      this.flutterwave_public,
-      this.flutterwave_secret,
-      this.flutterwave_encryption,
-      this.paystack_public});
+  LiveValue({this.stripe_url, this.stripe_key, this.stripe_publickey, this.razor_url, this.razor_key, this.razor_secret, this.flutterwave_public, this.flutterwave_secret, this.flutterwave_encryption, this.paystack_public});
 
   factory LiveValue.fromJson(Map<String, dynamic> json) {
     return LiveValue(
@@ -630,6 +627,40 @@ class Country {
     data['currency_name'] = this.currencyName;
     data['symbol'] = this.symbol;
     data['currency_code'] = this.currencyCode;
+    return data;
+  }
+}
+
+class ProviderWallet {
+  int? id;
+  String? title;
+  int? userId;
+  int? amount;
+  int? status;
+  String? createdAt;
+  String? updatedAt;
+
+  ProviderWallet(this.id, this.title, this.userId, this.amount, this.status, this.createdAt, this.updatedAt);
+
+  ProviderWallet.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    title = json['title'];
+    userId = json['user_id'];
+    amount = json['amount'];
+    status = json['status'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['title'] = this.title;
+    data['user_id'] = this.userId;
+    data['amount'] = this.amount;
+    data['status'] = this.status;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
     return data;
   }
 }

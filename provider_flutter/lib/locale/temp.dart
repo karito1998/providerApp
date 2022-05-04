@@ -461,8 +461,6 @@ class LanguageTemp extends Languages {
 
   @override
   String lblInvalidUrl = '';
-  @override
-  String lblInvalidEmail = '';
 
   @override
   String errorPasswordLength = '';
@@ -549,90 +547,68 @@ class LanguageTemp extends Languages {
   @override
   String lbllogintitle = "";
 
-
   @override
   String lblloginsubtitle = "";
-
 
   @override
   String lblsignuptitle = "";
 
-
   @override
   String lblsignupsubtitle = "";
-
 
   @override
   String lblLogin = "";
 
-
   @override
   String lblsignup = "";
-
 
   @override
   String lblUserType = "";
 
-
   @override
   String lblPurchaseCode = "";
-
 
   @override
   String lblFeatureProduct = "";
 
-
   @override
   String lblHours = "";
-
 
   @override
   String lblRating = "";
 
-
   @override
   String lblOff = "";
-
 
   @override
   String lblHr = "";
 
-
   @override
   String lblDate = "";
-
 
   @override
   String lblAboutHandyman = "";
 
-
   @override
   String lblAboutCustomer = "";
-
 
   @override
   String lblPaymentDetail = "";
 
-
   @override
   String lblId = "";
-
 
   @override
   String lblMethod = "";
 
-
   @override
   String lblStatus = "";
-
 
   @override
   String lblPriceDetail = "";
 
-
   @override
   String lblSubTotal = "";
-
 
   @override
   String lblTax = "";
@@ -640,13 +616,11 @@ class LanguageTemp extends Languages {
   @override
   String lblCoupon = "";
 
-
   @override
   String lblTotalAmount = "";
 
   @override
   String lblOnBasisOf = "";
-
 
   @override
   String lblCheckStatus = "";
@@ -675,10 +649,8 @@ class LanguageTemp extends Languages {
   @override
   String lblStatusType = "";
 
-
   @override
   String lblHandymanType = "";
-
 
   @override
   String lblFixed = "";
@@ -709,7 +681,6 @@ class LanguageTemp extends Languages {
 
   @override
   String lblWaitingForPayment = "";
-
 
   @override
   String lblOnGoing = "";
@@ -764,7 +735,6 @@ class LanguageTemp extends Languages {
 
   @override
   String lblDeleteAddressMsg = "";
-
 
   @override
   String lblChoosePaymentMethod = "";
@@ -900,4 +870,68 @@ class LanguageTemp extends Languages {
 
   @override
   String lblEnterMinute = "";
+
+  @override
+  String lblSelectSubCategory = "";
+
+  @override
+  String lblServiceProof = "";
+
+  @override
+  String lblTitle = "";
+
+  @override
+  String lblAddImage = "";
+
+  @override
+  String lblSubmit = "";
+
+  @override
+  String lblNotHelpLineNum = "";
+
+  @override
+  String lblWalletHistory = "";
+
+  @override
+  String lblServiceRatings = "";
+
+  @override
+  String lblNoServiceRatings = "";
+
+  @override
+  String lblEmail = "";
+
+  @override
+  String lblWallet = "";
+
+  @override
+  String lblSelectUserType = "";
+
+  @override
+  String lblIAgree = "";
+
+  @override
+  String lblTermsOfService = "";
+
+  @override
+  String lblLoginAgain = "";
+
+  @override
+  String lblTermCondition = "";
+
+  @override
+  String lblServiceTotalTime = "";
+
+  @override
+  String lblHelpLineNum = "";
+
+  @override
+  String lblReasonCancelling = "";
+
+  @override
+  String lblReasonRejecting = "";
+
+  @override
+  String lblFailed = "";
+
 }

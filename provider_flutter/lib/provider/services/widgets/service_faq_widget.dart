@@ -11,7 +11,7 @@ class ServiceFaqWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionTile(
       title: Text(serviceFaq!.title.validate(), style: primaryTextStyle()),
-      backgroundColor: context.cardColor,
+      // backgroundColor: context.cardColor,
       tilePadding: EdgeInsets.symmetric(horizontal: 16),
       children: [
         ListTile(

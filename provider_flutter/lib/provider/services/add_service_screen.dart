@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
@@ -11,6 +12,7 @@ import 'package:handyman_provider_flutter/models/service_address_response.dart';
 import 'package:handyman_provider_flutter/models/service_detail_response.dart';
 import 'package:handyman_provider_flutter/networks/network_utils.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
+import 'package:handyman_provider_flutter/provider/services/component/dropdown_subcategory_component.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
@@ -74,7 +76,9 @@ class AddServiceScreenState extends State<AddServiceScreen> {
   String serviceStatus = '';
 
   bool isFeature = false;
-  int? seviceId;
+  int? serviceId;
+  CategoryData? selectedSubCategoryData;
+  CategoryResponse? categoryResponse;
 
   @override
   void initState() {
@@ -105,10 +109,10 @@ class AddServiceScreenState extends State<AddServiceScreen> {
 
   getEditServiceData() {
     serviceDetail = widget.data!;
-    seviceId = widget.data!.id;
+    serviceId = widget.data!.id;
     serviceNameCont.text = serviceDetail.name.validate();
     priceCont.text = serviceDetail.price.toString();
-    discountCont.text = serviceDetail.discount.toString().validate();
+    discountCont.text = serviceDetail.discount.toString().validate(value: '0');
     descriptionCont.text = serviceDetail.description.validate();
     durationContHr.text = serviceDetail.duration.validate().splitBefore(':');
     durationContMin.text = serviceDetail.duration.validate().splitAfter(':');
@@ -187,13 +191,14 @@ class AddServiceScreenState extends State<AddServiceScreen> {
 
     MultipartRequest multiPartRequest = await getMultiPartRequest('service-save');
 
-    if (seviceId != null) {
-      multiPartRequest.fields[CommonKeys.id] = seviceId.toString();
+    if (serviceId != null) {
+      multiPartRequest.fields[CommonKeys.id] = serviceId.toString();
     }
 
     multiPartRequest.fields[AddServiceKey.name] = serviceNameCont.text.validate();
     multiPartRequest.fields[AddServiceKey.providerId] = appStore.userId.toString();
     multiPartRequest.fields[AddServiceKey.categoryId] = selectedCategory!.id.toString();
+    if (selectedSubCategoryData != null) multiPartRequest.fields[AddServiceKey.subCategoryId] = selectedSubCategoryData!.id.toString();
     multiPartRequest.fields[AddServiceKey.type] = serviceType.validate();
     multiPartRequest.fields[AddServiceKey.price] = priceCont.text.toString();
     multiPartRequest.fields[AddServiceKey.discountPrice] = discountCont.text.toString().validate();
@@ -226,7 +231,7 @@ class AddServiceScreenState extends State<AddServiceScreen> {
       multiPartRequest,
       onSuccess: (data) async {
         appStore.setLoading(false);
-        toast(data);
+        toast(jsonDecode(data)['message'], print: true);
 
         finish(context, true);
       },
@@ -401,6 +406,16 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                             }).toList(),
                             onChanged: (CategoryData? value) async {
                               selectedCategory = value!;
+                              setState(() {});
+                              LiveStream().emit(SELECT_SUBCATEGORY, selectedCategory!.id.validate());
+                            },
+                          ),
+                          16.height,
+                          DropdownSubCategoryComponent(
+                            isValidate: false,
+                            categoryId: selectedCategory?.id.validate(),
+                            onValueChanged: (CategoryData value) {
+                              selectedSubCategoryData = value;
                               setState(() {});
                             },
                           ),
@@ -611,7 +626,7 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                     textStyle: primaryTextStyle(color: white),
                     width: context.width() - context.navigationBarHeight,
                     onTap: () {
-                      if (getStringAsync(USER_EMAIL) != DEFAULT_PROVIDER_EMAIL) {
+                      if (!appStore.isTester) {
                         checkValidation();
                       } else {
                         toast(context.translate.lblUnAuthorized);
@@ -621,9 +636,9 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                   16.height,
                 ],
               ).paddingAll(16),
-            ).visible(!appStore.isLoading && afterInit),
+            ),
             Observer(
-              builder: (_) => LoaderWidget().center().visible(appStore.isLoading),
+              builder: (_) => LoaderWidget().center().visible(appStore.isLoading && afterInit),
             ),
           ],
         ),

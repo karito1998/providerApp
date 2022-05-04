@@ -5,11 +5,11 @@ import 'package:handyman_provider_flutter/models/dashboard_response.dart';
 import 'package:handyman_provider_flutter/models/user_data.dart';
 import 'package:handyman_provider_flutter/models/user_list_response.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
-import 'package:handyman_provider_flutter/screens/chat_screen.dart';
-import 'package:handyman_provider_flutter/screens/chatting_screen.dart';
+import 'package:handyman_provider_flutter/screens/chat/user_chat_screen.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
+import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/extensions/string_extension.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:handyman_provider_flutter/utils/model_keys.dart';
@@ -90,7 +90,7 @@ class _HandymanWidgetState extends State<HandymanWidget> {
                       if (widget.data!.contactNumber.validate().isNotEmpty)
                         TextIcon(
                           onTap: () {
-                            launchUri(TEL + widget.data!.contactNumber.validate());
+                            launchCall(widget.data!.contactNumber.validate());
                           },
                           prefix: Container(
                             padding: EdgeInsets.all(8),
@@ -98,13 +98,13 @@ class _HandymanWidgetState extends State<HandymanWidget> {
                               boxShape: BoxShape.circle,
                               backgroundColor: primaryColor.withOpacity(0.1),
                             ),
-                            child: Image.asset(calling, color: primaryColor, height: 18, width: 18),
+                            child: Image.asset(calling, color: primaryColor, height: 14, width: 14),
                           ),
                         ),
                       if (widget.data!.email.validate().isNotEmpty)
                         TextIcon(
                           onTap: () {
-                            launchUri('mailto:' + widget.data!.email.validate());
+                            launchMail(widget.data!.email.validate());
                           },
                           prefix: Container(
                             padding: EdgeInsets.all(8),
@@ -112,21 +112,17 @@ class _HandymanWidgetState extends State<HandymanWidget> {
                               boxShape: BoxShape.circle,
                               backgroundColor: primaryColor.withOpacity(0.1),
                             ),
-                            child: ic_message.iconImage(size: 18, color: primaryColor),
+                            child: ic_message.iconImage(size: 14, color: primaryColor),
                           ),
                         ),
                       if (widget.data!.contactNumber.validate().isNotEmpty)
                         TextIcon(
-                          onTap: () {
-                            if (widget.data!.uid.validate().isNotEmpty && getStringAsync(UID).isNotEmpty) {
-                              UserData user = UserData();
-                              user.uid = widget.data!.uid;
-                              user.playerId = '';
-
-                              ChattingScreen(userData: user).launch(context);
-                            } else {
-                              ChatScreen().launch(context);
-                            }
+                          onTap: () async {
+                            log(widget.data!.email);
+                            UserData user = await userService.getUser(email: widget.data!.email.validate()).catchError((e) {
+                              log(e.toString());
+                            });
+                            UserChatScreen(receiverUser: user).launch(context);
                           },
                           prefix: Container(
                             padding: EdgeInsets.all(8),
@@ -134,7 +130,7 @@ class _HandymanWidgetState extends State<HandymanWidget> {
                               boxShape: BoxShape.circle,
                               backgroundColor: primaryColor.withOpacity(0.1),
                             ),
-                            child: Image.asset(textMsg, color: primaryColor, height: 18, width: 18),
+                            child: Image.asset(textMsg, color: primaryColor, height: 14, width: 14),
                           ),
                         ),
                     ],
@@ -193,12 +189,16 @@ class _HandymanWidgetState extends State<HandymanWidget> {
             child: !widget.data!.isActive ? Image.asset(block, width: 18, height: 18) : Image.asset(unBlock, width: 18, height: 18),
           ).onTap(
             () {
-              if (!widget.data!.isActive) {
-                changeStatus(widget.data!.id, 1);
+              if (appStore.userEmail != DEFAULT_PROVIDER_EMAIL) {
+                widget.data!.isActive = !widget.data!.isActive;
+                if (!widget.data!.isActive) {
+                  changeStatus(widget.data!.id, 1);
+                } else {
+                  changeStatus(widget.data!.id, 0);
+                }
               } else {
-                changeStatus(widget.data!.id, 0);
+                toast(context.translate.lblUnAuthorized);
               }
-              widget.data!.isActive = !widget.data!.isActive;
 
               setState(() {});
             },

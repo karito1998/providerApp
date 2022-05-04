@@ -24,7 +24,7 @@ class RazorPayServices {
   void handlePaymentSuccess(PaymentSuccessResponse response) async {
     log("PaymentId: ${response.paymentId}");
 
-    savePayment(data: planData, paymentMethod: PAYMENT_METHOD_RAZOR, paymentStatus: SERVICE_PAYMENT_STATUS_PAID,txtId: response.paymentId);
+    savePayment(data: planData, paymentMethod: PAYMENT_METHOD_RAZOR, paymentStatus: SERVICE_PAYMENT_STATUS_PAID, txtId: response.paymentId);
   }
 
   void handlePaymentError(PaymentFailureResponse response) {
@@ -41,7 +41,6 @@ class RazorPayServices {
       'amount': (mAmount * 100),
       'name': planData!.title.validate(),
       'theme.color': '#5f60b9',
-      'description': 'Provider',
       'image': 'https://razorpay.com/assets/razorpay-glyph.svg',
       'prefill': {'contact': appStore.userContactNumber, 'email': appStore.userEmail},
       'external': {

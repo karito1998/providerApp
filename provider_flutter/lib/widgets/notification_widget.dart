@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/notification_list_response.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
@@ -31,7 +30,7 @@ class NotificationWidget extends StatelessWidget {
           ? cardDarkColor
           : appStore.isDarkMode
           ? context.cardColor
-          : white
+          : context.cardColor
           : context.cardColor,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
