@@ -464,6 +464,9 @@ class LanguageDe extends Languages {
   String lblInvalidUrl = 'Ungültige URL:';
 
   @override
+  String lblInvalidEmail = '';
+
+  @override
   String errorPasswordLength = 'Die Passwortlänge sollte mehr als sein';
 
   @override

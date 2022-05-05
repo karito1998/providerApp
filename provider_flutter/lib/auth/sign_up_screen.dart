@@ -72,7 +72,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         Container(
           width: 85,
           height: 85,
-          decoration: boxDecorationWithRoundedCorners(boxShape: BoxShape.circle, backgroundColor: primaryColor),
+          decoration: boxDecorationWithRoundedCorners(
+              boxShape: BoxShape.circle, backgroundColor: primaryColor),
           child: Image.asset(profile, height: 45, width: 45, color: white),
         ),
         16.height,
@@ -97,7 +98,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           focus: fNameFocus,
           nextFocus: lNameFocus,
           errorThisFieldRequired: context.translate.hintRequired,
-          decoration: inputDecoration(context, hint: context.translate.hintFirstNm),
+          decoration:
+              inputDecoration(context, hint: context.translate.hintFirstNm),
           suffix: profile.iconImage(size: 10).paddingAll(14),
         ),
         16.height,
@@ -107,7 +109,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           focus: lNameFocus,
           nextFocus: userNameFocus,
           errorThisFieldRequired: context.translate.hintRequired,
-          decoration: inputDecoration(context, hint: context.translate.hintLastNm),
+          decoration:
+              inputDecoration(context, hint: context.translate.hintLastNm),
           suffix: profile.iconImage(size: 10).paddingAll(14),
         ),
         16.height,
@@ -117,7 +120,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           focus: userNameFocus,
           nextFocus: emailFocus,
           errorThisFieldRequired: context.translate.hintRequired,
-          decoration: inputDecoration(context, hint: context.translate.hintUserNm),
+          decoration:
+              inputDecoration(context, hint: context.translate.hintUserNm),
           suffix: profile.iconImage(size: 10).paddingAll(14),
         ),
         16.height,
@@ -127,7 +131,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           focus: emailFocus,
           nextFocus: mobileFocus,
           errorThisFieldRequired: context.translate.hintRequired,
-          decoration: inputDecoration(context, hint: context.translate.hintEmailAddress),
+          decoration: inputDecoration(context,
+              hint: context.translate.hintEmailAddress),
           suffix: ic_message.iconImage(size: 10).paddingAll(14),
         ),
         16.height,
@@ -137,23 +142,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
           focus: mobileFocus,
           nextFocus: passwordFocus,
           errorThisFieldRequired: context.translate.hintRequired,
-          decoration: inputDecoration(context, hint: context.translate.hintContactNumber),
+          decoration: inputDecoration(context,
+              hint: context.translate.hintContactNumber),
           suffix: calling.iconImage(size: 10).paddingAll(14),
         ),
         16.height,
         DropdownButtonFormField<String>(
           items: [
             DropdownMenuItem(
-              child: Text(context.translate.provider, style: primaryTextStyle()),
+              child:
+                  Text(context.translate.provider, style: primaryTextStyle()),
               value: UserTypeProvider,
             ),
             DropdownMenuItem(
-              child: Text(context.translate.handyman, style: primaryTextStyle()),
+              child:
+                  Text(context.translate.handyman, style: primaryTextStyle()),
               value: UserTypeHandyman,
             ),
           ],
           focusNode: userTypeFocus,
-          decoration: inputDecoration(context, hint: context.translate.lblUserType),
+          decoration:
+              inputDecoration(context, hint: context.translate.lblUserType),
           value: selectedUserTypeValue,
           validator: (value) {
             if (value == null) return errorThisFieldRequired;
@@ -173,16 +182,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
             selectedUserTypeData = value;
             setState(() {});
           },
+
         ),
-        16.height,
+            16.height,
         AppTextField(
           textFieldType: TextFieldType.PASSWORD,
           controller: passwordCont,
           focus: passwordFocus,
-          suffixPasswordVisibleWidget: ic_show.iconImage(size: 10).paddingAll(14),
-          suffixPasswordInvisibleWidget: ic_hide.iconImage(size: 10).paddingAll(14),
+          suffixPasswordVisibleWidget:
+              ic_show.iconImage(size: 10).paddingAll(14),
+          suffixPasswordInvisibleWidget:
+              ic_hide.iconImage(size: 10).paddingAll(14),
           errorThisFieldRequired: context.translate.hintRequired,
-          decoration: inputDecoration(context, hint: context.translate.hintPassword),
+          decoration:
+              inputDecoration(context, hint: context.translate.hintPassword),
           onFieldSubmitted: (s) {
             saveUser();
           },
@@ -211,7 +224,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("${context.translate.alreadyHaveAccountTxt}?", style: secondaryTextStyle()),
+            Text("${context.translate.alreadyHaveAccountTxt}?",
+                style: secondaryTextStyle()),
             TextButton(
               onPressed: () {
                 finish(context);
@@ -232,7 +246,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Widget _buildTcAcceptWidget() {
-    return Row(
+    return Container (
+        width: 1000,
+        child:Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -241,8 +257,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
           setState(() {});
         }),
         16.width,
-        RichTextWidget(list: [
-          TextSpan(text: '${context.translate.lblIAgree} ', style: secondaryTextStyle()),
+       RichTextWidget(
+        maxLines: 2,
+        overflow: TextOverflow.clip,
+                list: [
+          TextSpan(
+              text: '${context.translate.lblIAgree} ',
+              style: secondaryTextStyle()),
           TextSpan(
             text: context.translate.lblTermsOfService,
             style: boldTextStyle(color: primaryColor, size: 14),
@@ -262,7 +283,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
         ])
       ],
-    ).paddingAll(16);
+    )).paddingAll(16);
   }
 
   //endregion
@@ -287,9 +308,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
         };
 
         if (selectedUserTypeValue == UserTypeProvider) {
-          request.putIfAbsent(UserKeys.providerTypeId, () => selectedUserTypeData!.id.toString());
+          request.putIfAbsent(UserKeys.providerTypeId,
+              () => selectedUserTypeData!.id.toString());
         } else {
-          request.putIfAbsent(UserKeys.handymanTypeId, () => selectedUserTypeData!.id.toString());
+          request.putIfAbsent(UserKeys.handymanTypeId,
+              () => selectedUserTypeData!.id.toString());
         }
 
         log(request);
@@ -298,7 +321,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
           value.data!.password = passwordCont.text.trim();
           value.data!.user_type = selectedUserTypeValue;
 
-          await authService.signUpWithEmailPassword(context, registerData: value.data!, isLogin: false).then((value) {
+          await authService
+              .signUpWithEmailPassword(context,
+                  registerData: value.data!, isLogin: false)
+              .then((value) {
 //
           }).catchError((e) {
             if (e.toString() == USER_CANNOT_LOGIN) {
@@ -309,8 +335,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SignInScreen().launch(context, isNewTask: true);
             }
           });
+          appStore.setLoading(false);
         }).catchError((e) {
-          toast(e.toString(), print: true);
+          appStore.setLoading(false);
+          if (e.toString() == "The username has already been taken.")
+            toast("El usuario ya existe.", print: true);
+          if (e.toString() ==
+              "The contact number must be between 10 and 12 digits.")
+            toast("El numero de contacto debe contener entre 10 y 12 digitos",
+                print: true);
+          else
+            log(e.toString());
         });
       } else {
         toast(context.translate.lblTermCondition);
@@ -327,7 +362,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
         "",
         elevation: 0,
         color: context.scaffoldBackgroundColor,
-        systemUiOverlayStyle: SystemUiOverlayStyle(statusBarIconBrightness: getStatusBrightness(val: appStore.isDarkMode), statusBarColor: context.scaffoldBackgroundColor),
+        systemUiOverlayStyle: SystemUiOverlayStyle(
+            statusBarIconBrightness:
+                getStatusBrightness(val: appStore.isDarkMode),
+            statusBarColor: context.scaffoldBackgroundColor),
       ),
       body: SizedBox(
         width: context.width(),
@@ -347,7 +385,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
             ),
             Observer(
-              builder: (context) => LoaderWidget().center().visible(appStore.isLoading),
+              builder: (context) =>
+                  LoaderWidget().center().visible(appStore.isLoading),
             )
           ],
         ),

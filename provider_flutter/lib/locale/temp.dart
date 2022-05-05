@@ -461,7 +461,8 @@ class LanguageTemp extends Languages {
 
   @override
   String lblInvalidUrl = '';
-
+  @override
+  String lblInvalidEmail = '';
   @override
   String errorPasswordLength = '';
 

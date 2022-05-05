@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -56,14 +57,22 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget _buildTopWidget() {
     return Column(
       children: [
-        32.height,
-        Text(context.translate.lbllogintitle, style: boldTextStyle(size: 22)),
+        Center(
+            child: Image.asset(
+          //"images/app_images/logo.svg",
+          "images/setting_icon/ic_splash_logo.png",
+          height: 100.0,
+          alignment: Alignment.center,
+        )),
+        16.height,
+        Text(context.translate.lbllogintitle, style: boldTextStyle(size: 22))
+            .center(),
         16.height,
         Text(
           context.translate.lblloginsubtitle,
           style: secondaryTextStyle(size: 16),
           textAlign: TextAlign.center,
-        ).paddingSymmetric(horizontal: 32),
+        ).center().paddingSymmetric(horizontal: 32),
         64.height,
       ],
     );
@@ -78,8 +87,9 @@ class _SignInScreenState extends State<SignInScreen> {
           focus: emailFocus,
           nextFocus: passwordFocus,
           errorThisFieldRequired: context.translate.hintRequired,
-          decoration: inputDecoration(context, hint: context.translate.hintEmailAddress),
-          suffix: ic_message.iconImage(size: 10).paddingAll(14),
+          errorInvalidEmail: context.translate.lblInvalidEmail,
+          decoration: inputDecoration(context,
+              hint: context.translate.hintEmailAddress),
           autoFillHints: [AutofillHints.email],
         ),
         16.height,
@@ -88,10 +98,10 @@ class _SignInScreenState extends State<SignInScreen> {
           controller: passwordCont,
           focus: passwordFocus,
           errorThisFieldRequired: context.translate.hintRequired,
-          suffixPasswordVisibleWidget: ic_show.iconImage(size: 10).paddingAll(14),
-          suffixPasswordInvisibleWidget: ic_hide.iconImage(size: 10).paddingAll(14),
-          errorMinimumPasswordLength: "${context.translate.errorPasswordLength} $passwordLengthGlobal",
-          decoration: inputDecoration(context, hint: context.translate.hintPassword),
+          errorMinimumPasswordLength:
+              "${context.translate.errorPasswordLength} $passwordLengthGlobal caracteres",
+          decoration:
+              inputDecoration(context, hint: context.translate.hintPassword),
           autoFillHints: [AutofillHints.password],
           onFieldSubmitted: (s) {
             loginUsers();
@@ -106,30 +116,35 @@ class _SignInScreenState extends State<SignInScreen> {
     return Column(
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                2.width,
-                SelectedItemWidget(isSelected: isRemember).onTap(() async {
-                  await setValue(IS_REMEMBERED, isRemember);
-                  isRemember = !isRemember;
-                  setState(() {});
-                }),
-                TextButton(
-                  onPressed: () async {
-                    await setValue(IS_REMEMBERED, isRemember);
-                    isRemember = !isRemember;
-                    setState(() {});
-                  },
-                  child: Text(context.translate.rememberMe, style: secondaryTextStyle()),
-                ),
-              ],
+            2.width,
+            SelectedItemWidget(isSelected: isRemember).onTap(() async {
+              await setValue(IS_REMEMBERED, isRemember);
+              isRemember = !isRemember;
+              setState(() {});
+            }),
+            TextButton(
+              onPressed: () async {
+                await setValue(IS_REMEMBERED, isRemember);
+                isRemember = !isRemember;
+                setState(() {});
+              },
+              child: Text(context.translate.rememberMe,
+                  style: secondaryTextStyle()),
             ),
+          ],
+        ),
+        Row(
+          children: [
+            Expanded(
+                child: SizedBox(
+              height: 1,
+            )),
             TextButton(
               child: Text(
                 context.translate.forgotPassword,
-                style: boldTextStyle(color: primaryColor, fontStyle: FontStyle.italic),
+                style: boldTextStyle(
+                    color: primaryColor, fontStyle: FontStyle.italic),
               ),
               onPressed: () {
                 showInDialog(
@@ -164,10 +179,12 @@ class _SignInScreenState extends State<SignInScreen> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(context.translate.doNotHaveAccount, style: secondaryTextStyle()),
+            Text(context.translate.doNotHaveAccount,
+                style: secondaryTextStyle()),
             TextButton(
               onPressed: () {
-                SignUpScreen().launch(context, pageRouteAnimation: PageRouteAnimation.Slide);
+                SignUpScreen().launch(context,
+                    pageRouteAnimation: PageRouteAnimation.Slide);
               },
               child: Text(
                 context.translate.signUp,
@@ -213,19 +230,25 @@ class _SignInScreenState extends State<SignInScreen> {
 
           if (res.data!.status.validate() == 1) {
             /// Redirect on the base of User Role.
-            if (res.data!.email == DEFAULT_PROVIDER_EMAIL || res.data!.email == DEFAULT_HANDYMAN_EMAIL) {
+            if (res.data!.email == DEFAULT_PROVIDER_EMAIL ||
+                res.data!.email == DEFAULT_HANDYMAN_EMAIL) {
               appStore.setTester(true);
             }
 
             if (res.data!.userType.validate().trim() == UserTypeProvider) {
               /// if User type id Provider
               if (res.data != null) await saveUserData(res.data!);
-              DashboardScreen(index: 0).launch(context, isNewTask: true, pageRouteAnimation: PageRouteAnimation.Slide);
+              DashboardScreen(index: 0).launch(context,
+                  isNewTask: true,
+                  pageRouteAnimation: PageRouteAnimation.Slide);
               toast(context.translate.loginSuccessfully);
-            } else if (res.data!.userType.validate().trim() == UserTypeHandyman) {
+            } else if (res.data!.userType.validate().trim() ==
+                UserTypeHandyman) {
               /// if User type id Handyman
               if (res.data != null) await saveUserData(res.data!);
-              HandyDashboardScreen().launch(context, isNewTask: true, pageRouteAnimation: PageRouteAnimation.Slide);
+              HandyDashboardScreen().launch(context,
+                  isNewTask: true,
+                  pageRouteAnimation: PageRouteAnimation.Slide);
               toast(context.translate.loginSuccessfully);
             } else {
               toast(context.translate.cantLogin, print: true);
@@ -251,7 +274,10 @@ class _SignInScreenState extends State<SignInScreen> {
             );
             log(data.toJson());
 
-            authService.signUpWithEmailPassword(context, registerData: data, isLogin: true, loginResponse: res).then((value) {
+            authService
+                .signUpWithEmailPassword(context,
+                    registerData: data, isLogin: true, loginResponse: res)
+                .then((value) {
               //
             }).catchError((e) {
               log(e.toString());
@@ -259,6 +285,11 @@ class _SignInScreenState extends State<SignInScreen> {
           }
         });
       }).catchError((e) {
+        if (e.toString() == "These credentials do not match our records.")
+          toast("No pudimos encontrar un usuario con estas credenciales",
+              print: true);
+        else
+          toast(e.toString(), print: true);
         appStore.setLoading(false);
         toast(e.toString(), print: true);
       });
@@ -281,7 +312,10 @@ class _SignInScreenState extends State<SignInScreen> {
         elevation: 0,
         showBack: false,
         color: context.scaffoldBackgroundColor,
-        systemUiOverlayStyle: SystemUiOverlayStyle(statusBarIconBrightness: getStatusBrightness(val: appStore.isDarkMode), statusBarColor: context.scaffoldBackgroundColor),
+        systemUiOverlayStyle: SystemUiOverlayStyle(
+            statusBarIconBrightness:
+                getStatusBrightness(val: appStore.isDarkMode),
+            statusBarColor: context.scaffoldBackgroundColor),
       ),
       body: SizedBox(
         width: context.width(),
@@ -299,7 +333,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     _buildForgotRememberWidget(),
                     _buildButtonWidget(),
                     16.height,
-                    UserDemoModeScreen(
+                    /*UserDemoModeScreen(
                       onChanged: (email, password) {
                         if (email.isNotEmpty && password.isNotEmpty) {
                           emailCont.text = email;
@@ -309,13 +343,23 @@ class _SignInScreenState extends State<SignInScreen> {
                           passwordCont.clear();
                         }
                       },
+                    ),*/
+                    Center(
+                      child: TextButton(
+                        child: Text("Reset", style: secondaryTextStyle()),
+                        onPressed: () {
+                          emailCont.clear();
+                          passwordCont.clear();
+                        },
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
             Observer(
-              builder: (_) => LoaderWidget().center().visible(appStore.isLoading),
+              builder: (_) =>
+                  LoaderWidget().center().visible(appStore.isLoading),
             ),
           ],
         ),

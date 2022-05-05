@@ -40,7 +40,10 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         pop();
       }).catchError((e) {
         appStore.setLoading(false);
-        toast(e.toString(), print: true);
+        if(e.toString() == "We can't find a user with that email address." )
+          toast("No pudimos encontrar un usuario con este correo electronico", print: true);
+        else
+          toast(e.toString(), print: true);
       });
     }
   }
@@ -72,19 +75,18 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       borderRadius: BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
                       backgroundColor: primaryColor,
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(context.translate.forgotPassword, style: boldTextStyle(color: white)).paddingOnly(left: 16),
-                        CloseButton(color: Colors.white),
-                      ],
-                    ),
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    child:
+                    Row( children: [
+                      Expanded(child: Text(context.translate.forgotPassword, style: boldTextStyle(color: white)).paddingOnly(left: 10),),
+                      CloseButton(color: Colors.white),
+                           ]),
+
                   ),
                   16.height,
                   Container(
-                    margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-                    padding: EdgeInsets.all(8),
+                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    padding: EdgeInsets.all(5),
                     alignment: Alignment.bottomCenter,
                     decoration: boxDecorationRoundedWithShadow(defaultRadius.toInt(), blurRadius: 0, backgroundColor: context.scaffoldBackgroundColor),
                     child: Form(

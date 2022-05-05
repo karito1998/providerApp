@@ -461,7 +461,8 @@ class LanguageSq extends Languages {
 
   @override
   String lblInvalidUrl = 'Nuk u gjet asnjë të dhëna';
-
+  @override
+  String lblInvalidEmail = '';
   @override
   String errorPasswordLength = 'URL e pavlefshme:';
 

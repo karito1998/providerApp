@@ -463,7 +463,8 @@ class LanguageGu extends Languages {
 
   @override
   String lblInvalidUrl = 'અમાન્ય URL:';
-
+  @override
+  String lblInvalidEmail = '';
   @override
   String errorPasswordLength = 'પાસવર્ડ લંબાઈ કરતાં વધુ હોવી જોઈએ';
 
