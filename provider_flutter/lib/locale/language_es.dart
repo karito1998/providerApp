@@ -464,9 +464,14 @@ class LanguageEs extends Languages {
   String lblInvalidUrl = 'URL invalida:';
   @override
   String lblInvalidEmail = 'El correo no es valido';
-
   @override
-  String errorPasswordLength = 'La contraseña debe tener más de';
+  String lblInvalidUsername = 'El nombre de usuario no puede contener espacios';
+  @override
+  String lblInvalidEmailSpaces = 'El correo no puede contener espacios';
+  @override
+  String tycRequired = 'Debes aceptar los';
+  @override
+  String errorPasswordLength = 'La contraseña debe tener más de 8 caracteres';
 
   @override
   String hintEmailAddress = 'Correo electrónico';
@@ -749,6 +754,13 @@ class LanguageEs extends Languages {
 
   @override
   String lblRetry = "Reintentar";
+
+  @override
+  String lblRetryErr = "Por favor intenta nuevamente";
+  @override
+  String lblWrongErr = "Algo salió mal";
+  @override
+  String lblInternetErr = "Tu internet no está funcionando";
 
   @override
   String lblBookingSummary = "Resumen de la reserva";

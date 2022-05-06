@@ -268,7 +268,7 @@ class _PricingPlanScreenState extends State<PricingPlanScreen> {
                 ),
               ),
             Observer(builder: (_) => noDataFound(context).center().visible(!appStore.isLoading && pricingPlanList.isEmpty && !hasError)),
-            Text(errorSomethingWentWrong, style: secondaryTextStyle()).center().visible(hasError),
+            Text(context.translate.lblWrongErr, style: secondaryTextStyle()).center().visible(hasError),
             Observer(builder: (_) => LoaderWidget().center().visible(appStore.isLoading)),
           ],
         ),

@@ -160,7 +160,7 @@ class NotificationScreenState extends State<NotificationFragment> {
                 ),
               ),
               LoaderWidget().visible(appStore.isLoading),
-              Text(errorSomethingWentWrong, style: secondaryTextStyle()).center().visible(hasError),
+              Text(context.translate.lblWrongErr, style: secondaryTextStyle()).center().visible(hasError),
               noDataFound(context).center().visible(!appStore.isLoading && readNotificationList.isEmpty && !hasError),
             ],
           ),

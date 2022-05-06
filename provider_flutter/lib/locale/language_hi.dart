@@ -466,6 +466,18 @@ class LanguageHi extends Languages {
   @override
   String lblInvalidEmail = '';
   @override
+  String lblInvalidUsername = '';
+  @override
+  String lblRetryErr = "";
+  @override
+  String lblWrongErr = "";
+  @override
+  String lblInternetErr = "";
+  @override
+  String lblInvalidEmailSpaces = "";
+  @override
+  String tycRequired = '';
+  @override
   String errorPasswordLength = 'पासवर्ड की लंबाई से अधिक होना चाहिए';
 
   @override

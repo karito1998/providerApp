@@ -1,11 +1,11 @@
 import 'package:nb_utils/nb_utils.dart';
 
 //region App Name
-const mAppName = 'Handyman Services';
+const mAppName = 'HelpiRD';
 //endregion
 
 //region AppBase URl
-const url = 'https://wordpress.iqonic.design/product/mobile/booking-service'; // Don't add slash at the end of the url
+const url = 'https://helpird.com'; // Don't add slash at the end of the url
 const mBaseUrl = "$url/api/";
 
 const termsConditionUrl = 'https://iqonic.design/terms-of-use/';
@@ -17,7 +17,7 @@ const packageName = "com.iqonic.provider"; // Don't Change it.
 
 //region Configs
 const decimalPoint = 2;
-const defaultLanguage = 'en';
+const defaultLanguage = 'es';
 const perPageItem = 25;
 const planRemainingDays = 15;
 //endregion

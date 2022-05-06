@@ -89,7 +89,7 @@ class WalletHistoryScreenState extends State<WalletHistoryScreen> {
             itemBuilder: (_, i) => WalletWidget(walletHistoryList[i]),
           ),
           Observer(builder: (_) => noDataFound(context).center().visible(!appStore.isLoading && walletHistoryList.isEmpty && !hasError)),
-          Text(errorSomethingWentWrong, style: secondaryTextStyle()).center().visible(hasError),
+          Text(context.translate.lblWrongErr, style: secondaryTextStyle()).center().visible(hasError),
           Observer(builder: (_) => LoaderWidget().center().visible(appStore.isLoading)),
         ],
       ),

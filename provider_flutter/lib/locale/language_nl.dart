@@ -464,6 +464,21 @@ class LanguageNl extends Languages {
   String lblInvalidUrl = 'Ongeldige URL:';
   @override
   String lblInvalidEmail = '';
+
+  @override
+  String lblRetryErr = "";
+  @override
+  String lblWrongErr = "";
+  @override
+  String lblInternetErr = "";
+
+  @override
+  String lblInvalidEmailSpaces = "";
+  @override
+  String tycRequired = '';
+  @override
+  String lblInvalidUsername = '';
+
   @override
   String errorPasswordLength = 'Wachtwoordlengte moet meer zijn dan';
 

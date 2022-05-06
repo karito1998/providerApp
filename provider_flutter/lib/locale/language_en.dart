@@ -464,7 +464,18 @@ class LanguageEn extends Languages {
   String lblInvalidUrl = 'Invalid URL:';
   @override
   String lblInvalidEmail = 'Invalid Email';
-
+  @override
+  String lblInvalidUsername = '';
+  @override
+  String lblRetryErr = "";
+  @override
+  String lblWrongErr = "";
+  @override
+  String lblInternetErr = "";
+  @override
+  String lblInvalidEmailSpaces = "";
+  @override
+  String tycRequired = '';
   @override
   String errorPasswordLength = 'Password length should be more than';
 

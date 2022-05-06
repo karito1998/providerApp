@@ -560,10 +560,10 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                                 ),
                                 keyboardType: TextInputType.number,
                                 validator: (s) {
-                                  if (s!.isEmpty) return errorThisFieldRequired;
+                                  if (s!.isEmpty) return context.translate.lblRequired;
 
                                   if (s.toInt() > 24) return context.translate.lblEnterHours;
-                                  if (s.toInt() == 0) return errorThisFieldRequired;
+                                  if (s.toInt() == 0) return context.translate.lblRequired;
                                   return null;
                                 },
                               ).paddingRight(8).expand(),
@@ -582,7 +582,7 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                                 ),
                                 keyboardType: TextInputType.number,
                                 validator: (s) {
-                                  if (s!.isEmpty) return errorThisFieldRequired;
+                                  if (s!.isEmpty) return context.translate.lblRequired;
 
                                   if (s.toInt() > 60) return context.translate.lblEnterMinute;
                                   return null;

@@ -465,7 +465,18 @@ class LanguageDe extends Languages {
 
   @override
   String lblInvalidEmail = '';
-
+  @override
+  String lblInvalidUsername = '';
+  @override
+  String lblRetryErr = "";
+  @override
+  String lblWrongErr = "";
+  @override
+  String lblInternetErr = "";
+  @override
+  String lblInvalidEmailSpaces = "";
+  @override
+  String tycRequired = '';
   @override
   String errorPasswordLength = 'Die Passwortlänge sollte mehr als sein';
 

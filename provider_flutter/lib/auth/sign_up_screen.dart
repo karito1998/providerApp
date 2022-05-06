@@ -50,6 +50,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   UserTypeData? selectedUserTypeData;
 
   bool isAcceptedTc = false;
+  bool isAcceptedPol = false;
 
   @override
   void initState() {
@@ -120,6 +121,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           focus: userNameFocus,
           nextFocus: emailFocus,
           errorThisFieldRequired: context.translate.hintRequired,
+          errorInvalidUsername: context.translate.lblInvalidUsername,
           decoration:
               inputDecoration(context, hint: context.translate.hintUserNm),
           suffix: profile.iconImage(size: 10).paddingAll(14),
@@ -131,6 +133,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           focus: emailFocus,
           nextFocus: mobileFocus,
           errorThisFieldRequired: context.translate.hintRequired,
+          errorInvalidUsername: context.translate.lblInvalidEmailSpaces,
           decoration: inputDecoration(context,
               hint: context.translate.hintEmailAddress),
           suffix: ic_message.iconImage(size: 10).paddingAll(14),
@@ -165,7 +168,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               inputDecoration(context, hint: context.translate.lblUserType),
           value: selectedUserTypeValue,
           validator: (value) {
-            if (value == null) return errorThisFieldRequired;
+            if (value == null) return context.translate.lblRequired;
             return null;
           },
           onChanged: (c) {
@@ -194,6 +197,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           suffixPasswordInvisibleWidget:
               ic_hide.iconImage(size: 10).paddingAll(14),
           errorThisFieldRequired: context.translate.hintRequired,
+          errorMinimumPasswordLength: context.translate.errorPasswordLength,
           decoration:
               inputDecoration(context, hint: context.translate.hintPassword),
           onFieldSubmitted: (s) {
@@ -246,9 +250,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   Widget _buildTcAcceptWidget() {
-    return Container (
-        width: 1000,
-        child:Row(
+    return Column(children:[Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -272,18 +274,39 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 launch(termsConditionUrl);
               },
           ),
-          TextSpan(text: ' & ', style: secondaryTextStyle()),
-          TextSpan(
-            text: context.translate.lblPrivacyPolicy,
-            style: boldTextStyle(color: primaryColor, size: 14),
-            recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                launch(privacyPolicyUrl);
-              },
-          ),
-        ])
+        ]),
+    ]),
+      10.height,
+    Row(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    mainAxisAlignment: MainAxisAlignment.start,
+    children: [
+        SelectedItemWidget(isSelected: isAcceptedPol).onTap(() async {
+          isAcceptedPol = !isAcceptedPol;
+          setState(() {});
+        }),
+        16.width,
+        RichTextWidget(
+            maxLines: 2,
+            overflow: TextOverflow.clip,
+            list: [
+              TextSpan(
+                  text: '${context.translate.lblIAgree} ',
+                  style: secondaryTextStyle()),
+              TextSpan(
+                text: context.translate.lblPrivacyPolicy,
+                style: boldTextStyle(color: primaryColor, size: 14),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () {
+                    launch(privacyPolicyUrl);
+                  },
+              ),
+            ]),
+    ])
+
       ],
-    )).paddingAll(16);
+    ).paddingAll(16);
+
   }
 
   //endregion
@@ -294,7 +317,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       formKey.currentState!.save();
       hideKeyboard(context);
 
-      if (isAcceptedTc) {
+      if (isAcceptedTc && isAcceptedPol) {
         appStore.setLoading(true);
 
         var request = {
@@ -320,7 +343,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         await registerUser(request).then((value) async {
           value.data!.password = passwordCont.text.trim();
           value.data!.user_type = selectedUserTypeValue;
-
+          //TODO: Verificar si sale del registro
+          finish(context);
           await authService
               .signUpWithEmailPassword(context,
                   registerData: value.data!, isLogin: false)
@@ -348,7 +372,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             log(e.toString());
         });
       } else {
-        toast(context.translate.lblTermCondition);
+        toast(context.translate.tycRequired+" "+context.translate.lblTermCondition+" & "+ context.translate.lblPrivacyPolicy);
       }
     }
   }

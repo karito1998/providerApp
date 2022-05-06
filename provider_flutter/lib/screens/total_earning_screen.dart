@@ -105,7 +105,7 @@ class _TotalEarningScreenState extends State<TotalEarningScreen> {
             },
           ),
           Observer(builder: (_) => noDataFound(context).center().visible(!appStore.isLoading && totalEarning.isEmpty && !hasError)),
-          Text(errorSomethingWentWrong, style: secondaryTextStyle()).center().visible(hasError),
+          Text(context.translate.lblWrongErr, style: secondaryTextStyle()).center().visible(hasError),
           Observer(builder: (_) => LoaderWidget().center().visible(appStore.isLoading)),
         ],
       ),

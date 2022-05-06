@@ -465,6 +465,18 @@ class LanguagePt extends Languages {
   @override
   String lblInvalidEmail = '';
   @override
+  String lblInvalidUsername = '';
+  @override
+  String lblRetryErr = "";
+  @override
+  String lblWrongErr = "";
+  @override
+  String lblInternetErr = "";
+  @override
+  String lblInvalidEmailSpaces = "";
+  @override
+  String tycRequired = '';
+  @override
   String errorPasswordLength = 'O comprimento da senha deve ser mais do que';
 
   @override

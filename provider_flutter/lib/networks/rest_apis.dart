@@ -114,7 +114,7 @@ Future<void> logout(BuildContext context) async {
 
                         SignInScreen().launch(context, isNewTask: true, pageRouteAnimation: PageRouteAnimation.Slide);
                       } else {
-                        toast(errorInternetNotAvailable);
+                        toast(context.translate.lblInternetErr);
                       }
                     },
                   ).expand(),

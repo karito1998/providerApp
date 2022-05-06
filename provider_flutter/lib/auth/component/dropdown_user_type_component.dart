@@ -59,7 +59,7 @@ class _DropdownUserTypeComponentState extends State<DropdownUserTypeComponent> {
       },
       validator: widget.isValidate
           ? (c) {
-              if (c == null) return errorThisFieldRequired;
+              if (c == null) return context.translate.lblRequired;
               return null;
             }
           : null,

@@ -465,7 +465,18 @@ class LanguageAf extends Languages {
 
   @override
   String lblInvalidEmail = 'Ongeldige Email';
-
+  @override
+  String lblInvalidUsername = '';
+  @override
+  String lblRetryErr = "";
+  @override
+  String lblWrongErr = "";
+  @override
+  String lblInternetErr = "";
+  @override
+  String lblInvalidEmailSpaces = "";
+  @override
+  String tycRequired = '';
   @override
   String errorPasswordLength = 'Wagwoordlengte moet meer wees as';
 

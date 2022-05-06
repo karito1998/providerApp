@@ -97,7 +97,7 @@ class SubscriptionHistoryScreenState extends State<SubscriptionHistoryScreen> {
             },
           ),
           Observer(builder: (_) => noDataFound(context).center().visible(!appStore.isLoading && subscriptionHistoryList.isEmpty && !hasError)),
-          Text(errorSomethingWentWrong, style: secondaryTextStyle()).center().visible(hasError),
+          Text(context.translate.lblWrongErr, style: secondaryTextStyle()).center().visible(hasError),
           Observer(builder: (_) => LoaderWidget().center().visible(appStore.isLoading)),
         ],
       ),

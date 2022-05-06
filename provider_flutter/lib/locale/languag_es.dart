@@ -311,6 +311,15 @@ abstract class Languages {
 
   String get lblInvalidUrl;
   String get lblInvalidEmail;
+  String get lblInvalidUsername;
+
+  String get tycRequired;
+  String get lblInvalidEmailSpaces;
+  String get lblRetryErr;
+
+  String get lblWrongErr;
+
+  String get lblInternetErr;
 
   String get errorPasswordLength;
 

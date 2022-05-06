@@ -20,6 +20,7 @@ import 'package:handyman_provider_flutter/store/AppStore.dart';
 import 'package:handyman_provider_flutter/utils/app_common.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
+import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
@@ -101,7 +102,7 @@ class _MyAppState extends State<MyApp> {
         var notId = notification.notification.additionalData!.containsKey('id') ? notification.notification.additionalData!['id'] : 0;
         push(BookingDetailScreen(bookingId: notId.toString().toInt()));
       } catch (e) {
-        throw errorSomethingWentWrong;
+        throw context.translate.lblWrongErr;
       }
     });
     afterBuildCreated(() {

@@ -164,7 +164,7 @@ class ServiceAddressesScreenState extends State<ServiceAddressesScreen> {
                       controller: addressNameCont,
                       validator: (s) {
                         if (s!.isEmpty)
-                          return errorThisFieldRequired;
+                          return context.translate.lblRequired;
                         else
                           return null;
                       },

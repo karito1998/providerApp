@@ -466,6 +466,18 @@ class LanguageFr extends Languages {
   @override
   String lblInvalidEmail = '';
   @override
+  String lblInvalidUsername = '';
+  @override
+  String lblRetryErr = "";
+  @override
+  String lblWrongErr = "";
+  @override
+  String lblInternetErr = "";
+  @override
+  String lblInvalidEmailSpaces = "";
+  @override
+  String tycRequired = '';
+  @override
   String errorPasswordLength = 'La longueur du mot de passe doit être plus que';
 
   @override
