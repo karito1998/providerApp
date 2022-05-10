@@ -328,6 +328,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           UserKeys.contactNumber: mobileCont.text.trim(),
           UserKeys.email: emailCont.text.trim(),
           UserKeys.password: passwordCont.text.trim(),
+          UserKeys.status: "1"
         };
 
         if (selectedUserTypeValue == UserTypeProvider) {
@@ -343,7 +344,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         await registerUser(request).then((value) async {
           value.data!.password = passwordCont.text.trim();
           value.data!.user_type = selectedUserTypeValue;
-          //TODO: Verificar si sale del registro
+          toast(context.translate.signUpSuccess);
           finish(context);
           await authService
               .signUpWithEmailPassword(context,

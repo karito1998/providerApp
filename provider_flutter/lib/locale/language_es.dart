@@ -24,6 +24,8 @@ class LanguageEs extends Languages {
 
   @override
   String signUp = 'Registrarse';
+  @override
+  String signUpSuccess = "Registro exitoso";
 
   @override
   String signInTitle = 'Iniciar sesión en tu cuanta';

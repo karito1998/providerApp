@@ -468,6 +468,8 @@ class LanguageTemp extends Languages {
   @override
   String tycRequired = '';
   @override
+  String signUpSuccess = "";
+  @override
   String lblInvalidUsername = '';
   @override
   String lblRetryErr = "";

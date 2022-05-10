@@ -477,6 +477,8 @@ class LanguageEn extends Languages {
   @override
   String tycRequired = '';
   @override
+  String signUpSuccess = "";
+  @override
   String errorPasswordLength = 'Password length should be more than';
 
   @override

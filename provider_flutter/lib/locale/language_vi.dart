@@ -479,6 +479,8 @@ class LanguageVi extends Languages {
   @override
   String tycRequired = '';
   @override
+  String signUpSuccess = "";
+  @override
   String errorPasswordLength = 'Chiều dài mật khẩu phải nhiều hơn';
 
   @override

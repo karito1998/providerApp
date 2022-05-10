@@ -478,6 +478,8 @@ class LanguageHi extends Languages {
   @override
   String tycRequired = '';
   @override
+  String signUpSuccess = "";
+  @override
   String errorPasswordLength = 'पासवर्ड की लंबाई से अधिक होना चाहिए';
 
   @override

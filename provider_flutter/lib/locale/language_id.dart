@@ -477,6 +477,8 @@ class LanguageId extends Languages {
   @override
   String tycRequired = '';
   @override
+  String signUpSuccess = "";
+  @override
   String errorPasswordLength = 'Panjang kata sandi harus lebih dari';
 
   @override

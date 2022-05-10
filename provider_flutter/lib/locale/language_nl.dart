@@ -477,6 +477,8 @@ class LanguageNl extends Languages {
   @override
   String tycRequired = '';
   @override
+  String signUpSuccess = "";
+  @override
   String lblInvalidUsername = '';
 
   @override

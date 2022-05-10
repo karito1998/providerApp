@@ -478,6 +478,8 @@ class LanguageAf extends Languages {
   @override
   String tycRequired = '';
   @override
+  String signUpSuccess = "";
+  @override
   String errorPasswordLength = 'Wagwoordlengte moet meer wees as';
 
   @override

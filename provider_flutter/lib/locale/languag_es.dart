@@ -316,6 +316,7 @@ abstract class Languages {
   String get tycRequired;
   String get lblInvalidEmailSpaces;
   String get lblRetryErr;
+  String get signUpSuccess;
 
   String get lblWrongErr;
 

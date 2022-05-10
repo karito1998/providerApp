@@ -478,6 +478,8 @@ class LanguageFr extends Languages {
   @override
   String tycRequired = '';
   @override
+  String signUpSuccess = "";
+  @override
   String errorPasswordLength = 'La longueur du mot de passe doit être plus que';
 
   @override

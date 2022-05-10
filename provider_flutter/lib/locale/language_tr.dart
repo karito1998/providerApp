@@ -478,6 +478,8 @@ class LanguageTr extends Languages {
   @override
   String tycRequired = '';
   @override
+  String signUpSuccess = "";
+  @override
   String errorPasswordLength = 'Şifre uzunluğu daha fazla olmalı';
 
   @override

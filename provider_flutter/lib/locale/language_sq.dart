@@ -476,6 +476,8 @@ class LanguageSq extends Languages {
   @override
   String tycRequired = '';
   @override
+  String signUpSuccess = "";
+  @override
   String errorPasswordLength = 'URL e pavlefshme:';
 
   @override

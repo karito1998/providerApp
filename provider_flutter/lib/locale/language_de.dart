@@ -478,6 +478,8 @@ class LanguageDe extends Languages {
   @override
   String tycRequired = '';
   @override
+  String signUpSuccess = "";
+  @override
   String errorPasswordLength = 'Die Passwortlänge sollte mehr als sein';
 
   @override

@@ -477,6 +477,8 @@ class LanguagePt extends Languages {
   @override
   String tycRequired = '';
   @override
+  String signUpSuccess = "";
+  @override
   String errorPasswordLength = 'O comprimento da senha deve ser mais do que';
 
   @override

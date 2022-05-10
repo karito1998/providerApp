@@ -478,6 +478,8 @@ class LanguageAr extends Languages {
   @override
   String tycRequired = '';
   @override
+  String signUpSuccess = "";
+  @override
   String errorPasswordLength = 'يجب أن يكون طول كلمة المرور أكثر من';
 
   @override
