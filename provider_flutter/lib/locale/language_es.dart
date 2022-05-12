@@ -169,7 +169,7 @@ class LanguageEs extends Languages {
   String darkMode = 'Modo oscuro';
 
   @override
-  String lightMode = 'Modo de luz';
+  String lightMode = 'Modo claro';
 
   @override
   String systemDefault = 'Modo de sistema';
@@ -292,13 +292,13 @@ class LanguageEs extends Languages {
   String lblTotalBooking = 'Reserva total';
 
   @override
-  String lblTotalService = 'Servicio total';
+  String lblTotalService = 'Total servicios';
 
   @override
   String lblTotalHandyman = 'Handyman total';
 
   @override
-  String lblTotalRevenue = 'Los ingresos totales';
+  String lblTotalRevenue = 'Total Ingresos';
 
   @override
   String lblPayment = 'Pago';
@@ -684,7 +684,7 @@ class LanguageEs extends Languages {
 
 
   @override
-  String lblHandymanType = "Tipo de Manitas";
+  String lblHandymanType = "Tipo de Cuenta";
 
 
   @override

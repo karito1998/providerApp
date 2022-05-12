@@ -25,10 +25,10 @@ class _ExperienceWidgetState extends State<ExperienceWidget> {
     Duration duration = DateTime.now().difference(DateTime.parse(appStore.createdAt));
 
     if (duration.inDays < 365) {
-      temp = 'Day';
+      temp = 'Día';
       value = duration.inDays;
     } else if (duration.inDays >= 365) {
-      temp = 'Year';
+      temp = 'Año';
       value = (duration.inDays / 365).floor();
     }
 

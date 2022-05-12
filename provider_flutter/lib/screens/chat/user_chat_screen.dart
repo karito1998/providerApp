@@ -179,7 +179,7 @@ class _UserChatScreenState extends State<UserChatScreen> {
                 isLive: true,
                 padding: EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 0),
                 physics: BouncingScrollPhysics(),
-                query: chatMessageService.chatMessagesWithPagination(senderId: appStore.uId, receiverUserId: widget.receiverUser.uid.validate()),
+                query: chatMessageService.chatMessagesWithPagination(senderId: appStore.uId, receiverUserId: widget.receiverUser.uid.validate(), currentUserId: ''),
                 initialLoader: LoaderWidget(),
                 itemsPerPage: PER_PAGE_CHAT_COUNT,
                 onEmpty: Text('No chats found', style: boldTextStyle(size: 20)).center(),
