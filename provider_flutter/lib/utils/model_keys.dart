@@ -41,16 +41,16 @@ class BookingServiceKeys {
 }
 
 class BookingStatusKeys {
-  static String pending = 'pendiente';
-  static String accept = 'Aceptado';
-  static String onGoing = 'En curso';
-  static String inProgress = 'En progreso';
-  static String hold = 'En pausa';
-  static String rejected = 'Rechazado';
-  static String failed = 'Fallido';
-  static String complete = 'Completado';
-  static String cancelled = 'Cancelado';
-  static String all = 'Todo';
+  static String pending = 'pending';
+  static String accept = 'accept';
+  static String onGoing = 'on_going';
+  static String inProgress = 'in_progress';
+  static String hold = 'hold';
+  static String rejected = 'rejected';
+  static String failed = 'failed';
+  static String complete = 'completed';
+  static String cancelled = 'cancelled';
+  static String all = 'all';
 }
 
 class BookingUpdateKeys {

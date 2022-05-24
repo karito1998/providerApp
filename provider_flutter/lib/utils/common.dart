@@ -21,20 +21,20 @@ import 'images.dart';
 
 List<LanguageDataModel> languageList() {
   return [
-    LanguageDataModel(id: 1, name: 'English', languageCode: 'en', fullLanguageCode: 'en-US', flag: 'images/flag/ic_us.png'),
+    LanguageDataModel(id: 1, name: 'Ingles', languageCode: 'en', fullLanguageCode: 'en-US', flag: 'images/flag/ic_us.png'), //English
     LanguageDataModel(id: 2, name: 'Hindi', languageCode: 'hi', fullLanguageCode: 'hi-IN', flag: 'images/flag/ic_india.png'),
-    LanguageDataModel(id: 3, name: 'Gujarati', languageCode: 'gu', fullLanguageCode: 'gu-IN', flag: 'images/flag/ic_india.png'),
-    LanguageDataModel(id: 4, name: 'Afrikaans', languageCode: 'af', fullLanguageCode: 'ar-AF', flag: 'images/flag/ic_ar.png'),
-    LanguageDataModel(id: 5, name: 'Arabic', languageCode: 'ar', fullLanguageCode: 'ar-AR', flag: 'images/flag/ic_ar.png'),
-    LanguageDataModel(id: 6, name: 'Dutch', languageCode: 'nl', fullLanguageCode: 'nl-NL', flag: 'images/flag/ic_nl.png'),
-    LanguageDataModel(id: 7, name: 'French', languageCode: 'fr', fullLanguageCode: 'fr-FR', flag: 'images/flag/ic_fr.png'),
-    LanguageDataModel(id: 8, name: 'German', languageCode: 'de', fullLanguageCode: 'de-DE', flag: 'images/flag/ic_de.png'),
-    LanguageDataModel(id: 9, name: 'Indonesian', languageCode: 'id', fullLanguageCode: 'id-ID', flag: 'images/flag/ic_id.png'),
-    LanguageDataModel(id: 10, name: 'Portugal', languageCode: 'pt', fullLanguageCode: 'pt-PT', flag: 'images/flag/ic_pt.png'),
-    LanguageDataModel(id: 11, name: 'Spanish', languageCode: 'es', fullLanguageCode: 'es-ES', flag: 'images/flag/ic_es.png'),
-    LanguageDataModel(id: 12, name: 'Turkish', languageCode: 'tr', fullLanguageCode: 'tr-TR', flag: 'images/flag/ic_tr.png'),
-    LanguageDataModel(id: 13, name: 'Vietnam', languageCode: 'vi', fullLanguageCode: 'vi-VI', flag: 'images/flag/ic_vi.png'),
-    LanguageDataModel(id: 14, name: 'Albanian', languageCode: 'sq', fullLanguageCode: 'sq-SQ', flag: 'images/flag/ic_arbanian.png'),
+    LanguageDataModel(id: 3, name: 'Guyaratí', languageCode: 'gu', fullLanguageCode: 'gu-IN', flag: 'images/flag/ic_india.png'), //Gujarati
+    LanguageDataModel(id: 4, name: 'Afrikáans', languageCode: 'af', fullLanguageCode: 'ar-AF', flag: 'images/flag/ic_ar.png'),//Afrikaans
+    LanguageDataModel(id: 5, name: 'Árabe', languageCode: 'ar', fullLanguageCode: 'ar-AR', flag: 'images/flag/ic_ar.png'), //Arabic
+    LanguageDataModel(id: 6, name: 'Neerlandés', languageCode: 'nl', fullLanguageCode: 'nl-NL', flag: 'images/flag/ic_nl.png'), //Dutch
+    LanguageDataModel(id: 7, name: 'Francés', languageCode: 'fr', fullLanguageCode: 'fr-FR', flag: 'images/flag/ic_fr.png'), //French
+    LanguageDataModel(id: 8, name: 'Alemán', languageCode: 'de', fullLanguageCode: 'de-DE', flag: 'images/flag/ic_de.png'), //German
+    LanguageDataModel(id: 9, name: 'Indonesio', languageCode: 'id', fullLanguageCode: 'id-ID', flag: 'images/flag/ic_id.png'),//Indonesian
+    LanguageDataModel(id: 10, name: 'Portugués', languageCode: 'pt', fullLanguageCode: 'pt-PT', flag: 'images/flag/ic_pt.png'),//Portugal
+    LanguageDataModel(id: 11, name: 'Español ', languageCode: 'es', fullLanguageCode: 'es-ES', flag: 'images/flag/ic_es.png'),//Spanish
+    LanguageDataModel(id: 12, name: 'Turco', languageCode: 'tr', fullLanguageCode: 'tr-TR', flag: 'images/flag/ic_tr.png'),//Turkish
+    LanguageDataModel(id: 13, name: 'Vietnamita', languageCode: 'vi', fullLanguageCode: 'vi-VI', flag: 'images/flag/ic_vi.png'),//Vietnam
+    LanguageDataModel(id: 14, name: 'Albanés', languageCode: 'sq', fullLanguageCode: 'sq-SQ', flag: 'images/flag/ic_arbanian.png'),//Albanian
   ];
 }
 

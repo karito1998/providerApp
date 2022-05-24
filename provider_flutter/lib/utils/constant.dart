@@ -8,10 +8,10 @@ const mAppName = 'HelpiRD';
 const url = 'https://helpird.com'; // Don't add slash at the end of the url
 const mBaseUrl = "$url/api/";
 
-const termsConditionUrl = 'https://iqonic.design/terms-of-use/';
-const privacyPolicyUrl = 'https://iqonic.design/privacy-policy/';
+const termsConditionUrl = 'https://helpird.com/#/term-conditions';
+const privacyPolicyUrl = 'https://helpird.com/#/privacy-policy';
 const purchaseUrl = 'https://codecanyon.net/item/handyman-service-flutter-ondemand-home-services-app-with-complete-solution/33776097?s_rank=5';
-const helpSupportUrl = 'https://iqonic.desky.support/';
+const helpSupportUrl = 'https://helpird.com/#/contact-us';
 const packageName = "com.iqonic.provider"; // Don't Change it.
 //endregion
 
