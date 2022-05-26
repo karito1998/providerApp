@@ -5,6 +5,23 @@ class LanguageDe extends Languages {
   String planAboutToExpire(int days) => 'Your Plan Is About to Expire In $days Days';
 
   @override
+  String lblInvalidEmail = '';
+  @override
+  String lblInvalidUsername = '';
+  @override
+  String lblRetryErr = "";
+  @override
+  String lblWrongErr = "";
+  @override
+  String lblInternetErr = "";
+  @override
+  String lblInvalidEmailSpaces = "";
+  @override
+  String tycRequired = '';
+  @override
+  String signUpSuccess = "";
+
+  @override
   String appName = 'Anbieter';
 
   @override
