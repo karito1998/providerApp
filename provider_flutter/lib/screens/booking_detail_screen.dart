@@ -177,30 +177,35 @@ class CommonBookingDetailScreenState extends State<CommonBookingDetailScreen> {
             return await 2.seconds.delay;
           },
           child: Scaffold(
-            appBar: appBarWidget(snap.hasData ? snap.data!.bookingDetail!.statusLabel.validate() : "", color: context.primaryColor, textColor: Colors.white, showBack: true, backWidget: BackWidget(), actions: [
-              TextButton(
-                onPressed: () {
-                  showModalBottomSheet(
-                    backgroundColor: Colors.transparent,
-                    context: context,
-                    isScrollControlled: true,
-                    isDismissible: true,
-                    builder: (_) {
-                      return DraggableScrollableSheet(
-                        initialChildSize: 0.50,
-                        minChildSize: 0.2,
-                        maxChildSize: 1,
-                        builder: (context, scrollController) => BookingHistoryComponent(
-                          data: snap.data!.bookingActivity!.reversed.toList(),
-                          scrollController: scrollController,
-                        ),
+            appBar: appBarWidget(snap.hasData ? snap.data!.bookingDetail!.statusLabel.validate() : "",
+                color: context.primaryColor,
+                textColor: Colors.white,
+                showBack: true,
+                backWidget: BackWidget(),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      showModalBottomSheet(
+                        backgroundColor: Colors.transparent,
+                        context: context,
+                        isScrollControlled: true,
+                        isDismissible: true,
+                        builder: (_) {
+                          return DraggableScrollableSheet(
+                            initialChildSize: 0.50,
+                            minChildSize: 0.2,
+                            maxChildSize: 1,
+                            builder: (context, scrollController) => BookingHistoryComponent(
+                              data: snap.data!.bookingActivity!.reversed.toList(),
+                              scrollController: scrollController,
+                            ),
+                          );
+                        },
                       );
                     },
-                  );
-                },
-                child: Text(context.translate.lblCheckStatus, style: boldTextStyle(color: white)),
-              ).paddingRight(8),
-            ]),
+                    child: Text(context.translate.lblCheckStatus, style: boldTextStyle(color: white)),
+                  ).paddingRight(8),
+                ]),
             body: buildBodyWidget(snap),
           ),
         );

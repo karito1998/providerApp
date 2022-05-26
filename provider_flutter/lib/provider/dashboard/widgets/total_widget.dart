@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/utils/app_common.dart';
@@ -24,7 +25,7 @@ class TotalWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(total.validate(), style: boldTextStyle(color: primaryColor, size: 20)).flexible(),
+              SizedBox(width: context.width() / 2 - 94, child: AutoSizeText(total.validate(), style: boldTextStyle(color: primaryColor, size: 20), maxLines: 1)),
               Container(
                 padding: EdgeInsets.all(8),
                 decoration: BoxDecoration(

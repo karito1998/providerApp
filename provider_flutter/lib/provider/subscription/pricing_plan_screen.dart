@@ -161,7 +161,9 @@ class _PricingPlanScreenState extends State<PricingPlanScreen> {
                                   decoration: BoxDecoration(color: context.primaryColor, borderRadius: radius()),
                                   padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                                   child: Text(
-                                    data.identifier == FREE ? 'Free Trial' : "${appStore.currencySymbol}${data.amount.validate().toStringAsFixed(decimalPoint).formatNumberWithComma()}/${data.type.validate()}",
+                                    data.identifier == FREE
+                                        ? 'Free Trial'
+                                        : "${appStore.currencySymbol}${data.amount.validate().toStringAsFixed(decimalPoint).formatNumberWithComma()}/${data.type.validate()}",
                                     style: boldTextStyle(color: white, size: 12),
                                   ),
                                 ),
@@ -229,7 +231,8 @@ class _PricingPlanScreenState extends State<PricingPlanScreen> {
                 left: 16,
                 right: 16,
                 child: AppButton(
-                  child: Text(selectedPricingPlan!.identifier == FREE ? context.translate.lblProceed.toUpperCase() : context.translate.lblMakePayment.toUpperCase(), style: boldTextStyle(color: white)),
+                  child:
+                      Text(selectedPricingPlan!.identifier == FREE ? context.translate.lblProceed.toUpperCase() : context.translate.lblMakePayment.toUpperCase(), style: boldTextStyle(color: white)),
                   color: primaryColor,
                   onTap: () async {
                     if (selectedPricingPlan!.identifier == FREE) {
@@ -268,7 +271,7 @@ class _PricingPlanScreenState extends State<PricingPlanScreen> {
                 ),
               ),
             Observer(builder: (_) => noDataFound(context).center().visible(!appStore.isLoading && pricingPlanList.isEmpty && !hasError)),
-            Text(context.translate.lblWrongErr, style: secondaryTextStyle()).center().visible(hasError),
+            Text(errorSomethingWentWrong, style: secondaryTextStyle()).center().visible(hasError),
             Observer(builder: (_) => LoaderWidget().center().visible(appStore.isLoading)),
           ],
         ),

@@ -160,13 +160,12 @@ class ServiceAddressesComponentState extends State<ServiceAddressesComponent> {
     );
   }
 
-
   void deleteDialog() {
     showInDialog(
       context,
       contentPadding: EdgeInsets.all(0),
       builder: (_) {
-        return   SizedBox(
+        return SizedBox(
           height: context.height() * 0.5,
           child: Column(
             children: [
@@ -174,7 +173,7 @@ class ServiceAddressesComponentState extends State<ServiceAddressesComponent> {
               32.height,
               Text(context.translate.lblDeleteAddress, style: boldTextStyle(size: 20)),
               16.height,
-              Text(context.translate.lblDeleteAddressMsg, style: secondaryTextStyle(),textAlign: TextAlign.center),
+              Text(context.translate.lblDeleteAddressMsg, style: secondaryTextStyle(), textAlign: TextAlign.center),
               28.height,
               Row(
                 children: [
@@ -225,7 +224,7 @@ class ServiceAddressesComponentState extends State<ServiceAddressesComponent> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(widget.data.address.validate(), style: boldTextStyle(), overflow: TextOverflow.ellipsis, maxLines: 4),
+              Text(widget.data.address.validate(), style: boldTextStyle(), overflow: TextOverflow.ellipsis, maxLines: 4).expand(),
               Switch(
                 activeColor: white,
                 inactiveThumbColor: white,
@@ -254,7 +253,7 @@ class ServiceAddressesComponentState extends State<ServiceAddressesComponent> {
             children: [
               Text(context.translate.lblEdit, style: secondaryTextStyle()).onTap(
                 () {
-                   if (getStringAsync(USER_EMAIL) != DEFAULT_PROVIDER_EMAIL) {
+                  if (getStringAsync(USER_EMAIL) != DEFAULT_PROVIDER_EMAIL) {
                     editDialog(widget.data.address);
                   } else {
                     toast(context.translate.lblUnAuthorized);

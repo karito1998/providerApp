@@ -275,7 +275,7 @@ class RegisterUserFormComponentState extends State<RegisterUserFormComponent> {
                       textStyle: primaryTextStyle(color: white),
                       width: context.width() - context.navigationBarHeight,
                       onTap: () {
-                        if (!appStore.isTester)  {
+                        if (!appStore.isTester) {
                           register();
                         } else {
                           toast(context.translate.lblUnAuthorized);

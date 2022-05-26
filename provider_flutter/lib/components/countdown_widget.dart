@@ -26,7 +26,9 @@ class _CountdownWidgetState extends State<CountdownWidget> {
   @override
   void initState() {
     if (widget.bookingDetailResponse.bookingDetail!.status.validate() == BookingStatusKeys.inProgress) {
-      value = "${(widget.bookingDetailResponse.bookingDetail!.durationDiff.toInt() + DateTime.now().difference(DateTime.parse(widget.bookingDetailResponse.bookingDetail!.startAt.validate())).inSeconds)}".toInt();
+      value =
+          "${(widget.bookingDetailResponse.bookingDetail!.durationDiff.toInt() + DateTime.now().difference(DateTime.parse(widget.bookingDetailResponse.bookingDetail!.startAt.validate())).inSeconds)}"
+              .toInt();
       stopTimer = false;
       init();
     } else {

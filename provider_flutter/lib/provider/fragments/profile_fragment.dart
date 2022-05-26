@@ -17,6 +17,7 @@ import 'package:handyman_provider_flutter/screens/about_us_screen.dart';
 import 'package:handyman_provider_flutter/screens/languages_screen.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
@@ -305,9 +306,9 @@ class ProfileFragmentState extends State<ProfileFragment> {
                       title: context.translate.lblPurchaseCode,
                       trailing: Icon(Icons.chevron_right, color: appStore.isDarkMode ? white : gray.withOpacity(0.8), size: 24),
                       onTap: () {
-                        launch(purchaseUrl);
+                        launch(PURCHASE_URL);
                       },
-                    ),
+                    ).visible(isIqonicProduct),
                     20.height,
                     TextButton(
                       child: Text(context.translate.logout, style: boldTextStyle(color: primaryColor, size: 18)),

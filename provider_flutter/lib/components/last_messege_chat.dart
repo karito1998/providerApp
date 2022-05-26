@@ -8,9 +8,7 @@ import 'package:nb_utils/nb_utils.dart';
 class LastMessageChat extends StatelessWidget {
   final stream;
 
-  LastMessageChat({
-    required this.stream,
-  });
+  LastMessageChat({required this.stream});
 
   Widget typeWidget(ChatMessageModel message) {
     String? type = message.messageType;

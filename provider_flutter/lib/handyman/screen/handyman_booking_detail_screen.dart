@@ -132,7 +132,10 @@ class HBookingDetailScreenState extends State<HBookingDetailScreen> {
         afterUpdateMessage = context.translate.lblWaitingForResponse;
         updated = true;
         //
-      } else if (_bookingDetail.status == BookingStatusKeys.hold || _bookingDetail.status == BookingStatusKeys.rejected || _bookingDetail.status == BookingStatusKeys.failed || _bookingDetail.status == BookingStatusKeys.cancelled) {
+      } else if (_bookingDetail.status == BookingStatusKeys.hold ||
+          _bookingDetail.status == BookingStatusKeys.rejected ||
+          _bookingDetail.status == BookingStatusKeys.failed ||
+          _bookingDetail.status == BookingStatusKeys.cancelled) {
         hideBottom = true;
       } else if (_bookingDetail.status == BookingStatusKeys.complete && _bookingDetail.paymentStatus == PENDING) {
         if (_bookingDetail.paymentMethod == COD && _bookingDetail.paymentStatus == PENDING) {
@@ -401,7 +404,10 @@ class HBookingDetailScreenState extends State<HBookingDetailScreen> {
 
   Widget _buildCounterWidget({required BookingDetailResponse value}) {
     if (value.bookingDetail!.isHourlyService &&
-        (value.bookingDetail!.status == BookingStatusKeys.inProgress || value.bookingDetail!.status == BookingStatusKeys.hold || value.bookingDetail!.status == BookingStatusKeys.complete || value.bookingDetail!.status == BookingStatusKeys.onGoing))
+        (value.bookingDetail!.status == BookingStatusKeys.inProgress ||
+            value.bookingDetail!.status == BookingStatusKeys.hold ||
+            value.bookingDetail!.status == BookingStatusKeys.complete ||
+            value.bookingDetail!.status == BookingStatusKeys.onGoing))
       return CountdownWidget(bookingDetailResponse: value);
     else
       return Offstage();

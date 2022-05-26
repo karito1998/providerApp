@@ -29,7 +29,7 @@ class _UserItemBuilderState extends State<UserItemBuilder> {
               push(UserChatScreen(receiverUser: snap.data!), pageRouteAnimation: PageRouteAnimation.Fade, duration: 200.milliseconds);
             },
             child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Row(
                 children: [
                   Container(
@@ -71,10 +71,7 @@ class _UserItemBuilderState extends State<UserItemBuilder> {
                                   );
                                 }
                               }
-                              return SizedBox(
-                                height: 18,
-                                width: 18,
-                              );
+                              return SizedBox(height: 18, width: 18);
                             },
                           ),
                         ],

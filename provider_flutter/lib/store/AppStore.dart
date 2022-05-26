@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:handyman_provider_flutter/locale/languag_es.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:mobx/mobx.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -27,7 +28,7 @@ abstract class _AppStore with Store {
   bool isTester = false;
 
   @observable
-  String selectedLanguageCode = defaultLanguage;
+  String selectedLanguageCode = DEFAULT_LANGUAGE;
 
   @observable
   String userProfileImage = '';

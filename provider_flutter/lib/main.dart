@@ -19,6 +19,7 @@ import 'package:handyman_provider_flutter/screens/splash_screen.dart';
 import 'package:handyman_provider_flutter/store/AppStore.dart';
 import 'package:handyman_provider_flutter/utils/app_common.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -51,28 +52,30 @@ List<RevenueChartData> chartData = [];
 //region Chat Variable
 String mSelectedImage = "assets/default_wallpaper.png";
 bool mIsEnterKey = false;
+String currentPackageName = '';
 //endregion
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   if (!isDesktop) {
-    await Firebase.initializeApp().catchError((e) {
+    Firebase.initializeApp().then((value) {
+      Function? originalOnError = FlutterError.onError;
+
+      FlutterError.onError = (FlutterErrorDetails errorDetails) async {
+        await FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
+        originalOnError!(errorDetails);
+      };
+    }).catchError((e) {
       log(e.toString());
       return e;
     });
   }
 
-  Function? originalOnError = FlutterError.onError;
-
-  FlutterError.onError = (FlutterErrorDetails errorDetails) async {
-    await FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
-    originalOnError!(errorDetails);
-  };
-
   await initialize(aLocaleLanguageList: languageList());
   defaultSettings();
 
-  appStore.setLanguage(getStringAsync(SELECTED_LANGUAGE_CODE, defaultValue: defaultLanguage));
+  appStore.setLanguage(getStringAsync(SELECTED_LANGUAGE_CODE, defaultValue: DEFAULT_LANGUAGE));
   await appStore.setLoggedIn(getBoolAsync(IS_LOGGED_IN));
 
   await setLoginValues();

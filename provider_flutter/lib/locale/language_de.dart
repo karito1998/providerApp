@@ -464,22 +464,6 @@ class LanguageDe extends Languages {
   String lblInvalidUrl = 'Ungültige URL:';
 
   @override
-  String lblInvalidEmail = '';
-  @override
-  String lblInvalidUsername = '';
-  @override
-  String lblRetryErr = "";
-  @override
-  String lblWrongErr = "";
-  @override
-  String lblInternetErr = "";
-  @override
-  String lblInvalidEmailSpaces = "";
-  @override
-  String tycRequired = '';
-  @override
-  String signUpSuccess = "";
-  @override
   String errorPasswordLength = 'Die Passwortlänge sollte mehr als sein';
 
   @override
@@ -563,90 +547,68 @@ class LanguageDe extends Languages {
   @override
   String lbllogintitle = "Hallo wieder !";
 
-
   @override
   String lblloginsubtitle = "Willkommen zurück, Sie wurden schon lange vermisst";
-
 
   @override
   String lblsignuptitle = "Hallo Benutzer!";
 
-
   @override
   String lblsignupsubtitle = "Erstellen Sie Ihr Konto für bessere Erfahrung";
-
 
   @override
   String lblLogin = "Anmeldung";
 
-
   @override
   String lblsignup = "Anmeldung";
-
 
   @override
   String lblUserType = "Benutzertyp";
 
-
   @override
   String lblPurchaseCode = "Vollständiger Quellcode kaufen";
-
 
   @override
   String lblFeatureProduct = "Dies ist ein Produkt";
 
-
   @override
   String lblHours = "Stunde";
-
 
   @override
   String lblRating = "Nennen";
 
-
   @override
   String lblOff = "Aus";
-
 
   @override
   String lblHr = "Hr.";
 
-
   @override
   String lblDate = "Datum";
-
 
   @override
   String lblAboutHandyman = "Über Handwerker.";
 
-
   @override
   String lblAboutCustomer = "Über den Kunden.";
-
 
   @override
   String lblPaymentDetail = "Zahlungsdetails";
 
-
   @override
   String lblId = "ICH WÜRDE";
-
 
   @override
   String lblMethod = "Methode";
 
-
   @override
   String lblStatus = "Status";
-
 
   @override
   String lblPriceDetail = "Preisdetails";
 
-
   @override
   String lblSubTotal = "Subsumme";
-
 
   @override
   String lblTax = "Steuer";
@@ -654,13 +616,11 @@ class LanguageDe extends Languages {
   @override
   String lblCoupon = "Coupon";
 
-
   @override
   String lblTotalAmount = "Gesamtmenge";
 
   @override
   String lblOnBasisOf = "Auf der Grundlage von";
-
 
   @override
   String lblCheckStatus = "Status überprüfen";
@@ -689,10 +649,8 @@ class LanguageDe extends Languages {
   @override
   String lblStatusType = "Status";
 
-
   @override
   String lblHandymanType = "Handwerkertyp.";
-
 
   @override
   String lblFixed = "Fest";
@@ -723,7 +681,6 @@ class LanguageDe extends Languages {
 
   @override
   String lblWaitingForPayment = "Warten auf Zahlung";
-
 
   @override
   String lblOnGoing = "Auf dem Weg";
@@ -778,7 +735,6 @@ class LanguageDe extends Languages {
 
   @override
   String lblDeleteAddressMsg = "Möchten Sie diese Adresse sicher, dass Sie diese Adresse löschen möchten";
-
 
   @override
   String lblChoosePaymentMethod = "Zahlungsart auswählen";

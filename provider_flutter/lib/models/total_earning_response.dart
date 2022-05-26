@@ -26,7 +26,7 @@ class TotalEarningResponse {
 }
 
 class TotalData {
-  int? amount;
+  num? amount;
   String? created_at;
   String? description;
   int? id;

@@ -10,7 +10,7 @@ import 'package:handyman_provider_flutter/networks/rest_apis.dart';
 import 'package:handyman_provider_flutter/screens/about_us_screen.dart';
 import 'package:handyman_provider_flutter/screens/languages_screen.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
-import 'package:handyman_provider_flutter/utils/constant.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
@@ -173,14 +173,14 @@ class _ProfileFragmentState extends State<ProfileFragment> {
                 },
               ),
               Divider(height: 0, thickness: 1, indent: 15.0, endIndent: 15.0).visible(appStore.isLoggedIn),
-              /*SettingItemWidget(
+              SettingItemWidget(
                 leading: Image.asset(purchase, height: 20, width: 20, color: appStore.isDarkMode ? white : gray.withOpacity(0.8)),
                 title: context.translate.lblPurchaseCode,
                 trailing: Icon(Icons.chevron_right, color: appStore.isDarkMode ? white : gray.withOpacity(0.8), size: 24),
                 onTap: () {
-                  launch(purchaseUrl);
+                  launch(PURCHASE_URL);
                 },
-              ),*/
+              ),
               20.height,
               TextButton(
                 child: Text(context.translate.logout, style: boldTextStyle(color: primaryColor, size: 18)),

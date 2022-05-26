@@ -38,18 +38,18 @@ class RegisterData {
 
   RegisterData(
       {this.api_token,
-        this.contact_number,
-        this.display_name,
-        this.email,
-        this.password,
-        this.first_name,
-        required this.last_name,
-        this.user_type,
-        required this.username,
-        this.provider_id,
-        this.status,
-        this.address,
-        this.uid});
+      this.contact_number,
+      this.display_name,
+      this.email,
+      this.password,
+      this.first_name,
+      required this.last_name,
+      this.user_type,
+      required this.username,
+      this.provider_id,
+      this.status,
+      this.address,
+      this.uid});
 
   factory RegisterData.fromJson(Map<String, dynamic> json) {
     return RegisterData(

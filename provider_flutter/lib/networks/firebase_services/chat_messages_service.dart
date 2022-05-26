@@ -22,7 +22,7 @@ class ChatMessageService extends BaseService {
     userRef = fireStore.collection(USER_COLLECTION);
   }
 
-  Query chatMessagesWithPagination({String? senderId, required String receiverUserId, required String currentUserId}) {
+  Query chatMessagesWithPagination({String? senderId, required String receiverUserId}) {
     return ref!.doc(senderId).collection(receiverUserId).orderBy("createdAt", descending: true);
   }
 

@@ -60,17 +60,22 @@ class ServiceComponent extends StatelessWidget {
                 right: 12,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  width: 120,
+                  alignment: Alignment.center,
                   decoration: boxDecorationWithShadow(
                     backgroundColor: primaryColor,
                     borderRadius: radius(24),
                     border: Border.all(color: white, width: 2),
                   ),
-                  child: PriceWidget(
-                    price: data.price!,
-                    isHourlyService: data.type == ServiceTypeHourly,
-                    color: Colors.white,
-                    size: 14,
-                    hourlyTextColor: Colors.white,
+                  child: Marquee(
+                    directionMarguee: DirectionMarguee.oneDirection,
+                    child: PriceWidget(
+                      price: data.price!,
+                      isHourlyService: data.type == ServiceTypeHourly,
+                      color: Colors.white,
+                      size: 14,
+                      hourlyTextColor: Colors.white,
+                    ),
                   ),
                 ),
               ),

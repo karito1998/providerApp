@@ -15,7 +15,7 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 
 class UserChatScreen extends StatefulWidget {
-  UserData receiverUser;
+  final UserData receiverUser;
 
   UserChatScreen({required this.receiverUser});
 
@@ -179,10 +179,10 @@ class _UserChatScreenState extends State<UserChatScreen> {
                 isLive: true,
                 padding: EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 0),
                 physics: BouncingScrollPhysics(),
-                query: chatMessageService.chatMessagesWithPagination(senderId: appStore.uId, receiverUserId: widget.receiverUser.uid.validate(), currentUserId: ''),
+                query: chatMessageService.chatMessagesWithPagination(senderId: appStore.uId, receiverUserId: widget.receiverUser.uid.validate()),
                 initialLoader: LoaderWidget(),
                 itemsPerPage: PER_PAGE_CHAT_COUNT,
-                onEmpty: Text('No chats found', style: boldTextStyle(size: 20)).center(),
+                onEmpty: Text(context.translate.lblNoChatFound, style: boldTextStyle(size: 20)).center(),
                 shrinkWrap: true,
                 onError: (e) {
                   return noDataFound(context);
@@ -196,9 +196,9 @@ class _UserChatScreenState extends State<UserChatScreen> {
               ),
             ),
             Positioned(
-              bottom: 20,
-              left: 18,
-              right: 18,
+              bottom: 8,
+              left: 8,
+              right: 8,
               child: _buildChatFieldWidget(),
             )
           ],

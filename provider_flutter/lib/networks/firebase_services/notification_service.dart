@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:handyman_provider_flutter/utils/constant.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:http/http.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -21,13 +21,13 @@ class NotificationService {
       /*'data': {
         'id': id,
       },*/
-      'app_id': mOneSignalAppId,
-      'android_channel_id': mOneSignalChannelId,
+      'app_id': ONESIGNAL_APP_ID,
+      'android_channel_id': ONESIGNAL_CHANNEL_ID,
       'include_player_ids': [receiverPlayerId],
-      'android_group': mAppName,
+      'android_group': APP_NAME,
     };
     var header = {
-      HttpHeaders.authorizationHeader: 'Basic $mOneSignalRestKey',
+      HttpHeaders.authorizationHeader: 'Basic ONESIGNAL_REST_KEYy',
       HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
     };
 

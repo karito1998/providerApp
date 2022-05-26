@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
@@ -26,7 +27,7 @@ Map<String, String> buildHeaderTokens() {
 
 Uri buildBaseUrl(String endPoint) {
   Uri url = Uri.parse(endPoint);
-  if (!endPoint.startsWith('http')) url = Uri.parse('$mBaseUrl$endPoint');
+  if (!endPoint.startsWith('http')) url = Uri.parse('$BASE_URL$endPoint');
 
   log('URL: ${url.toString()}');
 

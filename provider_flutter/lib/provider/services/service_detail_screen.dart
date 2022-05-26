@@ -12,7 +12,6 @@ import 'package:handyman_provider_flutter/provider/services/widgets/service_faq_
 import 'package:handyman_provider_flutter/screens/gallery_List_Screen.dart';
 import 'package:handyman_provider_flutter/utils/app_common.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
-import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:handyman_provider_flutter/utils/model_keys.dart';
@@ -284,7 +283,8 @@ class ServiceDetailScreenState extends State<ServiceDetailScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     if (serviceDetailData.serviceDetail!.subCategoryName.validate().isNotEmpty)
-                                      Text('${serviceDetailData.serviceDetail!.categoryName} > ${serviceDetailData.serviceDetail!.subCategoryName}', style: boldTextStyle(size: 14, color: primaryColor))
+                                      Text('${serviceDetailData.serviceDetail!.categoryName} > ${serviceDetailData.serviceDetail!.subCategoryName}',
+                                          style: boldTextStyle(size: 14, color: primaryColor))
                                     else
                                       Text('${serviceDetailData.serviceDetail!.categoryName}', style: boldTextStyle(size: 14, color: primaryColor)),
                                     6.height,

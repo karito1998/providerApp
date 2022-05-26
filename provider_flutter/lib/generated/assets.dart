@@ -68,5 +68,4 @@ class Assets {
   static const String settingIconIcUnBlock = 'images/setting_icon/ic_unBlock.png';
   static const String settingIconIcUnfillWallet = 'images/setting_icon/ic_unfill_wallet.png';
   static const String settingIconIcVerified = 'images/setting_icon/ic_verified.png';
-
 }

@@ -168,7 +168,7 @@ class BookingDetail {
   List<Taxes>? taxes;
   num? totalAmount;
 
-  bool get isHourlyService => type!.validate() == ServiceTypeHourly;
+  bool get isHourlyService => type.validate() == ServiceTypeHourly;
 
   BookingDetail({
     this.id,

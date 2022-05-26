@@ -41,9 +41,8 @@ class CategoryData {
   String? category_name;
   int? services;
 
+  CategoryData(this.id, this.name, this.status, this.description, this.isFeatured, this.color, this.categoryImage, this.category_id, this.category_extension, this.category_name, this.services);
 
-  CategoryData(this.id, this.name, this.status, this.description, this.isFeatured, this.color, this.categoryImage, this.category_id, this.category_extension, this.category_name,
-      this.services);
   //CategoryData({this.id, this.name, this.status, this.description, this.isFeatured, this.color, this.categoryImage});
 
   CategoryData.fromJson(Map<String, dynamic> json) {

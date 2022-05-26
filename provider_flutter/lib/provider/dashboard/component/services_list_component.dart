@@ -50,7 +50,7 @@ class ServiceListComponent extends StatelessWidget {
                 },
               ),
             ),
-            Observer(builder: (context) => noDataFound(context).center().visible(!appStore.isLoading&&list.validate().isEmpty )),
+            Observer(builder: (context) => noDataFound(context).center().visible(!appStore.isLoading && list.validate().isEmpty)),
           ],
         )
       ],

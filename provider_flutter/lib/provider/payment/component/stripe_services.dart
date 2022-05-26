@@ -7,6 +7,7 @@ import 'package:handyman_provider_flutter/models/provider_subscription_model.dar
 import 'package:handyman_provider_flutter/models/stripe_pay_model.dart';
 import 'package:handyman_provider_flutter/networks/network_utils.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:http/http.dart' as http;
 import 'package:nb_utils/nb_utils.dart';
@@ -17,16 +18,17 @@ class StripeServices {
   String stripeURL = "";
   String stripePaymentKey = "";
 
-  init({required String stripePaymentPublishKey, ProviderSubscriptionModel? data, required num totalAmount, required String stripeURL, required String stripePaymentKey}) {
+  init({required String stripePaymentPublishKey, ProviderSubscriptionModel? data, required num totalAmount, required String stripeURL, required String stripePaymentKey}) async {
     Stripe.publishableKey = stripePaymentPublishKey;
-    Stripe.instance.applySettings().catchError((e) {
+    Stripe.merchantIdentifier = 'merchant.flutter.stripe.test'; /// You can enter AnyName
+
+    await Stripe.instance.applySettings().catchError((e) {
       return e;
     });
 
     this.totalAmount = totalAmount;
     this.stripeURL = stripeURL;
     this.stripePaymentKey = stripePaymentKey;
-    setValue("StripeKeyPayment", stripePaymentKey);
   }
 
   //StripPayment
@@ -65,7 +67,7 @@ class StripeServices {
               googlePay: true,
               testEnv: true,
               // merchantCountryCode: 'IN',
-              merchantDisplayName: mAppName,
+              merchantDisplayName: APP_NAME,
               customerId: '1',
               customerEphemeralKeySecret: res.client_secret.validate(),
               setupIntentClientSecret: res.client_secret.validate(),

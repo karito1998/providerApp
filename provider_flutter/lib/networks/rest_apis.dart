@@ -39,6 +39,7 @@ import 'package:handyman_provider_flutter/provider/dashboard/dashboard_screen.da
 import 'package:handyman_provider_flutter/utils/app_common.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
@@ -292,10 +293,35 @@ Future<DashboardResponse> providerDashboard() async {
     await setValue(IS_PLAN_SUBSCRIBE, false);
   }
   appStore.setEarningType(data.earningType.validate());
-  appStore.setPrivacyPolicy(data.privacy_policy.validate());
-  appStore.setTermConditions(data.term_conditions.validate());
-  appStore.setInquiryEmail(data.inquriy_email.validate());
-  appStore.setHelplineNumber(data.helpline_number.validate());
+
+  if (data.privacy_policy != null) {
+    if (data.privacy_policy!.value.validate().isNotEmpty) {
+      appStore.setPrivacyPolicy(data.privacy_policy!.value.validate());
+    } else {
+      appStore.setPrivacyPolicy(PRIVACY_POLICY_URL);
+    }
+  } else {
+    appStore.setPrivacyPolicy(PRIVACY_POLICY_URL);
+  }
+  if (data.term_conditions != null) {
+    if (data.term_conditions!.value.validate().isNotEmpty) {
+      appStore.setTermConditions(data.term_conditions!.value.validate());
+    } else {
+      appStore.setTermConditions(TERMS_CONDITION_URL);
+    }
+  } else {
+    appStore.setTermConditions(TERMS_CONDITION_URL);
+  }
+
+  if (data.inquriy_email.validate().isNotEmpty) {
+    appStore.setInquiryEmail(data.inquriy_email.validate());
+  } else {
+    appStore.setInquiryEmail(HELP_SUPPORT_URL);
+  }
+
+  if (data.helpline_number.validate().isNotEmpty) {
+    appStore.setHelplineNumber(data.helpline_number.validate());
+  }
 
   return data;
 }
@@ -304,10 +330,35 @@ Future<HandymanDashBoardResponse> handymanDashboard() async {
   HandymanDashBoardResponse data = HandymanDashBoardResponse.fromJson(await handleResponse(await buildHttpResponse('handyman-dashboard', method: HttpMethod.GET)));
 
   setCurrencies(value: data.configurations);
-  appStore.setPrivacyPolicy(data.privacy_policy.validate());
-  appStore.setTermConditions(data.term_conditions.validate());
-  appStore.setInquiryEmail(data.inquriy_email.validate());
-  appStore.setHelplineNumber(data.helpline_number.validate());
+  if (data.privacy_policy != null) {
+    if (data.privacy_policy!.value.validate().isNotEmpty) {
+      appStore.setPrivacyPolicy(data.privacy_policy!.value.validate());
+    } else {
+      appStore.setPrivacyPolicy(PRIVACY_POLICY_URL);
+    }
+  } else {
+    appStore.setPrivacyPolicy(PRIVACY_POLICY_URL);
+  }
+
+  if (data.term_conditions != null) {
+    if (data.term_conditions!.value.validate().isNotEmpty) {
+      appStore.setTermConditions(data.term_conditions!.value.validate());
+    } else {
+      appStore.setTermConditions(TERMS_CONDITION_URL);
+    }
+  } else {
+    appStore.setPrivacyPolicy(TERMS_CONDITION_URL);
+  }
+
+  if (data.inquriy_email.validate().isNotEmpty) {
+    appStore.setInquiryEmail(data.inquriy_email.validate());
+  } else {
+    appStore.setInquiryEmail(HELP_SUPPORT_URL);
+  }
+
+  if (data.helpline_number.validate().isNotEmpty) {
+    appStore.setHelplineNumber(data.helpline_number.validate());
+  }
 
   return data;
 }

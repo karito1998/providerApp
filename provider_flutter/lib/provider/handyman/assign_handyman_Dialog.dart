@@ -180,7 +180,7 @@ class _AssignHandymanDialogState extends State<AssignHandymanDialog> {
                   context.translate.noDataFound,
                   style: boldTextStyle(),
                   textAlign: TextAlign.center,
-                ).paddingAll(16).visible(afterInit && filteredData.isEmpty),
+                ).paddingAll(16).visible(appStore.isLoading && afterInit && filteredData.isEmpty),
               ],
             ),
             Positioned(

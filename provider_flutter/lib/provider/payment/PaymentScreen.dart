@@ -72,7 +72,7 @@ class _PaymentScreenState extends State<PaymentScreen> implements TransactionCal
 
     if (currentTimeValue!.type == PAYMENT_METHOD_STRIPE) {
       if (currentTimeValue!.is_test == 1) {
-        stripeServices.init(
+        await stripeServices.init(
             data: widget.selectedPricingPlan,
             stripePaymentPublishKey: currentTimeValue!.test_value!.stripe_publickey.validate(),
             totalAmount: widget.selectedPricingPlan.amount.validate(),
@@ -83,7 +83,7 @@ class _PaymentScreenState extends State<PaymentScreen> implements TransactionCal
           isPaymentProcessing = false;
         });
       } else {
-        stripeServices.init(
+        await stripeServices.init(
             data: widget.selectedPricingPlan,
             stripePaymentPublishKey: currentTimeValue!.live_value!.stripe_publickey.validate(),
             totalAmount: widget.selectedPricingPlan.amount.validate(),

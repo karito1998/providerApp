@@ -196,7 +196,7 @@ class PaymentFragmentState extends State<PaymentFragment> {
               },
             ),
             Observer(builder: (_) => noDataFound(context).center().visible(!appStore.isLoading && paymentDataList.isEmpty && !hasError)),
-            Text(context.translate.lblWrongErr, style: secondaryTextStyle()).center().visible(hasError),
+            Text(errorSomethingWentWrong, style: secondaryTextStyle()).center().visible(hasError),
             Observer(builder: (_) => LoaderWidget().center().visible(appStore.isLoading)),
           ],
         ),

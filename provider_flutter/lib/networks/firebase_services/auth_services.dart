@@ -79,7 +79,7 @@ class AuthServices {
           loginResponse.data!.uid = value.id.validate();
           if (loginResponse.data!.status.validate() != 0) {
             /// Redirect on the base of User Role.
-            if(loginResponse.data!.email == DEFAULT_PROVIDER_EMAIL || loginResponse.data!.email == DEFAULT_HANDYMAN_EMAIL) {
+            if (loginResponse.data!.email == DEFAULT_PROVIDER_EMAIL || loginResponse.data!.email == DEFAULT_HANDYMAN_EMAIL) {
               appStore.setTester(true);
             }
             if (loginResponse.data!.userType == UserTypeProvider) {

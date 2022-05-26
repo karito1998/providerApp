@@ -12,27 +12,17 @@ mixin _$AppStore on _AppStore, Store {
   Computed<String>? _$userFullNameComputed;
 
   @override
-  String get userFullName =>
-      (_$userFullNameComputed ??= Computed<String>(() => super.userFullName,
-              name: '_AppStore.userFullName'))
-          .value;
+  String get userFullName => (_$userFullNameComputed ??= Computed<String>(() => super.userFullName, name: '_AppStore.userFullName')).value;
   Computed<bool>? _$earningTypeCommissionComputed;
 
   @override
-  bool get earningTypeCommission => (_$earningTypeCommissionComputed ??=
-          Computed<bool>(() => super.earningTypeCommission,
-              name: '_AppStore.earningTypeCommission'))
-      .value;
+  bool get earningTypeCommission => (_$earningTypeCommissionComputed ??= Computed<bool>(() => super.earningTypeCommission, name: '_AppStore.earningTypeCommission')).value;
   Computed<bool>? _$earningTypeSubscriptionComputed;
 
   @override
-  bool get earningTypeSubscription => (_$earningTypeSubscriptionComputed ??=
-          Computed<bool>(() => super.earningTypeSubscription,
-              name: '_AppStore.earningTypeSubscription'))
-      .value;
+  bool get earningTypeSubscription => (_$earningTypeSubscriptionComputed ??= Computed<bool>(() => super.earningTypeSubscription, name: '_AppStore.earningTypeSubscription')).value;
 
-  late final _$isLoggedInAtom =
-      Atom(name: '_AppStore.isLoggedIn', context: context);
+  late final _$isLoggedInAtom = Atom(name: '_AppStore.isLoggedIn', context: context);
 
   @override
   bool get isLoggedIn {
@@ -47,8 +37,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$isDarkModeAtom =
-      Atom(name: '_AppStore.isDarkMode', context: context);
+  late final _$isDarkModeAtom = Atom(name: '_AppStore.isDarkMode', context: context);
 
   @override
   bool get isDarkMode {
@@ -63,8 +52,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$isLoadingAtom =
-      Atom(name: '_AppStore.isLoading', context: context);
+  late final _$isLoadingAtom = Atom(name: '_AppStore.isLoading', context: context);
 
   @override
   bool get isLoading {
@@ -79,8 +67,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$isRememberMeAtom =
-      Atom(name: '_AppStore.isRememberMe', context: context);
+  late final _$isRememberMeAtom = Atom(name: '_AppStore.isRememberMe', context: context);
 
   @override
   bool get isRememberMe {
@@ -95,8 +82,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$isTesterAtom =
-      Atom(name: '_AppStore.isTester', context: context);
+  late final _$isTesterAtom = Atom(name: '_AppStore.isTester', context: context);
 
   @override
   bool get isTester {
@@ -111,8 +97,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$selectedLanguageCodeAtom =
-      Atom(name: '_AppStore.selectedLanguageCode', context: context);
+  late final _$selectedLanguageCodeAtom = Atom(name: '_AppStore.selectedLanguageCode', context: context);
 
   @override
   String get selectedLanguageCode {
@@ -122,14 +107,12 @@ mixin _$AppStore on _AppStore, Store {
 
   @override
   set selectedLanguageCode(String value) {
-    _$selectedLanguageCodeAtom.reportWrite(value, super.selectedLanguageCode,
-        () {
+    _$selectedLanguageCodeAtom.reportWrite(value, super.selectedLanguageCode, () {
       super.selectedLanguageCode = value;
     });
   }
 
-  late final _$userProfileImageAtom =
-      Atom(name: '_AppStore.userProfileImage', context: context);
+  late final _$userProfileImageAtom = Atom(name: '_AppStore.userProfileImage', context: context);
 
   @override
   String get userProfileImage {
@@ -144,8 +127,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$currencySymbolAtom =
-      Atom(name: '_AppStore.currencySymbol', context: context);
+  late final _$currencySymbolAtom = Atom(name: '_AppStore.currencySymbol', context: context);
 
   @override
   String get currencySymbol {
@@ -160,8 +142,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$currencyCodeAtom =
-      Atom(name: '_AppStore.currencyCode', context: context);
+  late final _$currencyCodeAtom = Atom(name: '_AppStore.currencyCode', context: context);
 
   @override
   String get currencyCode {
@@ -176,8 +157,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$currencyCountryIdAtom =
-      Atom(name: '_AppStore.currencyCountryId', context: context);
+  late final _$currencyCountryIdAtom = Atom(name: '_AppStore.currencyCountryId', context: context);
 
   @override
   String get currencyCountryId {
@@ -207,8 +187,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$isPlanSubscribeAtom =
-      Atom(name: '_AppStore.isPlanSubscribe', context: context);
+  late final _$isPlanSubscribeAtom = Atom(name: '_AppStore.isPlanSubscribe', context: context);
 
   @override
   bool get isPlanSubscribe {
@@ -223,8 +202,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$planTitleAtom =
-      Atom(name: '_AppStore.planTitle', context: context);
+  late final _$planTitleAtom = Atom(name: '_AppStore.planTitle', context: context);
 
   @override
   String get planTitle {
@@ -239,8 +217,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$identifierAtom =
-      Atom(name: '_AppStore.identifier', context: context);
+  late final _$identifierAtom = Atom(name: '_AppStore.identifier', context: context);
 
   @override
   String get identifier {
@@ -255,8 +232,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$planEndDateAtom =
-      Atom(name: '_AppStore.planEndDate', context: context);
+  late final _$planEndDateAtom = Atom(name: '_AppStore.planEndDate', context: context);
 
   @override
   String get planEndDate {
@@ -271,8 +247,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$userFirstNameAtom =
-      Atom(name: '_AppStore.userFirstName', context: context);
+  late final _$userFirstNameAtom = Atom(name: '_AppStore.userFirstName', context: context);
 
   @override
   String get userFirstName {
@@ -287,8 +262,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$userLastNameAtom =
-      Atom(name: '_AppStore.userLastName', context: context);
+  late final _$userLastNameAtom = Atom(name: '_AppStore.userLastName', context: context);
 
   @override
   String get userLastName {
@@ -303,8 +277,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$userContactNumberAtom =
-      Atom(name: '_AppStore.userContactNumber', context: context);
+  late final _$userContactNumberAtom = Atom(name: '_AppStore.userContactNumber', context: context);
 
   @override
   String get userContactNumber {
@@ -319,8 +292,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$userEmailAtom =
-      Atom(name: '_AppStore.userEmail', context: context);
+  late final _$userEmailAtom = Atom(name: '_AppStore.userEmail', context: context);
 
   @override
   String get userEmail {
@@ -335,8 +307,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$userNameAtom =
-      Atom(name: '_AppStore.userName', context: context);
+  late final _$userNameAtom = Atom(name: '_AppStore.userName', context: context);
 
   @override
   String get userName {
@@ -366,8 +337,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$countryIdAtom =
-      Atom(name: '_AppStore.countryId', context: context);
+  late final _$countryIdAtom = Atom(name: '_AppStore.countryId', context: context);
 
   @override
   int get countryId {
@@ -427,8 +397,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$playerIdAtom =
-      Atom(name: '_AppStore.playerId', context: context);
+  late final _$playerIdAtom = Atom(name: '_AppStore.playerId', context: context);
 
   @override
   String get playerId {
@@ -458,8 +427,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$providerIdAtom =
-      Atom(name: '_AppStore.providerId', context: context);
+  late final _$providerIdAtom = Atom(name: '_AppStore.providerId', context: context);
 
   @override
   int? get providerId {
@@ -474,8 +442,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$serviceAddressIdAtom =
-      Atom(name: '_AppStore.serviceAddressId', context: context);
+  late final _$serviceAddressIdAtom = Atom(name: '_AppStore.serviceAddressId', context: context);
 
   @override
   int get serviceAddressId {
@@ -490,8 +457,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$userTypeAtom =
-      Atom(name: '_AppStore.userType', context: context);
+  late final _$userTypeAtom = Atom(name: '_AppStore.userType', context: context);
 
   @override
   String get userType {
@@ -506,8 +472,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$privacyPolicyAtom =
-      Atom(name: '_AppStore.privacyPolicy', context: context);
+  late final _$privacyPolicyAtom = Atom(name: '_AppStore.privacyPolicy', context: context);
 
   @override
   String get privacyPolicy {
@@ -522,8 +487,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$termConditionsAtom =
-      Atom(name: '_AppStore.termConditions', context: context);
+  late final _$termConditionsAtom = Atom(name: '_AppStore.termConditions', context: context);
 
   @override
   String get termConditions {
@@ -538,8 +502,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$inquiryEmailAtom =
-      Atom(name: '_AppStore.inquiryEmail', context: context);
+  late final _$inquiryEmailAtom = Atom(name: '_AppStore.inquiryEmail', context: context);
 
   @override
   String get inquiryEmail {
@@ -554,8 +517,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$helplineNumberAtom =
-      Atom(name: '_AppStore.helplineNumber', context: context);
+  late final _$helplineNumberAtom = Atom(name: '_AppStore.helplineNumber', context: context);
 
   @override
   String get helplineNumber {
@@ -570,8 +532,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$initialAdCountAtom =
-      Atom(name: '_AppStore.initialAdCount', context: context);
+  late final _$initialAdCountAtom = Atom(name: '_AppStore.initialAdCount', context: context);
 
   @override
   int get initialAdCount {
@@ -586,8 +547,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$totalBookingAtom =
-      Atom(name: '_AppStore.totalBooking', context: context);
+  late final _$totalBookingAtom = Atom(name: '_AppStore.totalBooking', context: context);
 
   @override
   int get totalBooking {
@@ -602,8 +562,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$createdAtAtom =
-      Atom(name: '_AppStore.createdAt', context: context);
+  late final _$createdAtAtom = Atom(name: '_AppStore.createdAt', context: context);
 
   @override
   String get createdAt {
@@ -618,8 +577,7 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$earningTypeAtom =
-      Atom(name: '_AppStore.earningType', context: context);
+  late final _$earningTypeAtom = Atom(name: '_AppStore.earningType', context: context);
 
   @override
   String get earningType {
@@ -634,336 +592,263 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
-  late final _$setEarningTypeAsyncAction =
-      AsyncAction('_AppStore.setEarningType', context: context);
+  late final _$setEarningTypeAsyncAction = AsyncAction('_AppStore.setEarningType', context: context);
 
   @override
   Future<void> setEarningType(String val, {bool isInitializing = false}) {
-    return _$setEarningTypeAsyncAction
-        .run(() => super.setEarningType(val, isInitializing: isInitializing));
+    return _$setEarningTypeAsyncAction.run(() => super.setEarningType(val, isInitializing: isInitializing));
   }
 
-  late final _$setTesterAsyncAction =
-      AsyncAction('_AppStore.setTester', context: context);
+  late final _$setTesterAsyncAction = AsyncAction('_AppStore.setTester', context: context);
 
   @override
   Future<void> setTester(bool val, {bool isInitializing = false}) {
-    return _$setTesterAsyncAction
-        .run(() => super.setTester(val, isInitializing: isInitializing));
+    return _$setTesterAsyncAction.run(() => super.setTester(val, isInitializing: isInitializing));
   }
 
-  late final _$setUserProfileAsyncAction =
-      AsyncAction('_AppStore.setUserProfile', context: context);
+  late final _$setUserProfileAsyncAction = AsyncAction('_AppStore.setUserProfile', context: context);
 
   @override
   Future<void> setUserProfile(String val, {bool isInitializing = false}) {
-    return _$setUserProfileAsyncAction
-        .run(() => super.setUserProfile(val, isInitializing: isInitializing));
+    return _$setUserProfileAsyncAction.run(() => super.setUserProfile(val, isInitializing: isInitializing));
   }
 
-  late final _$setPlayerIdAsyncAction =
-      AsyncAction('_AppStore.setPlayerId', context: context);
+  late final _$setPlayerIdAsyncAction = AsyncAction('_AppStore.setPlayerId', context: context);
 
   @override
   Future<void> setPlayerId(String val, {bool isInitializing = false}) {
-    return _$setPlayerIdAsyncAction
-        .run(() => super.setPlayerId(val, isInitializing: isInitializing));
+    return _$setPlayerIdAsyncAction.run(() => super.setPlayerId(val, isInitializing: isInitializing));
   }
 
-  late final _$setTokenAsyncAction =
-      AsyncAction('_AppStore.setToken', context: context);
+  late final _$setTokenAsyncAction = AsyncAction('_AppStore.setToken', context: context);
 
   @override
   Future<void> setToken(String val, {bool isInitializing = false}) {
-    return _$setTokenAsyncAction
-        .run(() => super.setToken(val, isInitializing: isInitializing));
+    return _$setTokenAsyncAction.run(() => super.setToken(val, isInitializing: isInitializing));
   }
 
-  late final _$setCountryIdAsyncAction =
-      AsyncAction('_AppStore.setCountryId', context: context);
+  late final _$setCountryIdAsyncAction = AsyncAction('_AppStore.setCountryId', context: context);
 
   @override
   Future<void> setCountryId(int val, {bool isInitializing = false}) {
-    return _$setCountryIdAsyncAction
-        .run(() => super.setCountryId(val, isInitializing: isInitializing));
+    return _$setCountryIdAsyncAction.run(() => super.setCountryId(val, isInitializing: isInitializing));
   }
 
-  late final _$setStateIdAsyncAction =
-      AsyncAction('_AppStore.setStateId', context: context);
+  late final _$setStateIdAsyncAction = AsyncAction('_AppStore.setStateId', context: context);
 
   @override
   Future<void> setStateId(int val, {bool isInitializing = false}) {
-    return _$setStateIdAsyncAction
-        .run(() => super.setStateId(val, isInitializing: isInitializing));
+    return _$setStateIdAsyncAction.run(() => super.setStateId(val, isInitializing: isInitializing));
   }
 
-  late final _$setCurrencySymbolAsyncAction =
-      AsyncAction('_AppStore.setCurrencySymbol', context: context);
+  late final _$setCurrencySymbolAsyncAction = AsyncAction('_AppStore.setCurrencySymbol', context: context);
 
   @override
   Future<void> setCurrencySymbol(String val, {bool isInitializing = false}) {
-    return _$setCurrencySymbolAsyncAction.run(
-        () => super.setCurrencySymbol(val, isInitializing: isInitializing));
+    return _$setCurrencySymbolAsyncAction.run(() => super.setCurrencySymbol(val, isInitializing: isInitializing));
   }
 
-  late final _$setCurrencyCodeAsyncAction =
-      AsyncAction('_AppStore.setCurrencyCode', context: context);
+  late final _$setCurrencyCodeAsyncAction = AsyncAction('_AppStore.setCurrencyCode', context: context);
 
   @override
   Future<void> setCurrencyCode(String val, {bool isInitializing = false}) {
-    return _$setCurrencyCodeAsyncAction
-        .run(() => super.setCurrencyCode(val, isInitializing: isInitializing));
+    return _$setCurrencyCodeAsyncAction.run(() => super.setCurrencyCode(val, isInitializing: isInitializing));
   }
 
-  late final _$setCurrencyCountryIdAsyncAction =
-      AsyncAction('_AppStore.setCurrencyCountryId', context: context);
+  late final _$setCurrencyCountryIdAsyncAction = AsyncAction('_AppStore.setCurrencyCountryId', context: context);
 
   @override
   Future<void> setCurrencyCountryId(String val, {bool isInitializing = false}) {
-    return _$setCurrencyCountryIdAsyncAction.run(
-        () => super.setCurrencyCountryId(val, isInitializing: isInitializing));
+    return _$setCurrencyCountryIdAsyncAction.run(() => super.setCurrencyCountryId(val, isInitializing: isInitializing));
   }
 
-  late final _$setCityIdAsyncAction =
-      AsyncAction('_AppStore.setCityId', context: context);
+  late final _$setCityIdAsyncAction = AsyncAction('_AppStore.setCityId', context: context);
 
   @override
   Future<void> setCityId(int val, {bool isInitializing = false}) {
-    return _$setCityIdAsyncAction
-        .run(() => super.setCityId(val, isInitializing: isInitializing));
+    return _$setCityIdAsyncAction.run(() => super.setCityId(val, isInitializing: isInitializing));
   }
 
-  late final _$setUIdAsyncAction =
-      AsyncAction('_AppStore.setUId', context: context);
+  late final _$setUIdAsyncAction = AsyncAction('_AppStore.setUId', context: context);
 
   @override
   Future<void> setUId(String val, {bool isInitializing = false}) {
-    return _$setUIdAsyncAction
-        .run(() => super.setUId(val, isInitializing: isInitializing));
+    return _$setUIdAsyncAction.run(() => super.setUId(val, isInitializing: isInitializing));
   }
 
-  late final _$setPlanSubscribeStatusAsyncAction =
-      AsyncAction('_AppStore.setPlanSubscribeStatus', context: context);
+  late final _$setPlanSubscribeStatusAsyncAction = AsyncAction('_AppStore.setPlanSubscribeStatus', context: context);
 
   @override
   Future<void> setPlanSubscribeStatus(bool val, {bool isInitializing = false}) {
-    return _$setPlanSubscribeStatusAsyncAction.run(() =>
-        super.setPlanSubscribeStatus(val, isInitializing: isInitializing));
+    return _$setPlanSubscribeStatusAsyncAction.run(() => super.setPlanSubscribeStatus(val, isInitializing: isInitializing));
   }
 
-  late final _$setPlanTitleAsyncAction =
-      AsyncAction('_AppStore.setPlanTitle', context: context);
+  late final _$setPlanTitleAsyncAction = AsyncAction('_AppStore.setPlanTitle', context: context);
 
   @override
   Future<void> setPlanTitle(String val, {bool isInitializing = false}) {
-    return _$setPlanTitleAsyncAction
-        .run(() => super.setPlanTitle(val, isInitializing: isInitializing));
+    return _$setPlanTitleAsyncAction.run(() => super.setPlanTitle(val, isInitializing: isInitializing));
   }
 
-  late final _$setIdentifierAsyncAction =
-      AsyncAction('_AppStore.setIdentifier', context: context);
+  late final _$setIdentifierAsyncAction = AsyncAction('_AppStore.setIdentifier', context: context);
 
   @override
   Future<void> setIdentifier(String val, {bool isInitializing = false}) {
-    return _$setIdentifierAsyncAction
-        .run(() => super.setIdentifier(val, isInitializing: isInitializing));
+    return _$setIdentifierAsyncAction.run(() => super.setIdentifier(val, isInitializing: isInitializing));
   }
 
-  late final _$setPlanEndDateAsyncAction =
-      AsyncAction('_AppStore.setPlanEndDate', context: context);
+  late final _$setPlanEndDateAsyncAction = AsyncAction('_AppStore.setPlanEndDate', context: context);
 
   @override
   Future<void> setPlanEndDate(String val, {bool isInitializing = false}) {
-    return _$setPlanEndDateAsyncAction
-        .run(() => super.setPlanEndDate(val, isInitializing: isInitializing));
+    return _$setPlanEndDateAsyncAction.run(() => super.setPlanEndDate(val, isInitializing: isInitializing));
   }
 
-  late final _$setUserIdAsyncAction =
-      AsyncAction('_AppStore.setUserId', context: context);
+  late final _$setUserIdAsyncAction = AsyncAction('_AppStore.setUserId', context: context);
 
   @override
   Future<void> setUserId(int val, {bool isInitializing = false}) {
-    return _$setUserIdAsyncAction
-        .run(() => super.setUserId(val, isInitializing: isInitializing));
+    return _$setUserIdAsyncAction.run(() => super.setUserId(val, isInitializing: isInitializing));
   }
 
-  late final _$setUserTypeAsyncAction =
-      AsyncAction('_AppStore.setUserType', context: context);
+  late final _$setUserTypeAsyncAction = AsyncAction('_AppStore.setUserType', context: context);
 
   @override
   Future<void> setUserType(String val, {bool isInitializing = false}) {
-    return _$setUserTypeAsyncAction
-        .run(() => super.setUserType(val, isInitializing: isInitializing));
+    return _$setUserTypeAsyncAction.run(() => super.setUserType(val, isInitializing: isInitializing));
   }
 
-  late final _$setPrivacyPolicyAsyncAction =
-      AsyncAction('_AppStore.setPrivacyPolicy', context: context);
+  late final _$setPrivacyPolicyAsyncAction = AsyncAction('_AppStore.setPrivacyPolicy', context: context);
 
   @override
   Future<void> setPrivacyPolicy(String val, {bool isInitializing = false}) {
-    return _$setPrivacyPolicyAsyncAction
-        .run(() => super.setPrivacyPolicy(val, isInitializing: isInitializing));
+    return _$setPrivacyPolicyAsyncAction.run(() => super.setPrivacyPolicy(val, isInitializing: isInitializing));
   }
 
-  late final _$setTermConditionsAsyncAction =
-      AsyncAction('_AppStore.setTermConditions', context: context);
+  late final _$setTermConditionsAsyncAction = AsyncAction('_AppStore.setTermConditions', context: context);
 
   @override
   Future<void> setTermConditions(String val, {bool isInitializing = false}) {
-    return _$setTermConditionsAsyncAction.run(
-        () => super.setTermConditions(val, isInitializing: isInitializing));
+    return _$setTermConditionsAsyncAction.run(() => super.setTermConditions(val, isInitializing: isInitializing));
   }
 
-  late final _$setInquiryEmailAsyncAction =
-      AsyncAction('_AppStore.setInquiryEmail', context: context);
+  late final _$setInquiryEmailAsyncAction = AsyncAction('_AppStore.setInquiryEmail', context: context);
 
   @override
   Future<void> setInquiryEmail(String val, {bool isInitializing = false}) {
-    return _$setInquiryEmailAsyncAction
-        .run(() => super.setInquiryEmail(val, isInitializing: isInitializing));
+    return _$setInquiryEmailAsyncAction.run(() => super.setInquiryEmail(val, isInitializing: isInitializing));
   }
 
-  late final _$setHelplineNumberAsyncAction =
-      AsyncAction('_AppStore.setHelplineNumber', context: context);
+  late final _$setHelplineNumberAsyncAction = AsyncAction('_AppStore.setHelplineNumber', context: context);
 
   @override
   Future<void> setHelplineNumber(String val, {bool isInitializing = false}) {
-    return _$setHelplineNumberAsyncAction.run(
-        () => super.setHelplineNumber(val, isInitializing: isInitializing));
+    return _$setHelplineNumberAsyncAction.run(() => super.setHelplineNumber(val, isInitializing: isInitializing));
   }
 
-  late final _$setTotalBookingAsyncAction =
-      AsyncAction('_AppStore.setTotalBooking', context: context);
+  late final _$setTotalBookingAsyncAction = AsyncAction('_AppStore.setTotalBooking', context: context);
 
   @override
   Future<void> setTotalBooking(int val, {bool isInitializing = false}) {
-    return _$setTotalBookingAsyncAction
-        .run(() => super.setTotalBooking(val, isInitializing: isInitializing));
+    return _$setTotalBookingAsyncAction.run(() => super.setTotalBooking(val, isInitializing: isInitializing));
   }
 
-  late final _$setCreatedAtAsyncAction =
-      AsyncAction('_AppStore.setCreatedAt', context: context);
+  late final _$setCreatedAtAsyncAction = AsyncAction('_AppStore.setCreatedAt', context: context);
 
   @override
   Future<void> setCreatedAt(String val, {bool isInitializing = false}) {
-    return _$setCreatedAtAsyncAction
-        .run(() => super.setCreatedAt(val, isInitializing: isInitializing));
+    return _$setCreatedAtAsyncAction.run(() => super.setCreatedAt(val, isInitializing: isInitializing));
   }
 
-  late final _$setProviderIdAsyncAction =
-      AsyncAction('_AppStore.setProviderId', context: context);
+  late final _$setProviderIdAsyncAction = AsyncAction('_AppStore.setProviderId', context: context);
 
   @override
   Future<void> setProviderId(int val, {bool isInitializing = false}) {
-    return _$setProviderIdAsyncAction
-        .run(() => super.setProviderId(val, isInitializing: isInitializing));
+    return _$setProviderIdAsyncAction.run(() => super.setProviderId(val, isInitializing: isInitializing));
   }
 
-  late final _$setServiceAddressIdAsyncAction =
-      AsyncAction('_AppStore.setServiceAddressId', context: context);
+  late final _$setServiceAddressIdAsyncAction = AsyncAction('_AppStore.setServiceAddressId', context: context);
 
   @override
   Future<void> setServiceAddressId(int val, {bool isInitializing = false}) {
-    return _$setServiceAddressIdAsyncAction.run(
-        () => super.setServiceAddressId(val, isInitializing: isInitializing));
+    return _$setServiceAddressIdAsyncAction.run(() => super.setServiceAddressId(val, isInitializing: isInitializing));
   }
 
-  late final _$setUserEmailAsyncAction =
-      AsyncAction('_AppStore.setUserEmail', context: context);
+  late final _$setUserEmailAsyncAction = AsyncAction('_AppStore.setUserEmail', context: context);
 
   @override
   Future<void> setUserEmail(String val, {bool isInitializing = false}) {
-    return _$setUserEmailAsyncAction
-        .run(() => super.setUserEmail(val, isInitializing: isInitializing));
+    return _$setUserEmailAsyncAction.run(() => super.setUserEmail(val, isInitializing: isInitializing));
   }
 
-  late final _$setAddressAsyncAction =
-      AsyncAction('_AppStore.setAddress', context: context);
+  late final _$setAddressAsyncAction = AsyncAction('_AppStore.setAddress', context: context);
 
   @override
   Future<void> setAddress(String val, {bool isInitializing = false}) {
-    return _$setAddressAsyncAction
-        .run(() => super.setAddress(val, isInitializing: isInitializing));
+    return _$setAddressAsyncAction.run(() => super.setAddress(val, isInitializing: isInitializing));
   }
 
-  late final _$setFirstNameAsyncAction =
-      AsyncAction('_AppStore.setFirstName', context: context);
+  late final _$setFirstNameAsyncAction = AsyncAction('_AppStore.setFirstName', context: context);
 
   @override
   Future<void> setFirstName(String val, {bool isInitializing = false}) {
-    return _$setFirstNameAsyncAction
-        .run(() => super.setFirstName(val, isInitializing: isInitializing));
+    return _$setFirstNameAsyncAction.run(() => super.setFirstName(val, isInitializing: isInitializing));
   }
 
-  late final _$setLastNameAsyncAction =
-      AsyncAction('_AppStore.setLastName', context: context);
+  late final _$setLastNameAsyncAction = AsyncAction('_AppStore.setLastName', context: context);
 
   @override
   Future<void> setLastName(String val, {bool isInitializing = false}) {
-    return _$setLastNameAsyncAction
-        .run(() => super.setLastName(val, isInitializing: isInitializing));
+    return _$setLastNameAsyncAction.run(() => super.setLastName(val, isInitializing: isInitializing));
   }
 
-  late final _$setContactNumberAsyncAction =
-      AsyncAction('_AppStore.setContactNumber', context: context);
+  late final _$setContactNumberAsyncAction = AsyncAction('_AppStore.setContactNumber', context: context);
 
   @override
   Future<void> setContactNumber(String val, {bool isInitializing = false}) {
-    return _$setContactNumberAsyncAction
-        .run(() => super.setContactNumber(val, isInitializing: isInitializing));
+    return _$setContactNumberAsyncAction.run(() => super.setContactNumber(val, isInitializing: isInitializing));
   }
 
-  late final _$setUserNameAsyncAction =
-      AsyncAction('_AppStore.setUserName', context: context);
+  late final _$setUserNameAsyncAction = AsyncAction('_AppStore.setUserName', context: context);
 
   @override
   Future<void> setUserName(String val, {bool isInitializing = false}) {
-    return _$setUserNameAsyncAction
-        .run(() => super.setUserName(val, isInitializing: isInitializing));
+    return _$setUserNameAsyncAction.run(() => super.setUserName(val, isInitializing: isInitializing));
   }
 
-  late final _$setLoggedInAsyncAction =
-      AsyncAction('_AppStore.setLoggedIn', context: context);
+  late final _$setLoggedInAsyncAction = AsyncAction('_AppStore.setLoggedIn', context: context);
 
   @override
   Future<void> setLoggedIn(bool val, {bool isInitializing = false}) {
-    return _$setLoggedInAsyncAction
-        .run(() => super.setLoggedIn(val, isInitializing: isInitializing));
+    return _$setLoggedInAsyncAction.run(() => super.setLoggedIn(val, isInitializing: isInitializing));
   }
 
-  late final _$setInitialAdCountAsyncAction =
-      AsyncAction('_AppStore.setInitialAdCount', context: context);
+  late final _$setInitialAdCountAsyncAction = AsyncAction('_AppStore.setInitialAdCount', context: context);
 
   @override
   Future<void> setInitialAdCount(int val) {
-    return _$setInitialAdCountAsyncAction
-        .run(() => super.setInitialAdCount(val));
+    return _$setInitialAdCountAsyncAction.run(() => super.setInitialAdCount(val));
   }
 
-  late final _$setDarkModeAsyncAction =
-      AsyncAction('_AppStore.setDarkMode', context: context);
+  late final _$setDarkModeAsyncAction = AsyncAction('_AppStore.setDarkMode', context: context);
 
   @override
   Future<void> setDarkMode(bool val) {
     return _$setDarkModeAsyncAction.run(() => super.setDarkMode(val));
   }
 
-  late final _$setLanguageAsyncAction =
-      AsyncAction('_AppStore.setLanguage', context: context);
+  late final _$setLanguageAsyncAction = AsyncAction('_AppStore.setLanguage', context: context);
 
   @override
   Future<void> setLanguage(String val, {BuildContext? context}) {
-    return _$setLanguageAsyncAction
-        .run(() => super.setLanguage(val, context: context));
+    return _$setLanguageAsyncAction.run(() => super.setLanguage(val, context: context));
   }
 
-  late final _$_AppStoreActionController =
-      ActionController(name: '_AppStore', context: context);
+  late final _$_AppStoreActionController = ActionController(name: '_AppStore', context: context);
 
   @override
   void setLoading(bool val) {
-    final _$actionInfo =
-        _$_AppStoreActionController.startAction(name: '_AppStore.setLoading');
+    final _$actionInfo = _$_AppStoreActionController.startAction(name: '_AppStore.setLoading');
     try {
       return super.setLoading(val);
     } finally {
@@ -973,8 +858,7 @@ mixin _$AppStore on _AppStore, Store {
 
   @override
   void setRemember(bool val) {
-    final _$actionInfo =
-        _$_AppStoreActionController.startAction(name: '_AppStore.setRemember');
+    final _$actionInfo = _$_AppStoreActionController.startAction(name: '_AppStore.setRemember');
     try {
       return super.setRemember(val);
     } finally {

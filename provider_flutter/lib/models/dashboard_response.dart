@@ -31,8 +31,8 @@ class DashboardResponse {
   bool? isPlanAboutToExpire;
   bool? userNeverPurchasedPlan;
   bool? isPlanExpired;
-  String? privacy_policy;
-  String? term_conditions;
+  PrivacyPolicy? privacy_policy;
+  PrivacyPolicy? term_conditions;
   String? inquriy_email;
   String? helpline_number;
   ProviderWallet? providerWallet;
@@ -72,8 +72,8 @@ class DashboardResponse {
     commission = json['commission'] != null ? Commission.fromJson(json['commission']) : null;
     configurations = json['configurations'] != null ? (json['configurations'] as List).map((i) => Configurations.fromJson(i)).toList() : null;
     paymentSettings = json['payment_settings'] != null ? (json['payment_settings'] as List).map((i) => PaymentSetting.fromJson(i)).toList() : null;
-    privacy_policy = json['privacy_policy'];
-    term_conditions = json['term_conditions'];
+    privacy_policy = json['privacy_policy'] != null ? PrivacyPolicy.fromJson(json['privacy_policy']) : null;
+    term_conditions = json['term_conditions'] != null ? PrivacyPolicy.fromJson(json['term_conditions']) : null;
     inquriy_email = json['inquriy_email'];
     helpline_number = json['helpline_number'];
     if (json['service'] != null) {
@@ -124,8 +124,12 @@ class DashboardResponse {
     data['total_booking'] = this.totalBooking;
     data['is_subscribed'] = this.is_subscribed;
     data['total_service'] = this.total_service;
-    data['privacy_policy'] = this.privacy_policy;
-    data['term_conditions'] = this.term_conditions;
+    if (this.privacy_policy != null) {
+      data['privacy_policy'] = this.privacy_policy;
+    }
+    if (this.term_conditions != null) {
+      data['term_conditions'] = this.term_conditions;
+    }
     data['inquriy_email'] = this.inquriy_email;
     data['helpline_number'] = this.helpline_number;
     if (this.commission != null) {
@@ -155,6 +159,33 @@ class DashboardResponse {
     if (this.providerWallet != null) {
       data['provider_wallet'] = this.providerWallet!.toJson();
     }
+    return data;
+  }
+}
+
+class PrivacyPolicy {
+  int? id;
+  String? key;
+  String? type;
+  String? value;
+
+  PrivacyPolicy({this.id, this.key, this.type, this.value});
+
+  factory PrivacyPolicy.fromJson(Map<String, dynamic> json) {
+    return PrivacyPolicy(
+      id: json['id'],
+      key: json['key'],
+      type: json['type'],
+      value: json['value'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['key'] = this.key;
+    data['type'] = this.type;
+    data['value'] = this.value;
     return data;
   }
 }

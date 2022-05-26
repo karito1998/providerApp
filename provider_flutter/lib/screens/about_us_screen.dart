@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/about_model.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
-import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/data_provider.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -71,21 +70,13 @@ class AboutUsScreenState extends State<AboutUsScreen> {
             ).onTap(
               () async {
                 if (index == 0) {
-                  launchUrlCustomTab(appStore.termConditions.isNotEmpty ? appStore.termConditions.validate() : termsConditionUrl);
+                  checkIfLink(context, appStore.termConditions.validate(), title: context.translate.lblTermsAndConditions);
                 } else if (index == 1) {
-                  launchUrlCustomTab(appStore.privacyPolicy.isNotEmpty ? appStore.privacyPolicy.validate() : privacyPolicyUrl);
+                  checkIfLink(context, appStore.privacyPolicy.validate(), title: context.translate.lblPrivacyPolicy);
                 } else if (index == 2) {
-                  if (appStore.inquiryEmail.isNotEmpty) {
-                    launchMail(appStore.inquiryEmail.validate());
-                  } else {
-                    launchUrlCustomTab(helpSupportUrl);
-                  }
+                  checkIfLink(context, appStore.inquiryEmail.validate(), title: context.translate.lblHelpAndSupport);
                 } else if (index == 3) {
-                  if (appStore.helplineNumber.isNotEmpty) {
-                    launchCall(appStore.helplineNumber.validate());
-                  } else {
-                    toast(context.translate.lblNotHelpLineNum);
-                  }
+                  checkIfLink(context, appStore.helplineNumber.validate(), title: context.translate.lblHelpLineNum);
                 } else if (index == 4) {
                   {
                     PackageInfo.fromPlatform().then((value) {

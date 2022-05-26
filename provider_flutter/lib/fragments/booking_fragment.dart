@@ -28,7 +28,7 @@ class BookingFragmentState extends State<BookingFragment> with SingleTickerProvi
   int page = 1;
   List<BookingData> mainList = [];
 
-  String selectedValue = 'Todo';
+  String selectedValue = 'All';
 
   bool isEnabled = false;
   bool isLastPage = false;
@@ -75,8 +75,8 @@ class BookingFragmentState extends State<BookingFragment> with SingleTickerProvi
     });
   }
 
-  Future<void> fetchAllBookingList({required String status}) async {
-    appStore.setLoading(true);
+  Future<void> fetchAllBookingList({required String status, bool loading = true}) async {
+    appStore.setLoading(loading);
 
     await getBookingList(page, status: status).then((value) {
       appStore.setLoading(false);
@@ -116,9 +116,8 @@ class BookingFragmentState extends State<BookingFragment> with SingleTickerProvi
       body: RefreshIndicator(
         onRefresh: () async {
           page = 1;
-          fetchAllBookingList(status: selectedValue);
 
-          return await 2.seconds.delay;
+          return await fetchAllBookingList(status: selectedValue, loading: false);
         },
         child: Stack(
           children: [
@@ -140,6 +139,8 @@ class BookingFragmentState extends State<BookingFragment> with SingleTickerProvi
                 statusType: selectedValue,
                 onValueChanged: (BookingStatusResponse value) {
                   page = 1;
+                  scrollController.animToTop();
+
                   fetchAllBookingList(status: value.value.toString());
                 },
               ),

@@ -49,7 +49,7 @@ class _RatingViewAllScreenState extends State<RatingViewAllScreen> {
                 ],
               ),
             )
-          : BackgroundComponent(size: 200,text: context.translate.lblNoServiceRatings),
+          : BackgroundComponent(size: 200, text: context.translate.lblNoServiceRatings),
     );
   }
 }

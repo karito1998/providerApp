@@ -16,8 +16,8 @@ class HandymanDashBoardResponse {
   List<Configurations>? configurations;
   List<double>? chartArray;
   List<int>? monthData;
-  String? privacy_policy;
-  String? term_conditions;
+  PrivacyPolicy? privacy_policy;
+  PrivacyPolicy? term_conditions;
   String? inquriy_email;
   String? helpline_number;
 
@@ -47,10 +47,10 @@ class HandymanDashBoardResponse {
     total_booking = json['total_booking'];
     total_revenue = json['total_revenue'];
     upcomming_booking = json['upcomming_booking'];
-    privacy_policy= json['privacy_policy'];
-    term_conditions= json['term_conditions'];
-    inquriy_email= json['inquriy_email'];
-    helpline_number= json['helpline_number'];
+    privacy_policy = json['privacy_policy'] != null ? PrivacyPolicy.fromJson(json['privacy_policy']) : null;
+    term_conditions = json['term_conditions'] != null ? PrivacyPolicy.fromJson(json['term_conditions']) : null;
+    inquriy_email = json['inquriy_email'];
+    helpline_number = json['helpline_number'];
     List<String> months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
 
     chartArray = [];
@@ -74,8 +74,12 @@ class HandymanDashBoardResponse {
     data['today_booking'] = this.today_booking;
     data['total_booking'] = this.total_booking;
     data['total_revenue'] = this.total_revenue;
-    data['privacy_policy'] = this.privacy_policy;
-    data['term_conditions'] = this.term_conditions;
+    if (this.privacy_policy != null) {
+      data['privacy_policy'] = this.privacy_policy;
+    }
+    if (this.term_conditions != null) {
+      data['term_conditions'] = this.term_conditions;
+    }
     data['inquriy_email'] = this.inquriy_email;
     data['helpline_number'] = this.helpline_number;
     if (this.configurations != null) {

@@ -27,10 +27,10 @@ class NotificationWidget extends StatelessWidget {
       margin: EdgeInsets.only(bottom: 8),
       color: data.readAt != null
           ? appStore.isDarkMode
-          ? cardDarkColor
-          : appStore.isDarkMode
-          ? context.cardColor
-          : context.cardColor
+              ? cardDarkColor
+              : appStore.isDarkMode
+                  ? context.cardColor
+                  : context.cardColor
           : context.cardColor,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,

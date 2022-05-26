@@ -21,10 +21,10 @@ import '../widgets/app_widgets.dart';
 
 class BookingListComponent extends StatefulWidget {
   final String? status;
-  final BookingData? bookingData;
+  final BookingData bookingData;
   final int? index;
 
-  BookingListComponent({this.status, this.bookingData, this.index});
+  BookingListComponent({this.status, required this.bookingData, this.index});
 
   @override
   BookingListComponentState createState() => BookingListComponentState();
@@ -66,7 +66,7 @@ class BookingListComponentState extends State<BookingListComponent> {
       primaryColor: status == BookingStatusKeys.rejected ? Colors.redAccent : primaryColor,
       onAccept: (context) async {
         LiveStream().emit(LiveStreamUpdateBookings);
-        updateBooking(widget.bookingData!.id.validate(), status, index);
+        updateBooking(widget.bookingData.id.validate(), status, index);
       },
       title: context.translate.confirmationRequestTxt,
     );
@@ -90,7 +90,7 @@ class BookingListComponentState extends State<BookingListComponent> {
           Stack(
             children: [
               cachedImage(
-                widget.bookingData!.image_attchments!.isNotEmpty ? widget.bookingData!.image_attchments!.first.validate() : '',
+                widget.bookingData.image_attchments!.isNotEmpty ? widget.bookingData.image_attchments!.first.validate() : '',
                 fit: BoxFit.cover,
                 width: context.width(),
                 height: 150,
@@ -102,13 +102,13 @@ class BookingListComponentState extends State<BookingListComponent> {
                   padding: EdgeInsets.symmetric(horizontal: 2, vertical: 2),
                   constraints: BoxConstraints(maxWidth: context.width() * 0.3),
                   decoration: boxDecorationWithShadow(
-                    backgroundColor: widget.bookingData!.status.validate().getPaymentStatusBackgroundColor,
+                    backgroundColor: widget.bookingData.status.validate().getPaymentStatusBackgroundColor,
                     borderRadius: radius(24),
                   ),
                   child: Marquee(
                     directionMarguee: DirectionMarguee.oneDirection,
                     child: Text(
-                      "${widget.bookingData!.status_label.validate()}",
+                      "${widget.bookingData.status_label.validate()}",
                       style: boldTextStyle(color: white, size: 12),
                     ).paddingSymmetric(horizontal: 8, vertical: 4),
                   ),
@@ -122,7 +122,7 @@ class BookingListComponentState extends State<BookingListComponent> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                widget.bookingData!.service_name.validate(),
+                widget.bookingData.service_name.validate(),
                 style: boldTextStyle(size: 18),
                 overflow: TextOverflow.ellipsis,
               ).expand(),
@@ -130,7 +130,7 @@ class BookingListComponentState extends State<BookingListComponent> {
               Container(
                 padding: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                 decoration: boxDecorationWithRoundedCorners(borderRadius: radius(16), backgroundColor: primaryColor),
-                child: Text('#' + widget.bookingData!.id.toString().validate(), style: boldTextStyle(color: white)),
+                child: Text('#' + widget.bookingData.id.toString().validate(), style: boldTextStyle(color: white)),
               )
             ],
           ),
@@ -140,24 +140,24 @@ class BookingListComponentState extends State<BookingListComponent> {
             mainAxisSize: MainAxisSize.min,
             children: [
               PriceWidget(
-                price: widget.bookingData!.type == ServiceTypeHourly
-                    ? widget.bookingData!.totalAmount.validate()
+                price: widget.bookingData.type == ServiceTypeHourly
+                    ? widget.bookingData.totalAmount.validate()
                     : calculateTotalAmount(
-                        servicePrice: widget.bookingData!.price.validate(),
-                        qty: widget.bookingData!.quantity.validate(),
-                        couponData: widget.bookingData!.couponData != null ? widget.bookingData!.couponData : null,
-                        taxes: widget.bookingData!.taxes.validate(),
-                        serviceDiscountPercent: widget.bookingData!.discount.validate(),
+                        servicePrice: widget.bookingData.price.validate(),
+                        qty: widget.bookingData.quantity.validate(),
+                        couponData: widget.bookingData.couponData != null ? widget.bookingData.couponData : null,
+                        taxes: widget.bookingData.taxes.validate(),
+                        serviceDiscountPercent: widget.bookingData.discount.validate(),
                       ),
                 color: primaryColor,
-                isHourlyService: widget.bookingData!.isHourlyService,
+                isHourlyService: widget.bookingData.isHourlyService,
                 size: 20,
               ),
-              if (widget.bookingData!.type.toString().validate() == ServiceTypeHourly) 4.width else 8.width,
-              if (widget.bookingData!.discount != null && widget.bookingData!.discount != 0)
+              if (widget.bookingData.type.toString().validate() == ServiceTypeHourly) 4.width else 8.width,
+              if (widget.bookingData.discount != null && widget.bookingData.discount != 0)
                 Row(
                   children: [
-                    Text('(${widget.bookingData!.discount}%', style: boldTextStyle(size: 14, color: Colors.green)),
+                    Text('(${widget.bookingData.discount}%', style: boldTextStyle(size: 14, color: Colors.green)),
                     Text(' ${context.translate.lblOff})', style: boldTextStyle(size: 14, color: Colors.green)),
                   ],
                 ),
@@ -170,7 +170,7 @@ class BookingListComponentState extends State<BookingListComponent> {
               Image.asset(servicesAddress, height: 18, width: 18, color: context.iconColor),
               8.width,
               Text(
-                widget.bookingData!.address != null ? widget.bookingData!.address.validate() : context.translate.notAvailable,
+                widget.bookingData.address != null ? widget.bookingData.address.validate() : context.translate.notAvailable,
                 style: secondaryTextStyle(),
               ).flexible(),
             ],
@@ -183,13 +183,13 @@ class BookingListComponentState extends State<BookingListComponent> {
               8.width,
               Row(
                 children: [
-                  Text("${formatDate(widget.bookingData!.date.validate(), format: DATE_FORMAT_6)} At ", style: secondaryTextStyle()),
-                  Text(formatDate(widget.bookingData!.date.validate(), format: DATE_FORMAT_3), style: boldTextStyle(size: 14)),
+                  Text("${formatDate(widget.bookingData.date.validate(), format: DATE_FORMAT_6)} At ", style: secondaryTextStyle()),
+                  Text(formatDate(widget.bookingData.date.validate(), format: DATE_FORMAT_3), style: boldTextStyle(size: 14)),
                 ],
               ),
             ],
           ),
-          if (widget.bookingData!.customer_name.validate().isNotEmpty)
+          if (widget.bookingData.customer_name.validate().isNotEmpty)
             Column(
               children: [
                 16.height,
@@ -198,12 +198,12 @@ class BookingListComponentState extends State<BookingListComponent> {
                   children: [
                     Image.asset(profile, height: 18, width: 18, color: context.iconColor),
                     8.width,
-                    Text(widget.bookingData!.customer_name.validate(), style: secondaryTextStyle()),
+                    Text(widget.bookingData.customer_name.validate(), style: secondaryTextStyle()),
                   ],
                 ),
               ],
             ),
-          if (widget.bookingData!.handyman!.validate().isNotEmpty && isUserTypeProvider)
+          if (widget.bookingData.handyman.validate().isNotEmpty && isUserTypeProvider)
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -220,7 +220,7 @@ class BookingListComponentState extends State<BookingListComponent> {
                       ],
                     ).expand(),
                     Text(
-                      widget.bookingData!.handyman!.first.handyman!.displayName.validate(),
+                      widget.bookingData.handyman.validate().first.handyman!.displayName.validate(),
                       style: secondaryTextStyle(),
                     ).flexible(),
                   ],
@@ -228,7 +228,7 @@ class BookingListComponentState extends State<BookingListComponent> {
               ],
             ),
           16.height,
-          if (widget.bookingData!.payment_status != null)
+          if (widget.bookingData.payment_status != null)
             Column(
               children: [
                 Row(
@@ -243,15 +243,15 @@ class BookingListComponentState extends State<BookingListComponent> {
                       ],
                     ).expand(),
                     Text(
-                      getPaymentStatusText(widget.bookingData!.payment_status),
-                      style: boldTextStyle(size: 14, color: widget.bookingData!.payment_status.validate() == PAID ? Colors.green : Colors.red),
+                      getPaymentStatusText(widget.bookingData.payment_status),
+                      style: boldTextStyle(size: 14, color: widget.bookingData.payment_status.validate() == PAID ? Colors.green : Colors.red),
                     ).flexible(),
                   ],
                 ),
                 8.height,
               ],
             ),
-          if (isUserTypeProvider && widget.bookingData!.status == BookingStatusKeys.pending || (isUserTypeHandyman && widget.bookingData!.status == BookingStatusKeys.accept))
+          if (isUserTypeProvider && widget.bookingData.status == BookingStatusKeys.pending || (isUserTypeHandyman && widget.bookingData.status == BookingStatusKeys.accept))
             Row(
               children: [
                 if (isUserTypeProvider)
@@ -268,8 +268,8 @@ class BookingListComponentState extends State<BookingListComponent> {
                             backgroundColor: Colors.transparent,
                             builder: (_) {
                               return BookingSummaryDialog(
-                                bookingDataList: widget.bookingData!,
-                                bookingId: widget.bookingData!.id,
+                                bookingDataList: widget.bookingData,
+                                bookingId: widget.bookingData.id,
                               );
                             },
                             shape: RoundedRectangleBorder(borderRadius: radius()),
@@ -291,7 +291,7 @@ class BookingListComponentState extends State<BookingListComponent> {
                 ).expand(),
               ],
             ),
-          if (isUserTypeProvider && widget.bookingData!.handyman!.isEmpty && widget.bookingData!.status == BookingStatusKeys.accept)
+          if (isUserTypeProvider && widget.bookingData.handyman!.isEmpty && widget.bookingData.status == BookingStatusKeys.accept)
             Column(
               children: [
                 8.height,
@@ -304,8 +304,8 @@ class BookingListComponentState extends State<BookingListComponent> {
                       context: context,
                       builder: (_) {
                         return AssignHandymanDialog(
-                          bookingId: widget.bookingData!.id,
-                          serviceAddressId: widget.bookingData!.booking_address_id,
+                          bookingId: widget.bookingData.id,
+                          serviceAddressId: widget.bookingData.booking_address_id,
                           onUpdate: () {
                             setState(() {});
                             LiveStream().emit(LiveStreamUpdateBookings);
@@ -321,9 +321,9 @@ class BookingListComponentState extends State<BookingListComponent> {
       ),
     ).onTap(() async {
       if (isUserTypeProvider) {
-        BookingDetailScreen(bookingId: widget.bookingData!.id).launch(context);
+        BookingDetailScreen(bookingId: widget.bookingData.id).launch(context);
       } else {
-        HBookingDetailScreen(bookingId: widget.bookingData!.id).launch(context);
+        HBookingDetailScreen(bookingId: widget.bookingData.id).launch(context);
       }
     }, hoverColor: Colors.transparent, highlightColor: Colors.transparent, splashColor: Colors.transparent);
   }

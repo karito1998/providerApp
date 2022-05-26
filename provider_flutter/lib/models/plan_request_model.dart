@@ -17,7 +17,20 @@ class PlanRequestModel {
   int? user_id;
 
   PlanRequestModel(
-      {this.amount, this.description, this.duration, this.identifier, this.other_transaction_detail, this.payment_status, this.payment_type, this.plan_id, this.plan_limitation, this.plan_type, this.title, this.txn_id, this.type, this.user_id});
+      {this.amount,
+      this.description,
+      this.duration,
+      this.identifier,
+      this.other_transaction_detail,
+      this.payment_status,
+      this.payment_type,
+      this.plan_id,
+      this.plan_limitation,
+      this.plan_type,
+      this.title,
+      this.txn_id,
+      this.type,
+      this.user_id});
 
   factory PlanRequestModel.fromJson(Map<String, dynamic> json) {
     return PlanRequestModel(

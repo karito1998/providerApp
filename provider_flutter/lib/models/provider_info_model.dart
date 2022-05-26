@@ -187,7 +187,19 @@ class HandymanRatingReview {
   String? customerProfileImage;
   String? createdAt;
 
-  HandymanRatingReview({this.id, this.customerId, this.rating, this.review, this.serviceId, this.bookingId, this.handymanId, this.handymanName, this.handymanProfileImage, this.customerName, this.customerProfileImage, this.createdAt});
+  HandymanRatingReview(
+      {this.id,
+      this.customerId,
+      this.rating,
+      this.review,
+      this.serviceId,
+      this.bookingId,
+      this.handymanId,
+      this.handymanName,
+      this.handymanProfileImage,
+      this.customerName,
+      this.customerProfileImage,
+      this.createdAt});
 
   HandymanRatingReview.fromJson(Map<String, dynamic> json) {
     id = json['id'];

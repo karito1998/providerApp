@@ -157,7 +157,6 @@ class ServiceProofScreenState extends State<ServiceProofScreen> {
                         children: [
                           Icon(LineIcons.image, size: 30, color: context.iconColor),
                           8.height,
-
                           Text(context.translate.lblAddImage, style: boldTextStyle()),
                         ],
                       ).center().onTap(() async {

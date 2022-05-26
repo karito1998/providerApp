@@ -5,9 +5,10 @@ import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/provider/dashboard/dashboard_screen.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
-import 'package:handyman_provider_flutter/utils/constant.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:package_info/package_info.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -23,9 +24,17 @@ class SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> init() async {
-    afterBuildCreated(() {
-      appStore.setLanguage(getStringAsync(SELECTED_LANGUAGE_CODE, defaultValue: defaultLanguage), context: context);
+    afterBuildCreated(() async {
+      appStore.setLanguage(getStringAsync(SELECTED_LANGUAGE_CODE, defaultValue: DEFAULT_LANGUAGE), context: context);
       setStatusBarColor(Colors.transparent, statusBarBrightness: Brightness.dark, statusBarIconBrightness: appStore.isDarkMode ? Brightness.light : Brightness.dark);
+
+      if (isAndroid || isIOS) {
+        PackageInfo.fromPlatform().then((value) {
+          currentPackageName = value.packageName;
+        }).catchError((e) {
+          //
+        });
+      }
     });
     await 2.seconds.delay;
     if (!appStore.isLoggedIn) {
@@ -71,7 +80,7 @@ class SplashScreenState extends State<SplashScreen> {
             children: [
               Image.asset(appLogo, height: 120, width: 120),
               32.height,
-              Text(mAppName, style: boldTextStyle(size: 26)),
+              Text(APP_NAME, style: boldTextStyle(size: 26)),
             ],
           ),
         ],

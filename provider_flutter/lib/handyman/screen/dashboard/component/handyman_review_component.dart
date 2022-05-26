@@ -40,7 +40,7 @@ class _HandymanReviewComponentState extends State<HandymanReviewComponent> {
             ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.only(left: 8,right: 8,bottom: 8,top: 16),
+              padding: EdgeInsets.only(left: 8, right: 8, bottom: 8, top: 16),
               itemCount: widget.handyman_reviews!.length,
               itemBuilder: (context, index) {
                 HandymanReview data = widget.handyman_reviews![index];

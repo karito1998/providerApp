@@ -14,6 +14,10 @@ class UserDemoModeScreen extends StatefulWidget {
 }
 
 class _UserDemoModeScreenState extends State<UserDemoModeScreen> {
+  List<String> demoLoginName = ["Demo Provider", "Demo Handyman", "Reset"];
+
+  int btnIndex = 0;
+
   @override
   void initState() {
     super.initState();
@@ -42,26 +46,29 @@ class _UserDemoModeScreenState extends State<UserDemoModeScreen> {
                 Wrap(
                   alignment: WrapAlignment.center,
                   spacing: 16,
-                  children: [
-                    OutlinedButton(
-                      onPressed: () {
-                        widget.onChanged.call(DEFAULT_PROVIDER_EMAIL, DEFAULT_PASS);
-                      },
-                      child: Text("Demo Provider", style: boldTextStyle(color: primaryColor, size: 14)),
-                    ).withWidth(context.width() / 2 - 24),
-                    OutlinedButton(
-                      onPressed: () {
-                        widget.onChanged.call(DEFAULT_HANDYMAN_EMAIL, DEFAULT_PASS);
-                      },
-                      child: Text("Demo Handyman", style: boldTextStyle(color: primaryColor, size: 14)),
-                    ).withWidth(context.width() / 2 - 24),
-                    TextButton(
-                      child: Text("Reset", style: secondaryTextStyle()),
-                      onPressed: () {
-                        widget.onChanged.call('', '');
-                      },
-                    ),
-                  ],
+                  children: List.generate(
+                    demoLoginName.length,
+                    (index) {
+                      return OutlinedButton(
+                        style: OutlinedButton.styleFrom(side: BorderSide(color: btnIndex == index ? primaryColor : gray.withOpacity(0.2), width: 1)),
+                        onPressed: () {
+                          btnIndex = index;
+                          setState(() {});
+
+                          if (index == 0) {
+                            widget.onChanged.call(DEFAULT_PROVIDER_EMAIL, DEFAULT_PASS);
+                          }
+                          if (index == 1) {
+                            widget.onChanged.call(DEFAULT_HANDYMAN_EMAIL, DEFAULT_PASS);
+                          }
+                          if (index == 2) {
+                            widget.onChanged.call('', '');
+                          }
+                        },
+                        child: Text(demoLoginName[index], style: boldTextStyle(color: primaryColor, size: 14)),
+                      ).withWidth(context.width() / 2 - 24);
+                    },
+                  ),
                 ),
               ],
             );

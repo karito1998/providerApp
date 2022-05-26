@@ -110,7 +110,7 @@ class _HomeFragmentState extends State<HomeFragment> {
               future: providerDashboard(),
               builder: (context, snap) {
                 if (snap.hasError) {
-                    return Text(snap.error.toString()).center();
+                  return Text(snap.error.toString()).center();
                 } else if (snap.hasData) {
                   return SingleChildScrollView(
                     padding: EdgeInsets.only(bottom: 16),
