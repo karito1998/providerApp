@@ -1,0 +1,37 @@
+modified:   .gitignore
+
+        modified:   images/setting_icon/ic_splash_logo.png
+        modified:   lib/auth/forgot_password_dialog.dart
+        modified:   lib/auth/sign_in_screen.dart
+        modified:   lib/auth/sign_up_screen.dart
+        modified:   lib/components/experience_widget.dart
+        modified:   lib/locale/applocalizations.dart
+        modified:   lib/locale/languag_es.dart
+        modified:   lib/locale/language_af.dart
+        modified:   lib/locale/language_ar.dart
+        modified:   lib/locale/language_de.dart
+        modified:   lib/locale/language_en.dart
+        modified:   lib/locale/language_es.dart
+        modified:   lib/locale/language_fr.dart
+        modified:   lib/locale/language_gu.dart
+        modified:   lib/locale/language_hi.dart
+        modified:   lib/locale/language_id.dart
+        modified:   lib/locale/language_nl.dart
+        modified:   lib/locale/language_pt.dart
+        modified:   lib/locale/language_sq.dart
+        modified:   lib/locale/language_tr.dart
+        modified:   lib/locale/language_vi.dart
+        modified:   lib/locale/temp.dart
+        modified:   lib/provider/service_address/service_addresses_screen.dart
+        modified:   lib/provider/services/add_service_screen.dart
+        modified:   lib/provider/services/component/dropdown_subcategory_component.dart
+        modified:   lib/utils/colors.dart
+        modified:   lib/utils/common.dart
+        modified:   lib/utils/constant.dart
+
+
+
+
+
+
+     
