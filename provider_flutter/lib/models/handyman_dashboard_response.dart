@@ -51,7 +51,7 @@ class HandymanDashBoardResponse {
     term_conditions = json['term_conditions'] != null ? PrivacyPolicy.fromJson(json['term_conditions']) : null;
     inquriy_email = json['inquriy_email'];
     helpline_number = json['helpline_number'];
-    List<String> months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+    List<String> months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
 
     chartArray = [];
     monthData = [];

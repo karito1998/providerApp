@@ -172,7 +172,7 @@ class _ProfileFragmentState extends State<ProfileFragment> {
                   AboutUsScreen().launch(context, pageRouteAnimation: PageRouteAnimation.Slide);
                 },
               ),
-              Divider(height: 0, thickness: 1, indent: 15.0, endIndent: 15.0).visible(appStore.isLoggedIn),
+              /*Divider(height: 0, thickness: 1, indent: 15.0, endIndent: 15.0).visible(appStore.isLoggedIn),
               SettingItemWidget(
                 leading: Image.asset(purchase, height: 20, width: 20, color: appStore.isDarkMode ? white : gray.withOpacity(0.8)),
                 title: context.translate.lblPurchaseCode,
@@ -180,7 +180,7 @@ class _ProfileFragmentState extends State<ProfileFragment> {
                 onTap: () {
                   launch(PURCHASE_URL);
                 },
-              ),
+              ),*/
               20.height,
               TextButton(
                 child: Text(context.translate.logout, style: boldTextStyle(color: primaryColor, size: 18)),

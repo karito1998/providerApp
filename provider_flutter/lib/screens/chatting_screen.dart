@@ -49,7 +49,7 @@ class _ChattingScreenState extends State<ChattingScreen> {
       uid: widget.currentFirebaseUser!.uid.validate(),
       playerId: getStringAsync(PLAYERID),
     );
-    chatMessageService = ChatMessageService();
+   // chatMessageService = ChatMessageService();
     chatMessageService.setUnReadStatusToTrue(senderId: sender.uid.validate(), receiverId: widget.userData!.uid!);
     setState(() {});
   }
@@ -81,7 +81,7 @@ class _ChattingScreenState extends State<ChattingScreen> {
     notificationService.sendPushNotifications(getStringAsync(DISPLAY_NAME), messageCont.text, receiverPlayerId: widget.userData!.playerId).catchError(log);
     messageCont.clear();
     setState(() {});
-    return await chatMessageService.addMessage(data).then((value) async {
+   /* return await chatMessageService.addMessage(data).then((value) async {
       if (result != null) {
         FileModel fileModel = FileModel();
         fileModel.id = value.id;
@@ -92,7 +92,7 @@ class _ChattingScreenState extends State<ChattingScreen> {
       }
 
       await chatMessageService.addMessageToDb(value, data, sender, widget.userData, image: result != null ? File(result.files.single.path!) : null).then((value) {
-        //
+
       });
 
       userService.fireStore
@@ -109,7 +109,7 @@ class _ChattingScreenState extends State<ChattingScreen> {
           .update({'lastMessageTime': DateTime.now().millisecondsSinceEpoch}).catchError((e) {
         log(e);
       });
-    });
+    });*/
   }
 
   @override
@@ -135,7 +135,7 @@ class _ChattingScreenState extends State<ChattingScreen> {
                 padding: EdgeInsets.only(left: 8, top: 8, right: 8, bottom: 0),
                 physics: BouncingScrollPhysics(),
                 query: chatMessageService.chatMessagesWithPagination(
-                  currentUserId: widget.currentFirebaseUser!.uid.validate(),
+                  //currentUserId: widget.currentFirebaseUser!.uid.validate(),
                   receiverUserId: widget.userData!.uid.validate(),
                 ),
                 itemsPerPage: PER_PAGE_CHAT_COUNT,
