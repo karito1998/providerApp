@@ -1,4 +1,5 @@
-modified:   .gitignore
+Comandos importantes
+flutter upgrade para actualizar el sdk de flutter y dart
 
         modified:   images/setting_icon/ic_splash_logo.png
         modified:   lib/auth/forgot_password_dialog.dart
@@ -28,6 +29,10 @@ modified:   .gitignore
         modified:   lib/utils/colors.dart
         modified:   lib/utils/common.dart
         modified:   lib/utils/constant.dart
+                    lib/utils/configs.dart
+                    lib/handyman/screen/fragment/handyman_profile_fragment.dart
+                    lib/screens/about_us_screen.dart
+
 
 
 
