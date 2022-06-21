@@ -1,6 +1,27 @@
-import 'package:handyman_provider_flutter/locale/languag_es.dart';
+import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 class LanguageId extends Languages {
+   //Helpi
+
+   @override
+   String lblInvalidEmail = '';
+   @override
+   String lblInvalidUsername = '';
+   @override
+   String lblRetryErr = "";
+   @override
+   String lblWrongErr = "";
+   @override
+   String lblInternetErr = "";
+   @override
+   String lblInvalidEmailSpaces = "";
+   @override
+   String tycRequired = '';
+   @override
+   String signUpSuccess = "";
+
+  //Helpi
+
   @override
   String planAboutToExpire(int days) => 'Your Plan Is About to Expire In $days Days';
 
@@ -11,10 +32,16 @@ class LanguageId extends Languages {
   String provider = 'Pemberi';
 
   @override
+  String lblProviderDashboard = "Dasbor Penyedia";
+
+  @override
   String welcome = 'Selamat datang';
 
   @override
   String back = 'kembali !';
+
+  @override
+  String lblHandymanDashboard = 'Dashboard tukang';
 
   @override
   String handyman = 'Tukang';
@@ -365,7 +392,7 @@ class LanguageId extends Languages {
   String lblTime = 'Waktu';
 
   @override
-  String lblService = 'Melayani';
+  String lblMyService = 'Layanan saya';
 
   @override
   String lblAllService = 'Semua layanan';
@@ -392,7 +419,7 @@ class LanguageId extends Languages {
   String lblAudio = 'Audio.';
 
   @override
-  String selectAddress = 'Pilih Layanan Adddresses.';
+  String selectAddress = 'Pilih Alamat Layanan';
 
   @override
   String btnSave = 'Menyimpan';
@@ -462,22 +489,7 @@ class LanguageId extends Languages {
 
   @override
   String lblInvalidUrl = 'URL tidak valid:';
-  @override
-  String lblInvalidEmail = '';
-  @override
-  String lblInvalidUsername = '';
-  @override
-  String lblRetryErr = "";
-  @override
-  String lblWrongErr = "";
-  @override
-  String lblInternetErr = "";
-  @override
-  String lblInvalidEmailSpaces = "";
-  @override
-  String tycRequired = '';
-  @override
-  String signUpSuccess = "";
+
   @override
   String errorPasswordLength = 'Panjang kata sandi harus lebih dari';
 
@@ -562,90 +574,68 @@ class LanguageId extends Languages {
   @override
   String lbllogintitle = "Halo lagi !";
 
-
   @override
   String lblloginsubtitle = "Selamat datang kembali, Anda telah terlewatkan untuk waktu yang lama";
-
 
   @override
   String lblsignuptitle = "Halo Pengguna!";
 
-
   @override
   String lblsignupsubtitle = "Buat akun Anda untuk pengalaman yang lebih baik";
-
 
   @override
   String lblLogin = "Gabung";
 
-
   @override
   String lblsignup = "Mendaftar";
-
 
   @override
   String lblUserType = "Tipe Pengguna";
 
-
   @override
   String lblPurchaseCode = "Beli kode sumber penuh";
-
 
   @override
   String lblFeatureProduct = "Ini adalah produk unggulan";
 
-
   @override
   String lblHours = "jam";
-
 
   @override
   String lblRating = "Peringkat";
 
+  @override
+  String lblOff = "Diskon";
 
   @override
-  String lblOff = "Mati";
-
-
-  @override
-  String lblHr = "SDM";
-
+  String lblHr = "jam";
 
   @override
   String lblDate = "Tanggal";
 
-
   @override
   String lblAboutHandyman = "Tentang Handyman.";
-
 
   @override
   String lblAboutCustomer = "Tentang Pelanggan";
 
-
   @override
   String lblPaymentDetail = "Rincian pembayaran";
-
 
   @override
   String lblId = "pengenal";
 
-
   @override
   String lblMethod = "metode";
-
 
   @override
   String lblStatus = "Status";
 
-
   @override
   String lblPriceDetail = "Detail Harga";
 
-
   @override
   String lblSubTotal = "Sub total";
-
 
   @override
   String lblTax = "Pajak";
@@ -653,13 +643,11 @@ class LanguageId extends Languages {
   @override
   String lblCoupon = "Kupon";
 
-
   @override
   String lblTotalAmount = "Jumlah total";
 
   @override
   String lblOnBasisOf = "Berdasarkan";
-
 
   @override
   String lblCheckStatus = "Periksa status";
@@ -688,10 +676,8 @@ class LanguageId extends Languages {
   @override
   String lblStatusType = "Status";
 
-
   @override
   String lblHandymanType = "Tipe Handyman.";
-
 
   @override
   String lblFixed = "Tetap";
@@ -722,7 +708,6 @@ class LanguageId extends Languages {
 
   @override
   String lblWaitingForPayment = "menunggu pembayaran";
-
 
   @override
   String lblOnGoing = "Sedang berlangsung";
@@ -962,7 +947,7 @@ class LanguageId extends Languages {
   String lblTermCondition = "Ketentuan Layanan";
 
   @override
-  String lblServiceTotalTime = "Harap masuk lagi";
+  String lblServiceTotalTime = "Total waktu layanan";
 
   @override
   String lblHelpLineNum = "Nomor Helpline";
@@ -975,4 +960,10 @@ class LanguageId extends Languages {
 
   @override
   String lblFailed = "Alasan mengapa pemesanan ini gagal";
+
+  @override
+  String get lblDesignation => "Penamaan";
+
+  @override
+  String get lblHandymanIsOffline => "Tukang adalah offline";
 }

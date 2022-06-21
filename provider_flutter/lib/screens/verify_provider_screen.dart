@@ -80,7 +80,10 @@ class _VerifyProviderScreenState extends State<VerifyProviderScreen> {
             imageFiles = filePickerResult!.paths.map((path) => File(path!)).toList();
             eAttachments = [];
           });
-          addDocument(docId, updateId: updateId);
+
+          ifNotTester(context, () {
+            addDocument(docId, updateId: updateId);
+          });
         },
         positiveText: context.translate.lblYes,
         negativeText: context.translate.lblNo,
@@ -315,7 +318,11 @@ class _VerifyProviderScreenState extends State<VerifyProviderScreen> {
                                           child: Icon(Icons.delete_forever, color: Colors.red, size: 20),
                                         ).onTap(() {
                                           showConfirmDialogCustom(context, dialogType: DialogType.DELETE, onAccept: (_) {
-                                            deleteDoc(providerDocuments[index].id);
+                                            if (!appStore.isTester) {
+                                              deleteDoc(providerDocuments[index].id);
+                                            } else {
+                                              toast(context.translate.lblUnAuthorized);
+                                            }
                                           });
                                         }).visible(providerDocuments[index].isVerified == 0),
                                         Icon(

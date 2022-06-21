@@ -6,11 +6,11 @@ import 'package:nb_utils/nb_utils.dart';
 
 class BookingDetailResponse {
   BookingDetail? bookingDetail;
-  Service? service;
+  ServiceData? service;
   UserData? customer;
   List<BookingActivity>? bookingActivity;
   List<RatingData>? ratingData;
-  ProviderData? providerData;
+  UserData? providerData;
   List<UserData>? handymanData;
   CouponData? couponData;
   List<Taxes>? taxes;
@@ -33,7 +33,7 @@ class BookingDetailResponse {
 
   BookingDetailResponse.fromJson(Map<String, dynamic> json) {
     bookingDetail = json['booking_detail'] != null ? new BookingDetail.fromJson(json['booking_detail']) : null;
-    service = json['service'] != null ? new Service.fromJson(json['service']) : null;
+    service = json['service'] != null ? new ServiceData.fromJson(json['service']) : null;
     customer = json['customer'] != null ? new UserData.fromJson(json['customer']) : null;
     if (json['booking_activity'] != null) {
       bookingActivity = [];
@@ -41,7 +41,7 @@ class BookingDetailResponse {
         bookingActivity!.add(new BookingActivity.fromJson(v));
       });
     }
-    providerData = json['provider_data'] != null ? new ProviderData.fromJson(json['provider_data']) : null;
+    providerData = json['provider_data'] != null ? new UserData.fromJson(json['provider_data']) : null;
     if (json['rating_data'] != null) {
       ratingData = [];
       json['rating_data'].forEach((v) {
@@ -271,108 +271,6 @@ class BookingDetail {
   }
 }
 
-class Customer {
-  int? id;
-  String? firstName;
-  String? lastName;
-  String? username;
-  int? providerId;
-  int? status;
-
-  // String? description;
-  String? userType;
-  String? email;
-  String? contactNumber;
-  int? countryId;
-  int? stateId;
-  int? cityId;
-  String? cityName;
-  String? address;
-  int? providertypeId;
-  String? providertype;
-  int? isFeatured;
-  String? displayName;
-  String? createdAt;
-  String? updatedAt;
-  String? profileImage;
-
-  Customer(
-      {this.id,
-      this.firstName,
-      this.lastName,
-      this.username,
-      this.providerId,
-      this.status,
-      // this.description,
-      this.userType,
-      this.email,
-      this.contactNumber,
-      this.countryId,
-      this.stateId,
-      this.cityId,
-      this.cityName,
-      this.address,
-      this.providertypeId,
-      this.providertype,
-      this.isFeatured,
-      this.displayName,
-      this.createdAt,
-      this.updatedAt,
-      this.profileImage});
-
-  Customer.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    firstName = json['first_name'];
-    lastName = json['last_name'];
-    username = json['username'];
-    providerId = json['provider_id'];
-    status = json['status'];
-    // description = json['description'];
-    userType = json['user_type'];
-    email = json['email'];
-    contactNumber = json['contact_number'];
-    countryId = json['country_id'];
-    stateId = json['state_id'];
-    cityId = json['city_id'];
-    cityName = json['city_name'];
-    address = json['address'];
-    providertypeId = json['providertype_id'];
-    providertype = json['providertype'];
-    isFeatured = json['is_featured'];
-    displayName = json['display_name'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    profileImage = json['profile_image'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['first_name'] = this.firstName;
-    data['last_name'] = this.lastName;
-    data['username'] = this.username;
-    data['provider_id'] = this.providerId;
-    data['status'] = this.status;
-    // data['description'] = this.description;
-    data['user_type'] = this.userType;
-    data['email'] = this.email;
-    data['contact_number'] = this.contactNumber;
-    data['country_id'] = this.countryId;
-    data['state_id'] = this.stateId;
-    data['city_id'] = this.cityId;
-    data['city_name'] = this.cityName;
-    data['address'] = this.address;
-    data['providertype_id'] = this.providertypeId;
-    data['providertype'] = this.providertype;
-    data['is_featured'] = this.isFeatured;
-    data['display_name'] = this.displayName;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['profile_image'] = this.profileImage;
-    return data;
-  }
-}
-
 class BookingActivity {
   int? id;
   int? bookingId;
@@ -419,8 +317,21 @@ class RatingData {
   String? createdAt;
   String? customerName;
   String? profileImage;
+  String? customerProfileImage;
+  String? handymanProfileImage;
 
-  RatingData({this.id, this.rating, this.review, this.serviceId, this.bookingId, this.createdAt, this.customerName, this.profileImage});
+  RatingData({
+    this.id,
+    this.rating,
+    this.review,
+    this.serviceId,
+    this.bookingId,
+    this.createdAt,
+    this.customerName,
+    this.profileImage,
+    this.customerProfileImage,
+    this.handymanProfileImage,
+  });
 
   RatingData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -431,6 +342,8 @@ class RatingData {
     createdAt = json['created_at'];
     customerName = json['customer_name'];
     profileImage = json['profile_image'];
+    customerProfileImage = json['customer_profile_image'];
+    handymanProfileImage = json['handyman_profile_image'];
   }
 
   Map<String, dynamic> toJson() {
@@ -443,234 +356,8 @@ class RatingData {
     data['created_at'] = this.createdAt;
     data['customer_name'] = this.customerName;
     data['profile_image'] = this.profileImage;
-    return data;
-  }
-}
-
-class ProviderData {
-  int? id;
-  String? firstName;
-  String? lastName;
-  String? username;
-  int? providerId;
-  int? status;
-  String? description;
-  String? userType;
-  String? email;
-  String? contactNumber;
-  int? countryId;
-  int? stateId;
-  int? cityId;
-  String? cityName;
-  String? address;
-  int? providertypeId;
-  String? providertype;
-  int? isFeatured;
-  String? displayName;
-  String? createdAt;
-  String? updatedAt;
-  String? profileImage;
-  String? timeZone;
-  String? lastNotificationSeen;
-
-  //String? handyman_rating;
-
-  ProviderData({
-    this.id,
-    this.firstName,
-    this.lastName,
-    this.username,
-    this.providerId,
-    this.status,
-    this.description,
-    this.userType,
-    this.email,
-    this.contactNumber,
-    this.countryId,
-    this.stateId,
-    this.cityId,
-    this.cityName,
-    this.address,
-    this.providertypeId,
-    this.providertype,
-    this.isFeatured,
-    this.displayName,
-    this.createdAt,
-    this.updatedAt,
-    this.profileImage,
-    this.timeZone,
-    this.lastNotificationSeen,
-    /*this.handyman_rating*/
-  });
-
-  ProviderData.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    firstName = json['first_name'];
-    lastName = json['last_name'];
-    username = json['username'];
-    providerId = json['provider_id'];
-    status = json['status'];
-    description = json['description'];
-    userType = json['user_type'];
-    email = json['email'];
-    contactNumber = json['contact_number'];
-    countryId = json['country_id'];
-    stateId = json['state_id'];
-    cityId = json['city_id'];
-    cityName = json['city_name'];
-    address = json['address'];
-    providertypeId = json['providertype_id'];
-    providertype = json['providertype'];
-    isFeatured = json['is_featured'];
-    displayName = json['display_name'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    profileImage = json['profile_image'];
-    timeZone = json['time_zone'];
-    lastNotificationSeen = json['last_notification_seen'];
-    //handyman_rating = json['handyman_rating'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['first_name'] = this.firstName;
-    data['last_name'] = this.lastName;
-    data['username'] = this.username;
-    data['provider_id'] = this.providerId;
-    data['status'] = this.status;
-    data['description'] = this.description;
-    data['user_type'] = this.userType;
-    data['email'] = this.email;
-    data['contact_number'] = this.contactNumber;
-    data['country_id'] = this.countryId;
-    data['state_id'] = this.stateId;
-    data['city_id'] = this.cityId;
-    data['city_name'] = this.cityName;
-    data['address'] = this.address;
-    data['providertype_id'] = this.providertypeId;
-    data['providertype'] = this.providertype;
-    data['is_featured'] = this.isFeatured;
-    data['display_name'] = this.displayName;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['profile_image'] = this.profileImage;
-    data['time_zone'] = this.timeZone;
-    data['last_notification_seen'] = this.lastNotificationSeen;
-    // data['handyman_rating'] = this.handyman_rating;
-    return data;
-  }
-}
-
-class HandymanData {
-  int? id;
-  String? firstName;
-  String? lastName;
-  String? username;
-  int? providerId;
-  int? status;
-  String? description;
-  String? userType;
-  String? email;
-  String? contactNumber;
-  int? countryId;
-  int? stateId;
-  int? cityId;
-  String? cityName;
-  String? address;
-  int? providertypeId;
-  String? providertype;
-  int? isFeatured;
-  String? displayName;
-  String? createdAt;
-  String? updatedAt;
-  String? profileImage;
-  String? timeZone;
-  String? lastNotificationSeen;
-  int? handyman_rating;
-
-  HandymanData(
-      {this.id,
-      this.firstName,
-      this.lastName,
-      this.username,
-      this.providerId,
-      this.status,
-      this.description,
-      this.userType,
-      this.email,
-      this.contactNumber,
-      this.countryId,
-      this.stateId,
-      this.cityId,
-      this.cityName,
-      this.address,
-      this.providertypeId,
-      this.providertype,
-      this.isFeatured,
-      this.displayName,
-      this.createdAt,
-      this.updatedAt,
-      this.profileImage,
-      this.timeZone,
-      this.lastNotificationSeen,
-      this.handyman_rating});
-
-  HandymanData.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    firstName = json['first_name'];
-    lastName = json['last_name'];
-    username = json['username'];
-    providerId = json['provider_id'];
-    status = json['status'];
-    description = json['description'];
-    userType = json['user_type'];
-    email = json['email'];
-    contactNumber = json['contact_number'];
-    countryId = json['country_id'];
-    stateId = json['state_id'];
-    cityId = json['city_id'];
-    cityName = json['city_name'];
-    address = json['address'];
-    providertypeId = json['providertype_id'];
-    providertype = json['providertype'];
-    isFeatured = json['is_featured'];
-    displayName = json['display_name'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    profileImage = json['profile_image'];
-    timeZone = json['time_zone'];
-    lastNotificationSeen = json['last_notification_seen'];
-    handyman_rating = json['handyman_rating'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['first_name'] = this.firstName;
-    data['last_name'] = this.lastName;
-    data['username'] = this.username;
-    data['provider_id'] = this.providerId;
-    data['status'] = this.status;
-    data['description'] = this.description;
-    data['user_type'] = this.userType;
-    data['email'] = this.email;
-    data['contact_number'] = this.contactNumber;
-    data['country_id'] = this.countryId;
-    data['state_id'] = this.stateId;
-    data['city_id'] = this.cityId;
-    data['city_name'] = this.cityName;
-    data['address'] = this.address;
-    data['providertype_id'] = this.providertypeId;
-    data['providertype'] = this.providertype;
-    data['is_featured'] = this.isFeatured;
-    data['display_name'] = this.displayName;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['profile_image'] = this.profileImage;
-    data['time_zone'] = this.timeZone;
-    data['last_notification_seen'] = this.lastNotificationSeen;
-    data['handyman_rating'] = this.handyman_rating;
+    data['customer_profile_image'] = this.customerProfileImage;
+    data['handyman_profile_image'] = this.handymanProfileImage;
     return data;
   }
 }

@@ -35,7 +35,7 @@ class CommonBookingDetailScreenState extends State<CommonBookingDetailScreen> {
     //
   }
 
-  Widget serviceDetailWidget({required BookingDetail bookingDetail, required Service serviceDetail}) {
+  Widget serviceDetailWidget({required BookingDetail bookingDetail, required ServiceData serviceDetail}) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:handyman_provider_flutter/components/back_widget.dart';
 import 'package:handyman_provider_flutter/components/register_user_form_component.dart';
 import 'package:handyman_provider_flutter/main.dart';
-import 'package:handyman_provider_flutter/models/user_list_response.dart';
+import 'package:handyman_provider_flutter/models/user_data.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
 import 'package:handyman_provider_flutter/provider/handyman/component/handyman_list_widget.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
@@ -21,7 +21,7 @@ class AllHandymanListScreen extends StatefulWidget {
 
 class _AllHandymanListScreenState extends State<AllHandymanListScreen> {
   ScrollController scrollController = ScrollController();
-  List<UserListData> userData = [];
+  List<UserData> userData = [];
   bool afterInit = false;
 
   int totalPage = 0;

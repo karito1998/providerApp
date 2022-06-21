@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:handyman_provider_flutter/components/handyman_name_widget.dart';
 import 'package:handyman_provider_flutter/components/register_user_form_component.dart';
 import 'package:handyman_provider_flutter/main.dart';
-import 'package:handyman_provider_flutter/models/dashboard_response.dart';
 import 'package:handyman_provider_flutter/models/user_data.dart';
-import 'package:handyman_provider_flutter/models/user_list_response.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
 import 'package:handyman_provider_flutter/screens/chat/user_chat_screen.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
-import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/extensions/string_extension.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:handyman_provider_flutter/utils/model_keys.dart';
@@ -17,16 +15,10 @@ import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class HandymanWidget extends StatefulWidget {
-  const HandymanWidget({
-    Key? key,
-    this.data,
-    required this.width,
-    this.data1,
-  }) : super(key: key);
-
-  final Handyman? data;
   final double width;
-  final UserListData? data1;
+  final UserData? data;
+
+  HandymanWidget({required this.width, this.data});
 
   @override
   State<HandymanWidget> createState() => _HandymanWidgetState();
@@ -75,12 +67,10 @@ class _HandymanWidgetState extends State<HandymanWidget> {
               ),
               Column(
                 children: [
-                  Text(
-                    widget.data!.displayName.validate(),
-                    style: boldTextStyle(size: 14),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.center,
+                  HandymanNameWidget(
+                    name: widget.data!.displayName.validate(),
+                    isHandymanAvailable: widget.data!.isHandymanAvailable,
+                    size: 14,
                   ).center(),
                   16.height,
                   Row(
@@ -141,7 +131,7 @@ class _HandymanWidgetState extends State<HandymanWidget> {
           ),
         ).onTap(
           () {
-            UserListData user = UserListData(
+            UserData user = UserData(
               id: widget.data!.id,
               firstName: widget.data!.firstName,
               lastName: widget.data!.lastName,
@@ -187,22 +177,17 @@ class _HandymanWidgetState extends State<HandymanWidget> {
             ),
             alignment: Alignment.center,
             child: !widget.data!.isActive ? Image.asset(block, width: 18, height: 18) : Image.asset(unBlock, width: 18, height: 18),
-          ).onTap(
-            () {
-              if (appStore.userEmail != DEFAULT_PROVIDER_EMAIL) {
-                widget.data!.isActive = !widget.data!.isActive;
-                if (!widget.data!.isActive) {
-                  changeStatus(widget.data!.id, 1);
-                } else {
-                  changeStatus(widget.data!.id, 0);
-                }
+          ).onTap(() {
+            ifNotTester(context, () {
+              if (!widget.data!.isActive) {
+                changeStatus(widget.data!.id, 1);
               } else {
-                toast(context.translate.lblUnAuthorized);
+                changeStatus(widget.data!.id, 0);
               }
-
-              setState(() {});
-            },
-          ),
+              widget.data!.isActive = !widget.data!.isActive;
+            });
+            setState(() {});
+          }),
         )
       ],
     );

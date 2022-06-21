@@ -19,7 +19,6 @@ class TotalComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log(snap.providerWallet);
     return Wrap(
       spacing: 16,
       runSpacing: 16,

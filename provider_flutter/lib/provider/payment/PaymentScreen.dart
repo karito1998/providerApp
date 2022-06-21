@@ -126,7 +126,7 @@ class _PaymentScreenState extends State<PaymentScreen> implements TransactionCal
   @override
   onTransactionError() {
     toast("Transaction error");
-    snackBar(context, title: context.translate.lblRetryErr);
+    snackBar(context, title: errorMessage);
   }
 
   @override

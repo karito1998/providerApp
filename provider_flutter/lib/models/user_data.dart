@@ -1,8 +1,8 @@
 import 'package:handyman_provider_flutter/models/provider_subscription_model.dart';
 
 class UserData {
-  String? uid;
   int? id;
+  String? uid;
   String? username;
   String? firstName;
   String? lastName;
@@ -33,6 +33,15 @@ class UserData {
   num? handymanRating;
   ProviderSubscriptionModel? subscription;
   int? isSubscribe;
+  String? designation;
+
+  String? cityName;
+  String? providertype;
+  bool? isHandymanAvailable;
+  String? loginType;
+
+  //Local
+  bool isActive = false;
 
   UserData({
     this.id,
@@ -67,6 +76,11 @@ class UserData {
     this.subscription,
     this.isSubscribe,
     this.uid,
+    this.designation,
+    this.cityName,
+    this.providertype,
+    this.isHandymanAvailable,
+    this.loginType,
   });
 
   UserData.fromJson(Map<String, dynamic> json) {
@@ -85,6 +99,7 @@ class UserData {
     providerId = json['provider_id'];
     playerId = json['player_id'];
     status = json['status'];
+    isActive = status == 1;
     serviceAddressId = json['service_address_id'];
     handymanRating = json['handyman_rating'];
     //providertypeId = json['providertype_id'];
@@ -102,6 +117,11 @@ class UserData {
     uid = json['uid'];
     subscription = json['subscription'] != null ? ProviderSubscriptionModel.fromJson(json['subscription']) : null;
     isSubscribe = json['is_subscribe'];
+    designation = json['designation'];
+    cityName = json['city_name'];
+    providertype = json['providertype'];
+    isHandymanAvailable = json['isHandymanAvailable'] != null ? json['isHandymanAvailable'] == 1 : false;
+    loginType = json['login_type'];
   }
 
   Map<String, dynamic> toJson() {
@@ -136,10 +156,16 @@ class UserData {
     data['profile_image'] = this.profileImage;
     data['description'] = this.description;
     data['uid'] = this.uid;
-    data['is_subscribe'] = this.isSubscribe;
+    data['is_subscribe'] = this.designation;
+    data['city_name'] = this.cityName;
+    data['providertype'] = this.providertype;
+    data['isHandymanAvailable'] = this.isHandymanAvailable;
+    data['login_type'] = this.loginType;
+
     if (this.subscription != null) {
       data['subscription'] = this.subscription!.toJson();
     }
+    data['designation'] = this.designation;
     return data;
   }
 }

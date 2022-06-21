@@ -12,6 +12,7 @@ class ChartComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 250,
+      margin: EdgeInsets.only(top: 8),
       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
       child: SfCartesianChart(
         title: ChartTitle(

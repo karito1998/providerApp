@@ -23,11 +23,14 @@ class NotificationScreenState extends State<NotificationFragment> {
   List<NotificationData> readNotificationList = [];
 
   bool hasError = false;
+  bool isApiCalled = false;
 
   @override
   void initState() {
     super.initState();
-    init();
+    afterBuildCreated(() {
+      init();
+    });
   }
 
   void init() async {
@@ -35,10 +38,11 @@ class NotificationScreenState extends State<NotificationFragment> {
   }
 
   Future<void> getAllNotification() async {
-    afterBuildCreated(() {
-      appStore.setLoading(true);
-    });
+    appStore.setLoading(true);
     await getNotification({NotificationKey.type: ""}).then((value) {
+      appStore.setLoading(false);
+      isApiCalled = true;
+
       if (unReadNotificationList.isNotEmpty) {
         unReadNotificationList.clear();
       }
@@ -50,9 +54,12 @@ class NotificationScreenState extends State<NotificationFragment> {
 
       setState(() {});
     }).catchError((e) {
-      toast(e.toString());
+      appStore.setLoading(false);
+      isApiCalled = true;
+
+      toast(e.toString(), print: true);
+      setState(() {});
     });
-    appStore.setLoading(false);
   }
 
   @override
@@ -63,7 +70,7 @@ class NotificationScreenState extends State<NotificationFragment> {
   Future<void> readNotification({String? id}) async {
     Map request = {CommonKeys.bookingId: id};
 
-    appStore.setLoading(true);
+    //appStore.setLoading(true);
 
     await bookingDetail(request).then((value) {
       init();
@@ -71,7 +78,7 @@ class NotificationScreenState extends State<NotificationFragment> {
       toast(e.toString(), print: true);
     });
 
-    appStore.setLoading(false);
+    //appStore.setLoading(false);
   }
 
   Widget listIterate(List<NotificationData> list) {
@@ -84,14 +91,15 @@ class NotificationScreenState extends State<NotificationFragment> {
 
         return GestureDetector(
           onTap: () async {
-            log(data.data!.toJson());
-            if (data.data!.type != ADD_WALLET && data.data!.type != UPDATE_WALLET && data.data!.type != WALLET_PAYOUT_TRANSFER) readNotification(id: data.data!.id.toString());
+            if (data.data!.type != ADD_WALLET && data.data!.type != UPDATE_WALLET && data.data!.type != WALLET_PAYOUT_TRANSFER) {
+              readNotification(id: data.data!.id.toString());
+            }
 
             if (isUserTypeHandyman) {
-              HBookingDetailScreen(bookingId: data.data!.id).launch(context, pageRouteAnimation: PageRouteAnimation.Slide);
+              HBookingDetailScreen(bookingId: data.data!.id).launch(context);
             } else if (isUserTypeProvider) {
               if (data.data!.type != ADD_WALLET && data.data!.type != UPDATE_WALLET && data.data!.type != WALLET_PAYOUT_TRANSFER) {
-                BookingDetailScreen(bookingId: data.data!.id).launch(context, pageRouteAnimation: PageRouteAnimation.Slide);
+                BookingDetailScreen(bookingId: data.data!.id).launch(context);
               } else {
                 init();
               }
@@ -161,7 +169,9 @@ class NotificationScreenState extends State<NotificationFragment> {
               ),
               LoaderWidget().visible(appStore.isLoading),
               Text(errorSomethingWentWrong, style: secondaryTextStyle()).center().visible(hasError),
-              noDataFound(context).center().visible(!appStore.isLoading && readNotificationList.isEmpty && !hasError),
+              Observer(
+                builder: (_) => noDataFound(context).center().visible(!appStore.isLoading && readNotificationList.isEmpty && isApiCalled),
+              ),
             ],
           ),
         ),

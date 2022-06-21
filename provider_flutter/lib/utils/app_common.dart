@@ -3,13 +3,16 @@ import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
+import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
+import 'package:handyman_provider_flutter/utils/widget/Notification/CustomSnackBar.dart';
+import 'package:handyman_provider_flutter/utils/widget/Notification/TopSnacker.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 //region App Default Settings
 void defaultSettings() {
-  passwordLengthGlobal = 8;
+  passwordLengthGlobal = 6;
   appButtonBackgroundColorGlobal = primaryColor;
   defaultRadius = 12;
   defaultAppButtonTextColorGlobal = Colors.white;
@@ -84,6 +87,8 @@ setOneSignal() async {
 
     OneSignal.shared.consentGranted(true);
     OneSignal.shared.requiresUserPrivacyConsent();
+    OneSignal.shared.consentGranted(true);
+    OneSignal.shared.promptUserForPushNotificationPermission();
 
     OneSignal.shared.setSubscriptionObserver((changes) async {
       if (!changes.to.userId.isEmptyOrNull) await setValue(PLAYERID, changes.to.userId);
@@ -118,4 +123,19 @@ int getRemainingPlanDays() {
   } else {
     return 0;
   }
+}
+
+showSnackBar(BuildContext context, {required String message, Icon? icon}) {
+  showTopSnackBar(
+    context,
+    CustomSnackBar.info(
+      message: message.validate(),
+      backgroundColor: white,
+      textStyle: boldTextStyle(),
+      icon: icon!,
+      messagePadding: EdgeInsets.zero,
+    ),
+    hideOutAnimationDuration: 350.milliseconds,
+    displayDuration: 350.milliseconds,
+  );
 }

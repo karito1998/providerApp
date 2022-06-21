@@ -33,6 +33,7 @@ class AuthServices {
           currentUser: value.user!,
           registerData: registerData,
           userModel: UserData(
+            id: registerData.id.validate(),
             uid: value.user!.uid,
             apiToken: registerData.api_token,
             contactNumber: registerData.contact_number,
@@ -46,16 +47,17 @@ class AuthServices {
           isLogin: true,
         );
       }).catchError((e) {
-        //
+        toast(e.toString());
       });
-
-      log("Err ${e.toString()}");
     });
+
     if (userCredential.user != null) {
       User currentUser = userCredential.user!;
       String displayName = registerData.first_name.validate() + registerData.last_name.validate();
 
       UserData userModel = UserData()
+        ..id = registerData.id
+        ..apiToken = registerData.api_token.validate()
         ..uid = currentUser.uid
         ..email = currentUser.email
         ..contactNumber = registerData.contact_number
@@ -79,9 +81,9 @@ class AuthServices {
           loginResponse.data!.uid = value.id.validate();
           if (loginResponse.data!.status.validate() != 0) {
             /// Redirect on the base of User Role.
-            if (loginResponse.data!.email == DEFAULT_PROVIDER_EMAIL || loginResponse.data!.email == DEFAULT_HANDYMAN_EMAIL) {
-              appStore.setTester(true);
-            }
+
+            appStore.setTester(loginResponse.data!.email == DEFAULT_PROVIDER_EMAIL || loginResponse.data!.email == DEFAULT_HANDYMAN_EMAIL);
+
             if (loginResponse.data!.userType == UserTypeProvider) {
               /// if User type id Provider
               if (loginResponse.data != null) await saveUserData(loginResponse.data!);

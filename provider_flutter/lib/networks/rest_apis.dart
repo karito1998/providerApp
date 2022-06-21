@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:handyman_provider_flutter/auth/sign_in_screen.dart';
@@ -26,6 +28,7 @@ import 'package:handyman_provider_flutter/models/search_list_response.dart';
 import 'package:handyman_provider_flutter/models/service_address_response.dart';
 import 'package:handyman_provider_flutter/models/service_detail_response.dart';
 import 'package:handyman_provider_flutter/models/service_response.dart';
+import 'package:handyman_provider_flutter/models/service_review_response.dart';
 import 'package:handyman_provider_flutter/models/state_list_response.dart';
 import 'package:handyman_provider_flutter/models/subscription_history_model.dart';
 import 'package:handyman_provider_flutter/models/tax_list_response.dart';
@@ -115,7 +118,7 @@ Future<void> logout(BuildContext context) async {
 
                         SignInScreen().launch(context, isNewTask: true, pageRouteAnimation: PageRouteAnimation.Slide);
                       } else {
-                        toast(context.translate.lblInternetErr);
+                        toast(errorInternetNotAvailable);
                       }
                     },
                   ).expand(),
@@ -157,6 +160,7 @@ Future<void> saveUserData(UserData data) async {
     await appStore.setUserProfile(data.profileImage.validate());
     await appStore.setCountryId(data.countryId.validate());
     await appStore.setStateId(data.stateId.validate());
+    await appStore.setDesignation(data.designation.validate());
     await userService.getUser(email: data.email.validate()).then((value) async {
       await appStore.setUId(value.uid.validate());
     }).catchError((e) {
@@ -285,8 +289,6 @@ Future<DashboardResponse> providerDashboard() async {
     );
   }
 
-  log(data.earningType);
-
   if (data.earningType == EARNING_TYPE_SUBSCRIPTION) {
     await setValue(IS_PLAN_SUBSCRIBE, true);
   } else {
@@ -323,6 +325,10 @@ Future<DashboardResponse> providerDashboard() async {
     appStore.setHelplineNumber(data.helpline_number.validate());
   }
 
+  if (data.language_option != null) {
+    setValue(SERVER_LANGUAGES, jsonEncode(data.language_option!.toList()));
+  }
+
   return data;
 }
 
@@ -330,6 +336,7 @@ Future<HandymanDashBoardResponse> handymanDashboard() async {
   HandymanDashBoardResponse data = HandymanDashBoardResponse.fromJson(await handleResponse(await buildHttpResponse('handyman-dashboard', method: HttpMethod.GET)));
 
   setCurrencies(value: data.configurations);
+
   if (data.privacy_policy != null) {
     if (data.privacy_policy!.value.validate().isNotEmpty) {
       appStore.setPrivacyPolicy(data.privacy_policy!.value.validate());
@@ -347,7 +354,7 @@ Future<HandymanDashBoardResponse> handymanDashboard() async {
       appStore.setTermConditions(TERMS_CONDITION_URL);
     }
   } else {
-    appStore.setPrivacyPolicy(TERMS_CONDITION_URL);
+    appStore.setTermConditions(TERMS_CONDITION_URL);
   }
 
   if (data.inquriy_email.validate().isNotEmpty) {
@@ -359,6 +366,12 @@ Future<HandymanDashBoardResponse> handymanDashboard() async {
   if (data.helpline_number.validate().isNotEmpty) {
     appStore.setHelplineNumber(data.helpline_number.validate());
   }
+
+  if (data.language_option != null) {
+    setValue(SERVER_LANGUAGES, jsonEncode(data.language_option!.toList()));
+  }
+
+  appStore.setHandymanAvailability(data.isHandymanAvailable.validate());
 
   return data;
 }
@@ -375,7 +388,8 @@ Future<ProfileUpdateResponse> deleteProviderDoc(int? id) async {
 //region Service API
 Future<ServiceResponse> getServiceList(int page, int providerId, {String? searchTxt, bool isSearch = false, int? categoryId, bool isCategoryWise = false}) async {
   if (isCategoryWise) {
-    return ServiceResponse.fromJson(await handleResponse(await buildHttpResponse('service-list?per_page=$perPageItem&category_id=$categoryId&page=$page&provider_id=$providerId', method: HttpMethod.GET)));
+    return ServiceResponse.fromJson(
+        await handleResponse(await buildHttpResponse('service-list?per_page=$perPageItem&category_id=$categoryId&page=$page&provider_id=$providerId', method: HttpMethod.GET)));
   } else if (isSearch) {
     return ServiceResponse.fromJson(await handleResponse(await buildHttpResponse('service-list?per_page=$perPageItem&page=$page&search=$searchTxt&provider_id=$providerId', method: HttpMethod.GET)));
   } else {
@@ -391,8 +405,8 @@ Future<ProfileUpdateResponse> deleteService(int id) async {
   return ProfileUpdateResponse.fromJson(await handleResponse(await buildHttpResponse('service-delete/$id', method: HttpMethod.POST)));
 }
 
-Future<UserListData> deleteHandyman(int id) async {
-  return UserListData.fromJson(await handleResponse(await buildHttpResponse('handyman-delete/$id', method: HttpMethod.POST)));
+Future<UserData> deleteHandyman(int id) async {
+  return UserData.fromJson(await handleResponse(await buildHttpResponse('handyman-delete/$id', method: HttpMethod.POST)));
 }
 
 Future<BaseResponse> restoreHandyman(Map request) async {
@@ -412,14 +426,14 @@ Future<TaxListResponse> getTaxList() async {
 //endregion
 
 //region Category API
-Future<CategoryResponse> getCategoryList() async {
-  return CategoryResponse.fromJson(await handleResponse(await buildHttpResponse('category-list', method: HttpMethod.GET)));
+Future<CategoryResponse> getCategoryList({String perPage = ''}) async {
+  return CategoryResponse.fromJson(await handleResponse(await buildHttpResponse('category-list$perPage', method: HttpMethod.GET)));
 }
 //endregion
 
 //region SubCategory Api
 Future<CategoryResponse> getSubCategoryList({required int catId}) async {
-  return CategoryResponse.fromJson(await handleResponse(await buildHttpResponse('subcategory-list?category_id=$catId', method: HttpMethod.GET)));
+  return CategoryResponse.fromJson(await handleResponse(await buildHttpResponse('subcategory-list?category_id=$catId&per_page=all', method: HttpMethod.GET)));
 }
 //endregion
 
@@ -430,7 +444,8 @@ Future<BaseResponse> updateHandymanStatus(Map request) async {
 
 Future<UserListResponse> getHandyman({bool isPagination = false, int? page, int? providerId, String? userTypeHandyman = "handyman"}) async {
   if (isPagination) {
-    return UserListResponse.fromJson(await handleResponse(await buildHttpResponse('user-list?user_type=$userTypeHandyman&provider_id=$providerId&per_page=$perPageItem&page=$page', method: HttpMethod.GET)));
+    return UserListResponse.fromJson(
+        await handleResponse(await buildHttpResponse('user-list?user_type=$userTypeHandyman&provider_id=$providerId&per_page=$perPageItem&page=$page', method: HttpMethod.GET)));
   } else {
     return UserListResponse.fromJson(await handleResponse(await buildHttpResponse('user-list?user_type=$userTypeHandyman&provider_id=$providerId', method: HttpMethod.GET)));
   }
@@ -471,12 +486,24 @@ Future<DashboardResponse> currencyConfig() async {
 
 //region TotalEarningList API
 Future<TotalEarningResponse> getTotalEarningList(int page, {var perPage = perPageItem}) async {
-  return TotalEarningResponse.fromJson(await handleResponse(await buildHttpResponse('${isUserTypeProvider ? 'provider-payout-list' : 'handyman-payout-list'}?per_page="$perPage"&page=$page', method: HttpMethod.GET)));
+  return TotalEarningResponse.fromJson(
+      await handleResponse(await buildHttpResponse('${isUserTypeProvider ? 'provider-payout-list' : 'handyman-payout-list'}?per_page="$perPage"&page=$page', method: HttpMethod.GET)));
 }
 //endregion
 
 Future<BaseResponse> deleteImage(Map request) async {
   return BaseResponse.fromJson(await handleResponse(await buildHttpResponse('remove-file', request: request, method: HttpMethod.POST)));
+}
+
+Future<List<RatingData>> serviceReviews(Map request) async {
+  ServiceReviewResponse res = ServiceReviewResponse.fromJson(await handleResponse(await buildHttpResponse('service-reviews?per_page=all', request: request, method: HttpMethod.POST)));
+
+  return res.data.validate();
+}
+
+Future<List<RatingData>> handymanReviews(Map request) async {
+  ServiceReviewResponse res = ServiceReviewResponse.fromJson(await handleResponse(await buildHttpResponse('handyman-reviews?per_page=all', request: request, method: HttpMethod.POST)));
+  return res.data.validate();
 }
 
 //region SubScription API
@@ -534,6 +561,10 @@ Future<void> savePayment({
 
 Future<WalletHistoryListResponse> getWalletHistory(int page, {var perPage = perPageItem}) async {
   return WalletHistoryListResponse.fromJson(await handleResponse(await buildHttpResponse('wallet-history?per_page=$perPage&page=$page&orderby=desc', method: HttpMethod.GET)));
+}
+
+Future<BaseResponse> updateHandymanAvailabilityApi({required Map request}) async {
+  return BaseResponse.fromJson(await handleResponse(await buildHttpResponse('handyman-update-available-status', request: request, method: HttpMethod.POST)));
 }
 
 //endregion

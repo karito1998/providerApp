@@ -6,7 +6,7 @@ import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class BookingHistoryComponent extends StatefulWidget {
-  List<BookingActivity> data;
+  final List<BookingActivity> data;
   final ScrollController? scrollController;
 
   BookingHistoryComponent({required this.data, this.scrollController});

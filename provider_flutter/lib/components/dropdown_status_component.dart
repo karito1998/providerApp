@@ -49,7 +49,7 @@ class _DropdownStatusComponentState extends State<DropdownStatusComponent> {
       builder: (context, snap) {
         if (snap.hasData) {
           if (!snap.data!.any((element) => element.id == 0)) {
-            snap.data!.insert(0, BookingStatusResponse(label: 'Todo', id: 0, status: 0, value: "All"));
+            snap.data!.insert(0, BookingStatusResponse(label: 'All', id: 0, status: 0, value: "All"));
           }
           if (widget.statusType.validate().isNotEmpty) {
             snap.data.validate().forEach((e) {
@@ -85,7 +85,7 @@ class _DropdownStatusComponentState extends State<DropdownStatusComponent> {
             ),
           );
         }
-        return snapWidgetHelper(snap, defaultErrorMessage: "");
+        return snapWidgetHelper(snap, defaultErrorMessage: "", loadingWidget: SizedBox());
       },
     );
   }

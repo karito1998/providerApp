@@ -104,7 +104,7 @@ class _CountdownWidgetState extends State<CountdownWidget> {
       color: context.dividerColor,
       child: Row(
         children: [
-          Text(widget.text ?? '${context.translate.lblServiceTotalTime} : ', style: primaryTextStyle(size: 14)),
+          Text(widget.text ?? '${context.translate.lblServiceTotalTime}: ', style: primaryTextStyle(size: 14)),
           Text(calculateTimer(value), style: boldTextStyle(color: Colors.red, size: 14)),
         ],
       ),

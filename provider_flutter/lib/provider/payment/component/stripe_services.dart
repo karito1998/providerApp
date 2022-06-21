@@ -20,7 +20,9 @@ class StripeServices {
 
   init({required String stripePaymentPublishKey, ProviderSubscriptionModel? data, required num totalAmount, required String stripeURL, required String stripePaymentKey}) async {
     Stripe.publishableKey = stripePaymentPublishKey;
-    Stripe.merchantIdentifier = 'merchant.flutter.stripe.test'; /// You can enter AnyName
+    Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
+
+    /// You can enter AnyName
 
     await Stripe.instance.applySettings().catchError((e) {
       return e;
@@ -58,17 +60,18 @@ class StripeServices {
       http.Response.fromStream(value).then((response) async {
         if (response.statusCode == 200) {
           StripePayModel res = StripePayModel.fromJson(await handleResponse(response));
+
           await Stripe.instance
               .initPaymentSheet(
             paymentSheetParameters: SetupPaymentSheetParameters(
               paymentIntentClientSecret: res.client_secret.validate(),
               style: appStore.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-              applePay: true,
-              googlePay: true,
+              applePay: isIOS,
+              googlePay: isMobile,
               testEnv: true,
               // merchantCountryCode: 'IN',
               merchantDisplayName: APP_NAME,
-              customerId: '1',
+              customerId: appStore.userId.toString(),
               customerEphemeralKeySecret: res.client_secret.validate(),
               setupIntentClientSecret: res.client_secret.validate(),
             ),
@@ -77,11 +80,7 @@ class StripeServices {
             log(e.toString());
           });
           log("e");
-          await Stripe.instance
-              .presentPaymentSheet(
-            parameters: PresentPaymentSheetParameters(clientSecret: res.client_secret!, confirmPayment: true),
-          )
-              .then(
+          await Stripe.instance.presentPaymentSheet().then(
             (value) async {
               savePayment(data: data, paymentMethod: PAYMENT_METHOD_STRIPE, paymentStatus: SERVICE_PAYMENT_STATUS_PAID);
               onPaymentComplete?.call();

@@ -118,10 +118,9 @@ class SubscriptionWidgetState extends State<SubscriptionWidget> {
               elevation: 0,
               color: primaryColor,
               onTap: () {
-                if (!appStore.isTester)
+                ifNotTester(context, () {
                   cancelPlan();
-                else
-                  toast(context.translate.lblUnAuthorized);
+                });
               },
             )
         ],

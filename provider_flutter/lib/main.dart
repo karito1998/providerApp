@@ -7,7 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:handyman_provider_flutter/components/no_internet_component.dart';
 import 'package:handyman_provider_flutter/locale/applocalizations.dart';
-import 'package:handyman_provider_flutter/locale/languag_es.dart';
+import 'package:handyman_provider_flutter/locale/base_language.dart';
 import 'package:handyman_provider_flutter/models/file_model.dart';
 import 'package:handyman_provider_flutter/models/revenue_chart_data.dart';
 import 'package:handyman_provider_flutter/networks/firebase_services/auth_services.dart';
@@ -21,7 +21,6 @@ import 'package:handyman_provider_flutter/utils/app_common.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
-import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
@@ -31,6 +30,7 @@ import 'app_theme.dart';
 AppStore appStore = AppStore();
 //endregion
 bool isCurrentlyOnNoInternet = false;
+bool disableTestUserForcefully = false;
 
 //region App languages
 Languages? languages;
@@ -60,22 +60,19 @@ void main() async {
 
   if (!isDesktop) {
     Firebase.initializeApp().then((value) {
-      Function? originalOnError = FlutterError.onError;
-
-      FlutterError.onError = (FlutterErrorDetails errorDetails) async {
-        await FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
-        originalOnError!(errorDetails);
-      };
+      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
     }).catchError((e) {
       log(e.toString());
       return e;
     });
   }
 
-  await initialize(aLocaleLanguageList: languageList());
+  await initialize();
+  localeLanguageList = languageList();
+
   defaultSettings();
 
-  appStore.setLanguage(getStringAsync(SELECTED_LANGUAGE_CODE, defaultValue: DEFAULT_LANGUAGE));
+  appStore.setLanguage(DEFAULT_LANGUAGE);
   await appStore.setLoggedIn(getBoolAsync(IS_LOGGED_IN));
 
   await setLoginValues();
@@ -105,7 +102,7 @@ class _MyAppState extends State<MyApp> {
         var notId = notification.notification.additionalData!.containsKey('id') ? notification.notification.additionalData!['id'] : 0;
         push(BookingDetailScreen(bookingId: notId.toString().toInt()));
       } catch (e) {
-        throw context.translate.lblWrongErr;
+        throw errorSomethingWentWrong;
       }
     });
     afterBuildCreated(() {
@@ -154,7 +151,12 @@ class _MyAppState extends State<MyApp> {
         themeMode: appStore.isDarkMode ? ThemeMode.dark : ThemeMode.light,
         scrollBehavior: SBehavior(),
         supportedLocales: LanguageDataModel.languageLocales(),
-        localizationsDelegates: [AppLocalizations(), GlobalMaterialLocalizations.delegate, GlobalWidgetsLocalizations.delegate, GlobalCupertinoLocalizations.delegate],
+        localizationsDelegates: [
+          AppLocalizations(),
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
         localeResolutionCallback: (locale, supportedLocales) => locale,
         locale: Locale(appStore.selectedLanguageCode),
       ),

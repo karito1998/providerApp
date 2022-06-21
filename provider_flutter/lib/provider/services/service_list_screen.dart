@@ -34,12 +34,13 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
   int providerId = 0;
   int? categoryId = 0;
 
-  List<Service> mainList = [];
+  List<ServiceData> mainList = [];
 
   bool changeList = false;
 
   bool isEnabled = false;
   bool isLastPage = false;
+  bool isApiCalled = false;
 
   @override
   void initState() {
@@ -65,6 +66,8 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
 
   Future<void> fetchAllServices() async {
     await getSearchList(page, search: searchList.text, providerId: appStore.userId).then((value) {
+      isApiCalled = true;
+
       if (page == 1) {
         mainList.clear();
       }
@@ -76,9 +79,10 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
 
       setState(() {});
     }).catchError((e) {
-      toast(e.toString());
-    }).whenComplete(() {
       appStore.setLoading(false);
+      isApiCalled = true;
+
+      toast(e.toString());
     });
   }
 
@@ -186,7 +190,7 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
                 ],
               ),
             ),
-            Observer(builder: (context) => noDataFound(context).center().visible(!appStore.isLoading && mainList.validate().isEmpty)),
+            Observer(builder: (context) => noDataFound(context).center().visible(!appStore.isLoading && mainList.validate().isEmpty && isApiCalled)),
             Observer(builder: (context) => LoaderWidget().visible(appStore.isLoading))
           ],
         ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:handyman_provider_flutter/components/handyman_name_widget.dart';
 import 'package:handyman_provider_flutter/components/register_user_form_component.dart';
 import 'package:handyman_provider_flutter/main.dart';
-import 'package:handyman_provider_flutter/models/user_list_response.dart';
+import 'package:handyman_provider_flutter/models/user_data.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
@@ -13,7 +14,7 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HandymanListWidget extends StatefulWidget {
-  final UserListData data;
+  final UserData data;
   final Function? onUpdate;
 
   HandymanListWidget({required this.data, this.onUpdate});
@@ -124,19 +125,18 @@ class _HandymanListWidgetState extends State<HandymanListWidget> {
                 children: [
                   Row(
                     children: [
-                      Text(
-                        '${widget.data.firstName.validate()} ${widget.data.lastName.validate()}',
-                        style: boldTextStyle(size: 18),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
+                      HandymanNameWidget(
+                        name: widget.data.displayName.validate(),
+                        isHandymanAvailable: widget.data.isHandymanAvailable.validate(),
                       ).expand(),
+                      8.width,
                       PopupMenuButton(
                         icon: Icon(Icons.more_horiz, size: 24),
                         onSelected: (selection) async {
                           if (selection == 1) {
                             bool? res = await RegisterUserFormComponent(
                               user_type: UserTypeHandyman,
-                              data: UserListData(
+                              data: UserData(
                                 id: widget.data.id,
                                 firstName: widget.data.firstName,
                                 lastName: widget.data.lastName,
@@ -172,11 +172,9 @@ class _HandymanListWidgetState extends State<HandymanListWidget> {
                               context,
                               dialogType: DialogType.DELETE,
                               onAccept: (_) {
-                                if (getStringAsync(USER_EMAIL) != DEFAULT_PROVIDER_EMAIL) {
+                                ifNotTester(context, () {
                                   removeHandyman(widget.data.id.validate());
-                                } else {
-                                  toast(context.translate.lblUnAuthorized);
-                                }
+                                });
                               },
                             );
                           } else if (selection == 3) {
@@ -184,11 +182,9 @@ class _HandymanListWidgetState extends State<HandymanListWidget> {
                               context,
                               dialogType: DialogType.DELETE,
                               onAccept: (_) {
-                                if (getStringAsync(USER_EMAIL) != DEFAULT_PROVIDER_EMAIL) {
+                                ifNotTester(context, () {
                                   restoreHandymanData();
-                                } else {
-                                  toast(context.translate.lblUnAuthorized);
-                                }
+                                });
                               },
                             );
                           } else if (selection == 4) {
@@ -196,11 +192,9 @@ class _HandymanListWidgetState extends State<HandymanListWidget> {
                               context,
                               dialogType: DialogType.DELETE,
                               onAccept: (_) {
-                                if (getStringAsync(USER_EMAIL) != DEFAULT_PROVIDER_EMAIL) {
+                                ifNotTester(context, () {
                                   forceDeleteHandymanData();
-                                } else {
-                                  toast(context.translate.lblUnAuthorized);
-                                }
+                                });
                               },
                             );
                           }
@@ -304,12 +298,10 @@ class _HandymanListWidgetState extends State<HandymanListWidget> {
                 color: getStatusBackgroundColor(widget.data.isActive.validate()),
                 elevation: 0,
                 onTap: () {
-                  if (getStringAsync(USER_EMAIL) != DEFAULT_PROVIDER_EMAIL) {
+                  ifNotTester(context, () {
                     changeStatus(1);
                     widget.data.isActive = true;
-                  } else {
-                    toast(context.translate.lblUnAuthorized);
-                  }
+                  });
                 },
               ).expand(),
               16.width,
@@ -322,12 +314,10 @@ class _HandymanListWidgetState extends State<HandymanListWidget> {
                 elevation: 0,
                 color: getStatusBackgroundColor(!widget.data.isActive.validate()),
                 onTap: () {
-                  if (getStringAsync(USER_EMAIL) != DEFAULT_PROVIDER_EMAIL) {
+                  ifNotTester(context, () {
                     changeStatus(0);
                     widget.data.isActive = false;
-                  } else {
-                    toast(context.translate.lblUnAuthorized);
-                  }
+                  });
                 },
               ).expand(),
             ],

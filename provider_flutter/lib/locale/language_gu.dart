@@ -1,7 +1,28 @@
-import 'package:handyman_provider_flutter/locale/languag_es.dart';
+import 'package:handyman_provider_flutter/locale/base_language.dart';
 // class LanguageGu extends Languages
 
 class LanguageGu extends Languages {
+   //Helpi
+
+   @override
+   String lblInvalidEmail = '';
+   @override
+   String lblInvalidUsername = '';
+   @override
+   String lblRetryErr = "";
+   @override
+   String lblWrongErr = "";
+   @override
+   String lblInternetErr = "";
+   @override
+   String lblInvalidEmailSpaces = "";
+   @override
+   String tycRequired = '';
+   @override
+   String signUpSuccess = "";
+
+  //Helpi
+
   @override
   String planAboutToExpire(int days) => 'Your Plan Is About to Expire In $days Days';
 
@@ -12,10 +33,16 @@ class LanguageGu extends Languages {
   String provider = 'પ્રદજન';
 
   @override
+  String lblProviderDashboard = "પ્રદાતી";
+
+  @override
   String welcome = 'સ્વાગત';
 
   @override
   String back = 'પાછા!';
+
+  @override
+  String lblHandymanDashboard = 'હેન્ડીમેન ડેશબોર્ડ';
 
   @override
   String handyman = 'હેન્ડીમેન';
@@ -153,7 +180,7 @@ class LanguageGu extends Languages {
   String accept = 'સ્વીકારવું';
 
   @override
-  String decline = 'ઘટાડો';
+  String decline = 'અસ્વીકાર કરવો';
 
   @override
   String noDataFound = 'કોઈ ડેટા મળ્યો નથી';
@@ -366,7 +393,7 @@ class LanguageGu extends Languages {
   String lblTime = 'સમય';
 
   @override
-  String lblService = 'સેવા';
+  String lblMyService = 'મારી સેવાઓ';
 
   @override
   String lblAllService = 'બધી સેવા';
@@ -393,7 +420,7 @@ class LanguageGu extends Languages {
   String lblAudio = 'ઓડિયો';
 
   @override
-  String selectAddress = 'સેવા એડ્રેસ્રેસ પસંદ કરો';
+  String selectAddress = 'સેવા સરનામાંઓ પસંદ કરો';
 
   @override
   String btnSave = 'સાચવવું';
@@ -463,22 +490,7 @@ class LanguageGu extends Languages {
 
   @override
   String lblInvalidUrl = 'અમાન્ય URL:';
-  @override
-  String lblInvalidEmail = '';
-  @override
-  String lblInvalidUsername = '';
-  @override
-  String lblRetryErr = "";
-  @override
-  String lblWrongErr = "";
-  @override
-  String lblInternetErr = "";
-  @override
-  String lblInvalidEmailSpaces = "";
-  @override
-  String tycRequired = '';
-  @override
-  String signUpSuccess = "";
+
   @override
   String errorPasswordLength = 'પાસવર્ડ લંબાઈ કરતાં વધુ હોવી જોઈએ';
 
@@ -562,90 +574,68 @@ class LanguageGu extends Languages {
   @override
   String lbllogintitle = "ફરીથી નમસ્કાર !";
 
-
   @override
   String lblloginsubtitle = "સ્વાગત છે, તમે લાંબા સમય સુધી ચૂકી ગયા છો";
-
 
   @override
   String lblsignuptitle = "હેલો વપરાશકર્તા!";
 
-
   @override
   String lblsignupsubtitle = "વધુ સારા અનુભવ માટે તમારું એકાઉન્ટ બનાવો";
-
 
   @override
   String lblLogin = "પ્રવેશ કરો";
 
-
   @override
   String lblsignup = "સાઇનઅપ";
-
 
   @override
   String lblUserType = "વપરાશકર્તા પ્રકાર";
 
-
   @override
   String lblPurchaseCode = "સંપૂર્ણ સ્રોત કોડ ખરીદો";
-
 
   @override
   String lblFeatureProduct = "આ ફીચર્ડ ઉત્પાદન છે";
 
-
   @override
   String lblHours = "કલાક";
-
 
   @override
   String lblRating = "રેટિંગ";
 
+  @override
+  String lblOff = "છૂટ";
 
   @override
-  String lblOff = "બંધ";
-
-
-  @override
-  String lblHr = "એચઆર";
-
+  String lblHr = "કલાક";
 
   @override
   String lblDate = "તારીખ";
 
-
   @override
   String lblAboutHandyman = "હેન્ડીમેન વિશે";
-
 
   @override
   String lblAboutCustomer = "ગ્રાહક વિશે";
 
-
   @override
   String lblPaymentDetail = "ચુકવણી વિગતવાર";
-
 
   @override
   String lblId = "આઈડી";
 
-
   @override
   String lblMethod = "પદ્ધતિ";
-
 
   @override
   String lblStatus = "સ્થિતિ";
 
-
   @override
   String lblPriceDetail = "ભાવની વિગત";
 
-
   @override
   String lblSubTotal = "પેટા કુલ";
-
 
   @override
   String lblTax = "કરવેરા";
@@ -653,13 +643,11 @@ class LanguageGu extends Languages {
   @override
   String lblCoupon = "કૂપન";
 
-
   @override
   String lblTotalAmount = "કુલ રકમ";
 
   @override
   String lblOnBasisOf = "ના આધારે";
-
 
   @override
   String lblCheckStatus = "ચેક સ્થિતિ";
@@ -688,10 +676,8 @@ class LanguageGu extends Languages {
   @override
   String lblStatusType = "સ્થિતિ";
 
-
   @override
   String lblHandymanType = "હેન્ડીમેન પ્રકાર";
-
 
   @override
   String lblFixed = "સ્થિર";
@@ -722,7 +708,6 @@ class LanguageGu extends Languages {
 
   @override
   String lblWaitingForPayment = "ચુકવણી માટે રાહ જોઈ રહ્યું છે";
-
 
   @override
   String lblOnGoing = "જવા પર";
@@ -962,7 +947,7 @@ class LanguageGu extends Languages {
   String lblTermCondition = "સેવાની શરતો";
 
   @override
-  String lblServiceTotalTime = "કૃપા કરીને ફરીથી લ login ગિન કરો";
+  String lblServiceTotalTime = "સેવા કુલ સમય";
 
   @override
   String lblHelpLineNum = "હેલ્પલાઈન નંબર";
@@ -975,4 +960,10 @@ class LanguageGu extends Languages {
 
   @override
   String lblFailed = "આ બુકિંગ કેમ નિષ્ફળ થયું તેનું કારણ";
+
+  @override
+  String get lblDesignation => "હોદ્દો";
+
+  @override
+  String get lblHandymanIsOffline => "હેન્ડીમેન offline છે";
 }

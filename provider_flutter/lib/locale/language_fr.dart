@@ -1,7 +1,28 @@
-import 'package:handyman_provider_flutter/locale/languag_es.dart';
+import 'package:handyman_provider_flutter/locale/base_language.dart';
 // class LanguageFr extends Languages{}
 
 class LanguageFr extends Languages {
+   //Helpi
+
+   @override
+   String lblInvalidEmail = '';
+   @override
+   String lblInvalidUsername = '';
+   @override
+   String lblRetryErr = "";
+   @override
+   String lblWrongErr = "";
+   @override
+   String lblInternetErr = "";
+   @override
+   String lblInvalidEmailSpaces = "";
+   @override
+   String tycRequired = '';
+   @override
+   String signUpSuccess = "";
+
+  //Helpi
+
   @override
   String planAboutToExpire(int days) => 'Your Plan Is About to Expire In $days Days';
 
@@ -12,10 +33,16 @@ class LanguageFr extends Languages {
   String provider = 'Fournisseur';
 
   @override
+  String lblProviderDashboard = "Tableau de bord du fournisseur";
+
+  @override
   String welcome = 'Bienvenue';
 
   @override
   String back = 'arrière !';
+
+  @override
+  String lblHandymanDashboard = 'Tableau de tableau de bord';
 
   @override
   String handyman = 'Bricoleur';
@@ -153,7 +180,7 @@ class LanguageFr extends Languages {
   String accept = 'J\'accepte';
 
   @override
-  String decline = 'Déclin';
+  String decline = 'Rejeter';
 
   @override
   String noDataFound = 'Aucune donnée disponible';
@@ -366,7 +393,7 @@ class LanguageFr extends Languages {
   String lblTime = 'Temps';
 
   @override
-  String lblService = 'Service';
+  String lblMyService = 'Mes services';
 
   @override
   String lblAllService = 'Tout service';
@@ -393,7 +420,7 @@ class LanguageFr extends Languages {
   String lblAudio = 'laudio';
 
   @override
-  String selectAddress = 'Sélectionnez Service Adddresses';
+  String selectAddress = 'Sélectionnez des adresses de service';
 
   @override
   String btnSave = 'sauvegarder';
@@ -463,22 +490,7 @@ class LanguageFr extends Languages {
 
   @override
   String lblInvalidUrl = 'URL invalide:';
-  @override
-  String lblInvalidEmail = '';
-  @override
-  String lblInvalidUsername = '';
-  @override
-  String lblRetryErr = "";
-  @override
-  String lblWrongErr = "";
-  @override
-  String lblInternetErr = "";
-  @override
-  String lblInvalidEmailSpaces = "";
-  @override
-  String tycRequired = '';
-  @override
-  String signUpSuccess = "";
+
   @override
   String errorPasswordLength = 'La longueur du mot de passe doit être plus que';
 
@@ -563,90 +575,68 @@ class LanguageFr extends Languages {
   @override
   String lbllogintitle = "Rebonjour !";
 
-
   @override
   String lblloginsubtitle = "Bienvenue en arrière, vous avez été manqué depuis longtemps";
-
 
   @override
   String lblsignuptitle = "Bonjour utilisateur!";
 
-
   @override
   String lblsignupsubtitle = "Créez votre compte pour une meilleure expérience";
-
 
   @override
   String lblLogin = "Connexion";
 
-
   @override
   String lblsignup = "S'inscrire";
-
 
   @override
   String lblUserType = "Type d'utilisateur";
 
-
   @override
   String lblPurchaseCode = "Achat code source complet";
-
 
   @override
   String lblFeatureProduct = "Ceci est produit en vedette";
 
-
   @override
   String lblHours = "heure";
-
 
   @override
   String lblRating = "Notation";
 
-
   @override
-  String lblOff = "Désactivé";
-
+  String lblOff = "Remise";
 
   @override
   String lblHr = "heure";
 
-
   @override
   String lblDate = "Date";
-
 
   @override
   String lblAboutHandyman = "À propos de Handyman";
 
-
   @override
   String lblAboutCustomer = "Sur le client";
-
 
   @override
   String lblPaymentDetail = "Détail du paiement";
 
-
   @override
   String lblId = "identifiant";
-
 
   @override
   String lblMethod = "Méthode";
 
-
   @override
   String lblStatus = "Statut";
-
 
   @override
   String lblPriceDetail = "Détail de prix";
 
-
   @override
   String lblSubTotal = "Total";
-
 
   @override
   String lblTax = "Impôt";
@@ -654,13 +644,11 @@ class LanguageFr extends Languages {
   @override
   String lblCoupon = "Coupon";
 
-
   @override
   String lblTotalAmount = "Montant total";
 
   @override
   String lblOnBasisOf = "Sur la base de";
-
 
   @override
   String lblCheckStatus = "État de contrôle";
@@ -689,10 +677,8 @@ class LanguageFr extends Languages {
   @override
   String lblStatusType = "Statut";
 
-
   @override
   String lblHandymanType = "Type de bricoleur";
-
 
   @override
   String lblFixed = "Fixé";
@@ -723,7 +709,6 @@ class LanguageFr extends Languages {
 
   @override
   String lblWaitingForPayment = "en attente de paiement";
-
 
   @override
   String lblOnGoing = "En cours";
@@ -963,7 +948,7 @@ class LanguageFr extends Languages {
   String lblTermCondition = "Conditions d'utilisation";
 
   @override
-  String lblServiceTotalTime = "Veuillez vous connecter à nouveau";
+  String lblServiceTotalTime = "Temps total du service";
 
   @override
   String lblHelpLineNum = "Numéro d'assistance téléphonique";
@@ -977,4 +962,9 @@ class LanguageFr extends Languages {
   @override
   String lblFailed = "Raison pour laquelle cette réservation est échouée";
 
+  @override
+  String get lblDesignation => "La désignation";
+
+  @override
+  String get lblHandymanIsOffline => "Handyman est hors ligne";
 }

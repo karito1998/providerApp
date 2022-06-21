@@ -1,6 +1,26 @@
-import 'package:handyman_provider_flutter/locale/languag_es.dart';
+import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 class LanguageAf extends Languages {
+   //Helpi
+
+   @override
+   String lblInvalidEmail = '';
+   @override
+   String lblInvalidUsername = '';
+   @override
+   String lblRetryErr = "";
+   @override
+   String lblWrongErr = "";
+   @override
+   String lblInternetErr = "";
+   @override
+   String lblInvalidEmailSpaces = "";
+   @override
+   String tycRequired = '';
+   @override
+   String signUpSuccess = "";
+
+  //Helpi
   @override
   String planAboutToExpire(int days) => 'Your Plan Is About to Expire In $days Days';
 
@@ -11,10 +31,16 @@ class LanguageAf extends Languages {
   String provider = 'Verskaffer';
 
   @override
+  String lblProviderDashboard = "Verskaffer dashboard";
+
+  @override
   String welcome = 'Welkom';
 
   @override
   String back = 'Terug!';
+
+  @override
+  String lblHandymanDashboard = 'Handyman Dashboard';
 
   @override
   String handyman = 'Handyman';
@@ -152,7 +178,7 @@ class LanguageAf extends Languages {
   String accept = 'Aanvaar';
 
   @override
-  String decline = 'Afsak';
+  String decline = 'Verwerp';
 
   @override
   String noDataFound = 'Geen data gevind nie';
@@ -365,7 +391,7 @@ class LanguageAf extends Languages {
   String lblTime = 'Tyd';
 
   @override
-  String lblService = 'Diens';
+  String lblMyService = 'My dienste';
 
   @override
   String lblAllService = 'Alle diens';
@@ -392,7 +418,7 @@ class LanguageAf extends Languages {
   String lblAudio = 'Oudio';
 
   @override
-  String selectAddress = 'Kies Service Addresses';
+  String selectAddress = 'Kies diensadresse';
 
   @override
   String btnSave = 'Spaar';
@@ -463,22 +489,6 @@ class LanguageAf extends Languages {
   @override
   String lblInvalidUrl = 'Ongeldige URL:';
 
-  @override
-  String lblInvalidEmail = 'Ongeldige Email';
-  @override
-  String lblInvalidUsername = '';
-  @override
-  String lblRetryErr = "";
-  @override
-  String lblWrongErr = "";
-  @override
-  String lblInternetErr = "";
-  @override
-  String lblInvalidEmailSpaces = "";
-  @override
-  String tycRequired = '';
-  @override
-  String signUpSuccess = "";
   @override
   String errorPasswordLength = 'Wagwoordlengte moet meer wees as';
 
@@ -563,90 +573,68 @@ class LanguageAf extends Languages {
   @override
   String lbllogintitle = "Hallo weer !";
 
-
   @override
   String lblloginsubtitle = "Welkom terug, jy is lankal gemis";
-
 
   @override
   String lblsignuptitle = "Hallo gebruiker!";
 
-
   @override
   String lblsignupsubtitle = "Skep jou rekening vir beter ervaring";
-
 
   @override
   String lblLogin = "Teken aan";
 
-
   @override
   String lblsignup = "Teken aan";
-
 
   @override
   String lblUserType = "Gebruiker tipe";
 
-
   @override
   String lblPurchaseCode = "Koop volledige bronkode";
-
 
   @override
   String lblFeatureProduct = "Dit is 'n goeie produk";
 
-
   @override
   String lblHours = "uur";
-
 
   @override
   String lblRating = "Beoordeling";
 
-
   @override
-  String lblOff = "Af";
-
+  String lblOff = "Afslag";
 
   @override
   String lblHr = "uur";
 
-
   @override
   String lblDate = "Datum";
-
 
   @override
   String lblAboutHandyman = "Oor Handyman";
 
-
   @override
   String lblAboutCustomer = "Oor kliënt";
-
 
   @override
   String lblPaymentDetail = "Betaalbesonderhede";
 
-
   @override
   String lblId = "Id";
-
 
   @override
   String lblMethod = "Metode";
 
-
   @override
   String lblStatus = "Status";
-
 
   @override
   String lblPriceDetail = "Prysbesonderhede";
 
-
   @override
   String lblSubTotal = "Subtotaal";
-
 
   @override
   String lblTax = "Belasting";
@@ -654,13 +642,11 @@ class LanguageAf extends Languages {
   @override
   String lblCoupon = "Koepon";
 
-
   @override
   String lblTotalAmount = "Totaal";
 
   @override
   String lblOnBasisOf = "Op grond van";
-
 
   @override
   String lblCheckStatus = "Kontroleer status";
@@ -689,10 +675,8 @@ class LanguageAf extends Languages {
   @override
   String lblStatusType = "Status";
 
-
   @override
   String lblHandymanType = "Handyman tipe";
-
 
   @override
   String lblFixed = "Vasgestel";
@@ -723,7 +707,6 @@ class LanguageAf extends Languages {
 
   @override
   String lblWaitingForPayment = "Wag vir betaling";
-
 
   @override
   String lblOnGoing = "Aan die gang";
@@ -963,7 +946,7 @@ class LanguageAf extends Languages {
   String lblTermCondition = "Diensvoorwaardes";
 
   @override
-  String lblServiceTotalTime = "Meld asseblief weer aan";
+  String lblServiceTotalTime = "Diens totale tyd";
 
   @override
   String lblHelpLineNum = "Hulplyn nommer";
@@ -976,4 +959,10 @@ class LanguageAf extends Languages {
 
   @override
   String lblFailed = "Rede waarom hierdie bespreking misluk";
+
+  @override
+  String get lblDesignation => "Aanwysing";
+
+  @override
+  String get lblHandymanIsOffline => "Handyman is vanlyn";
 }

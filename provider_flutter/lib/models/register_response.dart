@@ -35,21 +35,24 @@ class RegisterData {
   String? address;
   String? uid;
   String? password;
+  int? id;
 
-  RegisterData(
-      {this.api_token,
-      this.contact_number,
-      this.display_name,
-      this.email,
-      this.password,
-      this.first_name,
-      required this.last_name,
-      this.user_type,
-      required this.username,
-      this.provider_id,
-      this.status,
-      this.address,
-      this.uid});
+  RegisterData({
+    this.api_token,
+    this.contact_number,
+    this.display_name,
+    this.email,
+    this.password,
+    this.first_name,
+    required this.last_name,
+    this.user_type,
+    required this.username,
+    this.provider_id,
+    this.status,
+    this.address,
+    this.uid,
+    this.id,
+  });
 
   factory RegisterData.fromJson(Map<String, dynamic> json) {
     return RegisterData(
@@ -65,6 +68,7 @@ class RegisterData {
       status: json['status'],
       address: json['address'],
       uid: json['uid'],
+      id: json['id'],
     );
   }
 
@@ -82,6 +86,7 @@ class RegisterData {
     data['status'] = this.status;
     data['address'] = this.address;
     data['uid'] = this.uid;
+    data['id'] = this.id;
     return data;
   }
 }

@@ -9,7 +9,7 @@ import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class HandymanCommissionComponent extends StatelessWidget {
-  Commission commission;
+  final Commission commission;
 
   HandymanCommissionComponent({required this.commission});
 
@@ -30,7 +30,7 @@ class HandymanCommissionComponent extends StatelessWidget {
               RichTextWidget(
                 textAlign: TextAlign.center,
                 list: [
-                  TextSpan(text: "${context.translate.lblHandymanType} : ", style: secondaryTextStyle(size: 14)),
+                  TextSpan(text: "${context.translate.lblHandymanType}: ", style: secondaryTextStyle(size: 14)),
                   TextSpan(text: '${commission.name.validate()}', style: boldTextStyle(size: 14)),
                 ],
               ),
@@ -38,7 +38,7 @@ class HandymanCommissionComponent extends StatelessWidget {
               RichTextWidget(
                 textAlign: TextAlign.center,
                 list: [
-                  TextSpan(text: '${context.translate.lblMyCommission} : ', style: secondaryTextStyle(size: 14)),
+                  TextSpan(text: '${context.translate.lblMyCommission}: ', style: secondaryTextStyle(size: 14)),
                   TextSpan(
                       text: isCommissionTypePercent(commission.type) ? '${commission.commission.validate()}%' : '${getStringAsync(CURRENCY_COUNTRY_SYMBOL)}${commission.commission.validate()}',
                       style: boldTextStyle(size: 14)),

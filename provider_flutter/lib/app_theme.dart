@@ -52,7 +52,7 @@ class AppTheme {
       shape: RoundedRectangleBorder(borderRadius: radiusOnly(topLeft: defaultRadius, topRight: defaultRadius)),
       backgroundColor: scaffoldSecondaryDark,
     ),
-    dividerColor: Colors.white12,
+    dividerColor: dividerDarkColor,
     cardColor: scaffoldSecondaryDark,
     dialogTheme: DialogTheme(shape: dialogShape()),
   ).copyWith(

@@ -80,10 +80,10 @@ class _HandyDashboardScreenState extends State<HandyDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(index: currentIndex, children: fragmentList),
+      body: fragmentList[currentIndex],
       appBar: appBarWidget(
         [
-          context.translate.handyman,
+          context.translate.lblHandymanDashboard,
           context.translate.lblBooking,
           context.translate.notification,
           context.translate.lblProfile,

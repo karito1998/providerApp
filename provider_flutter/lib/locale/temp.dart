@@ -1,6 +1,32 @@
-import 'package:handyman_provider_flutter/locale/languag_es.dart';
+import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 class LanguageTemp extends Languages {
+  //Helpi
+  @override
+  String lblInvalidEmail = '';
+
+  @override
+  String lblInvalidEmailSpaces = "";
+
+  @override
+  String tycRequired = '';
+
+  @override
+  String signUpSuccess = "";
+
+  @override
+  String lblInvalidUsername = '';
+
+  @override
+  String lblRetryErr = "";
+
+  @override
+  String lblWrongErr = "";
+
+  @override
+  String lblInternetErr = "";
+  //Helpi
+  
   @override
   String planAboutToExpire(int days) => 'Your Plan Is About to Expire In $days Days';
 
@@ -18,6 +44,9 @@ class LanguageTemp extends Languages {
 
   @override
   String handyman = '';
+
+  @override
+  String lblHandymanDashboard = '';
 
   @override
   String signIn = '';
@@ -365,7 +394,7 @@ class LanguageTemp extends Languages {
   String lblTime = '';
 
   @override
-  String lblService = '';
+  String lblMyService = '';
 
   @override
   String lblAllService = '';
@@ -461,22 +490,7 @@ class LanguageTemp extends Languages {
 
   @override
   String lblInvalidUrl = '';
-  @override
-  String lblInvalidEmail = '';
-  @override
-  String lblInvalidEmailSpaces = "";
-  @override
-  String tycRequired = '';
-  @override
-  String signUpSuccess = "";
-  @override
-  String lblInvalidUsername = '';
-  @override
-  String lblRetryErr = "";
-  @override
-  String lblWrongErr = "";
-  @override
-  String lblInternetErr = "";
+
   @override
   String errorPasswordLength = '';
 
@@ -949,4 +963,13 @@ class LanguageTemp extends Languages {
   @override
   String lblFailed = "";
 
+  @override
+  String get lblDesignation => "";
+
+  @override
+  String get lblHandymanIsOffline => "";
+
+  @override
+  // TODO: implement lblProviderDashboard
+  String get lblProviderDashboard => throw UnimplementedError();
 }

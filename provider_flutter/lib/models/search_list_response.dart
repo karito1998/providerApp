@@ -2,7 +2,7 @@ import 'package:handyman_provider_flutter/models/pagination_model.dart';
 import 'package:handyman_provider_flutter/models/service_model.dart';
 
 class SearchListResponse {
-  List<Service>? data;
+  List<ServiceData>? data;
   int? max;
   int? min;
   Pagination? pagination;
@@ -11,7 +11,7 @@ class SearchListResponse {
 
   factory SearchListResponse.fromJson(Map<String, dynamic> json) {
     return SearchListResponse(
-      data: json['data'] != null ? (json['data'] as List).map((i) => Service.fromJson(i)).toList() : null,
+      data: json['data'] != null ? (json['data'] as List).map((i) => ServiceData.fromJson(i)).toList() : null,
       max: json['max'],
       min: json['min'],
       pagination: json['pagination'] != null ? Pagination.fromJson(json['pagination']) : null,

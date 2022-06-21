@@ -27,6 +27,7 @@ class PaymentFragmentState extends State<PaymentFragment> {
   int totalItems = 0;
 
   bool hasError = false;
+  bool isApiCalled = false;
 
   @override
   void initState() {
@@ -56,6 +57,7 @@ class PaymentFragmentState extends State<PaymentFragment> {
 
     await getPaymentList(currentPage).then((value) {
       appStore.setLoading(false);
+      isApiCalled = true;
       hasError = false;
       totalItems = value.pagination!.totalItems!;
 
@@ -70,6 +72,7 @@ class PaymentFragmentState extends State<PaymentFragment> {
       setState(() {});
     }).catchError((e) {
       appStore.setLoading(false);
+      isApiCalled = true;
       hasError = true;
       setState(() {});
     });
@@ -141,18 +144,18 @@ class PaymentFragmentState extends State<PaymentFragment> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(context.translate.lblPaymentID, style: boldTextStyle(size: 14)),
-                                Text("#" + paymentDataList[index].id.validate().toString(), style: secondaryTextStyle()),
+                                Text(context.translate.lblPaymentID, style: secondaryTextStyle(size: 16)),
+                                Text("#" + paymentDataList[index].id.validate().toString(), style: boldTextStyle()),
                               ],
                             ).paddingSymmetric(vertical: 4),
                             Divider(thickness: 0.9),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(context.translate.paymentStatus, style: boldTextStyle(size: 14)),
+                                Text(context.translate.paymentStatus, style: secondaryTextStyle(size: 16)),
                                 Text(
                                   paymentDataList[index].paymentStatus.validate().capitalizeFirstLetter(),
-                                  style: secondaryTextStyle(),
+                                  style: boldTextStyle(),
                                 ),
                               ],
                             ).paddingSymmetric(vertical: 4),
@@ -160,11 +163,11 @@ class PaymentFragmentState extends State<PaymentFragment> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(context.translate.paymentMethod, style: boldTextStyle(size: 14)),
+                                Text(context.translate.paymentMethod, style: secondaryTextStyle(size: 16)),
                                 Text(
                                   (paymentDataList[index].paymentMethod.validate().isNotEmpty ? paymentDataList[index].paymentMethod.validate() : context.translate.notAvailable)
                                       .capitalizeFirstLetter(),
-                                  style: secondaryTextStyle(),
+                                  style: boldTextStyle(),
                                 ),
                               ],
                             ).paddingSymmetric(vertical: 4),
@@ -172,7 +175,7 @@ class PaymentFragmentState extends State<PaymentFragment> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(context.translate.lblAmount, style: boldTextStyle(size: 14)),
+                                Text(context.translate.lblAmount, style: secondaryTextStyle(size: 16)),
                                 PriceWidget(
                                   price: calculateTotalAmount(
                                     servicePrice: paymentDataList[index].price.validate(),
@@ -183,6 +186,7 @@ class PaymentFragmentState extends State<PaymentFragment> {
                                   ),
                                   color: primaryColor,
                                   size: 16,
+                                  isBoldText: true,
                                 ),
                               ],
                             ).paddingSymmetric(vertical: 4),
@@ -195,8 +199,8 @@ class PaymentFragmentState extends State<PaymentFragment> {
                 );
               },
             ),
-            Observer(builder: (_) => noDataFound(context).center().visible(!appStore.isLoading && paymentDataList.isEmpty && !hasError)),
             Text(errorSomethingWentWrong, style: secondaryTextStyle()).center().visible(hasError),
+            Observer(builder: (_) => noDataFound(context).center().visible(!appStore.isLoading && paymentDataList.isEmpty && isApiCalled)),
             Observer(builder: (_) => LoaderWidget().center().visible(appStore.isLoading)),
           ],
         ),

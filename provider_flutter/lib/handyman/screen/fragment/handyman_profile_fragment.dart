@@ -10,13 +10,13 @@ import 'package:handyman_provider_flutter/networks/rest_apis.dart';
 import 'package:handyman_provider_flutter/screens/about_us_screen.dart';
 import 'package:handyman_provider_flutter/screens/languages_screen.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
+import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:package_info/package_info.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ProfileFragment extends StatefulWidget {
   @override
@@ -24,6 +24,9 @@ class ProfileFragment extends StatefulWidget {
 }
 
 class _ProfileFragmentState extends State<ProfileFragment> {
+  UniqueKey keyForExperienceWidget = UniqueKey();
+  bool isAvailable = false;
+
   @override
   void initState() {
     super.initState();
@@ -32,6 +35,7 @@ class _ProfileFragmentState extends State<ProfileFragment> {
 
   void init() async {
     setStatusBarColor(primaryColor);
+    isAvailable = appStore.handymanAvailability == 1 ? true : false;
   }
 
   @override
@@ -62,12 +66,21 @@ class _ProfileFragmentState extends State<ProfileFragment> {
                           Stack(
                             alignment: Alignment.bottomRight,
                             children: [
-                              cachedImage(
-                                appStore.userProfileImage,
-                                height: 120,
-                                width: 120,
-                                fit: BoxFit.cover,
-                              ).cornerRadiusWithClipRRect(60),
+                              Container(
+                                decoration: boxDecorationDefault(
+                                  border: Border.all(color: primaryColor, width: 2),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Container(
+                                  margin: EdgeInsets.all(4),
+                                  child: cachedImage(
+                                    appStore.userProfileImage,
+                                    height: 120,
+                                    width: 120,
+                                    fit: BoxFit.cover,
+                                  ).cornerRadiusWithClipRRect(60),
+                                ),
+                              ),
                               Positioned(
                                 bottom: 0,
                                 right: 8,
@@ -77,7 +90,7 @@ class _ProfileFragmentState extends State<ProfileFragment> {
                                   decoration: boxDecorationDefault(
                                     shape: BoxShape.circle,
                                     color: primaryColor,
-                                    border: Border.all(color: context.cardColor, width: 2),
+                                    border: Border.all(width: 2, color: white),
                                   ),
                                   child: Icon(AntDesign.edit, color: white, size: 18),
                                 ).onTap(() {
@@ -120,7 +133,7 @@ class _ProfileFragmentState extends State<ProfileFragment> {
                             ],
                           ),
                           Container(height: 45, width: 1, color: appTextSecondaryColor.withOpacity(0.4)),
-                          ExperienceWidget(),
+                          ExperienceWidget(key: keyForExperienceWidget),
                         ],
                       ),
                     ),
@@ -128,19 +141,57 @@ class _ProfileFragmentState extends State<ProfileFragment> {
                 ],
               ),
               80.height,
+              if (appStore.isLoggedIn && isUserTypeHandyman)
+                Observer(builder: (context) {
+                  return AnimatedContainer(
+                    margin: EdgeInsets.all(16),
+                    decoration: boxDecorationWithRoundedCorners(
+                      backgroundColor: (appStore.handymanAvailability == 1 ? Colors.green : Colors.red).withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(defaultRadius),
+                    ),
+                    duration: 300.milliseconds,
+                    child: SettingItemWidget(
+                      padding: EdgeInsets.only(top: 8, bottom: 8, left: 16, right: 16),
+                      title: 'Available Status',
+                      subTitle: 'You are ${appStore.handymanAvailability == 1 ? 'Online' : 'Offline'}',
+                      subTitleTextColor: appStore.handymanAvailability == 1 ? Colors.green : Colors.red,
+                      trailing: Switch(
+                        value: appStore.handymanAvailability == 1 ? true : false,
+                        activeColor: Colors.green,
+                        onChanged: (v) {
+                          isAvailable = v;
+                          setState(() {});
+                          appStore.setHandymanAvailability(isAvailable ? 1 : 0, isInitializing: true);
+                          Map request = {
+                            "is_available": isAvailable ? 1 : 0,
+                            "id": appStore.userId,
+                          };
+                          updateHandymanAvailabilityApi(request: request).then((value) {
+                            toast(value.message);
+                          }).catchError((e) {
+                            appStore.setHandymanAvailability(isAvailable ? 0 : 1, isInitializing: true);
+                            toast(e.toString());
+                          });
+                        },
+                      ),
+                    ),
+                  );
+                }),
               SettingItemWidget(
                 leading: Image.asset(language, height: 18, width: 18, color: context.iconColor),
                 title: context.translate.language,
                 trailing: Icon(Icons.chevron_right, color: appStore.isDarkMode ? white : gray.withOpacity(0.8), size: 24),
                 onTap: () {
-                  LanguagesScreen().launch(context);
+                  LanguagesScreen().launch(context).then((value) {
+                    keyForExperienceWidget = UniqueKey();
+                  });
                 },
               ),
-              Divider(height: 4, endIndent: 16, indent: 16, color: gray.withOpacity(0.3)),
+              Divider(height: 0, endIndent: 16, indent: 16, color: gray.withOpacity(0.3)),
               SettingItemWidget(
                 leading: Image.asset(
                   ic_theme,
-                  height: 18,
+                  height: 19,
                   width: 18,
                   color: appStore.isDarkMode ? white : gray.withOpacity(0.8),
                 ),
@@ -154,16 +205,16 @@ class _ProfileFragmentState extends State<ProfileFragment> {
                   );
                 },
               ),
-              Divider(height: 4, endIndent: 16, indent: 16, color: gray.withOpacity(0.3)),
+              Divider(height: 0, endIndent: 16, indent: 16, color: gray.withOpacity(0.3)),
               SettingItemWidget(
-                leading: Image.asset(changePassword, height: 20, width: 20, color: context.iconColor),
+                leading: Image.asset(changePassword, height: 20, width: 18, color: context.iconColor),
                 title: context.translate.changePassword,
                 trailing: Icon(Icons.chevron_right, color: appStore.isDarkMode ? white : gray.withOpacity(0.8), size: 24),
                 onTap: () {
                   ChangePasswordScreen().launch(context, pageRouteAnimation: PageRouteAnimation.Slide);
                 },
               ),
-              Divider(height: 0, thickness: 1, indent: 15.0, endIndent: 15.0).visible(appStore.isLoggedIn),
+              Divider(height: 0, indent: 16, endIndent: 16, color: gray.withOpacity(0.3)).visible(appStore.isLoggedIn),
               SettingItemWidget(
                 leading: Image.asset(about, height: 18, width: 18, color: appStore.isDarkMode ? white : gray.withOpacity(0.8)),
                 title: context.translate.lblAbout,
@@ -172,15 +223,20 @@ class _ProfileFragmentState extends State<ProfileFragment> {
                   AboutUsScreen().launch(context, pageRouteAnimation: PageRouteAnimation.Slide);
                 },
               ),
-              /*Divider(height: 0, thickness: 1, indent: 15.0, endIndent: 15.0).visible(appStore.isLoggedIn),
-              SettingItemWidget(
-                leading: Image.asset(purchase, height: 20, width: 20, color: appStore.isDarkMode ? white : gray.withOpacity(0.8)),
-                title: context.translate.lblPurchaseCode,
-                trailing: Icon(Icons.chevron_right, color: appStore.isDarkMode ? white : gray.withOpacity(0.8), size: 24),
-                onTap: () {
-                  launch(PURCHASE_URL);
-                },
-              ),*/
+              if (isIqonicProduct)
+                Column(
+                  children: [
+                    Divider(height: 0, indent: 16, endIndent: 16, color: gray.withOpacity(0.3)).visible(appStore.isLoggedIn),
+                    SettingItemWidget(
+                      leading: Image.asset(purchase, height: 19, width: 18, color: appStore.isDarkMode ? white : gray.withOpacity(0.8)),
+                      title: context.translate.lblPurchaseCode,
+                      trailing: Icon(Icons.chevron_right, color: appStore.isDarkMode ? white : gray.withOpacity(0.8), size: 24),
+                      onTap: () {
+                        launchUrlCustomTab(PURCHASE_URL);
+                      },
+                    ),
+                  ],
+                ),
               20.height,
               TextButton(
                 child: Text(context.translate.logout, style: boldTextStyle(color: primaryColor, size: 18)),

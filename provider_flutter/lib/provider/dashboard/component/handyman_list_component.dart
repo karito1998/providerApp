@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:handyman_provider_flutter/main.dart';
-import 'package:handyman_provider_flutter/models/dashboard_response.dart';
+import 'package:handyman_provider_flutter/models/user_data.dart';
 import 'package:handyman_provider_flutter/provider/dashboard/widgets/handyman_widget.dart';
 import 'package:handyman_provider_flutter/provider/handyman/handyman_list_screen.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
@@ -9,12 +9,14 @@ import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class HandymanListComponent extends StatelessWidget {
-  final List<Handyman> list;
+  final List<UserData> list;
 
   HandymanListComponent({required this.list});
 
   @override
   Widget build(BuildContext context) {
+    if (list.isEmpty) return Offstage();
+
     return Container(
       color: context.cardColor,
       margin: EdgeInsets.only(top: 16),
@@ -29,7 +31,7 @@ class HandymanListComponent extends StatelessWidget {
               if (list.length > 4)
                 TextButton(
                   onPressed: () {
-                    HandymanListScreen(list: list).launch(context);
+                    HandymanListScreen().launch(context);
                   },
                   child: Text(context.translate.viewAll, style: secondaryTextStyle()),
                 )
@@ -43,7 +45,7 @@ class HandymanListComponent extends StatelessWidget {
                 runSpacing: 16,
                 children: List.generate(
                   list.take(4).length,
-                  (index) {
+                      (index) {
                     return HandymanWidget(data: list[index], width: context.width() * 0.48 - 20);
                   },
                 ),

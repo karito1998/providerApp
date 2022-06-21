@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:handyman_provider_flutter/components/back_widget.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/service_address_response.dart';
-import 'package:handyman_provider_flutter/models/user_list_response.dart';
+import 'package:handyman_provider_flutter/models/user_data.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
@@ -17,7 +17,7 @@ import 'package:nb_utils/nb_utils.dart';
 
 class RegisterUserFormComponent extends StatefulWidget {
   final String? user_type;
-  final UserListData? data;
+  final UserData? data;
   final bool isUpdate;
 
   RegisterUserFormComponent({this.user_type, this.data, this.isUpdate = false});
@@ -260,11 +260,9 @@ class RegisterUserFormComponentState extends State<RegisterUserFormComponent> {
                         fillColor: context.scaffoldBackgroundColor,
                       ),
                       onFieldSubmitted: (s) {
-                        if (getStringAsync(USER_EMAIL) != DEFAULT_PROVIDER_EMAIL) {
+                        ifNotTester(context, () {
                           register();
-                        } else {
-                          toast(context.translate.lblUnAuthorized);
-                        }
+                        });
                       },
                     ).visible(!widget.isUpdate),
                     24.height,
@@ -275,11 +273,9 @@ class RegisterUserFormComponentState extends State<RegisterUserFormComponent> {
                       textStyle: primaryTextStyle(color: white),
                       width: context.width() - context.navigationBarHeight,
                       onTap: () {
-                        if (!appStore.isTester) {
+                        ifNotTester(context, () {
                           register();
-                        } else {
-                          toast(context.translate.lblUnAuthorized);
-                        }
+                        });
                       },
                     ),
                     16.height,

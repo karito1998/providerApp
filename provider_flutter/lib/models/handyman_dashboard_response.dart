@@ -20,6 +20,8 @@ class HandymanDashBoardResponse {
   PrivacyPolicy? term_conditions;
   String? inquriy_email;
   String? helpline_number;
+  List<LanguageOption>? language_option;
+  int? isHandymanAvailable;
 
   HandymanDashBoardResponse({
     this.commission,
@@ -36,6 +38,8 @@ class HandymanDashBoardResponse {
     this.term_conditions,
     this.inquriy_email,
     this.helpline_number,
+    this.language_option,
+    this.isHandymanAvailable,
   });
 
   HandymanDashBoardResponse.fromJson(Map<String, dynamic> json) {
@@ -51,7 +55,9 @@ class HandymanDashBoardResponse {
     term_conditions = json['term_conditions'] != null ? PrivacyPolicy.fromJson(json['term_conditions']) : null;
     inquriy_email = json['inquriy_email'];
     helpline_number = json['helpline_number'];
-    List<String> months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+    List<String> months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+    language_option = json['language_option'] != null ? (json['language_option'] as List).map((i) => LanguageOption.fromJson(i)).toList() : null;
+    isHandymanAvailable = json['isHandymanAvailable'];
 
     chartArray = [];
     monthData = [];
@@ -93,6 +99,12 @@ class HandymanDashBoardResponse {
     if (this.handyman_reviews != null) {
       data['handyman_reviews'] = this.handyman_reviews!.map((v) => v.toJson()).toList();
     }
+
+    if (this.language_option != null) {
+      data['language_option'] = this.language_option!.map((v) => v.toJson()).toList();
+    }
+    data['isHandymanAvailable'] = this.isHandymanAvailable;
+
     return data;
   }
 }

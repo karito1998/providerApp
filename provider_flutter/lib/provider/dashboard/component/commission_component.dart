@@ -29,7 +29,7 @@ class CommissionComponent extends StatelessWidget {
               RichTextWidget(
                 textAlign: TextAlign.center,
                 list: [
-                  TextSpan(text: '${context.translate.lblProviderType} : ', style: secondaryTextStyle(size: 14)),
+                  TextSpan(text: '${context.translate.lblProviderType}: ', style: secondaryTextStyle(size: 14)),
                   TextSpan(text: '${commission.name.validate()}', style: boldTextStyle(size: 14)),
                 ],
               ),
@@ -37,7 +37,7 @@ class CommissionComponent extends StatelessWidget {
               RichTextWidget(
                 textAlign: TextAlign.center,
                 list: [
-                  TextSpan(text: '${context.translate.lblMyCommission} : ', style: secondaryTextStyle(size: 14)),
+                  TextSpan(text: '${context.translate.lblMyCommission}: ', style: secondaryTextStyle(size: 14)),
                   TextSpan(
                     text: isCommissionTypePercent(commission.type) ? '${commission.commission.validate()} %' : '${getStringAsync(CURRENCY_COUNTRY_SYMBOL)}${commission.commission.validate()}',
                     style: boldTextStyle(size: 14),

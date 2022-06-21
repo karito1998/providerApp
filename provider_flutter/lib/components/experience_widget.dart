@@ -18,17 +18,19 @@ class _ExperienceWidgetState extends State<ExperienceWidget> {
   @override
   void initState() {
     super.initState();
-    init();
+    afterBuildCreated(() {
+      init();
+    });
   }
 
   void init() async {
     Duration duration = DateTime.now().difference(DateTime.parse(appStore.createdAt));
 
     if (duration.inDays < 365) {
-      temp = 'Día';
+      temp = context.translate.lblDay;
       value = duration.inDays;
     } else if (duration.inDays >= 365) {
-      temp = 'Año';
+      temp = context.translate.lblYear;
       value = (duration.inDays / 365).floor();
     }
 

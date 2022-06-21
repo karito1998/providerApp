@@ -6,7 +6,7 @@ part of 'AppStore.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$AppStore on _AppStore, Store {
   Computed<String>? _$userFullNameComputed;
@@ -412,6 +412,21 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
+  late final _$designationAtom = Atom(name: '_AppStore.designation', context: context);
+
+  @override
+  String get designation {
+    _$designationAtom.reportRead();
+    return super.designation;
+  }
+
+  @override
+  set designation(String value) {
+    _$designationAtom.reportWrite(value, super.designation, () {
+      super.designation = value;
+    });
+  }
+
   late final _$userIdAtom = Atom(name: '_AppStore.userId', context: context);
 
   @override
@@ -592,6 +607,21 @@ mixin _$AppStore on _AppStore, Store {
     });
   }
 
+  late final _$handymanAvailabilityAtom = Atom(name: '_AppStore.handymanAvailability', context: context);
+
+  @override
+  int get handymanAvailability {
+    _$handymanAvailabilityAtom.reportRead();
+    return super.handymanAvailability;
+  }
+
+  @override
+  set handymanAvailability(int value) {
+    _$handymanAvailabilityAtom.reportWrite(value, super.handymanAvailability, () {
+      super.handymanAvailability = value;
+    });
+  }
+
   late final _$setEarningTypeAsyncAction = AsyncAction('_AppStore.setEarningType', context: context);
 
   @override
@@ -709,6 +739,13 @@ mixin _$AppStore on _AppStore, Store {
   @override
   Future<void> setUserId(int val, {bool isInitializing = false}) {
     return _$setUserIdAsyncAction.run(() => super.setUserId(val, isInitializing: isInitializing));
+  }
+
+  late final _$setDesignationAsyncAction = AsyncAction('_AppStore.setDesignation', context: context);
+
+  @override
+  Future<void> setDesignation(String val, {bool isInitializing = false}) {
+    return _$setDesignationAsyncAction.run(() => super.setDesignation(val, isInitializing: isInitializing));
   }
 
   late final _$setUserTypeAsyncAction = AsyncAction('_AppStore.setUserType', context: context);
@@ -844,6 +881,13 @@ mixin _$AppStore on _AppStore, Store {
     return _$setLanguageAsyncAction.run(() => super.setLanguage(val, context: context));
   }
 
+  late final _$setHandymanAvailabilityAsyncAction = AsyncAction('_AppStore.setHandymanAvailability', context: context);
+
+  @override
+  Future<void> setHandymanAvailability(int val, {bool isInitializing = false}) {
+    return _$setHandymanAvailabilityAsyncAction.run(() => super.setHandymanAvailability(val, isInitializing: isInitializing));
+  }
+
   late final _$_AppStoreActionController = ActionController(name: '_AppStore', context: context);
 
   @override
@@ -895,6 +939,7 @@ stateId: ${stateId},
 cityId: ${cityId},
 address: ${address},
 playerId: ${playerId},
+designation: ${designation},
 userId: ${userId},
 providerId: ${providerId},
 serviceAddressId: ${serviceAddressId},
@@ -907,6 +952,7 @@ initialAdCount: ${initialAdCount},
 totalBooking: ${totalBooking},
 createdAt: ${createdAt},
 earningType: ${earningType},
+handymanAvailability: ${handymanAvailability},
 userFullName: ${userFullName},
 earningTypeCommission: ${earningTypeCommission},
 earningTypeSubscription: ${earningTypeSubscription}

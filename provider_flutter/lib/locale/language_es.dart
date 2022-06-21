@@ -1,980 +1,997 @@
-import 'package:handyman_provider_flutter/locale/languag_es.dart';
+import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 class LanguageEs extends Languages {
   @override
-  String planAboutToExpire(int days) => 'Tu plan expira en $days dias';
+    String planAboutToExpire(int days) => 'Tu plan expira en $days dias';
 
-  @override
-  String appName = 'Proveedor';
+    @override
+    String appName = 'Proveedor';
 
-  @override
-  String provider = 'Proveedor';
+    @override
+    String provider = 'Proveedor';
 
-  @override
-  String welcome = 'Bienvenido';
+    @override
+    String lblProviderDashboard = "Tablero de proveedores";
 
-  @override
-  String back = 'Regresar';
+    @override
+    String welcome = 'Bienvenido';
 
-  @override
-  String handyman = 'Personal de mantenimiento';
+    @override
+    String back = 'Regresar';
 
-  @override
-  String signIn = 'Iniciar sesión';
+    @override
+    String lblHandymanDashboard = 'Panel de control';
 
-  @override
-  String signUp = 'Registrarse';
-  @override
-  String signUpSuccess = "Registro exitoso";
+    @override
+    String handyman = 'Personal de mantenimiento';
 
-  @override
-  String signInTitle = 'Iniciar sesión en tu cuanta';
+    @override
+    String signIn = 'Iniciar sesión';
 
-  @override
-  String signUpTitle = 'Regístate en su cuenta';
+    @override
+    String signUp = 'Registrarse';
+    @override
+    String signUpSuccess = "Registro exitoso";
 
-  @override
-  String hintNameTxt = 'Nombre';
+    @override
+    String signInTitle = 'Iniciar sesión en tu cuanta';
 
-  @override
-  String hintFirstNameTxt = 'Primer nombre';
+    @override
+    String signUpTitle = 'Regístate en su cuenta';
 
-  @override
-  String hintLastNameTxt = 'Apellido';
+    @override
+    String hintNameTxt = 'Nombre';
 
-  @override
-  String hintContactNumberTxt = 'Número de contacto';
+    @override
+    String hintFirstNameTxt = 'Primer nombre';
 
-  @override
-  String hintEmailAddressTxt = 'Dirección de correo electrónico';
+    @override
+    String hintLastNameTxt = 'Apellido';
 
-  @override
-  String hintUserNameTxt = 'Nombre de usuario';
+    @override
+    String hintContactNumberTxt = 'Número de contacto';
 
-  @override
-  String hintPasswordTxt = 'Contraseña';
+    @override
+    String hintEmailAddressTxt = 'Dirección de correo electrónico';
 
-  @override
-  String hintReenterPasswordTxt = 'confirma tu contraseña';
+    @override
+    String hintUserNameTxt = 'Nombre de usuario';
 
-  @override
-  String confirm = 'Confirmar';
+    @override
+    String hintPasswordTxt = 'Contraseña';
 
-  @override
-  String hintEmailTxt = 'Introduce tu correo electrónico';
+    @override
+    String hintReenterPasswordTxt = 'confirma tu contraseña';
 
-  @override
-  String hintConfirmPasswordTxt = 'Ingresa su contraseña de confirmación';
+    @override
+    String confirm = 'Confirmar';
 
-  @override
-  String forgotPassword = '¿Has olvidado tu contraseña?';
+    @override
+    String hintEmailTxt = 'Introduce tu correo electrónico';
 
-  @override
-  String reset = 'Reiniciar';
+    @override
+    String hintConfirmPasswordTxt = 'Ingresa su contraseña de confirmación';
 
-  @override
-  String alreadyHaveAccountTxt = 'Ya tienes una cuenta';
+    @override
+    String forgotPassword = '¿Has olvidado tu contraseña?';
 
-  @override
-  String rememberMe = 'Recuérdame';
+    @override
+    String reset = 'Reiniciar';
 
-  @override
-  String forgotPasswordTitleTxt = 'Ingrese el correo electrónico para restablecer tu contraseña';
+    @override
+    String alreadyHaveAccountTxt = 'Ya tienes una cuenta';
 
-  @override
-  String resetPassword = 'Restablecer la contraseña';
+    @override
+    String rememberMe = 'Recuérdame';
 
-  @override
-  String loginSuccessfully = 'Sesion Iniciada';
+    @override
+    String forgotPasswordTitleTxt = 'Ingrese el correo electrónico para restablecer tu contraseña';
 
-  @override
-  String editProfile = 'Editar perfil';
+    @override
+    String resetPassword = 'Restablecer la contraseña';
 
-  @override
-  String saveChanges = 'Guardar cambios';
+    @override
+    String loginSuccessfully = 'Sesion Iniciada';
 
-  @override
-  String camera = 'Cámara';
+    @override
+    String editProfile = 'Editar perfil';
 
-  @override
-  String language = 'Idiomas';
+    @override
+    String saveChanges = 'Guardar cambios';
 
-  @override
-  String supportLanguage = 'Elija el idioma que prefieres';
+    @override
+    String camera = 'Cámara';
 
-  @override
-  String appTheme = 'Tema de la aplicación';
+    @override
+    String language = 'Idiomas';
 
-  @override
-  String bookingHistory = 'Historial de reserva';
+    @override
+    String supportLanguage = 'Elija el idioma que prefieres';
 
-  @override
-  String logout = 'Cerrar sesión';
+    @override
+    String appTheme = 'Tema de la aplicación';
 
-  @override
-  String afterLogoutTxt = '¿Quieres cerrar sesión en la aplicación? ¡Siempre puedes iniciar sesión de nuevo!';
+    @override
+    String bookingHistory = 'Historial de reserva';
 
-  @override
-  String chooseTheme = 'Elige el tema de la aplicación';
+    @override
+    String logout = 'Cerrar sesión';
 
-  @override
-  String selectCountry = 'Selecciona país';
+    @override
+    String afterLogoutTxt = '¿Quieres cerrar sesión en la aplicación? ¡Siempre puedes iniciar sesión de nuevo!';
 
-  @override
-  String selectState = 'Selecciona estado';
+    @override
+    String chooseTheme = 'Elige el tema de la aplicación';
 
-  @override
-  String selectCity = 'Selecciona ciudad';
+    @override
+    String selectCountry = 'Selecciona país';
 
-  @override
-  String changePassword = 'Cambiar la contraseña';
+    @override
+    String selectState = 'Selecciona estado';
 
-  @override
-  String passwordNotMatch = 'Las contraseñas no coinciden';
+    @override
+    String selectCity = 'Selecciona ciudad';
 
-  @override
-  String doNotHaveAccount = '¿No tienes una cuenta?';
+    @override
+    String changePassword = 'Cambiar la contraseña';
 
-  @override
-  String hintNewPasswordTxt = 'Introduce tu nueva contraseña';
+    @override
+    String passwordNotMatch = 'Las contraseñas no coinciden';
 
-  @override
-  String hintOldPasswordTxt = 'Ingresa tu contraseña anterior';
+    @override
+    String doNotHaveAccount = '¿No tienes una cuenta?';
 
-  @override
-  String home = 'Hogar';
+    @override
+    String hintNewPasswordTxt = 'Introduce tu nueva contraseña';
 
-  @override
-  String review = 'Revisar';
+    @override
+    String hintOldPasswordTxt = 'Ingresa tu contraseña anterior';
 
-  @override
-  String notification = 'Notificaciones';
+    @override
+    String home = 'Hogar';
 
-  @override
-  String accept = 'Aceptar';
+    @override
+    String review = 'Revisar';
 
-  @override
-  String decline = 'Rechazar';
+    @override
+    String notification = 'Notificaciones';
 
-  @override
-  String noDataFound = 'Datos no encontrados';
+    @override
+    String accept = 'Aceptar';
 
-  @override
-  String pending = 'Pendiente';
+    @override
+    String decline = 'Rechazar';
 
-  @override
-  String paymentPending = 'Pago pendiente';
+    @override
+    String noDataFound = 'Datos no encontrados';
 
-  @override
-  String darkMode = 'Modo oscuro';
+    @override
+    String pending = 'Pendiente';
 
-  @override
-  String lightMode = 'Modo claro';
+    @override
+    String paymentPending = 'Pago pendiente';
 
-  @override
-  String systemDefault = 'Modo de sistema';
+    @override
+    String darkMode = 'Modo oscuro';
 
-  @override
-  String serviceDetail = 'Detalle de servicio';
+    @override
+    String lightMode = 'Modo claro';
 
-  @override
-  String confirmationRequestTxt = '¿Estás seguro?';
+    @override
+    String systemDefault = 'Modo de sistema';
 
-  @override
-  String notAvailable = 'No disponible';
+    @override
+    String serviceDetail = 'Detalle de servicio';
 
-  @override
-  String lblGallery = 'Galería';
+    @override
+    String confirmationRequestTxt = '¿Estás seguro?';
 
-  @override
-  String markAsRead = 'Marcar todo como leido';
+    @override
+    String notAvailable = 'No disponible';
 
-  @override
-  String cantLogin = 'No puedes ingresar';
+    @override
+    String lblGallery = 'Galería';
 
-  @override
-  String pleaseContactAdmin = 'Por favor, ponte en contacto con el administrador';
+    @override
+    String markAsRead = 'Marcar todo como leido';
 
-  @override
-  String lblOk = 'OK';
+    @override
+    String cantLogin = 'No puedes ingresar';
 
-  @override
-  String totalWorking = 'Trabajo total';
+    @override
+    String pleaseContactAdmin = 'Por favor, ponte en contacto con el administrador';
 
-  @override
-  String paymentStatus = 'Estado de pago';
+    @override
+    String lblOk = 'OK';
 
-  @override
-  String paymentMethod = 'Método de pago';
+    @override
+    String totalWorking = 'Trabajo total';
 
-  @override
-  String category = 'Categoría';
+    @override
+    String paymentStatus = 'Estado de pago';
 
-  @override
-  String hintAddress = 'Ingresa la direccion';
+    @override
+    String paymentMethod = 'Método de pago';
 
-  @override
-  String lblCheckInternet = 'Asegúrate de estar conectado a internet';
+    @override
+    String category = 'Categoría';
 
-  @override
-  String quantity = 'Cantidad';
+    @override
+    String hintAddress = 'Ingresa la direccion';
 
-  @override
-  String paymentReceived = 'Pago recibido';
+    @override
+    String lblCheckInternet = 'Asegúrate de estar conectado a internet';
 
-  @override
-  String lblInternetWait = 'La página volverá cuando Internet esté disponible.';
+    @override
+    String quantity = 'Cantidad';
 
-  @override
-  String lblYes = 'sí';
+    @override
+    String paymentReceived = 'Pago recibido';
 
-  @override
-  String lblNo = 'No';
+    @override
+    String lblInternetWait = 'La página volverá cuando Internet esté disponible.';
 
-  @override
-  String lblReason = 'Razón';
+    @override
+    String lblYes = 'sí';
 
-  @override
-  String cantChangePw = 'No puedes cambiar la contraseña de esta cuenta';
+    @override
+    String lblNo = 'No';
 
-  @override
-  String lblSelectHandyman = 'Por favor selecciona Handyman';
+    @override
+    String lblReason = 'Razón';
 
-  @override
-  String lblAssign = 'Asignar';
+    @override
+    String cantChangePw = 'No puedes cambiar la contraseña de esta cuenta';
 
-  @override
-  String lblCall = 'Llama';
+    @override
+    String lblSelectHandyman = 'Por favor selecciona Handyman';
 
-  @override
-  String lblLocation = 'Localización';
+    @override
+    String lblAssign = 'Asignar';
 
-  @override
-  String lblAssignHandyman = 'Asignar manitas';
+    @override
+    String lblCall = 'Llama';
 
-  @override
-  String lblAssigned = 'Asignado';
+    @override
+    String lblLocation = 'Localización';
 
-  @override
-  String viewAll = 'Ver todo';
+    @override
+    String lblAssignHandyman = 'Asignar manitas';
 
-  @override
-  String lblMonthlyRevenue = 'ganancia mensual';
+    @override
+    String lblAssigned = 'Asignado';
 
-  @override
-  String lblRevenue = 'Ingresos';
+    @override
+    String viewAll = 'Ver todo';
 
-  @override
-  String lblAddHandyman = 'Añadir manitas';
+    @override
+    String lblMonthlyRevenue = 'ganancia mensual';
 
-  @override
-  String hintName = 'Ingresa el nombre';
+    @override
+    String lblRevenue = 'Ingresos';
 
-  @override
-  String hintLastName = 'Introduce el apellido';
+    @override
+    String lblAddHandyman = 'Añadir manitas';
 
-  @override
-  String hintEmail = 'Introduce la dirección de correo electrónico';
+    @override
+    String hintName = 'Ingresa el nombre';
 
-  @override
-  String hintUserName = 'Introduce tu nombre de usuario';
+    @override
+    String hintLastName = 'Introduce el apellido';
 
-  @override
-  String hintContact = 'Ingresa el número de contacto';
+    @override
+    String hintEmail = 'Introduce la dirección de correo electrónico';
 
-  @override
-  String hintPass = 'Introduce la contraseña';
+    @override
+    String hintUserName = 'Introduce tu nombre de usuario';
 
-  @override
-  String lblBooking = 'Reserva';
+    @override
+    String hintContact = 'Ingresa el número de contacto';
 
-  @override
-  String lblTotalBooking = 'Reserva total';
+    @override
+    String hintPass = 'Introduce la contraseña';
 
-  @override
-  String lblTotalService = 'Total servicios';
+    @override
+    String lblBooking = 'Reserva';
 
-  @override
-  String lblTotalHandyman = 'Handyman total';
+    @override
+    String lblTotalBooking = 'Reserva total';
 
-  @override
-  String lblTotalRevenue = 'Total Ingresos';
+    @override
+    String lblTotalService = 'Total servicios';
 
-  @override
-  String lblPayment = 'Pago';
+    @override
+    String lblTotalHandyman = 'Handyman total';
 
-  @override
-  String lblBookingID = 'ID de reserva';
+    @override
+    String lblTotalRevenue = 'Total Ingresos';
 
-  @override
-  String lblPaymentID = 'ID de pago';
+    @override
+    String lblPayment = 'Pago';
 
-  @override
-  String lblAmount = 'Monto';
+    @override
+    String lblBookingID = 'ID de reserva';
 
-  @override
-  String toastConnected = 'Conectado a Internet ';
+    @override
+    String lblPaymentID = 'ID de pago';
 
-  @override
-  String hintAddService = 'Añadir servicio';
+    @override
+    String lblAmount = 'Monto';
 
-  @override
-  String hintServiceName = 'Ingresa el nombre del servicio';
+    @override
+    String toastConnected = 'Conectado a Internet ';
 
-  @override
-  String hintSelectCategory = 'Selecciona una categoría';
+    @override
+    String hintAddService = 'Añadir servicio';
 
-  @override
-  String hintSelectType = 'Selecciona tipo';
+    @override
+    String hintServiceName = 'Ingresa el nombre del servicio';
 
-  @override
-  String hintSelectStatus = 'Selecciona Estado';
+    @override
+    String hintSelectCategory = 'Selecciona una categoría';
 
-  @override
-  String hintPrice = 'Precio';
+    @override
+    String hintSelectType = 'Selecciona tipo';
 
-  @override
-  String hintDiscount = 'Descuento';
+    @override
+    String hintSelectStatus = 'Selecciona Estado';
 
-  @override
-  String hintDuration = 'Duración';
+    @override
+    String hintPrice = 'Precio';
 
-  @override
-  String hintDescription = 'Descripción';
+    @override
+    String hintDiscount = 'Descuento';
 
-  @override
-  String hintSetAsFeature = 'Establecer como característica';
+    @override
+    String hintDuration = 'Duración';
 
-  @override
-  String hintAdd = 'Agregar';
+    @override
+    String hintDescription = 'Descripción';
 
-  @override
-  String hintChooseImage = 'Elegir imagen';
+    @override
+    String hintSetAsFeature = 'Establecer como característica';
 
-  @override
-  String customer = 'Cliente';
+    @override
+    String hintAdd = 'Agregar';
 
-  @override
-  String lblCategory = 'Categoría';
+    @override
+    String hintChooseImage = 'Elegir imagen';
 
-  @override
-  String lblProfile = 'Perfil';
+    @override
+    String customer = 'Cliente';
 
-  @override
-  String lblAllHandyman = 'Todo manitas';
+    @override
+    String lblCategory = 'Categoría';
 
-  @override
-  String lblTime = 'Tiempo';
+    @override
+    String lblProfile = 'Perfil';
 
-  @override
-  String lblService = 'Servicio';
+    @override
+    String lblAllHandyman = 'Todo manitas';
 
-  @override
-  String lblAllService = 'Todo el servicio';
+    @override
+    String lblTime = 'Tiempo';
 
-  @override
-  String lblAddService = 'Añadir servicio';
+    @override
+    String lblService = 'Servicio';
 
-  @override
-  String lblCreateAccount = 'Crea una cuenta';
+    @override
+    String lblAllService = 'Todo el servicio';
 
-  @override
-  String lblChat = 'Chat';
+    @override
+    String lblAddService = 'Añadir servicio';
 
-  @override
-  String dltMessage = 'Borrar mensaje';
+    @override
+    String lblCreateAccount = 'Crea una cuenta';
 
-  @override
-  String lblImg = 'Imagen';
+    @override
+    String lblChat = 'Chat';
 
-  @override
-  String lblVideo = 'Video';
+    @override
+    String dltMessage = 'Borrar mensaje';
 
-  @override
-  String lblAudio = 'Audio';
+    @override
+    String lblImg = 'Imagen';
 
-  @override
-  String selectAddress = 'Seleccione Servicio Addresses';
+    @override
+    String lblVideo = 'Video';
 
-  @override
-  String btnSave = 'Ahorrar';
+    @override
+    String lblAudio = 'Audio';
 
-  @override
-  String editAddress = 'Editar dirección de servicio';
+    @override
+    String selectAddress = 'Seleccione Servicio Addresses';
 
-  @override
-  String lblUpdate = 'Actualizar';
+    @override
+    String btnSave = 'Ahorrar';
 
-  @override
-  String lblEdit = 'Editar';
+    @override
+    String editAddress = 'Editar dirección de servicio';
 
-  @override
-  String lblDelete = 'Borrar';
+    @override
+    String lblUpdate = 'Actualizar';
 
-  @override
-  String lblServiceAddress = 'Direcciones de servicio';
+    @override
+    String lblEdit = 'Editar';
 
-  @override
-  String lblServices = 'Servicios';
+    @override
+    String lblDelete = 'Borrar';
 
-  @override
-  String lblEditService = 'Servicio de edición';
+    @override
+    String lblServiceAddress = 'Direcciones de servicio';
 
-  @override
-  String selectImgNote = "Nota: puedes cargar imágenes con extensiones 'jpg , 'png , 'jpeg   y puede seleccionar varias imágenes";
+    @override
+    String lblServices = 'Servicios';
 
-  @override
-  String lblDurationHr = 'Duración: horas';
+    @override
+    String lblEditService = 'Servicio de edición';
 
-  @override
-  String lblDurationMin = 'Duración: Minuto';
+    @override
+    String selectImgNote = "Nota: puedes cargar imágenes con extensiones 'jpg , 'png , 'jpeg   y puede seleccionar varias imágenes";
 
-  @override
-  String lblError = 'ERROR:';
+    @override
+    String lblDurationHr = 'Duración: horas';
 
-  @override
-  String lblWriteMsg = 'Escribe un mensaje...';
+    @override
+    String lblDurationMin = 'Duración: Minuto';
 
-  @override
-  String lblWaitForAcceptReq = 'Por favor, espera a que el administrador acepte su solicitud';
+    @override
+    String lblError = 'ERROR:';
 
-  @override
-  String lblContactAdmin = 'Ponte en contacto con Admin';
+    @override
+    String lblWriteMsg = 'Escribe un mensaje...';
 
-  @override
-  String lblAddServiceAddress = 'Añadir dirección de servicio';
+    @override
+    String lblWaitForAcceptReq = 'Por favor, espera a que el administrador acepte su solicitud';
 
-  @override
-  String lblAvailableAddress = 'Direcciones de servicio disponibles';
+    @override
+    String lblContactAdmin = 'Ponte en contacto con Admin';
 
-  @override
-  String lblEnterValidEmailPw = 'Ingresa un correo electrónico válido y la contraseña';
+    @override
+    String lblAddServiceAddress = 'Añadir dirección de servicio';
 
-  @override
-  String lblSomethingWrong = 'Algo salió mal';
+    @override
+    String lblAvailableAddress = 'Direcciones de servicio disponibles';
 
-  @override
-  String lblNotFoundUser = 'Usuario no encontrado';
+    @override
+    String lblEnterValidEmailPw = 'Ingresa un correo electrónico válido y la contraseña';
 
-  @override
-  String lblNoUserFound = 'Usuario no encontrado';
+    @override
+    String lblSomethingWrong = 'Algo salió mal';
 
-  @override
-  String lblNoDataFound = 'Datos no encontrados';
+    @override
+    String lblNotFoundUser = 'Usuario no encontrado';
 
-  @override
-  String lblInvalidUrl = 'URL invalida:';
-  @override
-  String lblInvalidEmail = 'El correo no es valido';
-  @override
-  String lblInvalidUsername = 'El nombre de usuario no puede contener espacios';
-  @override
-  String lblInvalidEmailSpaces = 'El correo no puede contener espacios';
-  @override
-  String tycRequired = 'Debes aceptar los';
-  @override
-  String errorPasswordLength = 'La contraseña debe tener más de 8 caracteres';
+    @override
+    String lblNoUserFound = 'Usuario no encontrado';
 
-  @override
-  String hintEmailAddress = 'Correo electrónico';
+    @override
+    String lblNoDataFound = 'Datos no encontrados';
 
-  @override
-  String hintPassword = 'Contraseña';
+    @override
+    String lblInvalidUrl = 'URL invalida:';
+    @override
+    String lblInvalidEmail = 'El correo no es valido';
+    @override
+    String lblInvalidUsername = 'El nombre de usuario no puede contener espacios';
+    @override
+    String lblInvalidEmailSpaces = 'El correo no puede contener espacios';
+    @override
+    String tycRequired = 'Debes aceptar los';
+    @override
+    String errorPasswordLength = 'La contraseña debe tener más de 8 caracteres';
 
-  @override
-  String hintFirstNm = 'Primer nombre';
+    @override
+    String hintEmailAddress = 'Correo electrónico';
 
-  @override
-  String hintLastNm = 'Apellido';
+    @override
+    String hintPassword = 'Contraseña';
 
-  @override
-  String hintUserNm = 'Nombre de usuario';
+    @override
+    String hintFirstNm = 'Primer nombre';
 
-  @override
-  String hintContactNumber = 'Número de contacto';
+    @override
+    String hintLastNm = 'Apellido';
 
-  @override
-  String hintEnterProperData = 'Por favor ingresa datos correctos';
+    @override
+    String hintUserNm = 'Nombre de usuario';
 
-  @override
-  String hintRequired = 'Este campo es obligatorio';
+    @override
+    String hintContactNumber = 'Número de contacto';
 
-  @override
-  String lblUnAuthorized = "El usuario de Demo no se puede otorgar para esta acción.";
+    @override
+    String hintEnterProperData = 'Por favor ingresa datos correctos';
 
-  @override
-  String btnVerifyId = "Verifique su identificación";
+    @override
+    String hintRequired = 'Este campo es obligatorio';
 
-  @override
-  String confirmationUpload = "¿Estás seguro de subir este documento?";
+    @override
+    String lblUnAuthorized = "El usuario de Demo no se puede otorgar para esta acción.";
 
-  @override
-  String toastSuccess = "El documento del proveedor ha sido guardado con éxito";
+    @override
+    String btnVerifyId = "Verifique su identificación";
 
-  @override
-  String lblSelectDoc = "Selecciona Documento";
+    @override
+    String confirmationUpload = "¿Estás seguro de subir este documento?";
 
-  @override
-  String lblAddDoc = "Añadir documentos";
+    @override
+    String toastSuccess = "El documento del proveedor ha sido guardado con éxito";
 
-  @override
-  String lblAppSetting = "Ajustes de Aplicacion";
+    @override
+    String lblSelectDoc = "Selecciona Documento";
 
-  @override
-  String lblRateUs = "Calificanos";
+    @override
+    String lblAddDoc = "Añadir documentos";
 
-  @override
-  String lblTermsAndConditions = "Términos y condiciones";
+    @override
+    String lblAppSetting = "Ajustes de Aplicacion";
 
-  @override
-  String lblPrivacyPolicy = "Política de privacidad";
+    @override
+    String lblRateUs = "Calificanos";
 
-  @override
-  String lblHelpAndSupport = "Ayuda";
+    @override
+    String lblTermsAndConditions = "Términos y condiciones";
 
-  @override
-  String lblVersion = "V";
+    @override
+    String lblPrivacyPolicy = "Política de privacidad";
 
-  @override
-  String lblAbout = "Acerca de";
+    @override
+    String lblHelpAndSupport = "Ayuda";
 
-  @override
-  String lblProviderType = "Tipo de comisión";
+    @override
+    String lblVersion = "V";
 
-  @override
-  String lblMyCommission = "Mi comisión";
+    @override
+    String lblAbout = "Acerca de";
 
-  @override
-  String lblTaxes = "Impuestos";
+    @override
+    String lblProviderType = "Tipo de comisión";
 
-  @override
-  String lblTaxName = "Tipo de impuesto";
+    @override
+    String lblMyCommission = "Mi comisión";
 
-  @override
-  String lblMyTax = "Mi impuesto";
+    @override
+    String lblTaxes = "Impuestos";
 
-  @override
-  String lbllogintitle = "¡Hola de nuevo!";
+    @override
+    String lblTaxName = "Tipo de impuesto";
 
+    @override
+    String lblMyTax = "Mi impuesto";
 
-  @override
-  String lblloginsubtitle = "Bienvenido de nuevo, te has perdido por mucho tiempo.";
+    @override
+    String lbllogintitle = "¡Hola de nuevo!";
 
 
-  @override
-  String lblsignuptitle = "¡Bienvenido!";
+    @override
+    String lblloginsubtitle = "Bienvenido de nuevo, te has perdido por mucho tiempo.";
 
 
-  @override
-  String lblsignupsubtitle = "Crea tu cuenta para una mejor experiencia.";
+    @override
+    String lblsignuptitle = "¡Bienvenido!";
 
 
-  @override
-  String lblLogin = "Iniciar Sesion";
+    @override
+    String lblsignupsubtitle = "Crea tu cuenta para una mejor experiencia.";
 
 
-  @override
-  String lblsignup = "Registrate";
+    @override
+    String lblLogin = "Iniciar Sesion";
 
 
-  @override
-  String lblUserType = "Tipo de usuario";
+    @override
+    String lblsignup = "Registrate";
 
 
-  @override
-  String lblPurchaseCode = "Comprar código fuente completo";
+    @override
+    String lblUserType = "Tipo de usuario";
 
 
-  @override
-  String lblFeatureProduct = "Esto se destaca producto";
+    @override
+    String lblPurchaseCode = "Comprar código fuente completo";
 
 
-  @override
-  String lblHours = "hora";
+    @override
+    String lblFeatureProduct = "Esto se destaca producto";
 
 
-  @override
-  String lblRating = "Clasificación";
+    @override
+    String lblHours = "hora";
 
 
-  @override
-  String lblOff = "Apagado";
+    @override
+    String lblRating = "Clasificación";
 
 
-  @override
-  String lblHr = "hora";
+    @override
+    String lblOff = "Apagado";
 
 
-  @override
-  String lblDate = "Fecha";
+    @override
+    String lblHr = "hora";
 
 
-  @override
-  String lblAboutHandyman = "Sobre HelpiRD";
+    @override
+    String lblDate = "Fecha";
 
 
-  @override
-  String lblAboutCustomer = "Acerca del cliente";
+    @override
+    String lblAboutHandyman = "Sobre HelpiRD";
 
 
-  @override
-  String lblPaymentDetail = "Detalles de pago";
+    @override
+    String lblAboutCustomer = "Acerca del cliente";
 
 
-  @override
-  String lblId = "IDENTIFICACIÓN";
+    @override
+    String lblPaymentDetail = "Detalles de pago";
 
 
-  @override
-  String lblMethod = "Método";
+    @override
+    String lblId = "IDENTIFICACIÓN";
 
 
-  @override
-  String lblStatus = "Estado";
+    @override
+    String lblMethod = "Método";
 
 
-  @override
-  String lblPriceDetail = "Detalle de precio";
+    @override
+    String lblStatus = "Estado";
 
 
-  @override
-  String lblSubTotal = "Sub total";
+    @override
+    String lblPriceDetail = "Detalle de precio";
 
 
-  @override
-  String lblTax = "Impuesto";
+    @override
+    String lblSubTotal = "Sub total";
 
-  @override
-  String lblCoupon = "Cupón";
 
+    @override
+    String lblTax = "Impuesto";
 
-  @override
-  String lblTotalAmount = "Cantidad total";
+    @override
+    String lblCoupon = "Cupón";
 
-  @override
-  String lblOnBasisOf = "Sobre la base de";
 
+    @override
+    String lblTotalAmount = "Cantidad total";
 
-  @override
-  String lblCheckStatus = "Comprobar estado";
+    @override
+    String lblOnBasisOf = "Sobre la base de";
 
-  @override
-  String lblReady = "Listo";
 
-  @override
-  String lblCancel = "Cancelar";
+    @override
+    String lblCheckStatus = "Comprobar estado";
 
-  @override
-  String lblUnreadNotification = "Notificación no leída";
+    @override
+    String lblReady = "Listo";
 
-  @override
-  String lblMarkAllAsRead = "Marcar todo como leido";
+    @override
+    String lblCancel = "Cancelar";
 
-  @override
-  String lblCloseAppMsg = "Presiona de nuevo para salir de la aplicación";
+    @override
+    String lblUnreadNotification = "Notificación no leída";
 
-  @override
-  String lblAddress = "Habla a";
+    @override
+    String lblMarkAllAsRead = "Marcar todo como leido";
 
-  @override
-  String lblType = "Escribe";
+    @override
+    String lblCloseAppMsg = "Presiona de nuevo para salir de la aplicación";
 
-  @override
-  String lblStatusType = "Estado";
+    @override
+    String lblAddress = "Habla a";
 
+    @override
+    String lblType = "Escribe";
 
-  @override
-  String lblHandymanType = "Tipo de Cuenta";
+    @override
+    String lblStatusType = "Estado";
 
 
-  @override
-  String lblFixed = "Reparado";
+    @override
+    String lblHandymanType = "Tipo de Cuenta";
 
-  @override
-  String lblHello = "Hola";
 
-  @override
-  String lblWelcomeBack = "¡Bienvenido de nuevo!";
+    @override
+    String lblFixed = "Reparado";
 
-  @override
-  String lblUpcomingBooking = "Próxima reserva";
+    @override
+    String lblHello = "Hola";
 
-  @override
-  String lblTodayBooking = "Hoy reservando";
+    @override
+    String lblWelcomeBack = "¡Bienvenido de nuevo!";
 
-  @override
-  String lblNoReviewYet = "Todavía no hay revisión";
+    @override
+    String lblUpcomingBooking = "Próxima reserva";
 
-  @override
-  String lblAllReview = "Toda la revisión";
+    @override
+    String lblTodayBooking = "Hoy reservando";
 
-  @override
-  String lblWaitingForResponse = "Esperando una respuesta";
+    @override
+    String lblNoReviewYet = "Todavía no hay revisión";
 
-  @override
-  String lblConfirmPayment = "Confirmar pago";
+    @override
+    String lblAllReview = "Toda la revisión";
 
-  @override
-  String lblWaitingForPayment = "A la espera del pago";
+    @override
+    String lblWaitingForResponse = "Esperando una respuesta";
 
+    @override
+    String lblConfirmPayment = "Confirmar pago";
 
-  @override
-  String lblOnGoing = "En curso";
+    @override
+    String lblWaitingForPayment = "A la espera del pago";
 
-  @override
-  String lblPaymentDone = "Pago hecho";
 
-  @override
-  String lblDelivered = "Entregado";
+    @override
+    String lblOnGoing = "En curso";
 
-  @override
-  String lblDay = "Día";
+    @override
+    String lblPaymentDone = "Pago hecho";
 
-  @override
-  String lblYear = "Año";
+    @override
+    String lblDelivered = "Entregado";
 
-  @override
-  String lblExperience = "Experiencia";
+    @override
+    String lblDay = "Día";
 
-  @override
-  String lblOf = "(s) de";
+    @override
+    String lblYear = "Año";
 
-  @override
-  String lblSelectAddress = "Seleccione la dirección";
+    @override
+    String lblExperience = "Experiencia";
 
-  @override
-  String lblActivate = "Activar";
+    @override
+    String lblOf = "(s) de";
 
-  @override
-  String lblDeactivate = "Desactivar";
+    @override
+    String lblSelectAddress = "Seleccione la dirección";
 
-  @override
-  String lblOpps = "Opps";
+    @override
+    String lblActivate = "Activar";
 
-  @override
-  String lblNoInternet = "Algo mal con tu conexión, inténtalo de nuevo.";
+    @override
+    String lblDeactivate = "Desactivar";
 
-  @override
-  String lblRetry = "Reintentar";
+    @override
+    String lblOpps = "Opps";
 
-  @override
-  String lblRetryErr = "Por favor intenta nuevamente";
-  @override
-  String lblWrongErr = "Algo salió mal";
-  @override
-  String lblInternetErr = "Tu internet no está funcionando";
+    @override
+    String lblNoInternet = "Algo mal con tu conexión, inténtalo de nuevo.";
 
-  @override
-  String lblBookingSummary = "Resumen de la reserva";
+    @override
+    String lblRetry = "Reintentar";
 
-  @override
-  String lblServiceStatus = "Estado del servicio";
+    @override
+    String lblRetryErr = "Por favor intenta nuevamente";
+    @override
+    String lblWrongErr = "Algo salió mal";
+    @override
+    String lblInternetErr = "Tu internet no está funcionando";
 
-  @override
-  String lblMemberSince = "Miembro desde";
+    @override
+    String lblBookingSummary = "Resumen de la reserva";
 
-  @override
-  String lblDeleteAddress = "Eliminar dirección";
+    @override
+    String lblServiceStatus = "Estado del servicio";
 
-  @override
-  String lblDeleteAddressMsg = "¿Estás seguro de que deseas eliminar esta dirección?";
+    @override
+    String lblMemberSince = "Miembro desde";
 
+    @override
+    String lblDeleteAddress = "Eliminar dirección";
 
-  @override
-  String lblChoosePaymentMethod = "Elige el método de pago";
+    @override
+    String lblDeleteAddressMsg = "¿Estás seguro de que deseas eliminar esta dirección?";
 
-  @override
-  String lblNoPayments = "Sin pagos";
 
-  @override
-  String lblPayWith = "Quieres pagar con";
+    @override
+    String lblChoosePaymentMethod = "Elige el método de pago";
 
-  @override
-  String lblProceed = "Proceder";
+    @override
+    String lblNoPayments = "Sin pagos";
 
-  @override
-  String lblPricingPlan = "Plan de precios";
+    @override
+    String lblPayWith = "Quieres pagar con";
 
-  @override
-  String lblSelectPlan = "Obtenga elige tu mejor plan";
+    @override
+    String lblProceed = "Proceder";
 
-  @override
-  String lblMakePayment = "Hacer el pago";
+    @override
+    String lblPricingPlan = "Plan de precios";
 
-  @override
-  String lblRestore = "Restaurar";
+    @override
+    String lblSelectPlan = "Obtenga elige tu mejor plan";
 
-  @override
-  String lblForceDelete = "Fuerza Eliminar";
+    @override
+    String lblMakePayment = "Hacer el pago";
 
-  @override
-  String lblActivated = "Activado";
+    @override
+    String lblRestore = "Restaurar";
 
-  @override
-  String lblDeactivated = "Desactivado";
+    @override
+    String lblForceDelete = "Fuerza Eliminar";
 
-  @override
-  String lblNoDescriptionAvailable = "No hay descripción disponible";
+    @override
+    String lblActivated = "Activado";
 
-  @override
-  String lblFAQs = "Preguntas frecuentes";
+    @override
+    String lblDeactivated = "Desactivado";
 
-  @override
-  String lblGetDirection = "Obtener una dirección";
+    @override
+    String lblNoDescriptionAvailable = "No hay descripción disponible";
 
-  @override
-  String lblDeleteTitle = "¡Oh no, te vas!";
+    @override
+    String lblFAQs = "Preguntas frecuentes";
 
-  @override
-  String lblDeleteSubTitle = "¿Quieres cerrar sesión?";
+    @override
+    String lblGetDirection = "Obtener una dirección";
 
-  @override
-  String lblUpcomingServices = "Próximos servicios";
+    @override
+    String lblDeleteTitle = "¡Oh no, te vas!";
 
-  @override
-  String lblTodayServices = "Servicios de hoy";
+    @override
+    String lblDeleteSubTitle = "¿Quieres cerrar sesión?";
 
-  @override
-  String lblPlanExpired = "¡Opps! El plan expiró";
+    @override
+    String lblUpcomingServices = "Próximos servicios";
 
-  @override
-  String lblPlanSubTitle = "Su plan anterior ha caducado";
+    @override
+    String lblTodayServices = "Servicios de hoy";
 
-  @override
-  String btnTxtBuyNow = "Compra ahora";
+    @override
+    String lblPlanExpired = "¡Opps! El plan expiró";
 
-  @override
-  String lblChooseYourPlan = "Elige tu plan";
+    @override
+    String lblPlanSubTitle = "Su plan anterior ha caducado";
 
-  @override
-  String lblRenewSubTitle = "Compra un nuevo plan para obtener nuevas reservas de servicios";
+    @override
+    String btnTxtBuyNow = "Compra ahora";
 
-  @override
-  String lblReminder = "Recordatorio";
+    @override
+    String lblChooseYourPlan = "Elige tu plan";
 
-  @override
-  String lblRenew = "Renovar";
+    @override
+    String lblRenewSubTitle = "Compra un nuevo plan para obtener nuevas reservas de servicios";
 
-  @override
-  String lblCurrentPlan = "Plan actual";
+    @override
+    String lblReminder = "Recordatorio";
 
-  @override
-  String lblValidTill = "Válida hasta";
+    @override
+    String lblRenew = "Renovar";
 
-  @override
-  String lblSearchHere = "Busca aquí...";
+    @override
+    String lblCurrentPlan = "Plan actual";
 
-  @override
-  String lblEarningList = "Lista de ganancias";
+    @override
+    String lblValidTill = "Válida hasta";
 
-  @override
-  String lblNoChatFound = "No se encontró chat";
+    @override
+    String lblSearchHere = "Busca aquí...";
 
-  @override
-  String lblIsSuccessFullyActivated = "se activa con éxito";
+    @override
+    String lblEarningList = "Lista de ganancias";
 
-  @override
-  String lblSubscriptionTitle = "¿Estás seguro de que quieres cancelar el plan actual?";
+    @override
+    String lblNoChatFound = "No se encontró chat";
 
-  @override
-  String lblPlan = "Plan";
+    @override
+    String lblIsSuccessFullyActivated = "se activa con éxito";
 
-  @override
-  String lblCancelPlan = "Plan de cancelación";
+    @override
+    String lblSubscriptionTitle = "¿Estás seguro de que quieres cancelar el plan actual?";
 
-  @override
-  String lblSubscriptionHistory = "Historial de suscripción";
+    @override
+    String lblPlan = "Plan";
 
-  @override
-  String lblDemoProvider = "Proveedor de demostración";
+    @override
+    String lblCancelPlan = "Plan de cancelación";
 
-  @override
-  String lblDemoHandyman = "Manipulador de demostración";
+    @override
+    String lblSubscriptionHistory = "Historial de suscripción";
 
-  @override
-  String lblReset = "Reiniciar";
+    @override
+    String lblDemoProvider = "Proveedor de demostración";
 
-  @override
-  String lblRequired = "Este campo es obligatorio";
+    @override
+    String lblDemoHandyman = "Manipulador de demostración";
 
-  @override
-  String lblGiveReason = "Por favor dada la razón";
+    @override
+    String lblReset = "Reiniciar";
 
-  @override
-  String lblTrashHandyman = "Handyman ha sido basura con éxito";
+    @override
+    String lblRequired = "Este campo es obligatorio";
 
-  @override
-  String lblPlsSelectAddress = "Por favor seleccionado dirección";
+    @override
+    String lblGiveReason = "Por favor dada la razón";
 
-  @override
-  String lblPlsSelectCategory = "Por favor seleccionada Categoría";
+    @override
+    String lblTrashHandyman = "Handyman ha sido basura con éxito";
 
-  @override
-  String lblEnterHours = "Ingrese horas hasta 24 horas";
+    @override
+    String lblPlsSelectAddress = "Por favor seleccionado dirección";
 
-  @override
-  String lblEnterMinute = "Ingrese minuto hasta 60 minutos";
+    @override
+    String lblPlsSelectCategory = "Por favor seleccionada Categoría";
 
-  @override
-  String lblSelectSubCategory = "Seleccionar subcategoría";
+    @override
+    String lblEnterHours = "Ingrese horas hasta 24 horas";
 
-  @override
-  String lblServiceProof = "Prueba de servicio";
+    @override
+    String lblEnterMinute = "Ingrese minuto hasta 60 minutos";
 
-  @override
-  String lblTitle = "Título";
+    @override
+    String lblSelectSubCategory = "Seleccionar subcategoría";
 
-  @override
-  String lblAddImage = "Añadir imagen";
+    @override
+    String lblServiceProof = "Prueba de servicio";
 
-  @override
-  String lblSubmit = "Entregar";
+    @override
+    String lblTitle = "Título";
 
-  @override
-  String lblNotHelpLineNum = "No disponible Número de línea de ayuda";
+    @override
+    String lblAddImage = "Añadir imagen";
 
-  @override
-  String lblWalletHistory = "Historia de la billetera";
+    @override
+    String lblSubmit = "Entregar";
 
-  @override
-  String lblServiceRatings = "Calificaciones de servicio";
+    @override
+    String lblNotHelpLineNum = "No disponible Número de línea de ayuda";
 
-  @override
-  String lblNoServiceRatings = "No hay calificaciones de servicio";
+    @override
+    String lblWalletHistory = "Historia de la billetera";
 
-  @override
-  String lblEmail = "Correo electrónico";
+    @override
+    String lblServiceRatings = "Calificaciones de servicio";
 
-  @override
-  String lblWallet = "Cartera";
+    @override
+    String lblNoServiceRatings = "No hay calificaciones de servicio";
 
-  @override
-  String lblSelectUserType = "Tipo de cuenta";
+    @override
+    String lblEmail = "Correo electrónico";
 
-  @override
-  String lblIAgree = "Acepto";
+    @override
+    String lblWallet = "Cartera";
 
-  @override
-  String lblTermsOfService = "Terminos de servicio";
+    @override
+    String lblSelectUserType = "Tipo de cuenta";
 
-  @override
-  String lblLoginAgain = "Estoy de acuerdo con la";
+    @override
+    String lblIAgree = "Acepto";
 
-  @override
-  String lblTermCondition = "Términos de servicio";
+    @override
+    String lblTermsOfService = "Terminos de servicio";
 
-  @override
-  String lblServiceTotalTime = "Inicie sesión nuevamente";
+    @override
+    String lblLoginAgain = "Estoy de acuerdo con la";
 
-  @override
-  String lblHelpLineNum = "Número de ayuda";
+    @override
+    String lblTermCondition = "Términos de servicio";
 
-  @override
-  String lblReasonCancelling = "Razón para cancelar esta reserva";
+    @override
+    String lblServiceTotalTime = "Inicie sesión nuevamente";
 
-  @override
-  String lblReasonRejecting = "Razón para rechazar esta reserva";
+    @override
+    String lblHelpLineNum = "Número de ayuda";
 
+    @override
+    String lblReasonCancelling = "Razón para cancelar esta reserva";
+
+    @override
+    String lblReasonRejecting = "Razón para rechazar esta reserva";
+
+    @override
+    String lblFailed = "Razón por la cual esta reserva falló";
+
+    @override
+    String get lblDesignation => "Designacion";
+
+    @override
+    String get lblHandymanIsOffline => "Helpi está fuera de línea";
+
   @override
-  String lblFailed = "Razón por la cual esta reserva falló";
+  // TODO: implement lblMyService
+  String get lblMyService => throw UnimplementedError();
+
 }

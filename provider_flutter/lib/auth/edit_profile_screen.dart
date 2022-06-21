@@ -37,7 +37,7 @@ class HEditProfileScreenState extends State<HEditProfileScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   File? imageFile;
-  PickedFile? pickedFile;
+  XFile? pickedFile;
 
   List<CountryListResponse> countryList = [];
   List<StateListResponse> stateList = [];
@@ -56,12 +56,14 @@ class HEditProfileScreenState extends State<HEditProfileScreen> {
   TextEditingController userNameCont = TextEditingController();
   TextEditingController mobileCont = TextEditingController();
   TextEditingController addressCont = TextEditingController();
+  TextEditingController designationCont = TextEditingController();
 
   FocusNode fNameFocus = FocusNode();
   FocusNode lNameFocus = FocusNode();
   FocusNode emailFocus = FocusNode();
   FocusNode userNameFocus = FocusNode();
   FocusNode mobileFocus = FocusNode();
+  FocusNode designationFocus = FocusNode();
 
   int countryId = 0;
   int stateId = 0;
@@ -96,6 +98,7 @@ class HEditProfileScreenState extends State<HEditProfileScreen> {
     cityId = appStore.cityId.validate();
     addressCont.text = appStore.address.validate();
     serviceAddressId = appStore.serviceAddressId.validate();
+    designationCont.text = appStore.designation.validate();
 
     if (getIntAsync(COUNTRY_ID) != 0) {
       await getCountry();
@@ -188,6 +191,8 @@ class HEditProfileScreenState extends State<HEditProfileScreen> {
     multiPartRequest.fields[UserKeys.stateId] = stateId.toString();
     multiPartRequest.fields[UserKeys.cityId] = cityId.toString();
     multiPartRequest.fields[CommonKeys.address] = addressCont.text.validate();
+    multiPartRequest.fields[UserKeys.designation] = designationCont.text.validate();
+
     if (isUserTypeHandyman && serviceAddressId != null) multiPartRequest.fields[UserKeys.serviceAddressId] = serviceAddressId.toString();
     if (imageFile != null) {
       multiPartRequest.files.add(await MultipartFile.fromPath(UserKeys.profileImage, imageFile!.path));
@@ -202,6 +207,7 @@ class HEditProfileScreenState extends State<HEditProfileScreen> {
       UserKeys.lastName: lNameCont.text,
       UserKeys.contactNumber: mobileCont.text,
       UserKeys.email: emailCont.text,
+      UserKeys.designation: designationCont.text.validate(),
       UserKeys.countryId: countryId.toString().toInt(),
       UserKeys.stateId: stateId.toString().toInt(),
       UserKeys.cityId: cityId.toString().toInt(),
@@ -248,14 +254,14 @@ class HEditProfileScreenState extends State<HEditProfileScreen> {
   }
 
   void _getFromGallery() async {
-    pickedFile = await ImagePicker().getImage(source: ImageSource.gallery, maxWidth: 1800, maxHeight: 1800);
+    pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery, maxWidth: 1800, maxHeight: 1800);
     if (pickedFile != null) {
       _showSelectionDialog(context);
     }
   }
 
   _getFromCamera() async {
-    pickedFile = await ImagePicker().getImage(source: ImageSource.camera, maxWidth: 1800, maxHeight: 1800);
+    pickedFile = await ImagePicker().pickImage(source: ImageSource.camera, maxWidth: 1800, maxHeight: 1800);
     if (pickedFile != null) {
       _showSelectionDialog(context);
     }
@@ -337,16 +343,28 @@ class HEditProfileScreenState extends State<HEditProfileScreen> {
                     children: [
                       Stack(
                         children: [
-                          imageFile != null
-                              ? Image.file(imageFile!, width: 90, height: 90, fit: BoxFit.cover).cornerRadiusWithClipRRect(45)
-                              : Observer(
-                                  builder: (_) => cachedImage(
-                                    appStore.userProfileImage,
-                                    height: 100,
-                                    width: 100,
-                                    fit: BoxFit.cover,
-                                  ).cornerRadiusWithClipRRect(64),
-                                ),
+                          Container(
+                            decoration: boxDecorationDefault(
+                              border: Border.all(color: primaryColor, width: 2),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Container(
+                              decoration: boxDecorationDefault(
+                                border: Border.all(color: context.scaffoldBackgroundColor, width: 4),
+                                shape: BoxShape.circle,
+                              ),
+                              child: imageFile != null
+                                  ? Image.file(imageFile!, width: 90, height: 90, fit: BoxFit.cover).cornerRadiusWithClipRRect(45)
+                                  : Observer(
+                                      builder: (_) => cachedImage(
+                                        appStore.userProfileImage,
+                                        height: 100,
+                                        width: 100,
+                                        fit: BoxFit.cover,
+                                      ).cornerRadiusWithClipRRect(64),
+                                    ),
+                            ),
+                          ),
                           Positioned(
                             bottom: 4,
                             right: 2,
@@ -416,7 +434,15 @@ class HEditProfileScreenState extends State<HEditProfileScreen> {
                           } else if (!regExp.hasMatch(value.toString())) {
                             return "Contact number must be 10 digit only";
                           }
+                          return null;
                         },
+                      ),
+                      16.height,
+                      AppTextField(
+                        textFieldType: TextFieldType.NAME,
+                        controller: designationCont,
+                        focus: designationFocus,
+                        decoration: inputDecoration(context, hint: context.translate.lblDesignation),
                       ),
                       16.height,
                       Row(
@@ -547,7 +573,7 @@ class HEditProfileScreenState extends State<HEditProfileScreen> {
                       16.height,
                       AppTextField(
                         controller: addressCont,
-                        textFieldType: TextFieldType.ADDRESS,
+                        textFieldType: TextFieldType.MULTILINE,
                         maxLines: 5,
                         minLines: 3,
                         decoration: inputDecoration(context, hint: context.translate.hintAddress),
@@ -574,11 +600,9 @@ class HEditProfileScreenState extends State<HEditProfileScreen> {
                             textStyle: primaryTextStyle(color: white),
                             width: context.width() - context.navigationBarHeight,
                             onTap: () {
-                              if (!appStore.isTester) {
+                              ifNotTester(context, () {
                                 update();
-                              } else {
-                                toast(context.translate.lblUnAuthorized);
-                              }
+                              });
                             },
                           ).expand(),
                         ],

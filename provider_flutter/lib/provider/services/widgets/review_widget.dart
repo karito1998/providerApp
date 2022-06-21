@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:handyman_provider_flutter/components/image_border_component.dart';
 import 'package:handyman_provider_flutter/models/booking_detail_response.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
-import 'package:handyman_provider_flutter/widgets/disabled_rating_bar_widget.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class ReviewWidget extends StatelessWidget {
@@ -14,31 +14,45 @@ class ReviewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 12, bottom: 12),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+      padding: EdgeInsets.all(16),
+      margin: EdgeInsets.only(bottom: 8),
+      width: context.width(),
+      decoration: boxDecorationDefault(color: context.cardColor),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          circleImage(image: isCustomer ? data.profileImage.validate() : data.profileImage.validate(), size: 70),
-          12.width,
-          Column(
+          Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('${data.customerName.validate()}', style: boldTextStyle()).expand(),
-                  8.width,
-                  Text(formatDate(data.createdAt.validate(), format: DATE_FORMAT_4), style: primaryTextStyle(size: 14)),
-                ],
+              ImageBorder(
+                child: circleImage(
+                  image: data.profileImage.validate().isNotEmpty ? data.profileImage.validate() : (isCustomer ? data.customerProfileImage.validate() : data.handymanProfileImage.validate()),
+                  size: 50,
+                ),
               ),
-              4.height,
-              // Text(data.service_name.validate(), style: primaryTextStyle(), maxLines: 1, overflow: TextOverflow.ellipsis),
-              8.height,
-              DisabledRatingBarWidget(rating: data.rating.validate()),
-              if (data.review.validate().isNotEmpty) Text('${data.review.validate()}', style: primaryTextStyle()).paddingTop(8),
+              16.width,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('${data.customerName.validate()}', style: boldTextStyle(size: 14), maxLines: 1, overflow: TextOverflow.ellipsis).flexible(),
+                      Row(
+                        children: [
+                          Image.asset('images/setting_icon/ic_star_fill.png', height: 16, color: getRatingBarColor(data.rating.validate().toInt())),
+                          4.width,
+                          Text('${data.rating.validate().toStringAsFixed(1).toString()}', style: boldTextStyle(color: getRatingBarColor(data.rating.validate().toInt()), size: 14)),
+                        ],
+                      ),
+                    ],
+                  ),
+                  data.createdAt.validate().isNotEmpty ? Text(formatDate('${DateTime.parse(data.createdAt.validate())}', format: DATE_FORMAT_4), style: secondaryTextStyle(size: 14)) : SizedBox(),
+                  if (data.review != null) Text(data.review.validate(), style: secondaryTextStyle()).paddingTop(8)
+                ],
+              ).flexible(),
             ],
-          ).expand(),
+          ),
         ],
       ),
     );

@@ -27,7 +27,7 @@ class _AllReviewComponentState extends State<AllReviewComponent> {
       ),
       body: ListView.builder(
         shrinkWrap: true,
-        padding: EdgeInsets.all(8),
+        padding: EdgeInsets.all(16),
         itemCount: widget.handymanReviews.validate().length,
         itemBuilder: (context, index) {
           HandymanReview data = widget.handymanReviews![index];

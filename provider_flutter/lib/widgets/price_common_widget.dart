@@ -22,7 +22,7 @@ class PriceCommonWidget extends StatelessWidget {
   }) : super(key: key);
 
   final BookingDetail bookingDetail;
-  final Service serviceDetail;
+  final ServiceData serviceDetail;
   final List<Taxes> taxes;
   final CouponData? couponData;
 
@@ -36,6 +36,8 @@ class PriceCommonWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        //price details
+
         Text(context.translate.lblPriceDetail, style: boldTextStyle(size: 18)),
         16.height,
         Container(
@@ -47,8 +49,8 @@ class PriceCommonWidget extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(context.translate.hintPrice, style: boldTextStyle()).expand(),
-                  PriceWidget(price: serviceDetail.price.validate(), color: textSecondaryColorGlobal, isBoldText: false, size: 18).flexible(),
+                  Text(context.translate.hintPrice, style: secondaryTextStyle(size: 16)).expand(),
+                  PriceWidget(price: serviceDetail.price.validate(), color: textPrimaryColorGlobal, isBoldText: true, size: 18).flexible(),
                 ],
               ),
               if (bookingDetail.type == ServiceTypeFixed)
@@ -59,11 +61,12 @@ class PriceCommonWidget extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(context.translate.lblSubTotal, style: boldTextStyle()),
+                        Text(context.translate.lblSubTotal, style: secondaryTextStyle(size: 16)),
                         8.width,
                         Text(
                           '${appStore.currencySymbol}${price(serviceDetail.price.validate())} * ${bookingDetail.quantity} = ${appStore.currencySymbol}${(price(serviceDetail.price.validate() * bookingDetail.quantity.validate()))}',
-                          style: secondaryTextStyle(size: 18),
+                          style: boldTextStyle(size: 18),
+                          textAlign: TextAlign.right,
                         ).flexible(),
                       ],
                     ),
@@ -74,8 +77,8 @@ class PriceCommonWidget extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(context.translate.lblTax, style: boldTextStyle()).expand(),
-                    PriceWidget(price: serviceDetail.taxAmount.validate(), color: Colors.red, isBoldText: false, size: 18).flexible(),
+                    Text(context.translate.lblTax, style: secondaryTextStyle(size: 16)).expand(),
+                    PriceWidget(price: serviceDetail.taxAmount.validate(), color: Colors.red, isBoldText: true, size: 18).flexible(),
                   ],
                 ),
               if (serviceDetail.discountPrice.validate() != 0 && serviceDetail.discount.validate() != 0)
@@ -87,7 +90,7 @@ class PriceCommonWidget extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Text(context.translate.hintDiscount, style: boldTextStyle()),
+                            Text(context.translate.hintDiscount, style: secondaryTextStyle(size: 16)),
                             Text(
                               " (${serviceDetail.discount.validate()}% ${context.translate.lblOff})",
                               style: boldTextStyle(color: Colors.green),
@@ -96,10 +99,10 @@ class PriceCommonWidget extends StatelessWidget {
                         ),
                         PriceWidget(
                           price: serviceDetail.discountPrice.validate(),
-                          color: Colors.green,
-                          isBoldText: false,
-                          isDiscountedPrice: true,
                           size: 18,
+                          color: Colors.green,
+                          isBoldText: true,
+                          isDiscountedPrice: true,
                         ).flexible(),
                       ],
                     ),
@@ -112,22 +115,22 @@ class PriceCommonWidget extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Text(context.translate.lblCoupon, style: boldTextStyle()),
-                        Text(" (${couponData!.code})", style: boldTextStyle(color: primaryColor)),
+                        Text(context.translate.lblCoupon, style: secondaryTextStyle(size: 16)),
+                        Text(" (${couponData!.code})", style: secondaryTextStyle(size: 16, color: primaryColor)),
                       ],
                     ),
                     PriceWidget(
                       price: serviceDetail.couponDiscountAmount.validate(),
-                      color: Colors.green,
-                      isBoldText: false,
                       size: 18,
+                      color: Colors.green,
+                      isBoldText: true,
                     ).flexible(),
                   ],
                 ),
               Divider(height: 26),
               Row(
                 children: [
-                  Text(context.translate.lblTotalAmount, style: boldTextStyle()).expand(),
+                  Text(context.translate.lblTotalAmount, style: secondaryTextStyle(size: 16)).expand(),
                   if (bookingDetail.type == ServiceTypeHourly) Text('(${appStore.currencySymbol}${bookingDetail.price}/hr) ', style: secondaryTextStyle()),
                   PriceWidget(price: getTotalValue, color: primaryColor, size: 18),
                 ],

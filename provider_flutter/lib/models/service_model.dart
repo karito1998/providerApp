@@ -1,7 +1,7 @@
 import 'package:handyman_provider_flutter/models/booking_detail_response.dart';
 import 'package:handyman_provider_flutter/models/service_detail_response.dart';
 
-class Service {
+class ServiceData {
   int? id;
   String? name;
   int? categoryId;
@@ -37,7 +37,7 @@ class Service {
   int? bookingAddressId;
   CouponData? appliedCouponData;
 
-  Service(
+  ServiceData(
       {this.id,
       this.name,
       this.image_attchments,
@@ -73,7 +73,7 @@ class Service {
 
   //Service({this.id, this.name, this.categoryId, this.providerId, this.price, this.priceFormat, this.type, this.discount, this.duration, this.status, this.description, this.isFeatured, this.providerName, this.cityId, this.categoryName, this.attchments, this.totalReview, this.totalRating, this.isFavourite, this.serviceAddressMapping, this.providerImage});
 
-  Service.fromJson(Map<String, dynamic> json) {
+  ServiceData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     providerImage = json['provider_image'];

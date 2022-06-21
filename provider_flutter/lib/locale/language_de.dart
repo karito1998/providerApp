@@ -1,25 +1,28 @@
-import 'package:handyman_provider_flutter/locale/languag_es.dart';
+import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 class LanguageDe extends Languages {
+   //Helpi
+
+   @override
+   String lblInvalidEmail = '';
+   @override
+   String lblInvalidUsername = '';
+   @override
+   String lblRetryErr = "";
+   @override
+   String lblWrongErr = "";
+   @override
+   String lblInternetErr = "";
+   @override
+   String lblInvalidEmailSpaces = "";
+   @override
+   String tycRequired = '';
+   @override
+   String signUpSuccess = "";
+
+  //Helpi
   @override
   String planAboutToExpire(int days) => 'Your Plan Is About to Expire In $days Days';
-
-  @override
-  String lblInvalidEmail = '';
-  @override
-  String lblInvalidUsername = '';
-  @override
-  String lblRetryErr = "";
-  @override
-  String lblWrongErr = "";
-  @override
-  String lblInternetErr = "";
-  @override
-  String lblInvalidEmailSpaces = "";
-  @override
-  String tycRequired = '';
-  @override
-  String signUpSuccess = "";
 
   @override
   String appName = 'Anbieter';
@@ -28,10 +31,16 @@ class LanguageDe extends Languages {
   String provider = 'Anbieter';
 
   @override
+  String lblProviderDashboard = "Anbieter Dashboard";
+
+  @override
   String welcome = 'Willkommen';
 
   @override
   String back = 'zurück !';
+
+  @override
+  String lblHandymanDashboard = 'Handwerker Dashboard';
 
   @override
   String handyman = 'Heimwerker';
@@ -382,7 +391,7 @@ class LanguageDe extends Languages {
   String lblTime = 'Zeit';
 
   @override
-  String lblService = 'Service';
+  String lblMyService = 'Meine Dienstleistungen';
 
   @override
   String lblAllService = 'Alle service.';
@@ -409,7 +418,7 @@ class LanguageDe extends Languages {
   String lblAudio = 'Audio';
 
   @override
-  String selectAddress = 'Wählen Sie Service Adddrals aus';
+  String selectAddress = 'Wählen Sie Serviceadressen';
 
   @override
   String btnSave = 'Speichern';
@@ -595,10 +604,10 @@ class LanguageDe extends Languages {
   String lblRating = "Nennen";
 
   @override
-  String lblOff = "Aus";
+  String lblOff = "lblOff";
 
   @override
-  String lblHr = "Hr.";
+  String lblHr = "Stunde";
 
   @override
   String lblDate = "Datum";
@@ -937,7 +946,7 @@ class LanguageDe extends Languages {
   String lblTermCondition = "Nutzungsbedingungen";
 
   @override
-  String lblServiceTotalTime = "Bitte melden Sie sich erneut an";
+  String lblServiceTotalTime = "Service Gesamtzeit";
 
   @override
   String lblHelpLineNum = "Helpline -Nummer";
@@ -950,4 +959,10 @@ class LanguageDe extends Languages {
 
   @override
   String lblFailed = "Grund, warum diese Buchung gescheitert ist";
+
+  @override
+  String get lblDesignation => "Bezeichnung";
+
+  @override
+  String get lblHandymanIsOffline => "Handwerker ist offline";
 }

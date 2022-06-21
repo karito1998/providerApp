@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:handyman_provider_flutter/components/handyman_name_widget.dart';
+import 'package:handyman_provider_flutter/components/image_border_component.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/booking_detail_response.dart';
 import 'package:handyman_provider_flutter/models/service_model.dart';
@@ -17,8 +19,8 @@ import 'package:url_launcher/url_launcher.dart';
 class BasicInfoComponent extends StatefulWidget {
   final UserData? handymanData;
   final UserData? customerData;
-  final ProviderData? providerData;
-  final Service? service;
+  final UserData? providerData;
+  final ServiceData? service;
   final int flag;
   final BookingDetail? bookingDetail;
 
@@ -29,10 +31,10 @@ class BasicInfoComponent extends StatefulWidget {
 }
 
 class BasicInfoComponentState extends State<BasicInfoComponent> {
-  Customer customer = Customer();
-  ProviderData provider = ProviderData();
+  UserData customer = UserData();
+  UserData provider = UserData();
   UserData userData = UserData();
-  Service service = Service();
+  ServiceData service = ServiceData();
 
   String? googleUrl;
   String? address;
@@ -57,6 +59,7 @@ class BasicInfoComponentState extends State<BasicInfoComponent> {
       profileUrl = widget.customerData!.profileImage.validate();
       contactNumber = widget.customerData!.contactNumber.validate();
       address = widget.customerData!.address.validate();
+
       userData = widget.customerData!;
       await userService.getUser(email: widget.customerData!.email.validate()).then((value) {
         widget.customerData!.uid = value.uid;
@@ -69,6 +72,7 @@ class BasicInfoComponentState extends State<BasicInfoComponent> {
       profileUrl = widget.handymanData!.profileImage.validate();
       contactNumber = widget.handymanData!.contactNumber.validate();
       address = widget.handymanData!.address.validate();
+
       userData = widget.handymanData!;
       await userService.getUser(email: widget.handymanData!.email.validate()).then((value) {
         widget.handymanData!.uid = value.uid;
@@ -101,21 +105,14 @@ class BasicInfoComponentState extends State<BasicInfoComponent> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (profileUrl.validate().isNotEmpty) circleImage(image: profileUrl.validate(), size: 65),
+                  if (profileUrl.validate().isNotEmpty) ImageBorder(child: circleImage(image: profileUrl.validate(), size: 65)),
                   16.width,
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(name.validate(), style: boldTextStyle(size: 18)),
+                      HandymanNameWidget(name: name.validate()),
                       10.height,
-                      if (widget.service!.categoryName.validate().isNotEmpty && widget.flag == 1)
-                        Text(
-                          widget.service!.categoryName.validate(),
-                          style: secondaryTextStyle(),
-                        ),
-                      if (widget.service!.categoryName.validate().isNotEmpty && widget.flag == 1) 10.height,
                       if (userData.email.validate().isNotEmpty && widget.flag == 0)
                         Row(
                           children: [
@@ -133,7 +130,7 @@ class BasicInfoComponentState extends State<BasicInfoComponent> {
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                servicesAddress.iconImage(size: 20),
+                                servicesAddress.iconImage(size: 18),
                                 3.width,
                                 Text(widget.bookingDetail!.address.validate(), style: secondaryTextStyle()).flexible(),
                               ],

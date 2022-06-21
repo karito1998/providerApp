@@ -1,8 +1,29 @@
-import 'package:handyman_provider_flutter/locale/languag_es.dart';
+import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 // class LanguageVi extend
 
 class LanguageVi extends Languages {
+   //Helpi
+
+   @override
+   String lblInvalidEmail = '';
+   @override
+   String lblInvalidUsername = '';
+   @override
+   String lblRetryErr = "";
+   @override
+   String lblWrongErr = "";
+   @override
+   String lblInternetErr = "";
+   @override
+   String lblInvalidEmailSpaces = "";
+   @override
+   String tycRequired = '';
+   @override
+   String signUpSuccess = "";
+
+  //Helpi
+
   @override
   String planAboutToExpire(int days) => 'Your Plan Is About to Expire In $days Days';
 
@@ -13,10 +34,16 @@ class LanguageVi extends Languages {
   String provider = 'Các nhà cung cấp';
 
   @override
+  String lblProviderDashboard = "Bảng điều khiển nhà cung cấp";
+
+  @override
   String welcome = 'Chào mừng';
 
   @override
   String back = 'mặt sau !';
+
+  @override
+  String lblHandymanDashboard = 'Bảng điều khiển siêng năng';
 
   @override
   String handyman = 'Handyman.';
@@ -367,7 +394,7 @@ class LanguageVi extends Languages {
   String lblTime = 'Thời gian';
 
   @override
-  String lblService = 'Dịch vụ';
+  String lblMyService = 'Dịch vụ của tôi';
 
   @override
   String lblAllService = 'Tất cả dịch vụ';
@@ -394,7 +421,7 @@ class LanguageVi extends Languages {
   String lblAudio = 'Âm thanh';
 
   @override
-  String selectAddress = 'Chọn dịch vụ AddDresses.';
+  String selectAddress = 'Chọn địa chỉ dịch vụ';
 
   @override
   String btnSave = 'Cứu';
@@ -464,22 +491,7 @@ class LanguageVi extends Languages {
 
   @override
   String lblInvalidUrl = 'URL không hợp lệ:';
-  @override
-  String lblInvalidEmail = '';
-  @override
-  String lblInvalidUsername = '';
-  @override
-  String lblRetryErr = "";
-  @override
-  String lblWrongErr = "";
-  @override
-  String lblInternetErr = "";
-  @override
-  String lblInvalidEmailSpaces = "";
-  @override
-  String tycRequired = '';
-  @override
-  String signUpSuccess = "";
+
   @override
   String errorPasswordLength = 'Chiều dài mật khẩu phải nhiều hơn';
 
@@ -564,90 +576,68 @@ class LanguageVi extends Languages {
   @override
   String lbllogintitle = "Xin chào lần nữa !";
 
-
   @override
   String lblloginsubtitle = "Chào mừng trở lại, bạn đã bị bỏ lỡ trong thời gian dài";
-
 
   @override
   String lblsignuptitle = "Xin chào người dùng!";
 
-
   @override
   String lblsignupsubtitle = "Tạo tài khoản của bạn để có trải nghiệm tốt hơn";
-
 
   @override
   String lblLogin = "Đăng nhập";
 
-
   @override
   String lblsignup = "Đăng ký";
-
 
   @override
   String lblUserType = "Loại người dùng";
 
-
   @override
   String lblPurchaseCode = "Mua mã nguồn đầy đủ";
-
 
   @override
   String lblFeatureProduct = "Đây là sản phẩm đặc trưng";
 
-
   @override
   String lblHours = "giờ";
-
 
   @override
   String lblRating = "Xếp hạng";
 
-
   @override
-  String lblOff = "Tắt";
-
+  String lblOff = "Chiết khấu";
 
   @override
   String lblHr = "giờ";
 
-
   @override
   String lblDate = "Ngày tháng";
-
 
   @override
   String lblAboutHandyman = "Về Handyman.";
 
-
   @override
   String lblAboutCustomer = "Về khách hàng.";
-
 
   @override
   String lblPaymentDetail = "Chi tiết thanh toán";
 
-
   @override
   String lblId = "TÔI";
-
 
   @override
   String lblMethod = "Phương pháp";
 
-
   @override
   String lblStatus = "Trạng thái";
-
 
   @override
   String lblPriceDetail = "Chi tiết giá";
 
-
   @override
   String lblSubTotal = "Tổng cộng";
-
 
   @override
   String lblTax = "Thuế";
@@ -655,13 +645,11 @@ class LanguageVi extends Languages {
   @override
   String lblCoupon = "Phiếu mua hàng";
 
-
   @override
   String lblTotalAmount = "Tổng cộng";
 
   @override
   String lblOnBasisOf = "Trên cơ sở của";
-
 
   @override
   String lblCheckStatus = "Kiểm tra trạng thái";
@@ -690,10 +678,8 @@ class LanguageVi extends Languages {
   @override
   String lblStatusType = "Trạng thái";
 
-
   @override
   String lblHandymanType = "Typeman loại";
-
 
   @override
   String lblFixed = "đã sửa";
@@ -724,7 +710,6 @@ class LanguageVi extends Languages {
 
   @override
   String lblWaitingForPayment = "Chờ thanh toán";
-
 
   @override
   String lblOnGoing = "Đang đi";
@@ -779,7 +764,6 @@ class LanguageVi extends Languages {
 
   @override
   String lblDeleteAddressMsg = "Bạn có chắc chắn muốn xóa địa chỉ này";
-
 
   @override
   String lblChoosePaymentMethod = "Lựa chọn hình thức thanh toán";
@@ -965,7 +949,7 @@ class LanguageVi extends Languages {
   String lblTermCondition = "Điều khoản dịch vụ";
 
   @override
-  String lblServiceTotalTime = "Xin vui lòng đăng nhập lại";
+  String lblServiceTotalTime = "Dịch vụ tổng thời gian";
 
   @override
   String lblHelpLineNum = "Số đường dây trợ giúp";
@@ -978,4 +962,10 @@ class LanguageVi extends Languages {
 
   @override
   String lblFailed = "Lý do tại sao đặt phòng này không thành công";
+
+  @override
+  String get lblDesignation => "Chỉ định";
+
+  @override
+  String get lblHandymanIsOffline => "Handyman là ngoại tuyến";
 }

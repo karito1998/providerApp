@@ -158,7 +158,7 @@ class _BookingSummaryDialogState extends State<BookingSummaryDialog> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(context.translate.lblLocation, style: boldTextStyle()).expand(),
+                          Text(context.translate.lblAddress, style: boldTextStyle()).expand(),
                           Text(
                             widget.bookingDataList!.address.validate(),
                             style: secondaryTextStyle(),

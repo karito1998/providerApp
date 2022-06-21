@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:handyman_provider_flutter/locale/languag_es.dart';
+import 'package:handyman_provider_flutter/locale/base_language.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/configs.dart';
@@ -90,6 +90,9 @@ abstract class _AppStore with Store {
   @observable
   String playerId = '';
 
+  @observable
+  String designation = '';
+
   @computed
   String get userFullName => '$userFirstName $userLastName'.trim();
 
@@ -129,6 +132,9 @@ abstract class _AppStore with Store {
   @observable
   String earningType = '';
 
+  @observable
+  int handymanAvailability = 0;
+
   @computed
   bool get earningTypeCommission => earningType == EARNING_TYPE_COMMISSION;
 
@@ -144,7 +150,7 @@ abstract class _AppStore with Store {
   @action
   Future<void> setTester(bool val, {bool isInitializing = false}) async {
     isTester = val;
-    if (!isInitializing) await setValue(IS_TESTER, val);
+    if (!isInitializing) await setValue(IS_TESTER, isTester);
   }
 
   @action
@@ -235,6 +241,12 @@ abstract class _AppStore with Store {
   Future<void> setUserId(int val, {bool isInitializing = false}) async {
     userId = val;
     if (!isInitializing) await setValue(USER_ID, val);
+  }
+
+  @action
+  Future<void> setDesignation(String val, {bool isInitializing = false}) async {
+    designation = val;
+    if (!isInitializing) await setValue(DESIGNATION, val);
   }
 
   @action
@@ -379,5 +391,11 @@ abstract class _AppStore with Store {
     selectedLanguageDataModel = getSelectedLanguageModel();
 
     if (context != null) languages = Languages.of(context);
+  }
+
+  @action
+  Future<void> setHandymanAvailability(int val, {bool isInitializing = false}) async {
+    handymanAvailability = val;
+    if (isInitializing) await setValue(HANDYMAN_AVAILABLE_STATUS, val);
   }
 }

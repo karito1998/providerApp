@@ -1,6 +1,27 @@
-import 'package:handyman_provider_flutter/locale/languag_es.dart';
+import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 class LanguageSq extends Languages {
+   //Helpi
+
+   @override
+   String lblInvalidEmail = '';
+   @override
+   String lblInvalidUsername = '';
+   @override
+   String lblRetryErr = "";
+   @override
+   String lblWrongErr = "";
+   @override
+   String lblInternetErr = "";
+   @override
+   String lblInvalidEmailSpaces = "";
+   @override
+   String tycRequired = '';
+   @override
+   String signUpSuccess = "";
+
+  //Helpi
+
   @override
   String planAboutToExpire(int days) => 'Your Plan Is About to Expire In $days Days';
 
@@ -11,10 +32,16 @@ class LanguageSq extends Languages {
   String provider = 'Ofrues';
 
   @override
+  String lblProviderDashboard = "Pult i ofruesit";
+
+  @override
   String welcome = 'Ofrues';
 
   @override
   String back = 'I mirëpritur';
+
+  @override
+  String lblHandymanDashboard = 'Pult i dorës';
 
   @override
   String handyman = 'Mbrapa!';
@@ -152,7 +179,7 @@ class LanguageSq extends Languages {
   String accept = 'Njoftime';
 
   @override
-  String decline = 'Pranoj';
+  String decline = 'Hedh poshtë';
 
   @override
   String noDataFound = 'Rënie';
@@ -365,7 +392,7 @@ class LanguageSq extends Languages {
   String lblTime = 'Të gjithë handyman';
 
   @override
-  String lblService = 'Kohë';
+  String lblMyService = 'Shërbimet e mia';
 
   @override
   String lblAllService = 'Shërbim';
@@ -388,10 +415,10 @@ class LanguageSq extends Languages {
   String lblVideo = 'Imazh';
 
   @override
-  String lblAudio = 'Video';
+  String lblAudio = 'Audio';
 
   @override
-  String selectAddress = 'Audio';
+  String selectAddress = 'Zgjidhni Adresat e Shërbimit';
 
   @override
   String btnSave = 'Zgjidhni Adddresses Service';
@@ -461,22 +488,7 @@ class LanguageSq extends Languages {
 
   @override
   String lblInvalidUrl = 'Nuk u gjet asnjë të dhëna';
-  @override
-  String lblInvalidEmail = '';
-  @override
-  String lblInvalidUsername = '';
-  @override
-  String lblRetryErr = "";
-  @override
-  String lblWrongErr = "";
-  @override
-  String lblInternetErr = "";
-  @override
-  String lblInvalidEmailSpaces = "";
-  @override
-  String tycRequired = '';
-  @override
-  String signUpSuccess = "";
+
   @override
   String errorPasswordLength = 'URL e pavlefshme:';
 
@@ -561,90 +573,68 @@ class LanguageSq extends Languages {
   @override
   String lbllogintitle = "Pershendetje perseri !";
 
-
   @override
   String lblloginsubtitle = "Mirë se vini përsëri, ju jeni humbur për kohë të gjatë";
-
 
   @override
   String lblsignuptitle = "Përshëndetje përdorues!";
 
-
   @override
   String lblsignupsubtitle = "Krijo llogarinë tënde për përvojë më të mirë";
-
 
   @override
   String lblLogin = "Login";
 
-
   @override
   String lblsignup = "Regjistrim";
-
 
   @override
   String lblUserType = "Lloji i përdoruesit";
 
-
   @override
   String lblPurchaseCode = "Blini kodin e plotë të burimit";
-
 
   @override
   String lblFeatureProduct = "Kjo është produkt i paraqitur";
 
-
   @override
   String lblHours = "orë";
-
 
   @override
   String lblRating = "Vlerësim";
 
+  @override
+  String lblOff = "Zbritje";
 
   @override
-  String lblOff = "Off";
-
-
-  @override
-  String lblHr = "hr";
-
+  String lblHr = "orë";
 
   @override
   String lblDate = "Datë";
 
-
   @override
   String lblAboutHandyman = "Rreth Handyman";
-
 
   @override
   String lblAboutCustomer = "Rreth klientit";
 
-
   @override
   String lblPaymentDetail = "Detaje";
-
 
   @override
   String lblId = "Id";
 
-
   @override
   String lblMethod = "Metodë";
-
 
   @override
   String lblStatus = "Status";
 
-
   @override
   String lblPriceDetail = "Detaj";
 
-
   @override
   String lblSubTotal = "Subje";
-
 
   @override
   String lblTax = "Taksë";
@@ -652,13 +642,11 @@ class LanguageSq extends Languages {
   @override
   String lblCoupon = "Kupon";
 
-
   @override
   String lblTotalAmount = "Gjithsej";
 
   @override
   String lblOnBasisOf = "Në bazë të";
-
 
   @override
   String lblCheckStatus = "Kontrolloni statusin";
@@ -687,10 +675,8 @@ class LanguageSq extends Languages {
   @override
   String lblStatusType = "Status";
 
-
   @override
   String lblHandymanType = "Lloji i duarve";
-
 
   @override
   String lblFixed = "I fiksuar";
@@ -721,7 +707,6 @@ class LanguageSq extends Languages {
 
   @override
   String lblWaitingForPayment = "Duke pritur pagesën";
-
 
   @override
   String lblOnGoing = "Në këmbë";
@@ -776,7 +761,6 @@ class LanguageSq extends Languages {
 
   @override
   String lblDeleteAddressMsg = "Jeni i sigurt që dëshironi të fshini këtë adresë";
-
 
   @override
   String lblChoosePaymentMethod = "Zgjidhni metodën e pagesës";
@@ -962,7 +946,7 @@ class LanguageSq extends Languages {
   String lblTermCondition = "Kushtet e Shërbimit";
 
   @override
-  String lblServiceTotalTime = "Ju lutemi hyni përsëri";
+  String lblServiceTotalTime = "Shërbimi Koha totale";
 
   @override
   String lblHelpLineNum = "Numër i linjës së ndihmës";
@@ -975,4 +959,10 @@ class LanguageSq extends Languages {
 
   @override
   String lblFailed = "Arsyeja pse kjo prenotim është dështuar";
+
+  @override
+  String get lblDesignation => "Përcaktim";
+
+  @override
+  String get lblHandymanIsOffline => "Handyman është jashtë linje";
 }

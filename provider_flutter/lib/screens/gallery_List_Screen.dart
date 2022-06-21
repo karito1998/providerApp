@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:handyman_provider_flutter/components/back_widget.dart';
 import 'package:handyman_provider_flutter/screens/zoom_image_screen.dart';
+import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-class GalleryListScreen extends StatefulWidget {
+class GalleryListScreen extends StatelessWidget {
   final List<String>? galleryImages;
+  final String? serviceName;
 
-  GalleryListScreen({this.galleryImages});
+  GalleryListScreen({this.galleryImages, this.serviceName});
 
-  @override
-  _GalleryListScreenState createState() => _GalleryListScreenState();
-}
-
-class _GalleryListScreenState extends State<GalleryListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarWidget(
-        "Gallery List",
+        "${context.translate.lblGallery} ${'- ${serviceName.validate()}'}",
         textColor: white,
         color: context.primaryColor,
         backWidget: BackWidget(),
@@ -27,15 +24,15 @@ class _GalleryListScreenState extends State<GalleryListScreen> {
         spacing: 16,
         runSpacing: 16,
         children: List.generate(
-          widget.galleryImages!.length,
+          galleryImages!.length,
           (index) {
             return cachedImage(
-              widget.galleryImages![index],
+              galleryImages![index],
               height: 110,
               width: context.width() * 0.33 - 20,
               fit: BoxFit.cover,
             ).cornerRadiusWithClipRRect(8).onTap(() {
-              ZoomImageScreen(galleryImages: widget.galleryImages, index: index).launch(context);
+              ZoomImageScreen(galleryImages: galleryImages, index: index).launch(context);
             });
           },
         ),

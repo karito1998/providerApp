@@ -1,11 +1,35 @@
-import 'package:handyman_provider_flutter/locale/languag_es.dart';
+import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 class LanguageEn extends Languages {
+   //Helpi
+
+   @override
+   String lblInvalidEmail = '';
+   @override
+   String lblInvalidUsername = '';
+   @override
+   String lblRetryErr = "";
+   @override
+   String lblWrongErr = "";
+   @override
+   String lblInternetErr = "";
+   @override
+   String lblInvalidEmailSpaces = "";
+   @override
+   String tycRequired = '';
+   @override
+   String signUpSuccess = "";
+
+  //Helpi
+
   @override
   String planAboutToExpire(int days) => 'Your Plan Is About to Expire In $days Days';
 
   @override
   String appName = 'Provider';
+
+  @override
+  String lblProviderDashboard = "Provider Dashboard";
 
   @override
   String provider = 'Provider';
@@ -15,6 +39,9 @@ class LanguageEn extends Languages {
 
   @override
   String back = 'back !';
+
+  @override
+  String lblHandymanDashboard = "Handyman Dashboard";
 
   @override
   String handyman = 'Handyman';
@@ -365,7 +392,7 @@ class LanguageEn extends Languages {
   String lblTime = 'Time';
 
   @override
-  String lblService = 'Service';
+  String lblMyService = 'My Services';
 
   @override
   String lblAllService = 'All Service';
@@ -419,7 +446,7 @@ class LanguageEn extends Languages {
   String lblEditService = 'Edit Service';
 
   @override
-  String selectImgNote = 'Note: You can upload images with \'jpg\',\'png\',\'jpeg\' extensions & you can select multiple images';
+  String selectImgNote = 'Note: You can upload images with \'jpg\', \'png\', \'jpeg\' extensions & you can select multiple images';
 
   @override
   String lblDurationHr = 'Duration : Hours';
@@ -462,22 +489,7 @@ class LanguageEn extends Languages {
 
   @override
   String lblInvalidUrl = 'Invalid URL:';
-  @override
-  String lblInvalidEmail = 'Invalid Email';
-  @override
-  String lblInvalidUsername = '';
-  @override
-  String lblRetryErr = "";
-  @override
-  String lblWrongErr = "";
-  @override
-  String lblInternetErr = "";
-  @override
-  String lblInvalidEmailSpaces = "";
-  @override
-  String tycRequired = '';
-  @override
-  String signUpSuccess = "";
+
   @override
   String errorPasswordLength = 'Password length should be more than';
 
@@ -509,7 +521,7 @@ class LanguageEn extends Languages {
   String lblUnAuthorized = "Demo user cannot be granted for this action";
 
   @override
-  String btnVerifyId = "Verify your Id";
+  String btnVerifyId = "Verify Your Id";
 
   @override
   String confirmationUpload = "Are You sure upload this Document?";
@@ -882,10 +894,10 @@ class LanguageEn extends Languages {
   String lblPlsSelectCategory = "Please Selected Category";
 
   @override
-  String lblEnterHours = "Enter Hours UpTo 24 Hours";
+  String lblEnterHours = "Enter Hours Up To 24 Hours";
 
   @override
-  String lblEnterMinute = "Enter Minute UpTo 60 Minute";
+  String lblEnterMinute = "Enter Minute Up To 60 Minute";
 
   @override
   String lblSelectSubCategory = "Select SubCategory";
@@ -950,4 +962,9 @@ class LanguageEn extends Languages {
   @override
   String lblFailed = "Reason why this booking is failed";
 
+  @override
+  String get lblDesignation => "Designation";
+
+  @override
+  String get lblHandymanIsOffline => "Handyman is Offline";
 }

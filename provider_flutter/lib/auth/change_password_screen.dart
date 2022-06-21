@@ -143,13 +143,12 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         } else if (reenterPasswordCont.text.isEmpty) {
                           return context.translate.lblRequired;
                         }
+                        return null;
                       },
                       onFieldSubmitted: (s) {
-                        if (!appStore.isTester) {
+                        ifNotTester(context, () {
                           changePassword();
-                        } else {
-                          toast(context.translate.lblUnAuthorized);
-                        }
+                        });
                       },
                       decoration: inputDecoration(context, hint: context.translate.hintReenterPasswordTxt),
                     ),
@@ -161,11 +160,9 @@ class ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       textStyle: primaryTextStyle(color: white),
                       width: context.width() - context.navigationBarHeight,
                       onTap: () {
-                        if (!appStore.isTester) {
+                        ifNotTester(context, () {
                           changePassword();
-                        } else {
-                          toast(context.translate.lblUnAuthorized);
-                        }
+                        });
                       },
                     ),
                     24.height,

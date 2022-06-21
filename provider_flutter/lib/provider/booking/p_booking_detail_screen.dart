@@ -12,7 +12,9 @@ import 'package:handyman_provider_flutter/models/user_data.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
 import 'package:handyman_provider_flutter/provider/handyman/assign_handyman_Dialog.dart';
 import 'package:handyman_provider_flutter/provider/handyman/handyman_info_screen.dart';
+import 'package:handyman_provider_flutter/provider/review/rating_view_all_screen.dart';
 import 'package:handyman_provider_flutter/provider/services/service_detail_screen.dart';
+import 'package:handyman_provider_flutter/provider/services/widgets/review_widget.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
@@ -21,7 +23,6 @@ import 'package:handyman_provider_flutter/utils/model_keys.dart';
 import 'package:handyman_provider_flutter/utils/widget/service_proof_list_widget.dart';
 import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:handyman_provider_flutter/widgets/price_common_widget.dart';
-import 'package:handyman_provider_flutter/widgets/review_list_widget.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -39,8 +40,8 @@ class BookingDetailScreenState extends State<BookingDetailScreen> {
   CouponData? couponData;
   BookingDetail _bookingDetail = BookingDetail();
   UserData _customer = UserData();
-  ProviderData providerData = ProviderData();
-  Service service = Service();
+  UserData providerData = UserData();
+  ServiceData service = ServiceData();
 
   List<BookingActivity> bookingActivity = [];
   List<UserData> handymanData = [];
@@ -244,18 +245,24 @@ class BookingDetailScreenState extends State<BookingDetailScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         16.height,
-        Text('${context.translate.review}', style: boldTextStyle()),
-        16.height,
+        if (bookingDetailResponse!.ratingData!.isNotEmpty)
+          Row(
+            children: [
+              Text('${context.translate.review}', style: boldTextStyle(size: 18)).expand(),
+              TextButton(
+                onPressed: () {
+                  RatingViewAllScreen(serviceId: bookingDetailResponse!.service!.id!).launch(context);
+                },
+                child: Text(context.translate.viewAll, style: secondaryTextStyle()),
+              ),
+            ],
+          ),
+        8.height,
         ListView.builder(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
-          padding: EdgeInsets.symmetric(vertical: 6),
           itemCount: bookingDetailResponse!.ratingData!.length,
-          itemBuilder: (context, index) {
-            RatingData data = bookingDetailResponse!.ratingData![index];
-
-            return ReviewListWidget(ratingData: data);
-          },
+          itemBuilder: (context, index) => ReviewWidget(data: bookingDetailResponse!.ratingData![index], isCustomer: true),
         ),
       ],
     );
@@ -339,7 +346,7 @@ class BookingDetailScreenState extends State<BookingDetailScreen> {
                             ),
                             16.height,
                             Divider(height: 0),
-                            24.height,
+                            16.height,
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -351,41 +358,47 @@ class BookingDetailScreenState extends State<BookingDetailScreen> {
                                     16.height,
                                     Row(
                                       children: [
-                                        Text("${context.translate.lblDate} : ", style: boldTextStyle()),
-                                        Text(
-                                          formatDate(_bookingDetail.date.validate(), format: DATE_FORMAT_2),
-                                          style: secondaryTextStyle(),
-                                        ),
+                                        Text("${context.translate.lblDate}: ", style: secondaryTextStyle()),
+                                        _bookingDetail.date.validate().isNotEmpty
+                                            ? Text(
+                                                formatDate(_bookingDetail.date.validate(), format: DATE_FORMAT_2),
+                                                style: boldTextStyle(size: 14),
+                                              )
+                                            : SizedBox(),
                                       ],
                                     ).visible(_bookingDetail.date.validate().isNotEmpty),
                                     8.height,
-                                    Row(
-                                      children: [
-                                        Text("${context.translate.lblTime} : ", style: boldTextStyle()),
-                                        Text(
-                                          formatDate(_bookingDetail.date.validate(), format: DATE_FORMAT_3),
-                                          style: secondaryTextStyle(),
-                                        ),
-                                      ],
-                                    ).visible(_bookingDetail.date.validate().isNotEmpty),
+                                    if (_bookingDetail.date.validate().isNotEmpty)
+                                      Row(
+                                        children: [
+                                          Text("${context.translate.lblTime}: ", style: secondaryTextStyle()),
+                                          _bookingDetail.date.validate().isNotEmpty
+                                              ? Text(formatDate(_bookingDetail.date.validate(), format: DATE_FORMAT_3), style: boldTextStyle(size: 14))
+                                              : SizedBox(),
+                                        ],
+                                      ),
                                   ],
                                 ).expand(),
                                 cachedImage(
                                   attachments!.isNotEmpty ? attachments!.first.url.validate() : "",
                                   fit: BoxFit.cover,
-                                  height: 90,
-                                  width: 90,
+                                  height: 80,
+                                  width: 80,
                                 ).cornerRadiusWithClipRRect(8),
                               ],
-                            ).onTap(() {
-                              ServiceDetailScreen(
-                                serviceId: _bookingDetail.serviceId.validate(),
-                              ).launch(context, pageRouteAnimation: PageRouteAnimation.Slide);
-                            }),
-                            8.height,
+                            ).onTap(
+                              () {
+                                ServiceDetailScreen(
+                                  serviceId: _bookingDetail.serviceId.validate(),
+                                ).launch(context, pageRouteAnimation: PageRouteAnimation.Slide);
+                              },
+                              splashColor: transparentColor,
+                              highlightColor: transparentColor,
+                            ),
+                            16.height,
                             Divider(height: 0),
                             _buildCounterWidget(value: bookingDetailResponse!),
-                            if (bookingDetailResponse!.bookingDetail != null)
+                            /*if (bookingDetailResponse!.bookingDetail != null)
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -393,15 +406,15 @@ class BookingDetailScreenState extends State<BookingDetailScreen> {
                                   Text(context.translate.hintDescription, style: boldTextStyle(size: 18)),
                                   16.height,
                                   bookingDetailResponse!.bookingDetail!.description.validate().isNotEmpty
-                                      ? Text(
+                                      ? ReadMoreText(
                                           bookingDetailResponse!.bookingDetail!.description.validate(),
                                           style: secondaryTextStyle(),
                                           textAlign: TextAlign.justify,
                                         )
-                                      : Text(context.translate.lblNoDescriptionAvailable, style: secondaryTextStyle()).center(),
+                                      : Text(context.translate.lblNoDescriptionAvailable, style: secondaryTextStyle()),
                                   16.height,
                                 ],
-                              ),
+                              ),*/
                             if (serviceProofList.isNotEmpty) ServiceProofListWidget(serviceProofList: serviceProofList),
                             if (handymanData.isNotEmpty && appStore.userType != UserTypeHandyman)
                               Column(
@@ -415,10 +428,10 @@ class BookingDetailScreenState extends State<BookingDetailScreen> {
                                       backgroundColor: context.cardColor,
                                       borderRadius: BorderRadius.all(Radius.circular(16)),
                                     ),
-                                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                                    padding: EdgeInsets.all(16),
                                     child: Column(
                                       children: handymanData.map((e) {
-                                        return BasicInfoComponent(1, handymanData: e, service: service).paddingOnly(bottom: 24).onTap(() {
+                                        return BasicInfoComponent(1, handymanData: e, service: service).onTap(() {
                                           HandymanInfoScreen(handymanId: e.id, service: service).launch(context).then((value) => null);
                                         });
                                       }).toList(),
@@ -426,7 +439,7 @@ class BookingDetailScreenState extends State<BookingDetailScreen> {
                                   ),
                                 ],
                               ),
-                            16.height,
+                            24.height,
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -437,7 +450,7 @@ class BookingDetailScreenState extends State<BookingDetailScreen> {
                                     backgroundColor: context.cardColor,
                                     borderRadius: BorderRadius.all(Radius.circular(16)),
                                   ),
-                                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                                  padding: EdgeInsets.all(16),
                                   child: BasicInfoComponent(
                                     0,
                                     customerData: _customer,
@@ -447,11 +460,11 @@ class BookingDetailScreenState extends State<BookingDetailScreen> {
                                 ),
                               ],
                             ),
+                            24.height,
                             if (_bookingDetail.paymentId.validate() != 0 && _bookingDetail.paymentStatus.validate().isNotEmpty)
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  28.height,
                                   Text(context.translate.lblPaymentDetail, style: boldTextStyle(size: 18)),
                                   16.height,
                                   Container(
@@ -467,48 +480,44 @@ class BookingDetailScreenState extends State<BookingDetailScreen> {
                                           Row(
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Text(context.translate.lblId, style: boldTextStyle()),
-                                              Text("#" + _bookingDetail.paymentId.toString(), style: secondaryTextStyle()),
+                                              Text(context.translate.lblId, style: secondaryTextStyle(size: 16)),
+                                              Text("#" + _bookingDetail.paymentId.toString(), style: boldTextStyle()),
                                             ],
                                           ),
+                                        4.height,
+                                        Divider(),
+                                        4.height,
                                         if (_bookingDetail.paymentMethod.validate().isNotEmpty)
-                                          Column(
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Divider(height: 20),
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                children: [
-                                                  Text(context.translate.lblMethod, style: boldTextStyle()),
-                                                  Text(
-                                                    (_bookingDetail.paymentMethod != null ? _bookingDetail.paymentMethod.toString() : context.translate.notAvailable).capitalizeFirstLetter(),
-                                                    style: secondaryTextStyle(),
-                                                  ),
-                                                ],
+                                              Text(context.translate.lblMethod, style: secondaryTextStyle(size: 16)),
+                                              Text(
+                                                (_bookingDetail.paymentMethod != null ? _bookingDetail.paymentMethod.toString() : context.translate.notAvailable).capitalizeFirstLetter(),
+                                                style: boldTextStyle(),
                                               ),
                                             ],
                                           ),
+                                        4.height,
+                                        Divider().visible(_bookingDetail.paymentMethod != null),
+                                        4.height,
                                         if (_bookingDetail.paymentStatus.validate().isNotEmpty)
-                                          Column(
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
-                                              Divider(height: 20),
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                children: [
-                                                  Text(context.translate.lblStatus, style: boldTextStyle()),
-                                                  Text(
-                                                    (_bookingDetail.paymentStatus != null ? _bookingDetail.paymentStatus.toString() : context.translate.pending).capitalizeFirstLetter(),
-                                                    style: secondaryTextStyle(size: 14),
-                                                  ),
-                                                ],
+                                              Text(context.translate.lblStatus, style: secondaryTextStyle(size: 16)),
+                                              Text(
+                                                (_bookingDetail.paymentStatus != null ? _bookingDetail.paymentStatus.toString() : context.translate.pending).capitalizeFirstLetter(),
+                                                style: boldTextStyle(),
                                               ),
                                             ],
                                           ),
                                       ],
                                     ),
                                   ),
+                                  28.height,
                                 ],
                               ),
-                            16.height,
                             if (bookingDetailResponse!.bookingDetail != null)
                               PriceCommonWidget(
                                 bookingDetail: bookingDetailResponse!.bookingDetail!,
@@ -564,9 +573,9 @@ class BookingDetailScreenState extends State<BookingDetailScreen> {
                   ? isAssigned
                       ? Text(context.translate.lblAssigned, style: boldTextStyle()).center()
                       : statusButton(
-                          context.width(),
+            context.width(),
                           context.translate.lblAssignHandyman,
-                          Colors.green.shade600,
+                          context.primaryColor,
                           Colors.white,
                           onTap: () {
                             appStore.setLoading(true);

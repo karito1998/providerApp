@@ -1,7 +1,28 @@
-import 'package:handyman_provider_flutter/locale/languag_es.dart';
+import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 // class LanguageTr extends
 class LanguageTr extends Languages {
+   //Helpi
+
+   @override
+   String lblInvalidEmail = '';
+   @override
+   String lblInvalidUsername = '';
+   @override
+   String lblRetryErr = "";
+   @override
+   String lblWrongErr = "";
+   @override
+   String lblInternetErr = "";
+   @override
+   String lblInvalidEmailSpaces = "";
+   @override
+   String tycRequired = '';
+   @override
+   String signUpSuccess = "";
+
+  //Helpi
+
   @override
   String planAboutToExpire(int days) => 'Your Plan Is About to Expire In $days Days';
 
@@ -12,10 +33,16 @@ class LanguageTr extends Languages {
   String provider = 'Sağlayıcı';
 
   @override
+  String lblProviderDashboard = "Sağlayıcı kontrol paneli";
+
+  @override
   String welcome = 'Hoş geldin';
 
   @override
   String back = 'geri !';
+
+  @override
+  String lblHandymanDashboard = 'Handyman Gösterge Tablosu';
 
   @override
   String handyman = 'Tamirci';
@@ -366,7 +393,7 @@ class LanguageTr extends Languages {
   String lblTime = 'Zaman';
 
   @override
-  String lblService = 'Hizmet';
+  String lblMyService = 'Benim servislerim';
 
   @override
   String lblAllService = 'Tüm hizmet';
@@ -393,7 +420,7 @@ class LanguageTr extends Languages {
   String lblAudio = 'Ses';
 
   @override
-  String selectAddress = "Servis Addresses'i seçin";
+  String selectAddress = "Hizmet Adreslerini Seçin";
 
   @override
   String btnSave = 'Kaydetmek';
@@ -463,22 +490,7 @@ class LanguageTr extends Languages {
 
   @override
   String lblInvalidUrl = 'Geçersiz URL:';
-  @override
-  String lblInvalidEmail = '';
-  @override
-  String lblInvalidUsername = '';
-  @override
-  String lblRetryErr = "";
-  @override
-  String lblWrongErr = "";
-  @override
-  String lblInternetErr = "";
-  @override
-  String lblInvalidEmailSpaces = "";
-  @override
-  String tycRequired = '';
-  @override
-  String signUpSuccess = "";
+
   @override
   String errorPasswordLength = 'Şifre uzunluğu daha fazla olmalı';
 
@@ -563,90 +575,68 @@ class LanguageTr extends Languages {
   @override
   String lbllogintitle = "Tekrar merhaba !";
 
-
   @override
   String lblloginsubtitle = "Hoşgeldiniz, uzun süre kaçırıldınız";
-
 
   @override
   String lblsignuptitle = "Merhaba kullanıcı!";
 
-
   @override
   String lblsignupsubtitle = "Daha iyi bir deneyim için hesabınızı oluşturun";
-
 
   @override
   String lblLogin = "Giriş yapmak";
 
-
   @override
   String lblsignup = "Üye olmak";
-
 
   @override
   String lblUserType = "Kullanıcı tipi";
 
-
   @override
   String lblPurchaseCode = "Tam Kaynak Kodunu Satın Alın";
-
 
   @override
   String lblFeatureProduct = "Bu özellikli ürün";
 
-
   @override
   String lblHours = "saat";
-
 
   @override
   String lblRating = "Değerlendirme";
 
+  @override
+  String lblOff = "İndirim";
 
   @override
-  String lblOff = "Kapalı";
-
-
-  @override
-  String lblHr = "HR";
-
+  String lblHr = "saat";
 
   @override
   String lblDate = "Tarih";
 
-
   @override
   String lblAboutHandyman = "Tamirci hakkında";
-
 
   @override
   String lblAboutCustomer = "Müşteri Hakkında";
 
-
   @override
   String lblPaymentDetail = "Ödeme detayları";
-
 
   @override
   String lblId = "İD";
 
-
   @override
   String lblMethod = "Yöntem";
-
 
   @override
   String lblStatus = "Durum";
 
-
   @override
   String lblPriceDetail = "Fiyat detayı";
 
-
   @override
   String lblSubTotal = "Ara toplam";
-
 
   @override
   String lblTax = "Vergi";
@@ -654,13 +644,11 @@ class LanguageTr extends Languages {
   @override
   String lblCoupon = "Kupon";
 
-
   @override
   String lblTotalAmount = "Toplam tutar";
 
   @override
   String lblOnBasisOf = "Temelinde";
-
 
   @override
   String lblCheckStatus = "Durumu kontrol et";
@@ -689,10 +677,8 @@ class LanguageTr extends Languages {
   @override
   String lblStatusType = "Durum";
 
-
   @override
   String lblHandymanType = "Tamirci tipi";
-
 
   @override
   String lblFixed = "Sabit";
@@ -723,7 +709,6 @@ class LanguageTr extends Languages {
 
   @override
   String lblWaitingForPayment = "Ödeme için bekleniyor";
-
 
   @override
   String lblOnGoing = "Devam etmek";
@@ -778,7 +763,6 @@ class LanguageTr extends Languages {
 
   @override
   String lblDeleteAddressMsg = "Bu adresi silmek istediğinize emin misiniz?";
-
 
   @override
   String lblChoosePaymentMethod = "Ödeme yöntemini seçin";
@@ -964,7 +948,7 @@ class LanguageTr extends Languages {
   String lblTermCondition = "Kullanım Şartları";
 
   @override
-  String lblServiceTotalTime = "Lütfen tekrar giriş yapın";
+  String lblServiceTotalTime = "Servis Toplam Süre";
 
   @override
   String lblHelpLineNum = "Yardım hattı numarası";
@@ -977,4 +961,10 @@ class LanguageTr extends Languages {
 
   @override
   String lblFailed = "Bu rezervasyonun başarısız olmasının nedeni";
+
+  @override
+  String get lblDesignation => "Aanduiding";
+
+  @override
+  String get lblHandymanIsOffline => "Handyman is offline";
 }

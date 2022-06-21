@@ -6,8 +6,7 @@ import 'package:handyman_provider_flutter/utils/data_provider.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:package_info/package_info.dart';
-
-import '../utils/constant.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutUsScreen extends StatefulWidget {
   @override
@@ -64,51 +63,32 @@ class AboutUsScreenState extends State<AboutUsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(aboutList[index].image.toString(),
-                      height: 28, width: 28, color: context.iconColor),
+                  Image.asset(aboutList[index].image.toString(), height: 28, width: 28, color: context.iconColor),
                   16.height,
-                  Text(aboutList[index].title.toString(),
-                      style: boldTextStyle(size: 18)),
+                  Text(aboutList[index].title.toString(), style: boldTextStyle(size: 18)),
                 ],
               ),
             ).onTap(
               () async {
                 if (index == 0) {
-                  launchUrlCustomTab(appStore.termConditions.isNotEmpty
-                      ? appStore.termConditions.validate()
-                      : termsConditionUrl);
-                  //checkIfLink(context, appStore.termConditions.validate(), title: context.translate.lblTermsAndConditions);
+                  checkIfLink(context, appStore.termConditions.validate(), title: context.translate.lblTermsAndConditions);
                 } else if (index == 1) {
-                  launchUrlCustomTab(appStore.privacyPolicy.isNotEmpty
-                      ? appStore.privacyPolicy.validate()
-                      : privacyPolicyUrl);
-
-                  //checkIfLink(context, appStore.privacyPolicy.validate(), title: context.translate.lblPrivacyPolicy);
+                  checkIfLink(context, appStore.privacyPolicy.validate(), title: context.translate.lblPrivacyPolicy);
                 } else if (index == 2) {
-                  if (appStore.inquiryEmail.isNotEmpty) {
-                    launchMail(appStore.inquiryEmail.validate());
-                  } else {
-                    launchUrlCustomTab(helpSupportUrl);
-                  }
-                  //checkIfLink(context, appStore.inquiryEmail.validate(), title: context.translate.lblHelpAndSupport);
+                  checkIfLink(context, appStore.inquiryEmail.validate(), title: context.translate.lblHelpAndSupport);
                 } else if (index == 3) {
-                  if (appStore.helplineNumber.isNotEmpty) {
-                    launchCall(appStore.helplineNumber.validate());
-                  } else {
-                    toast(context.translate.lblNotHelpLineNum);
-                  }
-                  //checkIfLink(context, appStore.helplineNumber.validate(), title: context.translate.lblHelpLineNum);
+                  checkIfLink(context, appStore.helplineNumber.validate(), title: context.translate.lblHelpLineNum);
                 } else if (index == 4) {
                   {
                     PackageInfo.fromPlatform().then((value) {
                       String package = '';
                       if (isAndroid) package = value.packageName;
-                      commonLaunchUrl(
-                          '${isAndroid ? playStoreBaseURL : appStoreBaseURL}$package');
+                      commonLaunchUrl('${isAndroid ? playStoreBaseURL : appStoreBaseURL}$package', launchMode: LaunchMode.externalApplication);
                     });
                   }
                 }
               },
+              borderRadius: radius(),
             );
           },
         ),

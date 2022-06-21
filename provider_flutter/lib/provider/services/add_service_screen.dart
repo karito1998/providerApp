@@ -129,7 +129,7 @@ class AddServiceScreenState extends State<AddServiceScreen> {
   }
 
   Future<void> getCategory() async {
-    await getCategoryList().then((value) {
+    await getCategoryList(perPage: '?per_page=all').then((value) {
       categoryList.addAll(value.data!);
 
       if (widget.data != null) selectedCategory = categoryList.where((element) => element.id == widget.data!.categoryId).first;
@@ -188,6 +188,11 @@ class AddServiceScreenState extends State<AddServiceScreen> {
 
   Future<void> addNewService() async {
     hideKeyboard(context);
+
+    // Check if image is selected when adding new service
+    if (serviceId == null && imageFiles.isEmpty) {
+      return toast('Choose at-least one image.');
+    }
 
     MultipartRequest multiPartRequest = await getMultiPartRequest('service-save');
 
@@ -249,12 +254,13 @@ class AddServiceScreenState extends State<AddServiceScreen> {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       hideKeyboard(context);
-      if (selectedCategory != null && selectedAddress.isNotEmpty) {
-        addNewService();
+
+      if (selectedCategory == null) {
+        toast(context.translate.lblPlsSelectCategory);
       } else if (selectedAddress.isEmpty) {
         toast(context.translate.lblPlsSelectAddress);
-      } else if (selectedCategory == null) {
-        toast(context.translate.lblPlsSelectCategory);
+      } else {
+        addNewService();
       }
     }
   }
@@ -318,7 +324,6 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                       borderType: BorderType.RRect,
                       dashPattern: [6, 5],
                       radius: Radius.circular(12),
-                      padding: EdgeInsets.all(16),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -326,7 +331,7 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                           8.height,
                           Text(context.translate.hintChooseImage, style: boldTextStyle()),
                         ],
-                      ).center().onTap(() async {
+                      ).center().onTap(borderRadius: radius(), () async {
                         getMultipleFile();
                       }),
                     ),
@@ -561,9 +566,11 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                                 keyboardType: TextInputType.number,
                                 validator: (s) {
                                   if (s!.isEmpty) return context.translate.lblRequired;
+                                  //if (s!.isEmpty) return errorThisFieldRequired;
 
                                   if (s.toInt() > 24) return context.translate.lblEnterHours;
                                   if (s.toInt() == 0) return context.translate.lblRequired;
+                                  //errorThisFieldRequired;
                                   return null;
                                 },
                               ).paddingRight(8).expand(),
@@ -582,7 +589,8 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                                 ),
                                 keyboardType: TextInputType.number,
                                 validator: (s) {
-                                  if (s!.isEmpty) return context.translate.lblRequired;
+                                 if (s!.isEmpty) return context.translate.lblRequired;
+                                 // if (s!.isEmpty) return errorThisFieldRequired;
 
                                   if (s.toInt() > 60) return context.translate.lblEnterMinute;
                                   return null;
@@ -626,11 +634,9 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                     textStyle: primaryTextStyle(color: white),
                     width: context.width() - context.navigationBarHeight,
                     onTap: () {
-                      if (!appStore.isTester) {
+                      ifNotTester(context, () {
                         checkValidation();
-                      } else {
-                        toast(context.translate.lblUnAuthorized);
-                      }
+                      });
                     },
                   ),
                   16.height,

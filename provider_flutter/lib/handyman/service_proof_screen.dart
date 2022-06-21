@@ -75,6 +75,9 @@ class ServiceProofScreenState extends State<ServiceProofScreen> {
         multiPartRequest.files.add(await MultipartFile.fromPath('${SaveBookingAttachment.bookingAttachment + i.toString()}', element.path));
       });
     }
+    if (imageFiles.isEmpty) {
+      return toast('Choose at-least one image.');
+    }
 
     if (imageFiles.isNotEmpty) multiPartRequest.fields[AddServiceKey.attachmentCount] = imageFiles.length.toString();
 

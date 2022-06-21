@@ -30,17 +30,16 @@ class _HandymanReviewComponentState extends State<HandymanReviewComponent> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(context.translate.review, style: boldTextStyle()),
-                if (widget.handyman_reviews!.length > 4)
-                  Text(context.translate.viewAll, style: secondaryTextStyle()).onTap(() {
-                    AllReviewComponent(handymanReviews: widget.handyman_reviews.validate()).launch(context);
-                  }),
+                Text(context.translate.viewAll, style: secondaryTextStyle()).onTap(() {
+                  AllReviewComponent(handymanReviews: widget.handyman_reviews.validate()).launch(context);
+                }),
               ],
             ).paddingSymmetric(horizontal: 16),
-            if (widget.handyman_reviews!.length < 4) 16.height,
+            if (widget.handyman_reviews!.length < 4) 8.height,
             ListView.builder(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.only(left: 8, right: 8, bottom: 8, top: 16),
+              padding: EdgeInsets.only(left: 16, right: 16, bottom: 8, top: 16),
               itemCount: widget.handyman_reviews!.length,
               itemBuilder: (context, index) {
                 HandymanReview data = widget.handyman_reviews![index];

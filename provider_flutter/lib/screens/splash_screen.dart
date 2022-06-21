@@ -36,7 +36,9 @@ class SplashScreenState extends State<SplashScreen> {
         });
       }
     });
-    await 2.seconds.delay;
+
+    if (!await isAndroid12Above()) await 2.seconds.delay;
+
     if (!appStore.isLoggedIn) {
       SignInScreen().launch(context, isNewTask: true);
     } else {

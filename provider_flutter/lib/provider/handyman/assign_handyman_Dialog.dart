@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:handyman_provider_flutter/components/handyman_name_widget.dart';
 import 'package:handyman_provider_flutter/main.dart';
-import 'package:handyman_provider_flutter/models/user_list_response.dart';
+import 'package:handyman_provider_flutter/models/user_data.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
@@ -21,12 +22,12 @@ class AssignHandymanDialog extends StatefulWidget {
 }
 
 class _AssignHandymanDialogState extends State<AssignHandymanDialog> {
-  List<UserListData> userData = [];
-  List<UserListData> handymanData = [];
-  List<UserListData> filteredData = [];
+  List<UserData> userData = [];
+  List<UserData> handymanData = [];
+  List<UserData> filteredData = [];
   List<int> assignedHandyman = [];
 
-  UserListData? userListData;
+  UserData? userListData;
 
   bool afterInit = false;
 
@@ -50,6 +51,7 @@ class _AssignHandymanDialogState extends State<AssignHandymanDialog> {
 
       for (int i = 0; i < handymanData.length; i++) {
         if (handymanData[i].status == 1) {
+          log('${handymanData[i].serviceAddressId} ${widget.serviceAddressId}');
           if (handymanData[i].serviceAddressId == widget.serviceAddressId) {
             userData.add(handymanData[i]);
 
@@ -135,7 +137,7 @@ class _AssignHandymanDialogState extends State<AssignHandymanDialog> {
                   shrinkWrap: true,
                   padding: EdgeInsets.only(top: 8, bottom: 90),
                   itemBuilder: (context, index) {
-                    return RadioListTile<UserListData>(
+                    return RadioListTile<UserData>(
                       value: filteredData[index],
                       contentPadding: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
                       controlAffinity: ListTileControlAffinity.trailing,
@@ -154,7 +156,10 @@ class _AssignHandymanDialogState extends State<AssignHandymanDialog> {
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(filteredData[index].displayName.validate(), style: boldTextStyle()),
+                              HandymanNameWidget(
+                                name: filteredData[index].displayName.validate(),
+                                isHandymanAvailable: filteredData[index].isHandymanAvailable,
+                              ),
                               8.height,
                               Text(
                                 "${context.translate.lblMemberSince} ${DateTime.parse(filteredData[index].createdAt.validate()).year}",
@@ -180,7 +185,7 @@ class _AssignHandymanDialogState extends State<AssignHandymanDialog> {
                   context.translate.noDataFound,
                   style: boldTextStyle(),
                   textAlign: TextAlign.center,
-                ).paddingAll(16).visible(appStore.isLoading && afterInit && filteredData.isEmpty),
+                ).paddingAll(16).visible(!appStore.isLoading && afterInit && filteredData.isEmpty),
               ],
             ),
             Positioned(
@@ -190,7 +195,11 @@ class _AssignHandymanDialogState extends State<AssignHandymanDialog> {
               child: AppButton(
                 onTap: () {
                   if (userListData != null) {
-                    assignHandyman();
+                    if (userListData!.isHandymanAvailable!) {
+                      assignHandyman();
+                    } else {
+                      toast(context.translate.lblHandymanIsOffline);
+                    }
                   } else {
                     toast(context.translate.lblSelectHandyman);
                   }

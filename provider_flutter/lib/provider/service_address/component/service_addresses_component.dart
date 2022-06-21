@@ -5,7 +5,6 @@ import 'package:handyman_provider_flutter/models/service_address_response.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
-import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:handyman_provider_flutter/utils/model_keys.dart';
@@ -117,7 +116,7 @@ class ServiceAddressesComponentState extends State<ServiceAddressesComponent> {
                     AppTextField(
                       onChanged: (value) {},
                       controller: textFieldAddress,
-                      textFieldType: TextFieldType.ADDRESS,
+                      textFieldType: TextFieldType.MULTILINE,
                       decoration: inputDecoration(context),
                       minLines: 4,
                       maxLines: 10,
@@ -140,11 +139,9 @@ class ServiceAddressesComponentState extends State<ServiceAddressesComponent> {
                           destinationLatitude = destinationPlacemark[0].latitude;
                           destinationLongitude = destinationPlacemark[0].longitude;
 
-                          if (getStringAsync(USER_EMAIL) != DEFAULT_PROVIDER_EMAIL) {
+                          ifNotTester(context, () {
                             updateAddressStatus(widget.data.status.validate().toInt(), textFieldAddress.text, destinationLatitude.toString(), destinationLongitude.toString(), 1);
-                          } else {
-                            toast(context.translate.lblUnAuthorized);
-                          }
+                          });
                         } catch (e) {
                           log(e);
                         }
@@ -166,8 +163,8 @@ class ServiceAddressesComponentState extends State<ServiceAddressesComponent> {
       contentPadding: EdgeInsets.all(0),
       builder: (_) {
         return SizedBox(
-          height: context.height() * 0.5,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(delete, width: 110, height: 110, fit: BoxFit.cover),
               32.height,
@@ -232,7 +229,7 @@ class ServiceAddressesComponentState extends State<ServiceAddressesComponent> {
                 activeTrackColor: primaryColor,
                 value: widget.data.status == 1 ? true : false,
                 onChanged: (bool? value) {
-                  if (getStringAsync(USER_EMAIL) != DEFAULT_PROVIDER_EMAIL) {
+                  ifNotTester(context, () {
                     setState(() {
                       if (widget.data.status == 1) {
                         widget.data.status = 0;
@@ -242,9 +239,7 @@ class ServiceAddressesComponentState extends State<ServiceAddressesComponent> {
                         updateAddressStatus(1, widget.data.address, widget.data.latitude, widget.data.longitude, 0);
                       }
                     });
-                  } else {
-                    toast(context.translate.lblUnAuthorized);
-                  }
+                  });
                 },
               ).paddingLeft(16),
             ],
@@ -253,21 +248,17 @@ class ServiceAddressesComponentState extends State<ServiceAddressesComponent> {
             children: [
               Text(context.translate.lblEdit, style: secondaryTextStyle()).onTap(
                 () {
-                  if (getStringAsync(USER_EMAIL) != DEFAULT_PROVIDER_EMAIL) {
+                  ifNotTester(context, () {
                     editDialog(widget.data.address);
-                  } else {
-                    toast(context.translate.lblUnAuthorized);
-                  }
+                  });
                 },
               ),
               16.width,
               Text(context.translate.lblDelete, style: secondaryTextStyle()).onTap(
                 () {
-                  if (getStringAsync(USER_EMAIL) != DEFAULT_PROVIDER_EMAIL) {
+                  ifNotTester(context, () {
                     deleteDialog();
-                  } else {
-                    toast(context.translate.lblUnAuthorized);
-                  }
+                  });
                 },
               )
             ],

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
+import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/model_keys.dart';
+import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -30,21 +33,25 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
 
-      Map req = {UserKeys.email: emailCont.text.validate()};
-      appStore.setLoading(true);
+      if (emailCont.text == DEFAULT_HANDYMAN_EMAIL || emailCont.text == DEFAULT_PROVIDER_EMAIL) {
+        toast(context.translate.lblUnAuthorized);
+      } else {
+        Map req = {UserKeys.email: emailCont.text.validate()};
+        appStore.setLoading(true);
 
-      forgotPassword(req).then((value) {
-        appStore.setLoading(false);
-        toast(value.message.toString());
+        forgotPassword(req).then((value) {
+          appStore.setLoading(false);
+          toast(value.message.toString());
 
-        pop();
-      }).catchError((e) {
-        appStore.setLoading(false);
+          pop();
+        }).catchError((e) {
         if(e.toString() == "We can't find a user with that email address." )
-          toast("No pudimos encontrar un usuario con este correo electronico", print: true);
-        else
+                  toast("No pudimos encontrar un usuario con este correo electronico", print: true);
+                else
+          appStore.setLoading(false);
           toast(e.toString(), print: true);
-      });
+        });
+      }
     }
   }
 
@@ -75,18 +82,19 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       borderRadius: BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
                       backgroundColor: primaryColor,
                     ),
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-                    child:
-                    Row( children: [
-                      Expanded(child: Text(context.translate.forgotPassword, style: boldTextStyle(color: white)).paddingOnly(left: 10),),
-                      CloseButton(color: Colors.white),
-                           ]),
-
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(context.translate.forgotPassword, style: boldTextStyle(color: white)).paddingOnly(left: 16),
+                        CloseButton(color: Colors.white),
+                      ],
+                    ),
                   ),
                   16.height,
                   Container(
                     margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    padding: EdgeInsets.all(5),
+                    padding: EdgeInsets.all(8),
                     alignment: Alignment.bottomCenter,
                     decoration: boxDecorationRoundedWithShadow(defaultRadius.toInt(), blurRadius: 0, backgroundColor: context.scaffoldBackgroundColor),
                     child: Form(
@@ -131,6 +139,9 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 ],
               ),
             ),
+          ),
+          Observer(
+            builder: (_) => LoaderWidget().center().visible(appStore.isLoading),
           ),
         ],
       ),

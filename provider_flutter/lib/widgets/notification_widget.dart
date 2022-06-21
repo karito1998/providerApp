@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:handyman_provider_flutter/components/image_border_component.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/notification_list_response.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
@@ -35,7 +36,9 @@ class NotificationWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          circleImage(image: data.profileImage.validate(), size: 60),
+          ImageBorder(
+            child: circleImage(image: data.profileImage.validate(), size: 60),
+          ),
           16.width,
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

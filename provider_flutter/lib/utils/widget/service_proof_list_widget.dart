@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:handyman_provider_flutter/models/booking_detail_response.dart';
 import 'package:handyman_provider_flutter/screens/zoom_image_screen.dart';
+import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -20,7 +21,7 @@ class _ServiceProofListWidgetState extends State<ServiceProofListWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         16.height,
-        Text('Service Proof', style: boldTextStyle(size: 18)),
+        Text(context.translate.lblServiceProof, style: boldTextStyle(size: 18)),
         16.height,
         Container(
           decoration: boxDecorationWithRoundedCorners(
@@ -80,6 +81,5 @@ class _ServiceProofListWidgetState extends State<ServiceProofListWidget> {
         ),
       ],
     );
-    ;
   }
 }

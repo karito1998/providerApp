@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:handyman_provider_flutter/components/image_border_component.dart';
 import 'package:handyman_provider_flutter/components/price_widget.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/service_model.dart';
@@ -10,7 +11,7 @@ import 'package:handyman_provider_flutter/widgets/disabled_rating_bar_widget.dar
 import 'package:nb_utils/nb_utils.dart';
 
 class ServiceComponent extends StatelessWidget {
-  final Service data;
+  final ServiceData data;
   final double width;
 
   ServiceComponent({required this.data, required this.width});
@@ -33,7 +34,7 @@ class ServiceComponent extends StatelessWidget {
               cachedImage(
                 data.image_attchments!.isNotEmpty ? data.image_attchments!.first.validate() : "",
                 fit: BoxFit.cover,
-                height: 120,
+                height: 180,
                 width: context.width(),
               ).cornerRadiusWithClipRRectOnly(topRight: defaultRadius.toInt(), topLeft: defaultRadius.toInt()),
               Positioned(
@@ -94,7 +95,7 @@ class ServiceComponent extends StatelessWidget {
               16.height,
               Row(
                 children: [
-                  circleImage(image: data.providerImage.validate(), size: 30),
+                  ImageBorder(child: circleImage(image: data.providerImage.validate(), size: 30)),
                   8.width,
                   if (data.providerName.validate().isNotEmpty)
                     Text(
@@ -105,7 +106,6 @@ class ServiceComponent extends StatelessWidget {
                     ).expand()
                 ],
               ),
-              10.height,
             ],
           ).paddingSymmetric(horizontal: 12, vertical: 12),
         ],

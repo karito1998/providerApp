@@ -31,6 +31,7 @@ class UserKeys {
   static String playerId = 'player_id';
   static String serviceAddressId = 'service_address_id';
   static String uid = 'uid';
+  static String designation = 'designation';
 }
 
 class BookingServiceKeys {

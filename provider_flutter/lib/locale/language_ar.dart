@@ -1,6 +1,27 @@
-import 'package:handyman_provider_flutter/locale/languag_es.dart';
+import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 class LanguageAr extends Languages {
+   //Helpi
+
+   @override
+   String lblInvalidEmail = '';
+   @override
+   String lblInvalidUsername = '';
+   @override
+   String lblRetryErr = "";
+   @override
+   String lblWrongErr = "";
+   @override
+   String lblInternetErr = "";
+   @override
+   String lblInvalidEmailSpaces = "";
+   @override
+   String tycRequired = '';
+   @override
+   String signUpSuccess = "";
+
+  //Helpi
+
   @override
   String planAboutToExpire(int days) => 'Your Plan Is About to Expire In $days Days';
 
@@ -11,10 +32,16 @@ class LanguageAr extends Languages {
   String provider = 'مزود';
 
   @override
+  String lblProviderDashboard = "لوحة القيادة مزود";
+
+  @override
   String welcome = 'أهلا بك';
 
   @override
   String back = 'الى الخلف !';
+
+  @override
+  String lblHandymanDashboard = 'لوحة القيادة العالية';
 
   @override
   String handyman = 'عامل يدوي';
@@ -152,7 +179,7 @@ class LanguageAr extends Languages {
   String accept = 'قبول';
 
   @override
-  String decline = 'يتناقص';
+  String decline = 'رفض';
 
   @override
   String noDataFound = 'لاتوجد بيانات';
@@ -365,7 +392,7 @@ class LanguageAr extends Languages {
   String lblTime = 'زمن';
 
   @override
-  String lblService = 'خدمة';
+  String lblMyService = 'خدماتي';
 
   @override
   String lblAllService = 'كل الخدمة';
@@ -392,7 +419,7 @@ class LanguageAr extends Languages {
   String lblAudio = 'صوتي';
 
   @override
-  String selectAddress = 'حدد خدمة AddDresses.';
+  String selectAddress = 'حدد عناوين الخدمة';
 
   @override
   String btnSave = 'يحفظ';
@@ -463,22 +490,6 @@ class LanguageAr extends Languages {
   @override
   String lblInvalidUrl = 'URL غير صالح:';
 
-  @override
-  String lblInvalidEmail = '';
-  @override
-  String lblInvalidUsername = '';
-  @override
-  String lblRetryErr = "";
-  @override
-  String lblWrongErr = "";
-  @override
-  String lblInternetErr = "";
-  @override
-  String lblInvalidEmailSpaces = "";
-  @override
-  String tycRequired = '';
-  @override
-  String signUpSuccess = "";
   @override
   String errorPasswordLength = 'يجب أن يكون طول كلمة المرور أكثر من';
 
@@ -563,90 +574,68 @@ class LanguageAr extends Languages {
   @override
   String lbllogintitle = "مرحبا مجددا !";
 
-
   @override
   String lblloginsubtitle = "مرحبا بك مرة أخرى، لقد فاتك لفترة طويلة";
-
 
   @override
   String lblsignuptitle = "مرحبا المستخدم!";
 
-
   @override
   String lblsignupsubtitle = "إنشاء حسابك للحصول على تجربة أفضل";
-
 
   @override
   String lblLogin = "تسجيل الدخول";
 
-
   @override
   String lblsignup = "اشتراك";
-
 
   @override
   String lblUserType = "نوع المستخدم";
 
-
   @override
   String lblPurchaseCode = "شراء شفرة المصدر الكامل";
-
 
   @override
   String lblFeatureProduct = "هذا المنتج مميز";
 
-
   @override
   String lblHours = "ساعة";
-
 
   @override
   String lblRating = "تقييم";
 
+  @override
+  String lblOff = "خصم";
 
   @override
-  String lblOff = "عن";
-
-
-  @override
-  String lblHr = "انتشر";
-
+  String lblHr = "ساعة";
 
   @override
   String lblDate = "تاريخ";
 
-
   @override
   String lblAboutHandyman = "حول العمل اليدوي";
-
 
   @override
   String lblAboutCustomer = "عن العميل";
 
-
   @override
   String lblPaymentDetail = "تفاصيل الدفع";
-
 
   @override
   String lblId = "هوية شخصية";
 
-
   @override
   String lblMethod = "طريقة";
-
 
   @override
   String lblStatus = "حالة";
 
-
   @override
   String lblPriceDetail = "تفاصيل السعر";
 
-
   @override
   String lblSubTotal = "المجموع الفرعي";
-
 
   @override
   String lblTax = "ضريبة";
@@ -654,13 +643,11 @@ class LanguageAr extends Languages {
   @override
   String lblCoupon = "كوبون";
 
-
   @override
   String lblTotalAmount = "المبلغ الإجمالي";
 
   @override
   String lblOnBasisOf = "على أساس";
-
 
   @override
   String lblCheckStatus = "تحقق من حالة";
@@ -689,10 +676,8 @@ class LanguageAr extends Languages {
   @override
   String lblStatusType = "حالة";
 
-
   @override
   String lblHandymanType = "Handyman النوع";
-
 
   @override
   String lblFixed = "مثبت";
@@ -723,7 +708,6 @@ class LanguageAr extends Languages {
 
   @override
   String lblWaitingForPayment = "في انتظار الدفع";
-
 
   @override
   String lblOnGoing = "جاري التنفيذ";
@@ -963,7 +947,7 @@ class LanguageAr extends Languages {
   String lblTermCondition = "شروط الخدمة";
 
   @override
-  String lblServiceTotalTime = "الرجاد الدخول على الحساب من جديد";
+  String lblServiceTotalTime = "إجمالي الخدمة";
 
   @override
   String lblHelpLineNum = "رقم خط المساعدة";
@@ -976,4 +960,10 @@ class LanguageAr extends Languages {
 
   @override
   String lblFailed = "سبب فشل هذا الحجز";
+
+  @override
+  String get lblDesignation => "تعيين";
+
+  @override
+  String get lblHandymanIsOffline => "هانيدان غير متصل";
 }

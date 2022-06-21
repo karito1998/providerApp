@@ -6,6 +6,7 @@ import 'package:handyman_provider_flutter/networks/rest_apis.dart';
 import 'package:handyman_provider_flutter/provider/dashboard/component/chart_component.dart';
 import 'package:handyman_provider_flutter/provider/dashboard/component/commission_component.dart';
 import 'package:handyman_provider_flutter/provider/dashboard/component/handyman_list_component.dart';
+import 'package:handyman_provider_flutter/provider/dashboard/component/handyman_recently_online_component.dart';
 import 'package:handyman_provider_flutter/provider/dashboard/component/services_list_component.dart';
 import 'package:handyman_provider_flutter/provider/dashboard/component/total_component.dart';
 import 'package:handyman_provider_flutter/provider/subscription/pricing_plan_screen.dart';
@@ -23,6 +24,8 @@ class HomeFragment extends StatefulWidget {
 
 class _HomeFragmentState extends State<HomeFragment> {
   int currentIndex = 0;
+
+  Future<DashboardResponse> future = providerDashboard();
 
   @override
   void initState() {
@@ -101,13 +104,14 @@ class _HomeFragmentState extends State<HomeFragment> {
     return RefreshIndicator(
       onRefresh: () async {
         setState(() {});
+        future = providerDashboard();
         return await 2.seconds.delay;
       },
       child: Scaffold(
         body: Stack(
           children: [
             FutureBuilder<DashboardResponse>(
-              future: providerDashboard(),
+              future: future,
               builder: (context, snap) {
                 if (snap.hasError) {
                   return Text(snap.error.toString()).center();
@@ -118,20 +122,14 @@ class _HomeFragmentState extends State<HomeFragment> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if ((snap.data!.earningType == EARNING_TYPE_SUBSCRIPTION))
-                          Observer(
-                            builder: (context) {
-                              return planBanner(snap.data!);
-                            },
-                          ),
+                        if ((snap.data!.earningType == EARNING_TYPE_SUBSCRIPTION)) planBanner(snap.data!),
                         _buildHeaderWidget(snap.data!),
                         if (snap.data!.earningType == EARNING_TYPE_COMMISSION) CommissionComponent(commission: snap.data!.commission!),
                         TotalComponent(snap: snap.data!),
-                        8.height,
                         ChartComponent(),
-                        16.height,
-                        if (snap.data!.handyman.validate().isNotEmpty) HandymanListComponent(list: snap.data!.handyman.validate()),
-                        if (snap.data!.service.validate().isNotEmpty) ServiceListComponent(list: snap.data!.service.validate()),
+                        HandymanRecentlyOnlineComponent(images: snap.data!.online_handyman.validate()),
+                        HandymanListComponent(list: snap.data!.handyman.validate()),
+                        ServiceListComponent(list: snap.data!.service.validate()),
                       ],
                     ),
                   );

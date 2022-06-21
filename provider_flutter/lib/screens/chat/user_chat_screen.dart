@@ -70,7 +70,7 @@ class _UserChatScreenState extends State<UserChatScreen> {
           cursorColor: appStore.isDarkMode ? Colors.white : Colors.black,
           textCapitalization: TextCapitalization.sentences,
           keyboardType: TextInputType.multiline,
-          decoration: inputDecoration(context).copyWith(
+          decoration: inputDecoration(context, borderRadius: 30).copyWith(
             hintText: context.translate.lblWriteMsg,
             hintStyle: secondaryTextStyle(),
           ),

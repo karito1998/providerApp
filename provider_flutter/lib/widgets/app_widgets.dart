@@ -106,6 +106,7 @@ Widget aboutCustomerWidget({BuildContext? context, BookingDetail? bookingDetail}
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
+      //AboutCustomer
       Text(context!.translate.lblAboutCustomer, style: boldTextStyle(size: 18)),
       OutlinedButton(
         child: Text(context.translate.lblGetDirection, style: boldTextStyle(color: primaryColor)),

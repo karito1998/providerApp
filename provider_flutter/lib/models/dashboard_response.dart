@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/provider_subscription_model.dart';
 import 'package:handyman_provider_flutter/models/service_model.dart';
+import 'package:handyman_provider_flutter/models/user_data.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import 'revenue_chart_data.dart';
@@ -13,9 +14,9 @@ class DashboardResponse {
   int? total_service;
   int? total_handyman;
   int? is_subscribed;
-  List<Service>? service;
-  List<Category>? category;
-  List<Handyman>? handyman;
+  List<ServiceData>? service;
+  List<CategoryData>? category;
+  List<UserData>? handyman;
   num? totalRevenue;
   List<double>? chartArray;
   List<int>? monthData;
@@ -24,6 +25,7 @@ class DashboardResponse {
   List<Configurations>? configurations;
   List<PaymentSetting>? paymentSettings;
   String? earningType;
+  List<LanguageOption>? language_option;
 
   List<String> months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
 
@@ -36,6 +38,7 @@ class DashboardResponse {
   String? inquriy_email;
   String? helpline_number;
   ProviderWallet? providerWallet;
+  List<String>? online_handyman;
 
   DashboardResponse({
     this.chartArray,
@@ -59,6 +62,8 @@ class DashboardResponse {
     this.inquriy_email,
     this.helpline_number,
     this.providerWallet,
+    this.language_option,
+    this.online_handyman,
   });
 
   DashboardResponse.fromJson(Map<String, dynamic> json) {
@@ -79,19 +84,19 @@ class DashboardResponse {
     if (json['service'] != null) {
       service = [];
       json['service'].forEach((v) {
-        service!.add(new Service.fromJson(v));
+        service!.add(new ServiceData.fromJson(v));
       });
     }
     if (json['category'] != null) {
       category = [];
       json['category'].forEach((v) {
-        category!.add(new Category.fromJson(v));
+        category!.add(new CategoryData.fromJson(v));
       });
     }
     if (json['handyman'] != null) {
       handyman = [];
       json['handyman'].forEach((v) {
-        handyman!.add(new Handyman.fromJson(v));
+        handyman!.add(UserData.fromJson(v));
       });
     }
 
@@ -116,6 +121,8 @@ class DashboardResponse {
     providerWallet = json['provider_wallet'] != null ? ProviderWallet.fromJson(json['provider_wallet']) : null;
 
     // providerWallet = json['provider_wallet'] != null ? (json['provider_wallet'] as List).map((i) => ProviderWallet.fromJson(i)).toList() : null;
+    language_option = json['language_option'] != null ? (json['language_option'] as List).map((i) => LanguageOption.fromJson(i)).toList() : null;
+    online_handyman = json['online_handyman'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
@@ -156,9 +163,15 @@ class DashboardResponse {
     }
     data['total_revenue'] = this.totalRevenue;
     data['earning_type'] = this.earningType;
+    data['online_handyman'] = this.online_handyman;
     if (this.providerWallet != null) {
       data['provider_wallet'] = this.providerWallet!.toJson();
     }
+
+    if (this.language_option != null) {
+      data['language_option'] = this.language_option!.map((v) => v.toJson()).toList();
+    }
+
     return data;
   }
 }
@@ -353,7 +366,7 @@ class ProviderAddressMapping {
   }
 }
 
-class Category {
+class CategoryData {
   int? id;
   String? name;
   int? status;
@@ -362,9 +375,9 @@ class Category {
   String? color;
   String? categoryImage;
 
-  Category({this.id, this.name, this.status, this.description, this.isFeatured, this.color, this.categoryImage});
+  CategoryData({this.id, this.name, this.status, this.description, this.isFeatured, this.color, this.categoryImage});
 
-  Category.fromJson(Map<String, dynamic> json) {
+  CategoryData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     status = json['status'];
@@ -383,131 +396,6 @@ class Category {
     data['is_featured'] = this.isFeatured;
     data['color'] = this.color;
     data['category_image'] = this.categoryImage;
-    return data;
-  }
-}
-
-class Handyman {
-  int? id;
-  String? firstName;
-  String? lastName;
-  String? username;
-  int? providerId;
-  int? status;
-  String? description;
-  String? userType;
-  String? email;
-  String? contactNumber;
-  int? countryId;
-  int? stateId;
-  int? cityId;
-  String? cityName;
-  String? address;
-  var providertypeId;
-  var providertype;
-  int? isFeatured;
-  String? displayName;
-  String? createdAt;
-  String? updatedAt;
-  String? profileImage;
-  String? timeZone;
-  String? uid;
-  String? loginType;
-  int? serviceAddressId;
-  String? lastNotificationSeen;
-
-  //Local
-  bool isActive = false;
-
-  Handyman(
-      {this.id,
-      this.firstName,
-      this.lastName,
-      this.username,
-      this.providerId,
-      this.status,
-      this.description,
-      this.userType,
-      this.email,
-      this.contactNumber,
-      this.countryId,
-      this.stateId,
-      this.cityId,
-      this.cityName,
-      this.address,
-      this.providertypeId,
-      this.providertype,
-      this.isFeatured,
-      this.displayName,
-      this.createdAt,
-      this.updatedAt,
-      this.profileImage,
-      this.timeZone,
-      this.uid,
-      this.loginType,
-      this.serviceAddressId,
-      this.lastNotificationSeen});
-
-  Handyman.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    firstName = json['first_name'];
-    lastName = json['last_name'];
-    username = json['username'];
-    providerId = json['provider_id'];
-    status = json['status'];
-    isActive = status.validate() == 1;
-    description = json['description'];
-    userType = json['user_type'];
-    email = json['email'];
-    contactNumber = json['contact_number'];
-    countryId = json['country_id'];
-    stateId = json['state_id'];
-    cityId = json['city_id'];
-    cityName = json['city_name'];
-    address = json['address'];
-    providertypeId = json['providertype_id'];
-    providertype = json['providertype'];
-    isFeatured = json['is_featured'];
-    displayName = json['display_name'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    profileImage = json['profile_image'];
-    timeZone = json['time_zone'];
-    uid = json['uid'];
-    loginType = json['login_type'];
-    serviceAddressId = json['service_address_id'];
-    lastNotificationSeen = json['last_notification_seen'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['first_name'] = this.firstName;
-    data['last_name'] = this.lastName;
-    data['username'] = this.username;
-    data['provider_id'] = this.providerId;
-    data['status'] = this.status;
-    data['description'] = this.description;
-    data['user_type'] = this.userType;
-    data['email'] = this.email;
-    data['contact_number'] = this.contactNumber;
-    data['country_id'] = this.countryId;
-    data['state_id'] = this.stateId;
-    data['city_id'] = this.cityId;
-    data['city_name'] = this.cityName;
-    data['address'] = this.address;
-    data['providertype_id'] = this.providertypeId;
-    data['providertype'] = this.providertype;
-    data['is_featured'] = this.isFeatured;
-    data['display_name'] = this.displayName;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['profile_image'] = this.profileImage;
-    data['time_zone'] = this.timeZone;
-    data['uid'] = this.uid;
-    data['login_type'] = this.loginType;
-    data['service_address_id'] = this.serviceAddressId;
-    data['last_notification_seen'] = this.lastNotificationSeen;
     return data;
   }
 }
@@ -692,6 +580,30 @@ class ProviderWallet {
     data['status'] = this.status;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    return data;
+  }
+}
+
+class LanguageOption {
+  String? flag_image;
+  String? id;
+  String? title;
+
+  LanguageOption({this.flag_image, this.id, this.title});
+
+  factory LanguageOption.fromJson(Map<String, dynamic> json) {
+    return LanguageOption(
+      flag_image: json['flag_image'],
+      id: json['id'],
+      title: json['title'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['flag_image'] = this.flag_image;
+    data['id'] = this.id;
+    data['title'] = this.title;
     return data;
   }
 }

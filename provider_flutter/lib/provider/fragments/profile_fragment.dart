@@ -6,7 +6,7 @@ import 'package:handyman_provider_flutter/auth/edit_profile_screen.dart';
 import 'package:handyman_provider_flutter/components/back_widget.dart';
 import 'package:handyman_provider_flutter/components/theme_selection_dailog.dart';
 import 'package:handyman_provider_flutter/main.dart';
-import 'package:handyman_provider_flutter/models/dashboard_response.dart';
+import 'package:handyman_provider_flutter/models/user_data.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
 import 'package:handyman_provider_flutter/provider/handyman/all_handyman_list_screen.dart';
 import 'package:handyman_provider_flutter/provider/service_address/service_addresses_screen.dart';
@@ -23,12 +23,11 @@ import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:package_info/package_info.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../wallet/wallet_history_screen.dart';
 
 class ProfileFragment extends StatefulWidget {
-  final List<Handyman>? list;
+  final List<UserData>? list;
 
   ProfileFragment({this.list});
 
@@ -77,7 +76,19 @@ class ProfileFragmentState extends State<ProfileFragment> {
                     Stack(
                       alignment: Alignment.bottomRight,
                       children: [
-                        circleImage(image: appStore.userProfileImage.validate(), size: 120),
+                        Container(
+                          decoration: boxDecorationDefault(
+                            border: Border.all(color: primaryColor, width: 3),
+                            shape: BoxShape.circle,
+                          ),
+                          child: Container(
+                            decoration: boxDecorationDefault(
+                              border: Border.all(color: context.scaffoldBackgroundColor, width: 4),
+                              shape: BoxShape.circle,
+                            ),
+                            child: circleImage(image: appStore.userProfileImage.validate(), size: 120),
+                          ),
+                        ),
                         Positioned(
                           bottom: 0,
                           right: 8,
@@ -301,14 +312,14 @@ class ProfileFragmentState extends State<ProfileFragment> {
                       },
                     ),
                     Divider(height: 0, thickness: 1, indent: 15.0, endIndent: 15.0).visible(appStore.isLoggedIn),
-                    /*SettingItemWidget(
+                    SettingItemWidget(
                       leading: Image.asset(purchase, height: 20, width: 20, color: appStore.isDarkMode ? white : gray.withOpacity(0.8)),
                       title: context.translate.lblPurchaseCode,
                       trailing: Icon(Icons.chevron_right, color: appStore.isDarkMode ? white : gray.withOpacity(0.8), size: 24),
                       onTap: () {
-                        launch(PURCHASE_URL);
+                        launchUrlCustomTab(PURCHASE_URL);
                       },
-                    ).visible(isIqonicProduct),*/
+                    ).visible(isIqonicProduct),
                     20.height,
                     TextButton(
                       child: Text(context.translate.logout, style: boldTextStyle(color: primaryColor, size: 18)),

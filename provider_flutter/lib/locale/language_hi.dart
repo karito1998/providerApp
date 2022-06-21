@@ -1,7 +1,28 @@
-import 'package:handyman_provider_flutter/locale/languag_es.dart';
+import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 // class LanguageHi extends
 class LanguageHi extends Languages {
+   //Helpi
+
+   @override
+   String lblInvalidEmail = '';
+   @override
+   String lblInvalidUsername = '';
+   @override
+   String lblRetryErr = "";
+   @override
+   String lblWrongErr = "";
+   @override
+   String lblInternetErr = "";
+   @override
+   String lblInvalidEmailSpaces = "";
+   @override
+   String tycRequired = '';
+   @override
+   String signUpSuccess = "";
+
+  //Helpi
+
   @override
   String planAboutToExpire(int days) => 'Your Plan Is About to Expire In $days Days';
 
@@ -12,10 +33,16 @@ class LanguageHi extends Languages {
   String provider = 'प्रदाता';
 
   @override
+  String lblProviderDashboard = "प्रदाता डैशबोर्ड";
+
+  @override
   String welcome = 'स्वागत';
 
   @override
   String back = 'वापस !';
+
+  @override
+  String lblHandymanDashboard = 'सहायक डैशबोर्ड';
 
   @override
   String handyman = 'सहायक';
@@ -54,7 +81,7 @@ class LanguageHi extends Languages {
   String hintPasswordTxt = 'अपना कूटशब्द भरें';
 
   @override
-  String hintReenterPasswordTxt = 'दुबारापासवडृ िलखो';
+  String hintReenterPasswordTxt = 'दुबारापासवडृ लिखो';
 
   @override
   String confirm = 'पुष्टि करना';
@@ -153,7 +180,7 @@ class LanguageHi extends Languages {
   String accept = 'स्वीकार करना';
 
   @override
-  String decline = 'पतन';
+  String decline = 'अस्वीकार';
 
   @override
   String noDataFound = 'डाटा प्राप्त नहीं हुआ';
@@ -366,7 +393,7 @@ class LanguageHi extends Languages {
   String lblTime = 'समय';
 
   @override
-  String lblService = 'सेवा';
+  String lblMyService = 'मेरी सेवाएं';
 
   @override
   String lblAllService = 'सभी सेवा';
@@ -393,7 +420,7 @@ class LanguageHi extends Languages {
   String lblAudio = 'ऑडियो';
 
   @override
-  String selectAddress = 'सेवा Adddresses का चयन करें';
+  String selectAddress = 'सेवा पते का चयन करें';
 
   @override
   String btnSave = 'सहेजें';
@@ -463,22 +490,7 @@ class LanguageHi extends Languages {
 
   @override
   String lblInvalidUrl = 'अवैध यूआरएल:';
-  @override
-  String lblInvalidEmail = '';
-  @override
-  String lblInvalidUsername = '';
-  @override
-  String lblRetryErr = "";
-  @override
-  String lblWrongErr = "";
-  @override
-  String lblInternetErr = "";
-  @override
-  String lblInvalidEmailSpaces = "";
-  @override
-  String tycRequired = '';
-  @override
-  String signUpSuccess = "";
+
   @override
   String errorPasswordLength = 'पासवर्ड की लंबाई से अधिक होना चाहिए';
 
@@ -594,10 +606,10 @@ class LanguageHi extends Languages {
   String lblRating = "रेटिंग";
 
   @override
-  String lblOff = "बंद";
+  String lblOff = "छूट";
 
   @override
-  String lblHr = "मानव संसाधन";
+  String lblHr = "घंटा";
 
   @override
   String lblDate = "तारीख";
@@ -936,7 +948,7 @@ class LanguageHi extends Languages {
   String lblTermCondition = "सेवा की शर्तें";
 
   @override
-  String lblServiceTotalTime = "कृपया फिर भाग लें";
+  String lblServiceTotalTime = "सेवा कुल समय";
 
   @override
   String lblHelpLineNum = "हेल्पलाइन नंबर";
@@ -949,4 +961,10 @@ class LanguageHi extends Languages {
 
   @override
   String lblFailed = "कारण यह बुकिंग विफल क्यों है";
+
+  @override
+  String get lblDesignation => "पद";
+
+  @override
+  String get lblHandymanIsOffline => "अप्रेंटिस ऑफ़लाइन है";
 }

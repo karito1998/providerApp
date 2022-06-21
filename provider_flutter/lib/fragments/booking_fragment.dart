@@ -28,10 +28,10 @@ class BookingFragmentState extends State<BookingFragment> with SingleTickerProvi
   int page = 1;
   List<BookingData> mainList = [];
 
-  String selectedValue = 'Todo';
-
-  bool isEnabled = false;
+  String selectedValue = 'All';
   bool isLastPage = false;
+  bool hasError = false;
+  bool isApiCalled = false;
 
   @override
   void initState() {
@@ -63,7 +63,7 @@ class BookingFragmentState extends State<BookingFragment> with SingleTickerProvi
       selectedValue = widget.statusType.validate();
     }
 
-    fetchAllBookingList(status: selectedValue);
+    fetchAllBookingList(status: selectedValue, loading: true);
 
     scrollController.addListener(() {
       if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
@@ -80,6 +80,8 @@ class BookingFragmentState extends State<BookingFragment> with SingleTickerProvi
 
     await getBookingList(page, status: status).then((value) {
       appStore.setLoading(false);
+      isApiCalled = true;
+
       if (page == 1) {
         mainList.clear();
       }
@@ -90,10 +92,12 @@ class BookingFragmentState extends State<BookingFragment> with SingleTickerProvi
 
       setState(() {});
     }).catchError((e) {
-      toast(e.toString(), print: true);
-    });
+      appStore.setLoading(false);
+      isApiCalled = true;
 
-    appStore.setLoading(false);
+      toast(e.toString(), print: true);
+      setState(() {});
+    });
   }
 
   @override
@@ -115,9 +119,9 @@ class BookingFragmentState extends State<BookingFragment> with SingleTickerProvi
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async {
+          setState(() {});
           page = 1;
-
-          return await fetchAllBookingList(status: selectedValue, loading: false);
+          return await fetchAllBookingList(status: selectedValue, loading: true);
         },
         child: Stack(
           children: [
@@ -140,13 +144,12 @@ class BookingFragmentState extends State<BookingFragment> with SingleTickerProvi
                 onValueChanged: (BookingStatusResponse value) {
                   page = 1;
                   scrollController.animToTop();
-
                   fetchAllBookingList(status: value.value.toString());
                 },
               ),
             ),
             Observer(
-              builder: (_) => noDataFound(context).center().visible(!appStore.isLoading && mainList.validate().isEmpty),
+              builder: (_) => noDataFound(context).center().visible(!appStore.isLoading && mainList.validate().isEmpty && isApiCalled),
             ),
             Observer(
               builder: (context) => LoaderWidget().visible(appStore.isLoading),

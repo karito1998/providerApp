@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart' as custom_tabs;
 import 'package:geocoding/geocoding.dart';
+import 'package:handyman_provider_flutter/components/html_widget.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/booking_detail_response.dart';
 import 'package:handyman_provider_flutter/models/booking_list_response.dart';
@@ -20,48 +23,61 @@ import 'colors.dart';
 import 'images.dart';
 
 List<LanguageDataModel> languageList() {
-  return [
-    LanguageDataModel(id: 1, name: 'Ingles', languageCode: 'en', fullLanguageCode: 'en-US', flag: 'images/flag/ic_us.png'), //English
-    LanguageDataModel(id: 2, name: 'Hindi', languageCode: 'hi', fullLanguageCode: 'hi-IN', flag: 'images/flag/ic_india.png'),
-    LanguageDataModel(id: 3, name: 'Guyaratí', languageCode: 'gu', fullLanguageCode: 'gu-IN', flag: 'images/flag/ic_india.png'), //Gujarati
-    LanguageDataModel(id: 4, name: 'Afrikáans', languageCode: 'af', fullLanguageCode: 'ar-AF', flag: 'images/flag/ic_ar.png'),//Afrikaans
-    LanguageDataModel(id: 5, name: 'Árabe', languageCode: 'ar', fullLanguageCode: 'ar-AR', flag: 'images/flag/ic_ar.png'), //Arabic
-    LanguageDataModel(id: 6, name: 'Neerlandés', languageCode: 'nl', fullLanguageCode: 'nl-NL', flag: 'images/flag/ic_nl.png'), //Dutch
-    LanguageDataModel(id: 7, name: 'Francés', languageCode: 'fr', fullLanguageCode: 'fr-FR', flag: 'images/flag/ic_fr.png'), //French
-    LanguageDataModel(id: 8, name: 'Alemán', languageCode: 'de', fullLanguageCode: 'de-DE', flag: 'images/flag/ic_de.png'), //German
-    LanguageDataModel(id: 9, name: 'Indonesio', languageCode: 'id', fullLanguageCode: 'id-ID', flag: 'images/flag/ic_id.png'),//Indonesian
-    LanguageDataModel(id: 10, name: 'Portugués', languageCode: 'pt', fullLanguageCode: 'pt-PT', flag: 'images/flag/ic_pt.png'),//Portugal
-    LanguageDataModel(id: 11, name: 'Español ', languageCode: 'es', fullLanguageCode: 'es-ES', flag: 'images/flag/ic_es.png'),//Spanish
-    LanguageDataModel(id: 12, name: 'Turco', languageCode: 'tr', fullLanguageCode: 'tr-TR', flag: 'images/flag/ic_tr.png'),//Turkish
-    LanguageDataModel(id: 13, name: 'Vietnamita', languageCode: 'vi', fullLanguageCode: 'vi-VI', flag: 'images/flag/ic_vi.png'),//Vietnam
-    LanguageDataModel(id: 14, name: 'Albanés', languageCode: 'sq', fullLanguageCode: 'sq-SQ', flag: 'images/flag/ic_arbanian.png'),//Albanian
-  ];
+  if (getStringAsync(SERVER_LANGUAGES).isNotEmpty) {
+    Iterable it = jsonDecode(getStringAsync(SERVER_LANGUAGES));
+    var res = it.map((e) => LanguageOption.fromJson(e)).toList();
+
+    localeLanguageList.clear();
+
+    res.forEach((element) {
+      localeLanguageList.add(LanguageDataModel(languageCode: element.id.validate().toString(), flag: element.flag_image, name: element.title));
+    });
+
+    return localeLanguageList;
+  } else {
+    return [
+       LanguageDataModel(id: 1, name: 'Ingles', languageCode: 'en', fullLanguageCode: 'en-US', flag: 'images/flag/ic_us.png'), //English
+          LanguageDataModel(id: 2, name: 'Hindi', languageCode: 'hi', fullLanguageCode: 'hi-IN', flag: 'images/flag/ic_india.png'),
+          LanguageDataModel(id: 3, name: 'Guyaratí', languageCode: 'gu', fullLanguageCode: 'gu-IN', flag: 'images/flag/ic_india.png'), //Gujarati
+          LanguageDataModel(id: 4, name: 'Afrikáans', languageCode: 'af', fullLanguageCode: 'ar-AF', flag: 'images/flag/ic_ar.png'),//Afrikaans
+          LanguageDataModel(id: 5, name: 'Árabe', languageCode: 'ar', fullLanguageCode: 'ar-AR', flag: 'images/flag/ic_ar.png'), //Arabic
+          LanguageDataModel(id: 6, name: 'Neerlandés', languageCode: 'nl', fullLanguageCode: 'nl-NL', flag: 'images/flag/ic_nl.png'), //Dutch
+          LanguageDataModel(id: 7, name: 'Francés', languageCode: 'fr', fullLanguageCode: 'fr-FR', flag: 'images/flag/ic_fr.png'), //French
+          LanguageDataModel(id: 8, name: 'Alemán', languageCode: 'de', fullLanguageCode: 'de-DE', flag: 'images/flag/ic_de.png'), //German
+          LanguageDataModel(id: 9, name: 'Indonesio', languageCode: 'id', fullLanguageCode: 'id-ID', flag: 'images/flag/ic_id.png'),//Indonesian
+          LanguageDataModel(id: 10, name: 'Portugués', languageCode: 'pt', fullLanguageCode: 'pt-PT', flag: 'images/flag/ic_pt.png'),//Portugal
+          LanguageDataModel(id: 11, name: 'Español ', languageCode: 'es', fullLanguageCode: 'es-ES', flag: 'images/flag/ic_es.png'),//Spanish
+          LanguageDataModel(id: 12, name: 'Turco', languageCode: 'tr', fullLanguageCode: 'tr-TR', flag: 'images/flag/ic_tr.png'),//Turkish
+          LanguageDataModel(id: 13, name: 'Vietnamita', languageCode: 'vi', fullLanguageCode: 'vi-VI', flag: 'images/flag/ic_vi.png'),//Vietnam
+          LanguageDataModel(id: 14, name: 'Albanés', languageCode: 'sq', fullLanguageCode: 'sq-SQ', flag: 'images/flag/ic_arbanian.png'),//Albanian
+    ];
+  }
 }
 
-InputDecoration inputDecoration(BuildContext context, {Widget? prefixIcon, String? hint, Color? fillColor, String? counterText}) {
+InputDecoration inputDecoration(BuildContext context, {Widget? prefixIcon, String? hint, Color? fillColor, String? counterText, double? borderRadius}) {
   return InputDecoration(
     contentPadding: EdgeInsets.only(left: 12, bottom: 10, top: 10, right: 10),
     labelText: hint,
-    labelStyle: primaryTextStyle(),
+    labelStyle: secondaryTextStyle(),
     alignLabelWithHint: true,
     counterText: counterText,
     prefixIcon: prefixIcon,
     enabledBorder: OutlineInputBorder(
-      borderRadius: radius(defaultRadius),
+      borderRadius: radius(borderRadius ?? defaultRadius),
       borderSide: BorderSide(color: Colors.transparent, width: 0.0),
     ),
     focusedErrorBorder: OutlineInputBorder(
-      borderRadius: radius(defaultRadius),
+      borderRadius: radius(borderRadius ?? defaultRadius),
       borderSide: BorderSide(color: Colors.red, width: 0.0),
     ),
     errorBorder: OutlineInputBorder(
-      borderRadius: radius(defaultRadius),
+      borderRadius: radius(borderRadius ?? defaultRadius),
       borderSide: BorderSide(color: Colors.red, width: 1.0),
     ),
     errorMaxLines: 2,
     errorStyle: primaryTextStyle(color: Colors.red, size: 12),
     focusedBorder: OutlineInputBorder(
-      borderRadius: radius(defaultRadius),
+      borderRadius: radius(borderRadius ?? defaultRadius),
       borderSide: BorderSide(color: primaryColor, width: 0.0),
     ),
     filled: true,
@@ -143,7 +159,7 @@ Widget confirmationButton(BuildContext context, String btnTxt, IconData iconData
 Widget statusButton(double width, String btnTxt, Color color, Color txtcolor, {Function? onTap}) {
   return AppButton(
     width: width,
-    padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
+    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
     elevation: 0,
     color: color,
     shapeBorder: RoundedRectangleBorder(
@@ -167,7 +183,10 @@ Future<void> commonLaunchUrl(String address, {LaunchMode launchMode = LaunchMode
 
 void launchCall(String? url) {
   if (url.validate().isNotEmpty) {
-    commonLaunchUrl('tel:' + url!, launchMode: LaunchMode.externalApplication);
+    if (isIOS)
+      commonLaunchUrl('tel://' + url!, launchMode: LaunchMode.externalApplication);
+    else
+      commonLaunchUrl('tel:' + url!, launchMode: LaunchMode.externalApplication);
   }
 }
 
@@ -202,7 +221,7 @@ num calculateTotalAmount({
   required int qty,
   required num? serviceDiscountPercent,
   CouponData? couponData,
-  Service? detail,
+  ServiceData? detail,
   required List<Taxes>? taxes,
 }) {
   double totalAmount = 0.0;
@@ -342,7 +361,7 @@ num hourlyCalculation({required int secTime, required num price}) {
 Widget subSubscriptionPlanWidget({Color? planBgColor, String? planTitle, String? planSubtitle, String? planButtonTxt, Function? onTap, Color? btnColor}) {
   return Container(
     color: planBgColor,
-    padding: EdgeInsets.only(left: 16, right: 16, bottom: 24, top: 24),
+    padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -394,4 +413,45 @@ String getReasonText(BuildContext context, String val) {
     return context.translate.lblFailed;
   }
   return '';
+}
+
+bool get isIqonicProduct => currentPackageName == packageName;
+
+void checkIfLink(BuildContext context, String value, {String? title}) {
+  String temp = parseHtmlString(value.validate());
+  if (value.validate().isEmpty) return;
+
+  if (temp.startsWith("https") || temp.startsWith("http")) {
+    launchUrlCustomTab(temp.validate());
+  } else if (temp.validateEmail()) {
+    launchMail(temp);
+  } else if (temp.validatePhone() || temp.startsWith('+')) {
+    launchCall(temp);
+  } else {
+    HtmlWidget(postContent: value, title: title).launch(context);
+  }
+}
+
+String buildPaymentStatusWithMethod(String status, String method) {
+  return '${getPaymentStatusText(status)}${status == SERVICE_PAYMENT_STATUS_PAID ? ' by $method' : ''}';
+}
+
+Color getRatingBarColor(int rating) {
+  if (rating == 1 || rating == 2) {
+    return Color(0xFFE80000);
+  } else if (rating == 3) {
+    return Color(0xFFff6200);
+  } else if (rating == 4 || rating == 5) {
+    return Color(0xFF73CB92);
+  } else {
+    return Color(0xFFE80000);
+  }
+}
+
+void ifNotTester(BuildContext context, VoidCallback callback) {
+  if (!appStore.isTester) {
+    callback.call();
+  } else {
+    toast(context.translate.lblUnAuthorized);
+  }
 }

@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:handyman_provider_flutter/components/register_user_form_component.dart';
 import 'package:handyman_provider_flutter/main.dart';
-import 'package:handyman_provider_flutter/models/dashboard_response.dart';
-import 'package:handyman_provider_flutter/models/user_list_response.dart';
+import 'package:handyman_provider_flutter/models/user_data.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
 import 'package:handyman_provider_flutter/provider/dashboard/widgets/handyman_widget.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
@@ -14,17 +13,13 @@ import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class HandymanListScreen extends StatefulWidget {
-  final List<Handyman>? list;
-
-  HandymanListScreen({this.list});
-
   @override
   HandymanListScreenState createState() => HandymanListScreenState();
 }
 
 class HandymanListScreenState extends State<HandymanListScreen> {
   ScrollController scrollController = ScrollController();
-  List<UserListData> userData = [];
+  List<UserData> userData = [];
   bool afterInit = false;
 
   int totalPage = 0;
@@ -45,40 +40,37 @@ class HandymanListScreenState extends State<HandymanListScreen> {
 
   Future<void> init() async {
     scrollController.addListener(() {
-      scrollHandler();
+      if (currentPage <= totalPage) {
+        if (scrollController.position.pixels == scrollController.position.maxScrollExtent && !appStore.isLoading) {
+          currentPage++;
+          appStore.setLoading(true);
+          getHandymanList();
+        }
+      }
     });
     getHandymanList();
-  }
-
-  scrollHandler() {
-    if (currentPage <= totalPage) {
-      if (scrollController.position.pixels == scrollController.position.maxScrollExtent && !appStore.isLoading) {
-        currentPage++;
-        appStore.setLoading(true);
-        getHandymanList();
-      }
-    }
   }
 
   Future<void> getHandymanList() async {
     appStore.setLoading(true);
     await getHandyman(page: currentPage, isPagination: true, providerId: appStore.userId).then((value) {
       totalItems = value.pagination!.totalItems;
-      if (!mounted) return;
+
       if (currentPage == 1) {
         userData.clear();
       }
+
       if (totalItems != 0) {
         userData.addAll(value.data!);
         print(value);
         totalPage = value.pagination!.totalPages!;
         currentPage = value.pagination!.currentPage!;
       }
+
       afterInit = true;
       setState(() {});
       appStore.setLoading(false);
     }).catchError((e) {
-      if (!mounted) return;
       toast(e.toString(), print: true);
       appStore.setLoading(false);
     });
@@ -134,9 +126,9 @@ class HandymanListScreenState extends State<HandymanListScreen> {
                     spacing: 16,
                     runSpacing: 16,
                     children: List.generate(
-                      widget.list!.length,
+                      userData.length,
                       (index) {
-                        return HandymanWidget(data: widget.list![index], width: context.width() * 0.5 - 26);
+                        return HandymanWidget(data: userData[index], width: context.width() * 0.5 - 26);
                       },
                     ),
                   ).paddingAll(16),

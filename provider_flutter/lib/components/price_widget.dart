@@ -64,7 +64,7 @@ class PriceWidget extends StatelessWidget {
                 if (isHourlyService)
                   Text(
                     '/${context.translate.lblHr}',
-                    style: secondaryTextStyle(color: hourlyTextColor),
+                    style: secondaryTextStyle(color: hourlyTextColor, size: 14),
                   ),
               ],
             ),

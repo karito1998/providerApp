@@ -12,6 +12,7 @@ import 'package:handyman_provider_flutter/provider/services/widgets/service_faq_
 import 'package:handyman_provider_flutter/screens/gallery_List_Screen.dart';
 import 'package:handyman_provider_flutter/utils/app_common.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
+import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:handyman_provider_flutter/utils/model_keys.dart';
@@ -48,7 +49,6 @@ class ServiceDetailScreenState extends State<ServiceDetailScreen> {
   @override
   void initState() {
     super.initState();
-    setStatusBarColor(Colors.transparent);
     afterBuildCreated(() {
       init();
     });
@@ -56,6 +56,10 @@ class ServiceDetailScreenState extends State<ServiceDetailScreen> {
 
   Future<void> init() async {
     appStore.setLoading(true);
+    await 1.seconds.delay;
+
+    setStatusBarColor(Colors.transparent);
+
     Map req = {
       CommonKeys.serviceId: widget.serviceId,
     };
@@ -148,12 +152,10 @@ class ServiceDetailScreenState extends State<ServiceDetailScreen> {
       positiveText: context.translate.lblYes,
       negativeText: context.translate.lblNo,
       onAccept: (context) async {
-        if (!appStore.isTester) {
+        ifNotTester(context, () {
           appStore.setLoading(true);
           removeService();
-        } else {
-          toast(context.translate.lblUnAuthorized);
-        }
+        });
       },
       title: context.translate.confirmationRequestTxt,
     );
@@ -179,7 +181,11 @@ class ServiceDetailScreenState extends State<ServiceDetailScreen> {
               child: Image.asset(featured, height: 22, width: 22, color: white),
               backgroundColor: primaryColor,
               onPressed: () {
-                toast(context.translate.lblFeatureProduct);
+                showSnackBar(
+                  context,
+                  message: context.translate.lblFeatureProduct,
+                  icon: Icon(Icons.star, size: 50, color: primaryColor),
+                );
               },
             )
           : Offstage(),
@@ -203,7 +209,7 @@ class ServiceDetailScreenState extends State<ServiceDetailScreen> {
                                 height: 400,
                                 child: PageView(
                                   children: List.generate(
-                                    galleryImages.take(3).length,
+                                    galleryImages.length,
                                     (index) {
                                       return cachedImage(
                                         galleryImages[index],
@@ -226,29 +232,29 @@ class ServiceDetailScreenState extends State<ServiceDetailScreen> {
                             Positioned(
                               right: 8,
                               top: context.statusBarHeight + 8,
-                              child: Container(
-                                padding: EdgeInsets.all(0),
-                                decoration: boxDecorationRoundedWithShadow(8, backgroundColor: primaryColor),
-                                child: PopupMenuButton(
-                                  icon: Icon(Icons.more_horiz, size: 24, color: white),
-                                  padding: EdgeInsets.all(8),
-                                  onSelected: (selection) {
-                                    if (selection == 1) {
-                                      AddServiceScreen(data: serviceDetailData.serviceDetail).launch(context).then((value) {
-                                        if (value ?? false) {
-                                          init();
-                                        }
-                                      });
-                                    } else if (selection == 2) {
-                                      confirmationDialog(context);
-                                    }
-                                  },
-                                  itemBuilder: (context) => [
-                                    PopupMenuItem(child: Text(context.translate.lblEdit, style: boldTextStyle()), value: 1),
-                                    PopupMenuItem(child: Text(context.translate.lblDelete, style: boldTextStyle()), value: 2)
-                                  ],
-                                ),
-                              ),
+                              child: isUserTypeProvider
+                                  ? Container(
+                                      padding: EdgeInsets.all(0),
+                                      decoration: boxDecorationRoundedWithShadow(8, backgroundColor: primaryColor),
+                                      child: PopupMenuButton(
+                                        icon: Icon(Icons.more_horiz, size: 24, color: white),
+                                        padding: EdgeInsets.all(8),
+                                        onSelected: (selection) {
+                                          if (selection == 1) {
+                                            AddServiceScreen(data: serviceDetailData.serviceDetail).launch(context).then((value) {
+                                              if (value ?? false) {
+                                                init();
+                                              }
+                                            });
+                                          } else if (selection == 2) {
+                                            confirmationDialog(context);
+                                          }
+                                        },
+                                        itemBuilder: (context) =>
+                                            [PopupMenuItem(child: Text(context.translate.lblEdit, style: boldTextStyle()), value: 1), PopupMenuItem(child: Text(context.translate.lblDelete, style: boldTextStyle()), value: 2)],
+                                      ),
+                                    )
+                                  : Offstage(),
                             ),
                             if (galleryImages.isNotEmpty && galleryImages.length != 1)
                               Positioned(
@@ -283,8 +289,7 @@ class ServiceDetailScreenState extends State<ServiceDetailScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     if (serviceDetailData.serviceDetail!.subCategoryName.validate().isNotEmpty)
-                                      Text('${serviceDetailData.serviceDetail!.categoryName} > ${serviceDetailData.serviceDetail!.subCategoryName}',
-                                          style: boldTextStyle(size: 14, color: primaryColor))
+                                      Text('${serviceDetailData.serviceDetail!.categoryName} > ${serviceDetailData.serviceDetail!.subCategoryName}', style: boldTextStyle(size: 14, color: primaryColor))
                                     else
                                       Text('${serviceDetailData.serviceDetail!.categoryName}', style: boldTextStyle(size: 14, color: primaryColor)),
                                     6.height,
@@ -318,22 +323,21 @@ class ServiceDetailScreenState extends State<ServiceDetailScreen> {
                                         edgeInsets: EdgeInsets.symmetric(horizontal: 0, vertical: 8),
                                         text: '${context.translate.hintDuration}',
                                         expandedText: true,
-                                        textStyle: boldTextStyle(),
                                         suffix: Text(
                                           "${serviceDetailData.serviceDetail!.duration.validate()} ${context.translate.lblHours}",
-                                          style: boldTextStyle(),
+                                          style: boldTextStyle(color: primaryColor),
                                         ),
                                       ),
                                     TextIcon(
                                       text: '${context.translate.lblRating}',
                                       edgeInsets: EdgeInsets.symmetric(horizontal: 0, vertical: 4),
-                                      textStyle: boldTextStyle(),
                                       expandedText: true,
                                       suffix: Row(
                                         children: [
-                                          Icon(Icons.star, color: rattingColor, size: 20),
+                                          Image.asset('images/setting_icon/ic_star_fill.png', height: 20, color: rattingColor),
+                                          //Icon(Icons.star, color: rattingColor, size: 20),
                                           4.width,
-                                          Text("${serviceDetailData.serviceDetail!.totalRating.validate()}", style: boldTextStyle()),
+                                          Text("${serviceDetailData.serviceDetail!.totalRating.validate().toStringAsFixed(1)}", style: boldTextStyle()),
                                         ],
                                       ),
                                     ),
@@ -350,12 +354,11 @@ class ServiceDetailScreenState extends State<ServiceDetailScreen> {
                             Text(context.translate.hintDescription, style: boldTextStyle()).visible(galleryImages.isNotEmpty),
                             12.height,
                             serviceDetailData.serviceDetail!.description.validate().isNotEmpty
-                                ? Text(
+                                ? ReadMoreText(
                                     serviceDetailData.serviceDetail!.description.validate(),
                                     style: secondaryTextStyle(),
-                                    textAlign: TextAlign.justify,
                                   )
-                                : Text(context.translate.lblNoDescriptionAvailable, style: secondaryTextStyle()).center().paddingOnly(top: 16),
+                                : Text(context.translate.lblNoDescriptionAvailable, style: secondaryTextStyle()),
                           ],
                         ).paddingAll(16),
                         24.height,
@@ -369,11 +372,14 @@ class ServiceDetailScreenState extends State<ServiceDetailScreen> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(context.translate.lblGallery, style: boldTextStyle()),
-                                    if (galleryImages.length > 4)
+                                    Text('${context.translate.lblGallery} (${galleryImages.length.toString()})', style: boldTextStyle()),
+                                    if (galleryImages.length > 3)
                                       TextButton(
                                         onPressed: () {
-                                          GalleryListScreen(galleryImages: galleryImages).launch(context);
+                                          GalleryListScreen(
+                                            galleryImages: galleryImages,
+                                            serviceName: serviceDetailData.serviceDetail!.name.validate(),
+                                          ).launch(context);
                                         },
                                         child: Text(context.translate.viewAll, style: secondaryTextStyle()),
                                       )

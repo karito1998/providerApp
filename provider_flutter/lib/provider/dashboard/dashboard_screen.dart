@@ -90,10 +90,10 @@ class DashboardScreenState extends State<DashboardScreen> {
         return Future.value(true);
       },
       child: Scaffold(
-        body: IndexedStack(index: currentIndex, children: fragmentList),
+        body: fragmentList[currentIndex],
         appBar: appBarWidget(
           [
-            context.translate.home,
+            context.translate.lblProviderDashboard,
             context.translate.lblBooking,
             context.translate.lblPayment,
             context.translate.notification,

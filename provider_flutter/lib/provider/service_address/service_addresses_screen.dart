@@ -6,7 +6,6 @@ import 'package:handyman_provider_flutter/models/service_address_response.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
-import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/model_keys.dart';
 import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
@@ -160,11 +159,11 @@ class ServiceAddressesScreenState extends State<ServiceAddressesScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     AppTextField(
-                      textFieldType: TextFieldType.ADDRESS,
+                      textFieldType: TextFieldType.MULTILINE,
                       controller: addressNameCont,
                       validator: (s) {
                         if (s!.isEmpty)
-                          return context.translate.lblRequired;
+                           return context.translate.lblRequired;
                         else
                           return null;
                       },
@@ -180,10 +179,9 @@ class ServiceAddressesScreenState extends State<ServiceAddressesScreen> {
                       textStyle: primaryTextStyle(color: white),
                       width: context.width() - context.navigationBarHeight,
                       onTap: () async {
-                        if (!appStore.isTester)
+                        ifNotTester(context, () {
                           addAddress();
-                        else
-                          toast(context.translate.lblUnAuthorized);
+                        });
                       },
                     ),
                   ],
