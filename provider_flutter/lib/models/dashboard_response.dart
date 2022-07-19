@@ -27,7 +27,7 @@ class DashboardResponse {
   String? earningType;
   List<LanguageOption>? language_option;
 
-  List<String> months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+  List<String> months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
 
   //Local
   bool? isPlanAboutToExpire;
@@ -122,7 +122,7 @@ class DashboardResponse {
 
     // providerWallet = json['provider_wallet'] != null ? (json['provider_wallet'] as List).map((i) => ProviderWallet.fromJson(i)).toList() : null;
     language_option = json['language_option'] != null ? (json['language_option'] as List).map((i) => LanguageOption.fromJson(i)).toList() : null;
-    online_handyman = json['online_handyman'].cast<String>();
+    online_handyman = json['online_handyman'] != null ? json['online_handyman'].cast<String>() : null;
   }
 
   Map<String, dynamic> toJson() {

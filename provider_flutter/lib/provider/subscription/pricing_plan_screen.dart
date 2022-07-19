@@ -141,11 +141,11 @@ class _PricingPlanScreenState extends State<PricingPlanScreen> {
                                             if (data.trialPeriod.validate() != 0 && data.identifier == FREE)
                                               RichText(
                                                 text: TextSpan(
-                                                  text: ' (Trial for ',
+                                                  text: ' (Prueba por ',
                                                   style: secondaryTextStyle(),
                                                   children: <TextSpan>[
                                                     TextSpan(text: '${data.trialPeriod.validate()}', style: boldTextStyle()),
-                                                    TextSpan(text: '  day(s))', style: secondaryTextStyle()),
+                                                    TextSpan(text: '  dias)', style: secondaryTextStyle()),
                                                   ],
                                                 ),
                                               ),
@@ -162,7 +162,7 @@ class _PricingPlanScreenState extends State<PricingPlanScreen> {
                                   padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                                   child: Text(
                                     data.identifier == FREE
-                                        ? 'Free Trial'
+                                        ? 'Gratuito'
                                         : "${appStore.currencySymbol}${data.amount.validate().toStringAsFixed(decimalPoint).formatNumberWithComma()}/${data.type.validate()}",
                                     style: boldTextStyle(color: white, size: 12),
                                   ),

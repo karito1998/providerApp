@@ -9,6 +9,8 @@ class HandymanRecentlyOnlineComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (images.isEmpty) return SizedBox();
+
     return Padding(
       padding: EdgeInsets.all(16),
       child: Column(

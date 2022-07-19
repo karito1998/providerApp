@@ -469,14 +469,16 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                           ),
                           16.height,
                           Row(
+                            //mainAxisSize: MainAxisSize.min,
                             children: [
-                              DropdownButtonFormField<String>(
+                              Expanded(child:DropdownButtonFormField<String>(
+
                                 decoration: inputDecoration(
                                   context,
                                   fillColor: context.scaffoldBackgroundColor,
                                   hint: context.translate.lblType,
                                 ),
-                                hint: Text(context.translate.hintSelectType, style: secondaryTextStyle()),
+                                hint: Text(context.translate.hintSelectType, style: secondaryTextStyle(size: 1)),
                                 value: serviceType.isNotEmpty ? serviceType : null,
                                 dropdownColor: context.cardColor,
                                 items: typeList.map((String data) {
@@ -489,15 +491,15 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                                   serviceType = value.validate();
                                   setState(() {});
                                 },
-                              ).expand(flex: 1),
+                              )),
                               16.width,
-                              DropdownButtonFormField<String>(
+                              Expanded(child:DropdownButtonFormField<String>(
                                 decoration: inputDecoration(
                                   context,
                                   fillColor: context.scaffoldBackgroundColor,
                                   hint: context.translate.lblStatusType,
                                 ),
-                                hint: Text(context.translate.hintSelectStatus, style: secondaryTextStyle()),
+                                hint: Text(context.translate.hintSelectStatus, style: secondaryTextStyle(size: 1)),
                                 dropdownColor: context.cardColor,
                                 value: serviceStatus.isNotEmpty ? serviceStatus : null,
                                 items: statusList.map((String data) {
@@ -510,7 +512,9 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                                   serviceStatus = value.validate();
                                   setState(() {});
                                 },
-                              ).expand(flex: 1),
+                              ),
+                              ),
+                              5.width,
                             ],
                           ),
                           24.height,
@@ -550,7 +554,7 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                           24.height,
                           Row(
                             children: [
-                              AppTextField(
+                              Expanded(child:AppTextField(
                                 textFieldType: TextFieldType.PHONE,
                                 controller: durationContHr,
                                 focus: durationHrFocus,
@@ -573,8 +577,9 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                                   //errorThisFieldRequired;
                                   return null;
                                 },
-                              ).paddingRight(8).expand(),
-                              AppTextField(
+                              )),
+                              16.width,
+                              Expanded(child:AppTextField(
                                 textFieldType: TextFieldType.PHONE,
                                 controller: durationContMin,
                                 focus: durationMinFocus,
@@ -595,7 +600,7 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                                   if (s.toInt() > 60) return context.translate.lblEnterMinute;
                                   return null;
                                 },
-                              ).expand(),
+                              )),
                             ],
                           ),
                           24.height,

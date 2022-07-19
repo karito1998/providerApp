@@ -347,11 +347,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
               toast(context.translate.lblLoginAgain);
               SignInScreen().launch(context, isNewTask: true);
             }
+            SignInScreen().launch(context, isNewTask: true);
           });
           appStore.setLoading(false);
         }).catchError((e) {
           appStore.setLoading(false);
-          if (e.toString() == "The username has already been taken.")
+          if (e.toString() == "El username ya ha sido tomado.")
                      toast("El usuario ya existe.", print: true);
                     if (e.toString() ==
                         "The contact number must be between 10 and 12 digits.")
@@ -359,6 +360,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           print: true);
                     else
                       log(e.toString());
+                      //toast(e.toString());
 
         });
       } else {

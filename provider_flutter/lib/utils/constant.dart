@@ -102,7 +102,13 @@ const TERM_CONDITIONS = 'TERM_CONDITIONS';
 const INQUIRY_EMAIL = 'INQUIRY_EMAIL';
 const HELPLINE_NUMBER = 'HELPLINE_NUMBER';
 const PASSWORD = 'PASSWORD';
-
+const IN_MAINTENANCE_MODE = 'inMaintenanceMode';
+const HAS_IN_APP_STORE_REVIEW = 'hasInAppStoreReview1';
+const HAS_IN_PLAY_STORE_REVIEW = 'hasInPlayStoreReview1';
+const HAS_IN_REVIEW = 'hasInReview';
+const SERVER_LANGUAGES = 'SERVER_LANGUAGES';
+const HANDYMAN_AVAILABLE_STATUS = 'HANDYMAN_AVAILABLE_STATUS';
+const DESIGNATION = 'DESIGNATION';
 //endregion
 
 //region  Login Type
@@ -233,7 +239,7 @@ const PAYMENT_METHOD_FLUTTER_WAVE = 'flutterwave';
 const DATE_FORMAT_1 = 'M/d/yyyy hh:mm a';
 const DATE_FORMAT_2 = 'd MMM, yyyy';
 const DATE_FORMAT_3 = 'hh:mm a';
-const DATE_FORMAT_4 = 'd MMM';
+const DATE_FORMAT_4 = 'dd MMM';
 const DATE_FORMAT_5 = 'yyyy';
 const DATE_FORMAT_6 = 'd MMMM, yyyy';
 const DATE_FORMAT_7 = 'yyyy-MM-dd';
@@ -248,7 +254,7 @@ const SUBSCRIPTION_STATUS_INACTIVE = 'inactive';
 const EARNING_TYPE = 'EARNING_TYPE';
 const EARNING_TYPE_COMMISSION = 'commission';
 const EARNING_TYPE_SUBSCRIPTION = 'subscription';
-const FREE = 'free';
+const FREE = 'gratis';
 //endregion
 
 //region WALLET TYPE

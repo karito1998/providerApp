@@ -56,17 +56,16 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget _buildTopWidget() {
     return Column(
       children: [
-      Center(
-                  child: Image.asset(
-                //"images/app_images/logo.svg",
-                "images/setting_icon/ic_splash_logo.png",
-                height: 100.0,
-                alignment: Alignment.center,
-              )),
-              16.height,
-              Text(context.translate.lbllogintitle, style: boldTextStyle(size: 22))
-                  .center(),
-
+    Center(
+                   child: Image.asset(
+                        //"images/app_images/logo.svg",
+                        "images/setting_icon/ic_splash_logo.png",
+                        height: 100.0,
+                       alignment: Alignment.center,
+                  )),
+                  16.height,
+                  Text(context.translate.lbllogintitle, style: boldTextStyle(size: 22))
+                      .center(),
         16.height,
         Text(
           context.translate.lblloginsubtitle,
@@ -87,7 +86,7 @@ class _SignInScreenState extends State<SignInScreen> {
           focus: emailFocus,
           nextFocus: passwordFocus,
           errorThisFieldRequired: context.translate.hintRequired,
-          errorInvalidEmail: context.translate.lblInvalidEmail,
+                    errorInvalidEmail: context.translate.lblInvalidEmail,
 
           decoration: inputDecoration(context, hint: context.translate.hintEmailAddress),
           suffix: ic_message.iconImage(size: 10).paddingAll(14),
@@ -115,10 +114,9 @@ class _SignInScreenState extends State<SignInScreen> {
 
   Widget _buildForgotRememberWidget() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+
             Row(
               children: [
                 2.width,
@@ -135,18 +133,15 @@ class _SignInScreenState extends State<SignInScreen> {
                   },
                   child: Text(context.translate.rememberMe, style: secondaryTextStyle()),
                 ),
+                Expanded(child: SizedBox(height: 1,))
               ],
             ),
-            Row(
-                     children: [
-                        Expanded(
-                            child: SizedBox(
-                          height: 1,
-                        )),
+
             TextButton(
               child: Text(
                 context.translate.forgotPassword,
                 style: boldTextStyle(color: primaryColor, fontStyle: FontStyle.italic),
+                textAlign: TextAlign.end,
               ),
               onPressed: () {
                 showInDialog(
@@ -156,12 +151,11 @@ class _SignInScreenState extends State<SignInScreen> {
                   builder: (_) => ForgotPasswordScreen(),
                 );
               },
-            )
-          ],
-        ),
-        32.height,
+            ),
+        20.height,
       ],
-    )]);
+        );
+
   }
 
   Widget _buildButtonWidget() {
@@ -275,11 +269,11 @@ class _SignInScreenState extends State<SignInScreen> {
           }
         });
       }).catchError((e) {
-      if (e.toString() == "These credentials do not match our records.")
-                toast("No pudimos encontrar un usuario con estas credenciales",
-                    print: true);
-              else
-               toast(e.toString(), print: true);
+        if (e.toString() == "These credentials do not match our records.")
+                          toast("No pudimos encontrar un usuario con estas credenciales",
+                              print: true);
+                     else
+                       toast(e.toString(), print: true);
         appStore.setLoading(false);
         toast(e.toString(), print: true);
       });
@@ -297,15 +291,9 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarWidget(
-        "",
-        elevation: 0,
-        showBack: false,
-        color: context.scaffoldBackgroundColor,
-        systemUiOverlayStyle: SystemUiOverlayStyle(statusBarIconBrightness: getStatusBrightness(val: appStore.isDarkMode), statusBarColor: context.scaffoldBackgroundColor),
-      ),
-      body: SizedBox(
-        width: context.width(),
+
+      body: SafeArea(
+        //width: context.width(),
         child: Stack(
           children: [
             Form(
@@ -315,23 +303,14 @@ class _SignInScreenState extends State<SignInScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    16.height,
                     _buildTopWidget(),
                     _buildFormWidget(),
                     _buildForgotRememberWidget(),
+                    30.height,
                     _buildButtonWidget(),
                     16.height,
-                    if (isIqonicProduct)
-                      UserDemoModeScreen(
-                        onChanged: (email, password) {
-                          if (email.isNotEmpty && password.isNotEmpty) {
-                            emailCont.text = email;
-                            passwordCont.text = password;
-                          } else {
-                            emailCont.clear();
-                            passwordCont.clear();
-                          }
-                        },
-                      ),
+
                   ],
                 ),
               ),

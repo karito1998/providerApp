@@ -29,7 +29,7 @@ class LanguageEs extends Languages {
     String signIn = 'Iniciar sesión';
 
     @override
-    String signUp = 'Registrarse';
+    String signUp = 'Regístrate';
     @override
     String signUpSuccess = "Registro exitoso";
 
@@ -148,7 +148,7 @@ class LanguageEs extends Languages {
     String hintOldPasswordTxt = 'Ingresa tu contraseña anterior';
 
     @override
-    String home = 'Hogar';
+    String home = 'Inicio';
 
     @override
     String review = 'Revisar';
@@ -256,7 +256,7 @@ class LanguageEs extends Languages {
     String lblLocation = 'Localización';
 
     @override
-    String lblAssignHandyman = 'Asignar manitas';
+    String lblAssignHandyman = 'Asignar colaborador';
 
     @override
     String lblAssigned = 'Asignado';
@@ -265,13 +265,13 @@ class LanguageEs extends Languages {
     String viewAll = 'Ver todo';
 
     @override
-    String lblMonthlyRevenue = 'ganancia mensual';
+    String lblMonthlyRevenue = 'Ganancia mensual';
 
     @override
     String lblRevenue = 'Ingresos';
 
     @override
-    String lblAddHandyman = 'Añadir manitas';
+    String lblAddHandyman = 'Añadir colaborador';
 
     @override
     String hintName = 'Ingresa el nombre';
@@ -301,7 +301,7 @@ class LanguageEs extends Languages {
     String lblTotalService = 'Total servicios';
 
     @override
-    String lblTotalHandyman = 'Handyman total';
+    String lblTotalHandyman = 'Total colaboradores';
 
     @override
     String lblTotalRevenue = 'Total Ingresos';
@@ -367,7 +367,7 @@ class LanguageEs extends Languages {
     String lblProfile = 'Perfil';
 
     @override
-    String lblAllHandyman = 'Todo manitas';
+    String lblAllHandyman = 'Todos los colaboradores';
 
     @override
     String lblTime = 'Tiempo';
@@ -376,7 +376,7 @@ class LanguageEs extends Languages {
     String lblService = 'Servicio';
 
     @override
-    String lblAllService = 'Todo el servicio';
+    String lblAllService = 'Servicios';
 
     @override
     String lblAddService = 'Añadir servicio';
@@ -400,10 +400,10 @@ class LanguageEs extends Languages {
     String lblAudio = 'Audio';
 
     @override
-    String selectAddress = 'Seleccione Servicio Addresses';
+    String selectAddress = 'Selecciona la dirección del servicio';
 
     @override
-    String btnSave = 'Ahorrar';
+    String btnSave = 'Guardar';
 
     @override
     String editAddress = 'Editar dirección de servicio';
@@ -427,7 +427,7 @@ class LanguageEs extends Languages {
     String lblEditService = 'Servicio de edición';
 
     @override
-    String selectImgNote = "Nota: puedes cargar imágenes con extensiones 'jpg , 'png , 'jpeg   y puede seleccionar varias imágenes";
+    String selectImgNote = "Nota: puedes cargar imágenes con extensiones 'jpg , 'png , 'jpeg   y puedes seleccionar varias imágenes";
 
     @override
     String lblDurationHr = 'Duración: horas';
@@ -680,10 +680,10 @@ class LanguageEs extends Languages {
     String lblCloseAppMsg = "Presiona de nuevo para salir de la aplicación";
 
     @override
-    String lblAddress = "Habla a";
+    String lblAddress = "Direccion";
 
     @override
-    String lblType = "Escribe";
+    String lblType = "Tipo";
 
     @override
     String lblStatusType = "Estado";
@@ -796,13 +796,13 @@ class LanguageEs extends Languages {
     String lblPayWith = "Quieres pagar con";
 
     @override
-    String lblProceed = "Proceder";
+    String lblProceed = "Adquirir";
 
     @override
     String lblPricingPlan = "Plan de precios";
 
     @override
-    String lblSelectPlan = "Obtenga elige tu mejor plan";
+    String lblSelectPlan = "Elige el mejor plan para ti";
 
     @override
     String lblMakePayment = "Hacer el pago";
@@ -985,7 +985,7 @@ class LanguageEs extends Languages {
     String lblFailed = "Razón por la cual esta reserva falló";
 
     @override
-    String get lblDesignation => "Designacion";
+    String get lblDesignation => "Profesión";
 
     @override
     String get lblHandymanIsOffline => "Helpi está fuera de línea";

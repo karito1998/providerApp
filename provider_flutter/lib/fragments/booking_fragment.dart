@@ -28,7 +28,7 @@ class BookingFragmentState extends State<BookingFragment> with SingleTickerProvi
   int page = 1;
   List<BookingData> mainList = [];
 
-  String selectedValue = 'All';
+  String selectedValue = 'Todo';
   bool isLastPage = false;
   bool hasError = false;
   bool isApiCalled = false;
