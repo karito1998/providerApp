@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:handyman_provider_flutter/main.dart';
-import 'package:handyman_provider_flutter/utils/colors.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -31,15 +31,15 @@ class PriceWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     TextDecoration? textDecoration() => isLineThroughEnabled ? TextDecoration.lineThrough : null;
 
-    TextStyle _textStyle() {
+    TextStyle _textStyle({int? aSize}) {
       return isBoldText
           ? boldTextStyle(
-              size: size!.toInt(),
+              size: aSize ?? size!.toInt(),
               color: color != null ? color : primaryColor,
               decoration: textDecoration(),
             )
           : secondaryTextStyle(
-              size: size!.toInt(),
+              size: aSize ?? size!.toInt(),
               color: color != null ? color : primaryColor,
               decoration: textDecoration(),
             );
@@ -58,7 +58,7 @@ class PriceWidget extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "${appStore.currencySymbol}${price.validate().toStringAsFixed(decimalPoint).formatNumberWithComma()}",
+                  "${appStore.currencySymbol}${price.validate().toStringAsFixed(DECIMAL_POINT).formatNumberWithComma()}",
                   style: _textStyle(),
                 ),
                 if (isHourlyService)

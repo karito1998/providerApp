@@ -62,27 +62,27 @@ class WalletHistory {
 
 class ActivityData {
   int? amount;
-  String? provider_name;
+  String? providerName;
   String? title;
-  int? user_id;
+  int? userId;
 
-  ActivityData({this.amount, this.provider_name, this.title, this.user_id});
+  ActivityData({this.amount, this.providerName, this.title, this.userId});
 
   factory ActivityData.fromJson(Map<String, dynamic> json) {
     return ActivityData(
       amount: json['amount'],
-      provider_name: json['provider_name'],
+      providerName: json['provider_name'],
       title: json['title'],
-      user_id: json['user_id'],
+      userId: json['user_id'],
     );
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['amount'] = this.amount;
-    data['provider_name'] = this.provider_name;
+    data['provider_name'] = this.providerName;
     data['title'] = this.title;
-    data['user_id'] = this.user_id;
+    data['user_id'] = this.userId;
     return data;
   }
 }

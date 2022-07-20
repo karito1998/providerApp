@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:handyman_provider_flutter/handyman/screen/handyman_booking_detail_screen.dart';
+import 'package:handyman_provider_flutter/components/app_widgets.dart';
+import 'package:handyman_provider_flutter/components/back_widget.dart';
+import 'package:handyman_provider_flutter/components/background_component.dart';
+import 'package:handyman_provider_flutter/components/notification_widget.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/notification_list_response.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
-import 'package:handyman_provider_flutter/provider/booking/p_booking_detail_screen.dart';
+import 'package:handyman_provider_flutter/screens/booking_detail_screen.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/model_keys.dart';
-import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
-import 'package:handyman_provider_flutter/widgets/notification_widget.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class NotificationFragment extends StatefulWidget {
@@ -75,31 +76,31 @@ class NotificationScreenState extends State<NotificationFragment> {
     await bookingDetail(request).then((value) {
       init();
     }).catchError((e) {
-      toast(e.toString(), print: true);
+      log(e.toString());
     });
 
     //appStore.setLoading(false);
   }
 
   Widget listIterate(List<NotificationData> list) {
-    return ListView.builder(
+    return AnimatedListView(
       shrinkWrap: true,
       itemCount: list.length,
+      padding: EdgeInsets.all(8),
       physics: NeverScrollableScrollPhysics(),
+      slideConfiguration: SlideConfiguration(duration: 400.milliseconds, delay: 50.milliseconds),
       itemBuilder: (context, index) {
         NotificationData data = list[index];
 
         return GestureDetector(
           onTap: () async {
-            if (data.data!.type != ADD_WALLET && data.data!.type != UPDATE_WALLET && data.data!.type != WALLET_PAYOUT_TRANSFER) {
+            if (data.data!.type != ADD_WALLET && data.data!.type != UPDATE_WALLET && data.data!.type != WALLET_PAYOUT_TRANSFER && data.data!.type == PAYOUT) {
               readNotification(id: data.data!.id.toString());
-            }
-
-            if (isUserTypeHandyman) {
-              HBookingDetailScreen(bookingId: data.data!.id).launch(context);
+            } else if (isUserTypeHandyman) {
+              CommonBookingDetailScreen(bookingId: data.data!.id).launch(context);
             } else if (isUserTypeProvider) {
               if (data.data!.type != ADD_WALLET && data.data!.type != UPDATE_WALLET && data.data!.type != WALLET_PAYOUT_TRANSFER) {
-                BookingDetailScreen(bookingId: data.data!.id).launch(context);
+                CommonBookingDetailScreen(bookingId: data.data!.id).launch(context);
               } else {
                 init();
               }
@@ -115,6 +116,16 @@ class NotificationScreenState extends State<NotificationFragment> {
   Widget build(BuildContext context) {
     return Observer(
       builder: (_) => Scaffold(
+        appBar: Navigator.canPop(context)
+            ? appBarWidget(
+                context.translate.notification,
+                showBack: true,
+                textColor: white,
+                elevation: 0.0,
+                color: context.primaryColor,
+                backWidget: BackWidget(),
+              )
+            : null,
         body: RefreshIndicator(
           onRefresh: () async {
             appStore.setLoading(true);
@@ -134,12 +145,12 @@ class NotificationScreenState extends State<NotificationFragment> {
                         children: [
                           Row(
                             children: [
-                              Text(context.translate.lblUnreadNotification, style: boldTextStyle(color: appStore.isDarkMode ? white : black)).expand(),
+                              Text(context.translate.lblUnreadNotification, style: boldTextStyle(color: appStore.isDarkMode ? white : black, size: LABEL_TEXT_SIZE)).expand(),
                               TextButton(
                                 onPressed: () async {
                                   appStore.setLoading(true);
 
-                                  await getNotification({NotificationKey.type: MarkAsRead}).then((value) {
+                                  await getNotification({NotificationKey.type: MARK_AS_READ}).then((value) {
                                     getAllNotification();
                                   }).catchError((e) {
                                     log(e.toString());
@@ -159,7 +170,7 @@ class NotificationScreenState extends State<NotificationFragment> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(context.translate.notification, style: boldTextStyle(color: appStore.isDarkMode ? white : black)).paddingAll(8),
+                          Text(context.translate.notification, style: boldTextStyle(color: appStore.isDarkMode ? white : black, size: LABEL_TEXT_SIZE)).paddingAll(8),
                           8.height,
                           listIterate(readNotificationList),
                         ],
@@ -170,7 +181,7 @@ class NotificationScreenState extends State<NotificationFragment> {
               LoaderWidget().visible(appStore.isLoading),
               Text(errorSomethingWentWrong, style: secondaryTextStyle()).center().visible(hasError),
               Observer(
-                builder: (_) => noDataFound(context).center().visible(!appStore.isLoading && readNotificationList.isEmpty && isApiCalled),
+                builder: (_) => BackgroundComponent().center().visible(!appStore.isLoading && readNotificationList.isEmpty && isApiCalled),
               ),
             ],
           ),

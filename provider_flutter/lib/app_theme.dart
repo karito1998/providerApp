@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class AppTheme {
@@ -26,6 +27,7 @@ class AppTheme {
     cardColor: cardColor,
     appBarTheme: AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light, statusBarColor: primaryColor)),
     dialogTheme: DialogTheme(shape: dialogShape()),
+    useMaterial3: true,
     pageTransitionsTheme: PageTransitionsTheme(
       builders: <TargetPlatform, PageTransitionsBuilder>{
         TargetPlatform.android: OpenUpwardsPageTransitionsBuilder(),
@@ -55,7 +57,7 @@ class AppTheme {
     dividerColor: dividerDarkColor,
     cardColor: scaffoldSecondaryDark,
     dialogTheme: DialogTheme(shape: dialogShape()),
-  ).copyWith(
+    useMaterial3: true,
     pageTransitionsTheme: PageTransitionsTheme(
       builders: <TargetPlatform, PageTransitionsBuilder>{
         TargetPlatform.android: OpenUpwardsPageTransitionsBuilder(),

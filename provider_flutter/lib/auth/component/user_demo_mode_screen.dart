@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:handyman_provider_flutter/utils/colors.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:package_info/package_info.dart';
 
 class UserDemoModeScreen extends StatefulWidget {
   final Function(String email, String password) onChanged;
@@ -35,11 +34,11 @@ class _UserDemoModeScreenState extends State<UserDemoModeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<PackageInfo>(
-      future: PackageInfo.fromPlatform(),
+    return FutureBuilder<String>(
+      future: getPackageName(),
       builder: (context, snap) {
         if (snap.hasData) {
-          if (snap.data!.packageName == packageName) {
+          if (snap.data! == APP_PACKAGE_NAME) {
             return Column(
               children: [
                 32.height,

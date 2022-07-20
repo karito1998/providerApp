@@ -3,24 +3,24 @@ import 'package:handyman_provider_flutter/locale/base_language.dart';
 // class LanguageVi extend
 
 class LanguageVi extends Languages {
-   //Helpi
+  //Helpi
 
-   @override
-   String lblInvalidEmail = '';
-   @override
-   String lblInvalidUsername = '';
-   @override
-   String lblRetryErr = "";
-   @override
-   String lblWrongErr = "";
-   @override
-   String lblInternetErr = "";
-   @override
-   String lblInvalidEmailSpaces = "";
-   @override
-   String tycRequired = '';
-   @override
-   String signUpSuccess = "";
+  @override
+  String lblInvalidEmail = '';
+  @override
+  String lblInvalidUsername = '';
+  @override
+  String lblRetryErr = "";
+  @override
+  String lblWrongErr = "";
+  @override
+  String lblInternetErr = "";
+  @override
+  String lblInvalidEmailSpaces = "";
+  @override
+  String tycRequired = '';
+  @override
+  String signUpSuccess = "";
 
   //Helpi
 
@@ -46,6 +46,15 @@ class LanguageVi extends Languages {
   String lblHandymanDashboard = 'Bảng điều khiển siêng năng';
 
   @override
+  String lblShowingOnly4Handyman = 'Chỉ thể hiện 4 người siêng năng';
+
+  @override
+  String lblRecentlyOnlineHandyman = 'Gần đây là người siêng năng trực tuyến';
+
+  @override
+  String lblStartDrive = 'Bắt đầu ổ đĩa';
+
+  @override
   String handyman = 'Handyman.';
 
   @override
@@ -55,10 +64,10 @@ class LanguageVi extends Languages {
   String signUp = 'Đăng ký';
 
   @override
-  String signInTitle = 'Đăng nhập vào \ naccount của bạn';
+  String signInTitle = 'Chú ý vào tài khoản của bạn';
 
   @override
-  String signUpTitle = 'Đăng ký vào \ naccount của bạn';
+  String signUpTitle = 'Đăng ký vào tài khoản của bạn';
 
   @override
   String hintNameTxt = 'Điền tên của bạn';
@@ -205,7 +214,7 @@ class LanguageVi extends Languages {
   String serviceDetail = 'Chi tiết dịch vụ';
 
   @override
-  String confirmationRequestTxt = 'Bạn có chắc không?';
+  String confirmationRequestTxt = 'Bạn có chắc chắn muốn thực hiện hành động này không?';
 
   @override
   String notAvailable = 'Không có sẵn';
@@ -968,4 +977,67 @@ class LanguageVi extends Languages {
 
   @override
   String get lblHandymanIsOffline => "Handyman là ngoại tuyến";
+
+  @override
+  String get lblDoYouWantToRestore => "Bạn có muốn khôi phục?";
+
+  @override
+  String get lblDoYouWantToDeleteForcefully => "Bạn có muốn xóa mạnh mẽ?";
+
+  @override
+  String get lblDoYouWantToDelete => "Bạn có muốn xóa không?";
+
+  @override
+  String get lblPleaseEnterMobileNumber => "Vui lòng nhập số điện thoại di động";
+
+  @override
+  String get lblContactNumberMustBe10DigitOnly => "Số liên lạc phải chỉ là 10 chữ số";
+
+  @override
+  String get lblDangerZone => "Khu vực nguy hiểm";
+
+  @override
+  String get lblDeleteAccount => "Xóa tài khoản";
+
+  @override
+  String get lblDeleteAccountConformation => "Tài khoản của bạn sẽ bị xóa vĩnh viễn. Dữ liệu của bạn sẽ không được khôi phục lại.";
+
+  @override
+  String get lblUnderMaintenance => "Đang bảo trì...";
+
+  @override
+  String get lblCatchUpAfterAWhile => "Bắt kịp sau một thời gian";
+
+  @override
+  String get lblRecheck => "Kiểm tra lại";
+
+  @override
+  String get lblTrialFor => "Thử nghiệm cho";
+
+  @override
+  String get lblDays => "Ngày";
+
+  @override
+  String get lblFreeTrial => "Dùng thử miễn phí";
+
+  @override
+  String get lblAtLeastOneImage => "Chọn hình ảnh At-least One";
+
+  @override
+  String get lblService => "Dịch vụ";
+
+  @override
+  String get lblTransactionError => "Lỗi Giao dịch";
+
+  @override
+  String get lblTransactionCancelled => "Giao dịch bị hủy";
+
+  @override
+  String get lblPaymentSuccessfullyDone => "Thanh toán thành công";
+
+  @override
+  String get lblNewUpdate => "Cập nhật mới";
+
+  @override
+  String get lblOptionalUpdateNotify => "Cập nhật tùy chọn thông báo";
 }

@@ -1,28 +1,29 @@
 import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 class LanguagePt extends Languages {
-   //Helpi
+  //Helpi
 
-   @override
-   String lblInvalidEmail = '';
-   @override
-   String lblInvalidUsername = '';
-   @override
-   String lblRetryErr = "";
-   @override
-   String lblWrongErr = "";
-   @override
-   String lblInternetErr = "";
-   @override
-   String lblInvalidEmailSpaces = "";
-   @override
-   String tycRequired = '';
-   @override
-   String signUpSuccess = "";
+  @override
+  String lblInvalidEmail = '';
+  @override
+  String lblInvalidUsername = '';
+  @override
+  String lblRetryErr = "";
+  @override
+  String lblWrongErr = "";
+  @override
+  String lblInternetErr = "";
+  @override
+  String lblInvalidEmailSpaces = "";
+  @override
+  String tycRequired = '';
+  @override
+  String signUpSuccess = "";
 
   //Helpi
 
-    String planAboutToExpire(int days) => 'Your Plan Is About to Expire In $days Days';
+  @override
+  String planAboutToExpire(int days) => 'Your Plan Is About to Expire In $days Days';
 
   @override
   String appName = 'Fornecedor';
@@ -43,6 +44,15 @@ class LanguagePt extends Languages {
   String lblHandymanDashboard = 'Painel de faz -tudo';
 
   @override
+  String lblShowingOnly4Handyman = 'Mostrando apenas 4 trabalhadores manuais';
+
+  @override
+  String lblRecentlyOnlineHandyman = 'Recentemente on -line trabalhador manual';
+
+  @override
+  String lblStartDrive = 'Inicie a unidade';
+
+  @override
   String handyman = 'Trabalhador manual';
 
   @override
@@ -52,10 +62,10 @@ class LanguagePt extends Languages {
   String signUp = 'Inscrever-se';
 
   @override
-  String signInTitle = 'Entrando em seu \ NAccount';
+  String signInTitle = 'Assinando em sua conta';
 
   @override
-  String signUpTitle = 'Inscreva-se em seu \ NAccount';
+  String signUpTitle = 'Inscreva -se em sua conta';
 
   @override
   String hintNameTxt = 'Digite seu nome';
@@ -202,7 +212,7 @@ class LanguagePt extends Languages {
   String serviceDetail = 'Detalhe do serviço';
 
   @override
-  String confirmationRequestTxt = 'Tem certeza?';
+  String confirmationRequestTxt = 'Você tem certeza que deseja executar esta ação?';
 
   @override
   String notAvailable = 'Não disponível';
@@ -964,4 +974,67 @@ class LanguagePt extends Languages {
 
   @override
   String get lblHandymanIsOffline => "Handyman está offline";
+
+  @override
+  String get lblDoYouWantToRestore => "Você quer restaurar?";
+
+  @override
+  String get lblDoYouWantToDeleteForcefully => "Você quer excluir com força?";
+
+  @override
+  String get lblDoYouWantToDelete => "Você quer deletar?";
+
+  @override
+  String get lblPleaseEnterMobileNumber => "Por favor, insira o número do celular";
+
+  @override
+  String get lblContactNumberMustBe10DigitOnly => "O número de contato deve ter apenas 10 dígitos";
+
+  @override
+  String get lblDangerZone => "Zona de perigo";
+
+  @override
+  String get lblDeleteAccount => "Deletar conta";
+
+  @override
+  String get lblDeleteAccountConformation => "Sua conta será excluída permanentemente. Seus dados não serão restaurados novamente.";
+
+  @override
+  String get lblUnderMaintenance => "Em manutenção...";
+
+  @override
+  String get lblCatchUpAfterAWhile => "Alcance depois de um tempo";
+
+  @override
+  String get lblRecheck => "RECHECHECE";
+
+  @override
+  String get lblTrialFor => "Julgamento para";
+
+  @override
+  String get lblDays => "Dias";
+
+  @override
+  String get lblFreeTrial => "Teste grátis";
+
+  @override
+  String get lblAtLeastOneImage => "Escolha pelo menos uma imagem";
+
+  @override
+  String get lblService => "Serviço";
+
+  @override
+  String get lblTransactionError => "Erro de transação";
+
+  @override
+  String get lblTransactionCancelled => "Transação cancelada";
+
+  @override
+  String get lblPaymentSuccessfullyDone => "Pagamento com sucesso";
+
+  @override
+  String get lblNewUpdate => "Nova atualização";
+
+  @override
+  String get lblOptionalUpdateNotify => "Atualização opcional notificar";
 }

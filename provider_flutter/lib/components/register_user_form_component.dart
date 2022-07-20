@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:handyman_provider_flutter/components/app_widgets.dart';
 import 'package:handyman_provider_flutter/components/back_widget.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/service_address_response.dart';
 import 'package:handyman_provider_flutter/models/user_data.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
-import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/extensions/string_extension.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:handyman_provider_flutter/utils/model_keys.dart';
-import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class RegisterUserFormComponent extends StatefulWidget {
-  final String? user_type;
+  final String? userType;
   final UserData? data;
   final bool isUpdate;
+  final Function? onUpdate;
 
-  RegisterUserFormComponent({this.user_type, this.data, this.isUpdate = false});
+  RegisterUserFormComponent({this.userType, this.data, this.isUpdate = false, this.onUpdate});
 
   @override
   RegisterUserFormComponentState createState() => RegisterUserFormComponentState();
@@ -36,6 +37,7 @@ class RegisterUserFormComponentState extends State<RegisterUserFormComponent> {
   TextEditingController mobileCont = TextEditingController();
   TextEditingController passwordCont = TextEditingController();
   TextEditingController cPasswordCont = TextEditingController();
+  TextEditingController designationCont = TextEditingController();
 
   FocusNode fNameFocus = FocusNode();
   FocusNode lNameFocus = FocusNode();
@@ -44,6 +46,7 @@ class RegisterUserFormComponentState extends State<RegisterUserFormComponent> {
   FocusNode mobileFocus = FocusNode();
   FocusNode passwordFocus = FocusNode();
   FocusNode cPasswordFocus = FocusNode();
+  FocusNode designationFocus = FocusNode();
 
   List<AddressResponse> serviceAddressList = [];
   AddressResponse? selectedServiceAddress;
@@ -71,6 +74,7 @@ class RegisterUserFormComponentState extends State<RegisterUserFormComponent> {
       userNameCont.text = widget.data!.username.validate();
       mobileCont.text = widget.data!.contactNumber.validate();
       serviceAddressId = widget.data!.serviceAddressId.validate();
+      designationCont.text = widget.data!.designation.validate();
     }
   }
 
@@ -93,11 +97,12 @@ class RegisterUserFormComponentState extends State<RegisterUserFormComponent> {
     });
   }
 
+  /// Register the Handyman
   Future<void> register() async {
     if (formKey.currentState!.validate()) {
       formKey.currentState!.save();
       hideKeyboard(context);
-      String? type = widget.user_type;
+      String? type = widget.userType;
 
       var request = {
         if (widget.isUpdate) CommonKeys.id: widget.data!.id,
@@ -106,8 +111,9 @@ class RegisterUserFormComponentState extends State<RegisterUserFormComponent> {
         UserKeys.userName: userNameCont.text,
         UserKeys.userType: type,
         UserKeys.providerId: appStore.userId,
-        UserKeys.status: UserStatusCode,
+        UserKeys.status: USER_STATUS_CODE,
         UserKeys.contactNumber: mobileCont.text,
+        UserKeys.designation: designationCont.text.validate(),
         if (serviceAddressId != null && serviceAddressId != -1) UserKeys.serviceAddressId: serviceAddressId.validate(),
         UserKeys.email: emailCont.text,
         if (!widget.isUpdate) UserKeys.password: passwordCont.text
@@ -116,20 +122,73 @@ class RegisterUserFormComponentState extends State<RegisterUserFormComponent> {
       if (widget.isUpdate) {
         await updateProfile(request).then((res) async {
           toast(res.message.validate());
-          finish(context, true);
+          finish(context, widget.onUpdate!.call());
         }).catchError((e) {
           toast(e.toString());
         });
       } else {
         await registerUser(request).then((res) async {
           toast(res.message.validate());
-          finish(context, true);
+          finish(context, widget.onUpdate!.call());
         }).catchError((e) {
           toast(e.toString());
         });
       }
       appStore.setLoading(false);
     }
+  }
+
+  /// Remove the Handyman
+  Future<void> removeHandyman(int? id) async {
+    appStore.setLoading(true);
+    await deleteHandyman(id.validate()).then((value) {
+      appStore.setLoading(false);
+
+      finish(context, widget.onUpdate!.call());
+
+      toast(context.translate.lblTrashHandyman, print: true);
+    }).catchError((e) {
+      appStore.setLoading(false);
+      toast(e.toString(), print: true);
+    });
+  }
+
+  /// Restore the Handyman
+  Future<void> restoreHandymanData() async {
+    appStore.setLoading(true);
+    var req = {
+      CommonKeys.id: widget.data!.id,
+      type: RESTORE,
+    };
+
+    await restoreHandyman(req).then((value) {
+      appStore.setLoading(false);
+      toast(value.message);
+      finish(context, widget.onUpdate!.call());
+      setState(() {});
+    }).catchError((e) {
+      appStore.setLoading(false);
+      toast(e.toString(), print: true);
+    });
+  }
+
+  /// ForceFully Delete the Handyman
+  Future<void> forceDeleteHandymanData() async {
+    appStore.setLoading(true);
+    var req = {
+      CommonKeys.id: widget.data!.id,
+      type: FORCE_DELETE,
+    };
+
+    await restoreHandyman(req).then((value) {
+      appStore.setLoading(false);
+      toast(value.message);
+      finish(context, widget.onUpdate!.call());
+      setState(() {});
+    }).catchError((e) {
+      appStore.setLoading(false);
+      toast(e.toString(), print: true);
+    });
   }
 
   @override
@@ -148,6 +207,67 @@ class RegisterUserFormComponentState extends State<RegisterUserFormComponent> {
           color: context.primaryColor,
           backWidget: BackWidget(),
           showBack: true,
+          actions: [
+            if (widget.isUpdate)
+              PopupMenuButton(
+                icon: Icon(Icons.more_vert, size: 24, color: white),
+                onSelected: (selection) async {
+                  if (selection == 1) {
+                    showConfirmDialogCustom(
+                      context,
+                      dialogType: DialogType.DELETE,
+                      title: context.translate.lblDoYouWantToDelete,
+                      onAccept: (_) {
+                        ifNotTester(context, () {
+                          removeHandyman(widget.data!.id.validate());
+                        });
+                      },
+                    );
+                  } else if (selection == 2) {
+                    showConfirmDialogCustom(
+                      context,
+                      dialogType: DialogType.DELETE,
+                      title: context.translate.lblDoYouWantToRestore,
+                      onAccept: (_) {
+                        ifNotTester(context, () {
+                          restoreHandymanData();
+                        });
+                      },
+                    );
+                  } else if (selection == 3) {
+                    showConfirmDialogCustom(
+                      context,
+                      dialogType: DialogType.DELETE,
+                      title: context.translate.lblDoYouWantToDeleteForcefully,
+                      onAccept: (_) {
+                        ifNotTester(context, () {
+                          forceDeleteHandymanData();
+                        });
+                      },
+                    );
+                  }
+                },
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    child: Text(context.translate.lblDelete),
+                    value: 1,
+                    enabled: widget.data!.deletedAt == null,
+                    textStyle: boldTextStyle(color: widget.data!.deletedAt == null ? textPrimaryColorGlobal : null),
+                  ),
+                  PopupMenuItem(
+                    child: Text(context.translate.lblRestore),
+                    value: 2,
+                    textStyle: boldTextStyle(color: widget.data!.deletedAt != null ? textPrimaryColorGlobal : null),
+                    enabled: widget.data!.deletedAt != null,
+                  ),
+                  PopupMenuItem(
+                    child: Text(context.translate.lblForceDelete),
+                    textStyle: boldTextStyle(),
+                    value: 3,
+                  ),
+                ],
+              ),
+          ],
         ),
         body: Stack(
           children: [
@@ -223,6 +343,18 @@ class RegisterUserFormComponentState extends State<RegisterUserFormComponent> {
                         fillColor: context.scaffoldBackgroundColor,
                       ),
                       suffix: calling.iconImage(size: 10).paddingAll(14),
+                    ),
+                    16.height,
+                    AppTextField(
+                      textFieldType: TextFieldType.NAME,
+                      controller: designationCont,
+                      isValidationRequired: false,
+                      focus: designationFocus,
+                      decoration: inputDecoration(
+                        context,
+                        hint: context.translate.lblDesignation,
+                        fillColor: context.scaffoldBackgroundColor,
+                      ),
                     ),
                     16.height,
                     DropdownButtonFormField<AddressResponse>(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:handyman_provider_flutter/components/app_widgets.dart';
 import 'package:handyman_provider_flutter/components/back_widget.dart';
+import 'package:handyman_provider_flutter/components/background_component.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/tax_list_response.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
@@ -7,7 +9,6 @@ import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
-import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class TaxesScreen extends StatefulWidget {
@@ -52,8 +53,9 @@ class _TaxesScreenState extends State<TaxesScreen> {
           builder: (context, snap) {
             if (snap.hasData) {
               return snap.data!.taxData.validate().isNotEmpty
-                  ? ListView.builder(
+                  ? AnimatedListView(
                       itemCount: snap.data!.taxData!.length,
+                      slideConfiguration: SlideConfiguration(duration: 400.milliseconds, delay: 50.milliseconds),
                       padding: EdgeInsets.all(8),
                       itemBuilder: (context, index) {
                         TaxData data = snap.data!.taxData![index];
@@ -95,7 +97,7 @@ class _TaxesScreenState extends State<TaxesScreen> {
                         );
                       },
                     )
-                  : noDataFound(context).center();
+                  : BackgroundComponent().center();
             }
             return snapWidgetHelper(snap, loadingWidget: LoaderWidget());
           },

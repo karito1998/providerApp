@@ -37,7 +37,7 @@ class Data {
   String? customerName;
   int? quantity;
   CouponData? couponData;
-  List<Taxes>? taxes;
+  List<TaxData>? taxes;
   num? discount;
   num? price;
 
@@ -65,7 +65,7 @@ class Data {
     paymentMethod = json['payment_method'];
     customerName = json['customer_name'];
     quantity = json['quantity'];
-    taxes = json['taxes'] != null ? (json['taxes'] as List).map((i) => Taxes.fromJson(i)).toList() : null;
+    taxes = json['taxes'] != null ? (json['taxes'] as List).map((i) => TaxData.fromJson(i)).toList() : null;
     couponData = json['coupon_data'] != null ? CouponData.fromJson(json['coupon_data']) : null;
     discount = json['discount'];
     price = json['price'];

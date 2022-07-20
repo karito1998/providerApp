@@ -1,12 +1,11 @@
-import 'package:handyman_provider_flutter/models/handyman_review_response.dart';
-import 'package:handyman_provider_flutter/utils/constant.dart';
-import 'package:nb_utils/nb_utils.dart';
+import 'package:handyman_provider_flutter/models/booking_detail_response.dart';
+import 'package:handyman_provider_flutter/models/service_model.dart';
 
 class ServiceDetailResponse {
   Provider? provider;
-  List<HandymanReview>? ratingData;
+  List<RatingData>? ratingData;
   List<ServiceFaq>? serviceFaq;
-  ServiceDetail? serviceDetail;
+  ServiceData? serviceDetail;
 
   ServiceDetailResponse({
     this.provider,
@@ -18,9 +17,9 @@ class ServiceDetailResponse {
   factory ServiceDetailResponse.fromJson(Map<String, dynamic> json) {
     return ServiceDetailResponse(
       provider: json['provider'] != null ? Provider.fromJson(json['provider']) : null,
-      ratingData: json['rating_data'] != null ? (json['rating_data'] as List).map((i) => HandymanReview.fromJson(i)).toList() : null,
+      ratingData: json['rating_data'] != null ? (json['rating_data'] as List).map((i) => RatingData.fromJson(i)).toList() : null,
       serviceFaq: json['service_faq'] != null ? (json['service_faq'] as List).map((i) => ServiceFaq.fromJson(i)).toList() : null,
-      serviceDetail: json['service_detail'] != null ? ServiceDetail.fromJson(json['service_detail']) : null,
+      serviceDetail: json['service_detail'] != null ? ServiceData.fromJson(json['service_detail']) : null,
     );
   }
 
@@ -38,119 +37,6 @@ class ServiceDetailResponse {
     }
     if (this.serviceDetail != null) {
       data['service_detail'] = this.serviceDetail!.toJson();
-    }
-    return data;
-  }
-}
-
-class ServiceDetail {
-  List<Attachments>? attchments;
-  List<String>? imageAttchments;
-  int? categoryId;
-  String? categoryName;
-  String? description;
-  num? discount;
-  String? duration;
-  int? id;
-  int? isFavourite;
-  int? isFeatured;
-  String? name;
-  num? price;
-  var priceFormat;
-  int? providerId;
-  String? providerName;
-  String? subCategoryName;
-  List<ServiceAddressMapping>? serviceAddressMapping;
-  var status;
-  num? totalRating;
-  num? totalReview;
-  String? type;
-
-  //Local
-  bool get isHourlyService => type.validate() == ServiceTypeHourly;
-
-  ServiceDetail({
-    this.attchments,
-    this.categoryId,
-    this.imageAttchments,
-    this.categoryName,
-    this.description,
-    this.discount,
-    this.duration,
-    this.id,
-    this.isFavourite,
-    this.isFeatured,
-    this.name,
-    this.price,
-    this.priceFormat,
-    this.providerId,
-    this.providerName,
-    this.serviceAddressMapping,
-    this.status,
-    this.totalRating,
-    this.totalReview,
-    this.type,
-    this.subCategoryName,
-  });
-
-  factory ServiceDetail.fromJson(Map<String, dynamic> json) {
-    return ServiceDetail(
-      imageAttchments: json['attchments'] != null ? List<String>.from(json['attchments']) : null,
-      categoryId: json['category_id'],
-      categoryName: json['category_name'],
-      description: json['description'],
-      discount: json['discount'],
-      duration: json['duration'],
-      id: json['id'],
-      isFavourite: json['is_favourite'],
-      isFeatured: json['is_featured'],
-      name: json['name'],
-      price: json['price'],
-      priceFormat: json['price_format'],
-      providerId: json['provider_id'],
-      providerName: json['provider_name'],
-      serviceAddressMapping: json['service_address_mapping'] != null ? (json['service_address_mapping'] as List).map((i) => ServiceAddressMapping.fromJson(i)).toList() : null,
-      attchments: json['attchments_array'] != null ? (json['attchments_array'] as List).map((i) => Attachments.fromJson(i)).toList() : null,
-      status: json['status'],
-      totalRating: json['total_rating'],
-      totalReview: json['total_review'],
-      type: json['type'],
-      subCategoryName: json['subcategory_name'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['category_id'] = this.categoryId;
-    data['category_name'] = this.categoryName;
-    data['description'] = this.description;
-    data['duration'] = this.duration;
-    data['id'] = this.id;
-    data['is_favourite'] = this.isFavourite;
-    data['is_featured'] = this.isFeatured;
-    data['name'] = this.name;
-    data['price'] = this.price;
-    data['price_format'] = this.priceFormat;
-    data['provider_id'] = this.providerId;
-    data['status'] = this.status;
-    data['total_rating'] = this.totalRating;
-    data['total_review'] = this.totalReview;
-    data['type'] = this.type;
-    data['subcategory_name'] = this.subCategoryName;
-    if (this.imageAttchments != null) {
-      data['attchments'] = this.imageAttchments;
-    }
-    if (this.discount != null) {
-      data['discount'] = this.discount;
-    }
-    if (this.providerName != null) {
-      data['provider_name'] = this.providerName;
-    }
-    if (this.serviceAddressMapping != null) {
-      data['service_address_mapping'] = this.serviceAddressMapping!.map((v) => v.toJson()).toList();
-    }
-    if (this.attchments != null) {
-      data['attchments_array'] = this.attchments!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -390,37 +276,37 @@ class Provider {
 }
 
 class ServiceFaq {
-  String? created_at;
+  String? createdAt;
   String? description;
   int? id;
-  int? service_id;
+  int? serviceId;
   int? status;
   String? title;
-  String? updated_at;
+  String? updatedAt;
 
-  ServiceFaq({this.created_at, this.description, this.id, this.service_id, this.status, this.title, this.updated_at});
+  ServiceFaq({this.createdAt, this.description, this.id, this.serviceId, this.status, this.title, this.updatedAt});
 
   factory ServiceFaq.fromJson(Map<String, dynamic> json) {
     return ServiceFaq(
-      created_at: json['created_at'],
+      createdAt: json['created_at'],
       description: json['description'],
       id: json['id'],
-      service_id: json['service_id'],
+      serviceId: json['service_id'],
       status: json['status'],
       title: json['title'],
-      updated_at: json['updated_at'],
+      updatedAt: json['updated_at'],
     );
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['created_at'] = this.created_at;
+    data['created_at'] = this.createdAt;
     data['description'] = this.description;
     data['id'] = this.id;
-    data['service_id'] = this.service_id;
+    data['service_id'] = this.serviceId;
     data['status'] = this.status;
     data['title'] = this.title;
-    data['updated_at'] = this.updated_at;
+    data['updated_at'] = this.updatedAt;
     return data;
   }
 }

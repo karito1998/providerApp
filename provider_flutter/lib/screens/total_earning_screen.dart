@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:handyman_provider_flutter/components/app_widgets.dart';
 import 'package:handyman_provider_flutter/components/back_widget.dart';
+import 'package:handyman_provider_flutter/components/background_component.dart';
+import 'package:handyman_provider_flutter/components/total_earning_widget.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/total_earning_response.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
-import 'package:handyman_provider_flutter/utils/colors.dart';
-import 'package:handyman_provider_flutter/utils/common.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
-import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
-import 'package:handyman_provider_flutter/widgets/total_earning_widget.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class TotalEarningScreen extends StatefulWidget {
@@ -104,7 +104,7 @@ class _TotalEarningScreenState extends State<TotalEarningScreen> {
               return TotalEarningWidget(totalEarning: totalEarning[index]);
             },
           ),
-          Observer(builder: (_) => noDataFound(context).center().visible(!appStore.isLoading && totalEarning.isEmpty && !hasError)),
+          Observer(builder: (_) => BackgroundComponent().center().visible(!appStore.isLoading && totalEarning.isEmpty && !hasError)),
           Text(errorSomethingWentWrong, style: secondaryTextStyle()).center().visible(hasError),
           Observer(builder: (_) => LoaderWidget().center().visible(appStore.isLoading)),
         ],

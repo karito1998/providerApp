@@ -1,24 +1,24 @@
 import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 class LanguageEn extends Languages {
-   //Helpi
+  //Helpi
 
-   @override
-   String lblInvalidEmail = '';
-   @override
-   String lblInvalidUsername = '';
-   @override
-   String lblRetryErr = "";
-   @override
-   String lblWrongErr = "";
-   @override
-   String lblInternetErr = "";
-   @override
-   String lblInvalidEmailSpaces = "";
-   @override
-   String tycRequired = '';
-   @override
-   String signUpSuccess = "";
+  @override
+  String lblInvalidEmail = '';
+  @override
+  String lblInvalidUsername = '';
+  @override
+  String lblRetryErr = "";
+  @override
+  String lblWrongErr = "";
+  @override
+  String lblInternetErr = "";
+  @override
+  String lblInvalidEmailSpaces = "";
+  @override
+  String tycRequired = '';
+  @override
+  String signUpSuccess = "";
 
   //Helpi
 
@@ -44,6 +44,15 @@ class LanguageEn extends Languages {
   String lblHandymanDashboard = "Handyman Dashboard";
 
   @override
+  String lblShowingOnly4Handyman = 'Showing Only 4 Handyman';
+
+  @override
+  String lblRecentlyOnlineHandyman = 'Recently Online Handyman';
+
+  @override
+  String lblStartDrive = 'Start Drive';
+
+  @override
   String handyman = 'Handyman';
 
   @override
@@ -53,10 +62,10 @@ class LanguageEn extends Languages {
   String signUp = 'Sign Up';
 
   @override
-  String signInTitle = 'SignIn into Your \nAccount';
+  String signInTitle = 'SignIn into your Account';
 
   @override
-  String signUpTitle = 'Sign Up into Your \nAccount';
+  String signUpTitle = 'Sign Up into your Account';
 
   @override
   String hintNameTxt = 'Your Name';
@@ -326,7 +335,7 @@ class LanguageEn extends Languages {
   String lblTotalRevenue = 'Total Earning';
 
   @override
-  String lblPayment = 'Payment';
+  String lblPayment = 'Payments';
 
   @override
   String lblBookingID = 'Booking ID';
@@ -576,7 +585,7 @@ class LanguageEn extends Languages {
   String lbllogintitle = "Hello Again !";
 
   @override
-  String lblloginsubtitle = "Welcome Back, You Have Been Missed For Long Time";
+  String lblloginsubtitle = "Welcome Back, You Have Been Missed For A Long Time";
 
   @override
   String lblsignuptitle = "Hello User !";
@@ -807,7 +816,7 @@ class LanguageEn extends Languages {
   String lblGetDirection = "Get Direction";
 
   @override
-  String lblDeleteTitle = "Oh No, Your Are Leaving!";
+  String lblDeleteTitle = "Oh No, You Are Leaving!";
 
   @override
   String lblDeleteSubTitle = "Do you want to logout?";
@@ -967,4 +976,67 @@ class LanguageEn extends Languages {
 
   @override
   String get lblHandymanIsOffline => "Handyman is Offline";
+
+  @override
+  String get lblDoYouWantToRestore => "Do you want to Restore?";
+
+  @override
+  String get lblDoYouWantToDeleteForcefully => "Do you want to delete Forcefully?";
+
+  @override
+  String get lblDoYouWantToDelete => "Do you want to delete?";
+
+  @override
+  String get lblPleaseEnterMobileNumber => "Please Enter Mobile Number";
+
+  @override
+  String get lblContactNumberMustBe10DigitOnly => "Contact Number Must be 10 Digit Only";
+
+  @override
+  String get lblDangerZone => "Danger Zone";
+
+  @override
+  String get lblDeleteAccount => "Delete Account";
+
+  @override
+  String get lblDeleteAccountConformation => "Your account will be deleted permanently. Your Data will not be Restored Again.";
+
+  @override
+  String get lblUnderMaintenance => "Under Maintenance...";
+
+  @override
+  String get lblCatchUpAfterAWhile => "Catch Up After A While";
+
+  @override
+  String get lblRecheck => "Recheck";
+
+  @override
+  String get lblTrialFor => "Trial For";
+
+  @override
+  String get lblDays => "Day(s)";
+
+  @override
+  String get lblFreeTrial => "Free Trial";
+
+  @override
+  String get lblAtLeastOneImage => "Choose at-least One Image";
+
+  @override
+  String get lblService => "Service";
+
+  @override
+  String get lblTransactionError => "Transaction Error";
+
+  @override
+  String get lblTransactionCancelled => "Transaction Cancelled";
+
+  @override
+  String get lblPaymentSuccessfullyDone => "Payment Successfully Done";
+
+  @override
+  String get lblNewUpdate => "New Update";
+
+  @override
+  String get lblOptionalUpdateNotify => "Optional Update Notify";
 }

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:handyman_provider_flutter/components/disabled_rating_bar_widget.dart';
 import 'package:handyman_provider_flutter/components/handyman_name_widget.dart';
 import 'package:handyman_provider_flutter/components/image_border_component.dart';
 import 'package:handyman_provider_flutter/main.dart';
-import 'package:handyman_provider_flutter/models/booking_detail_response.dart';
+import 'package:handyman_provider_flutter/models/booking_list_response.dart';
 import 'package:handyman_provider_flutter/models/service_model.dart';
 import 'package:handyman_provider_flutter/models/user_data.dart';
 import 'package:handyman_provider_flutter/screens/chat/user_chat_screen.dart';
-import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/extensions/string_extension.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
-import 'package:handyman_provider_flutter/widgets/disabled_rating_bar_widget.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -21,8 +21,12 @@ class BasicInfoComponent extends StatefulWidget {
   final UserData? customerData;
   final UserData? providerData;
   final ServiceData? service;
+
+  /// flag == 0 = customer
+  /// flag == 1 = handyman
+  /// else provider
   final int flag;
-  final BookingDetail? bookingDetail;
+  final BookingData? bookingDetail;
 
   BasicInfoComponent(this.flag, {this.customerData, this.handymanData, this.providerData, this.service, this.bookingDetail});
 
@@ -106,17 +110,28 @@ class BasicInfoComponentState extends State<BasicInfoComponent> {
             children: [
               Row(
                 children: [
-                  if (profileUrl.validate().isNotEmpty) ImageBorder(child: circleImage(image: profileUrl.validate(), size: 65)),
+                  if (profileUrl.validate().isNotEmpty) ImageBorder(src: profileUrl.validate(), height: 65),
                   16.width,
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      HandymanNameWidget(name: name.validate()),
+                      Row(
+                        children: [
+                          HandymanNameWidget(name: name.validate()).flexible(),
+                          if (widget.flag == 1)
+                            Row(
+                              children: [
+                                16.width,
+                                ic_info.iconImage(size: 15),
+                              ],
+                            ),
+                        ],
+                      ),
                       10.height,
                       if (userData.email.validate().isNotEmpty && widget.flag == 0)
                         Row(
                           children: [
-                            ic_message.iconImage(size: 16),
+                            ic_message.iconImage(size: 16, color: textSecondaryColorGlobal),
                             6.width,
                             Text(userData.email.validate(), style: secondaryTextStyle()).flexible(),
                           ],
@@ -130,7 +145,7 @@ class BasicInfoComponentState extends State<BasicInfoComponent> {
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                servicesAddress.iconImage(size: 18),
+                                servicesAddress.iconImage(size: 18, color: textSecondaryColorGlobal),
                                 3.width,
                                 Text(widget.bookingDetail!.address.validate(), style: secondaryTextStyle()).flexible(),
                               ],

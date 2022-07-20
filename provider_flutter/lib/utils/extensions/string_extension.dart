@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:handyman_provider_flutter/components/app_widgets.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
-import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 
 extension intExt on String {
   Widget iconImage({double? size, Color? color, BoxFit? fit}) {

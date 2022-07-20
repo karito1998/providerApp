@@ -1,10 +1,10 @@
-class BaseResponse {
+class BaseResponseModel {
   String? message;
 
-  BaseResponse({this.message});
+  BaseResponseModel({this.message});
 
-  factory BaseResponse.fromJson(Map<String, dynamic> json) {
-    return BaseResponse(
+  factory BaseResponseModel.fromJson(Map<String, dynamic> json) {
+    return BaseResponseModel(
       message: json['message'],
     );
   }

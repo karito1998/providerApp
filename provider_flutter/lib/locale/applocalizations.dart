@@ -6,7 +6,6 @@ import 'package:handyman_provider_flutter/locale/language_de.dart';
 import 'package:handyman_provider_flutter/locale/language_en.dart';
 import 'package:handyman_provider_flutter/locale/language_es.dart';
 import 'package:handyman_provider_flutter/locale/language_fr.dart';
-import 'package:handyman_provider_flutter/locale/language_gu.dart';
 import 'package:handyman_provider_flutter/locale/language_hi.dart';
 import 'package:handyman_provider_flutter/locale/language_id.dart';
 import 'package:handyman_provider_flutter/locale/language_nl.dart';
@@ -27,8 +26,6 @@ class AppLocalizations extends LocalizationsDelegate<Languages> {
         return LanguageEn();
       case 'hi':
         return LanguageHi();
-      case 'gu':
-        return LanguageGu();
       case 'af':
         return LanguageAf();
       case 'ar':

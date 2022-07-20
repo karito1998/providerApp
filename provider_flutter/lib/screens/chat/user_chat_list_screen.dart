@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:handyman_provider_flutter/components/app_widgets.dart';
 import 'package:handyman_provider_flutter/components/back_widget.dart';
+import 'package:handyman_provider_flutter/components/background_component.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/contact_model.dart';
 import 'package:handyman_provider_flutter/screens/chat/components/user_item_builder.dart';
-import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
-import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 
@@ -35,10 +35,10 @@ class UserChatListScreen extends StatelessWidget {
         separator: Divider(height: 0, indent: 82),
         shrinkWrap: true,
         query: chatMessageService.fetchChatListQuery(userId: appStore.uId),
-        onEmpty: noDataFound(context),
+        onEmpty: BackgroundComponent(),
         initialLoader: LoaderWidget(),
         itemBuilderType: PaginateBuilderType.listView,
-        onError: (e) => noDataFound(context),
+        onError: (e) => BackgroundComponent(),
       ),
     );
   }

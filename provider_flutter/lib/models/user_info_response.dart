@@ -27,76 +27,76 @@ class UserInfoResponse {
 
 class Data {
   String? address;
-  int? city_id;
-  String? city_name;
-  String? contact_number;
-  int? country_id;
-  String? created_at;
+  int? cityId;
+  String? cityName;
+  String? contactNumber;
+  int? countryId;
+  String? createdAt;
   String? description;
-  String? display_name;
+  String? displayName;
   String? email;
-  String? first_name;
+  String? firstName;
   int? id;
-  int? is_featured;
-  String? last_name;
-  String? profile_image;
-  int? provider_id;
+  int? isFeatured;
+  String? lastName;
+  String? profileImage;
+  int? providerId;
   String? providertype;
-  int? providertype_id;
-  int? state_id;
+  int? providertypeId;
+  int? stateId;
   int? status;
-  String? updated_at;
-  String? user_type;
-  String? username;
+  String? updatedAt;
+  String? userType;
+  String? userName;
 
   Data(
       {this.address,
-      this.city_id,
-      this.city_name,
-      this.contact_number,
-      this.country_id,
-      this.created_at,
+      this.cityId,
+      this.cityName,
+      this.contactNumber,
+      this.countryId,
+      this.createdAt,
       this.description,
-      this.display_name,
+      this.displayName,
       this.email,
-      this.first_name,
+      this.firstName,
       this.id,
-      this.is_featured,
-      this.last_name,
-      this.profile_image,
-      this.provider_id,
+      this.isFeatured,
+      this.lastName,
+      this.profileImage,
+      this.providerId,
       this.providertype,
-      this.providertype_id,
-      this.state_id,
+      this.providertypeId,
+      this.stateId,
       this.status,
-      this.updated_at,
-      this.user_type,
-      this.username});
+      this.updatedAt,
+      this.userType,
+      this.userName});
 
   factory Data.fromJson(Map<String, dynamic> json) {
     return Data(
       address: json['address'],
-      city_id: json['city_id'],
-      city_name: json['city_name'],
-      contact_number: json['contact_number'],
-      country_id: json['country_id'],
-      created_at: json['created_at'],
+      cityId: json['city_id'],
+      cityName: json['city_name'],
+      contactNumber: json['contact_number'],
+      countryId: json['country_id'],
+      createdAt: json['created_at'],
       description: json['description'],
-      display_name: json['display_name'],
+      displayName: json['display_name'],
       email: json['email'],
-      first_name: json['first_name'],
+      firstName: json['first_name'],
       id: json['id'],
-      is_featured: json['is_featured'],
-      last_name: json['last_name'],
-      profile_image: json['profile_image'],
-      provider_id: json['provider_id'],
+      isFeatured: json['is_featured'],
+      lastName: json['last_name'],
+      profileImage: json['profile_image'],
+      providerId: json['provider_id'],
       providertype: json['providertype'],
-      providertype_id: json['providertype_id'],
-      state_id: json['state_id'],
+      providertypeId: json['providertype_id'],
+      stateId: json['state_id'],
       status: json['status'],
-      updated_at: json['updated_at'],
-      user_type: json['user_type'],
-      username: json['username'],
+      updatedAt: json['updated_at'],
+      userType: json['user_type'],
+      userName: json['username'],
     );
   }
 

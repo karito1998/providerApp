@@ -53,7 +53,7 @@ Future<Response> buildHttpResponse(String endPoint, {HttpMethod method = HttpMet
       response = await get(url, headers: headers);
     }
 
-    log('Response ($method): ${response.statusCode} ${response.body}');
+    log('Response (${method.name}) ${response.statusCode}: ${response.body}');
 
     return response;
   } else {
@@ -66,7 +66,7 @@ Future handleResponse(Response response, [bool? avoidTokenError]) async {
     throw errorInternetNotAvailable;
   }
   if (response.statusCode == 401) {
-    if (!avoidTokenError.validate()) LiveStream().emit(tokenStream, true);
+    if (!avoidTokenError.validate()) LiveStream().emit(LIVESTREAM_TOKEN, true);
     throw 'Token Expired';
   }
 
@@ -77,6 +77,7 @@ Future handleResponse(Response response, [bool? avoidTokenError]) async {
       var body = jsonDecode(response.body);
       throw parseHtmlString(body['message']);
     } on Exception catch (e) {
+      log(e);
       throw errorSomethingWentWrong;
     }
   }

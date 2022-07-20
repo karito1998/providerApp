@@ -5,32 +5,33 @@ class PlanRequestModel {
   String? description;
   String? duration;
   String? identifier;
-  String? other_transaction_detail;
-  String? payment_status;
-  String? payment_type;
-  int? plan_id;
-  PlanLimitation? plan_limitation;
-  String? plan_type;
+  String? otherTransactionDetail;
+  String? paymentStatus;
+  String? paymentType;
+  int? planId;
+  PlanLimitation? planLimitation;
+  String? planType;
   String? title;
-  String? txn_id;
+  String? txnId;
   String? type;
-  int? user_id;
+  int? userId;
 
-  PlanRequestModel(
-      {this.amount,
-      this.description,
-      this.duration,
-      this.identifier,
-      this.other_transaction_detail,
-      this.payment_status,
-      this.payment_type,
-      this.plan_id,
-      this.plan_limitation,
-      this.plan_type,
-      this.title,
-      this.txn_id,
-      this.type,
-      this.user_id});
+  PlanRequestModel({
+    this.amount,
+    this.description,
+    this.duration,
+    this.identifier,
+    this.otherTransactionDetail,
+    this.paymentStatus,
+    this.paymentType,
+    this.planId,
+    this.planLimitation,
+    this.planType,
+    this.title,
+    this.txnId,
+    this.type,
+    this.userId,
+  });
 
   factory PlanRequestModel.fromJson(Map<String, dynamic> json) {
     return PlanRequestModel(
@@ -38,16 +39,16 @@ class PlanRequestModel {
       description: json['description'],
       duration: json['duration'],
       identifier: json['identifier'],
-      other_transaction_detail: json['other_transaction_detail'],
-      payment_status: json['payment_status'],
-      payment_type: json['payment_type'],
-      plan_id: json['plan_id'],
-      plan_limitation: json['plan_limitation'] != null ? PlanLimitation.fromJson(json['plan_limitation']) : null,
-      plan_type: json['plan_type'],
+      otherTransactionDetail: json['other_transaction_detail'],
+      paymentStatus: json['payment_status'],
+      paymentType: json['payment_type'],
+      planId: json['plan_id'],
+      planLimitation: json['plan_limitation'] != null ? PlanLimitation.fromJson(json['plan_limitation']) : null,
+      planType: json['plan_type'],
       title: json['title'],
-      txn_id: json['txn_id'],
+      txnId: json['txn_id'],
       type: json['type'],
-      user_id: json['user_id'],
+      userId: json['user_id'],
     );
   }
 
@@ -57,17 +58,17 @@ class PlanRequestModel {
     data['description'] = this.description;
     data['duration'] = this.duration;
     data['identifier'] = this.identifier;
-    data['other_transaction_detail'] = this.other_transaction_detail;
-    data['payment_status'] = this.payment_status;
-    data['payment_type'] = this.payment_type;
-    data['plan_id'] = this.plan_id;
-    data['plan_type'] = this.plan_type;
+    data['other_transaction_detail'] = this.otherTransactionDetail;
+    data['payment_status'] = this.paymentStatus;
+    data['payment_type'] = this.paymentType;
+    data['plan_id'] = this.planId;
+    data['plan_type'] = this.planType;
     data['title'] = this.title;
-    data['txn_id'] = this.txn_id;
+    data['txn_id'] = this.txnId;
     data['type'] = this.type;
-    data['user_id'] = this.user_id;
-    if (this.plan_limitation != null) {
-      data['plan_limitation'] = this.plan_limitation!.toJson();
+    data['user_id'] = this.userId;
+    if (this.planLimitation != null) {
+      data['plan_limitation'] = this.planLimitation!.toJson();
     }
     return data;
   }

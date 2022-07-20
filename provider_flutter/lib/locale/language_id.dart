@@ -1,24 +1,24 @@
 import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 class LanguageId extends Languages {
-   //Helpi
+  //Helpi
 
-   @override
-   String lblInvalidEmail = '';
-   @override
-   String lblInvalidUsername = '';
-   @override
-   String lblRetryErr = "";
-   @override
-   String lblWrongErr = "";
-   @override
-   String lblInternetErr = "";
-   @override
-   String lblInvalidEmailSpaces = "";
-   @override
-   String tycRequired = '';
-   @override
-   String signUpSuccess = "";
+  @override
+  String lblInvalidEmail = '';
+  @override
+  String lblInvalidUsername = '';
+  @override
+  String lblRetryErr = "";
+  @override
+  String lblWrongErr = "";
+  @override
+  String lblInternetErr = "";
+  @override
+  String lblInvalidEmailSpaces = "";
+  @override
+  String tycRequired = '';
+  @override
+  String signUpSuccess = "";
 
   //Helpi
 
@@ -44,6 +44,15 @@ class LanguageId extends Languages {
   String lblHandymanDashboard = 'Dashboard tukang';
 
   @override
+  String lblShowingOnly4Handyman = 'Hanya menunjukkan 4 tukang';
+
+  @override
+  String lblRecentlyOnlineHandyman = 'Baru -baru ini tukang online';
+
+  @override
+  String lblStartDrive = 'Mulai drive';
+
+  @override
   String handyman = 'Tukang';
 
   @override
@@ -53,10 +62,10 @@ class LanguageId extends Languages {
   String signUp = 'Mendaftar';
 
   @override
-  String signInTitle = 'Masuk ke \ naccount Anda';
+  String signInTitle = 'Masuk ke Akun Anda';
 
   @override
-  String signUpTitle = 'Daftar ke \ naccount Anda';
+  String signUpTitle = 'Daftar ke Akun Anda';
 
   @override
   String hintNameTxt = 'Masukkan nama Anda';
@@ -203,7 +212,7 @@ class LanguageId extends Languages {
   String serviceDetail = 'Detail layanan';
 
   @override
-  String confirmationRequestTxt = 'Apa kamu yakin?';
+  String confirmationRequestTxt = 'Apakah Anda yakin ingin melakukan tindakan ini?';
 
   @override
   String notAvailable = 'Tidak tersedia';
@@ -806,7 +815,7 @@ class LanguageId extends Languages {
   String lblGetDirection = "Dapatkan arah";
 
   @override
-  String lblDeleteTitle = "Oh tidak, kamu pergi!";
+  String lblDeleteTitle = "Oh tidak, kamu akan pergi!";
 
   @override
   String lblDeleteSubTitle = "Apakah Anda ingin keluar?";
@@ -966,4 +975,67 @@ class LanguageId extends Languages {
 
   @override
   String get lblHandymanIsOffline => "Tukang adalah offline";
+
+  @override
+  String get lblDoYouWantToRestore => "Apakah Anda ingin memulihkan?";
+
+  @override
+  String get lblDoYouWantToDeleteForcefully => "Apakah Anda ingin menghapus dengan paksa?";
+
+  @override
+  String get lblDoYouWantToDelete => "Apakah Anda ingin menghapus?";
+
+  @override
+  String get lblPleaseEnterMobileNumber => "Harap masukkan nomor ponsel";
+
+  @override
+  String get lblContactNumberMustBe10DigitOnly => "Nomor kontak harus hanya 10 digit";
+
+  @override
+  String get lblDeleteAccountConformation => "Akun Anda akan dihapus secara permanen. Data Anda tidak akan dipulihkan lagi.";
+
+  @override
+  String get lblDangerZone => "Zona bahaya";
+
+  @override
+  String get lblDeleteAccount => "Hapus akun";
+
+  @override
+  String get lblUnderMaintenance => "Dalam perbaikan...";
+
+  @override
+  String get lblCatchUpAfterAWhile => "Mengejar beberapa saat";
+
+  @override
+  String get lblRecheck => "Periksa ulang";
+
+  @override
+  String get lblTrialFor => "Uji coba untuk";
+
+  @override
+  String get lblDays => "Hari -hari";
+
+  @override
+  String get lblFreeTrial => "Uji coba gratis";
+
+  @override
+  String get lblAtLeastOneImage => "Pilih Atas-Lagi Satu Gambar";
+
+  @override
+  String get lblService => "Melayani";
+
+  @override
+  String get lblTransactionError => "Kesalahan transaksi";
+
+  @override
+  String get lblTransactionCancelled => "Transaksi dibatalkan";
+
+  @override
+  String get lblPaymentSuccessfullyDone => "Pembayaran berhasil dilakukan";
+
+  @override
+  String get lblNewUpdate => "Pembaruan baru";
+
+  @override
+  String get lblOptionalUpdateNotify => "Pembaruan opsional memberi tahu";
 }

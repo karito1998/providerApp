@@ -4,20 +4,20 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:handyman_provider_flutter/auth/component/user_demo_mode_screen.dart';
 import 'package:handyman_provider_flutter/auth/forgot_password_dialog.dart';
 import 'package:handyman_provider_flutter/auth/sign_up_screen.dart';
+import 'package:handyman_provider_flutter/components/app_widgets.dart';
 import 'package:handyman_provider_flutter/components/selected_item_widget.dart';
-import 'package:handyman_provider_flutter/handyman/screen/dashboard/handyman_dashboard_screen.dart';
+import 'package:handyman_provider_flutter/handyman/handyman_dashboard_screen.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/register_response.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
-import 'package:handyman_provider_flutter/provider/dashboard/dashboard_screen.dart';
-import 'package:handyman_provider_flutter/utils/colors.dart';
+import 'package:handyman_provider_flutter/provider/provider_dashboard_screen.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/extensions/string_extension.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:handyman_provider_flutter/utils/model_keys.dart';
-import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -56,16 +56,18 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget _buildTopWidget() {
     return Column(
       children: [
-    Center(
-                   child: Image.asset(
-                        //"images/app_images/logo.svg",
-                        "images/setting_icon/ic_splash_logo.png",
-                        height: 100.0,
-                       alignment: Alignment.center,
-                  )),
-                  16.height,
-                  Text(context.translate.lbllogintitle, style: boldTextStyle(size: 22))
-                      .center(),
+        Center(
+                       child: Image.asset(
+                                //"images/app_images/logo.svg",
+                                "images/setting_icon/ic_splash_logo.png",
+                                height: 100.0,
+                               alignment: Alignment.center,
+                          )),
+                      16.height,
+                      Text(context.translate.lbllogintitle, style: boldTextStyle(size: 22))
+                          .center(),
+        32.height,
+        Text(context.translate.lbllogintitle, style: boldTextStyle(size: 22)),
         16.height,
         Text(
           context.translate.lblloginsubtitle,
@@ -86,8 +88,7 @@ class _SignInScreenState extends State<SignInScreen> {
           focus: emailFocus,
           nextFocus: passwordFocus,
           errorThisFieldRequired: context.translate.hintRequired,
-                    errorInvalidEmail: context.translate.lblInvalidEmail,
-
+          errorInvalidEmail: context.translate.lblInvalidEmail,
           decoration: inputDecoration(context, hint: context.translate.hintEmailAddress),
           suffix: ic_message.iconImage(size: 10).paddingAll(14),
           autoFillHints: [AutofillHints.email],
@@ -114,9 +115,11 @@ class _SignInScreenState extends State<SignInScreen> {
 
   Widget _buildForgotRememberWidget() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.end
       children: [
-
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
             Row(
               children: [
                 2.width,
@@ -134,9 +137,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   child: Text(context.translate.rememberMe, style: secondaryTextStyle()),
                 ),
                 Expanded(child: SizedBox(height: 1,))
+
               ],
             ),
-
             TextButton(
               child: Text(
                 context.translate.forgotPassword,
@@ -152,10 +155,12 @@ class _SignInScreenState extends State<SignInScreen> {
                 );
               },
             ),
-        20.height,
+            20.height,
+          ],
+        ),
+        32.height,
       ],
-        );
-
+    );
   }
 
   Widget _buildButtonWidget() {
@@ -178,7 +183,7 @@ class _SignInScreenState extends State<SignInScreen> {
             Text(context.translate.doNotHaveAccount, style: secondaryTextStyle()),
             TextButton(
               onPressed: () {
-                SignUpScreen().launch(context, pageRouteAnimation: PageRouteAnimation.Slide);
+                SignUpScreen().launch(context);
               },
               child: Text(
                 context.translate.signUp,
@@ -226,15 +231,15 @@ class _SignInScreenState extends State<SignInScreen> {
             /// Redirect on the base of User Role.
             appStore.setTester(res.data!.email == DEFAULT_PROVIDER_EMAIL || res.data!.email == DEFAULT_HANDYMAN_EMAIL);
 
-            if (res.data!.userType.validate().trim() == UserTypeProvider) {
+            if (res.data!.userType.validate().trim() == USER_TYPE_PROVIDER) {
               /// if User type id Provider
               if (res.data != null) await saveUserData(res.data!);
-              DashboardScreen(index: 0).launch(context, isNewTask: true, pageRouteAnimation: PageRouteAnimation.Slide);
+              ProviderDashboardScreen(index: 0).launch(context, isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
               toast(context.translate.loginSuccessfully);
-            } else if (res.data!.userType.validate().trim() == UserTypeHandyman) {
+            } else if (res.data!.userType.validate().trim() == USER_TYPE_HANDYMAN) {
               /// if User type id Handyman
               if (res.data != null) await saveUserData(res.data!);
-              HandyDashboardScreen().launch(context, isNewTask: true, pageRouteAnimation: PageRouteAnimation.Slide);
+              HandymanDashboardScreen().launch(context, isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
               toast(context.translate.loginSuccessfully);
             } else {
               toast(context.translate.cantLogin, print: true);
@@ -249,13 +254,13 @@ class _SignInScreenState extends State<SignInScreen> {
           if (e.toString().capitalizeFirstLetter() == USER_NOT_FOUND) {
             RegisterData data = RegisterData(
               id: res.data!.id.validate(),
-              api_token: res.data!.apiToken.validate(),
-              contact_number: res.data!.contactNumber.validate(),
-              display_name: res.data!.displayName.validate(),
+              apiToken: res.data!.apiToken.validate(),
+              contactNumber: res.data!.contactNumber.validate(),
+              displayName: res.data!.displayName.validate(),
               email: res.data!.email.validate(),
-              first_name: res.data!.firstName.validate(),
-              last_name: res.data!.lastName.validate(),
-              user_type: res.data!.userType.validate(),
+              firstName: res.data!.firstName.validate(),
+              lastName: res.data!.lastName.validate(),
+              userType: res.data!.userType.validate(),
               username: res.data!.username.validate(),
               password: passwordCont.text.trim(),
             );
@@ -270,10 +275,10 @@ class _SignInScreenState extends State<SignInScreen> {
         });
       }).catchError((e) {
         if (e.toString() == "These credentials do not match our records.")
-                          toast("No pudimos encontrar un usuario con estas credenciales",
-                              print: true);
-                     else
-                       toast(e.toString(), print: true);
+                                    toast("No pudimos encontrar un usuario con estas credenciales",
+                                        print: true);
+                             else
+                               toast(e.toString(), print: true);
         appStore.setLoading(false);
         toast(e.toString(), print: true);
       });
@@ -291,9 +296,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      body: SafeArea(
-        //width: context.width(),
+        body: SafeArea(
         child: Stack(
           children: [
             Form(

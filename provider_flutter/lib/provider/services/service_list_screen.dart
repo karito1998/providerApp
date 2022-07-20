@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:handyman_provider_flutter/components/app_widgets.dart';
 import 'package:handyman_provider_flutter/components/back_widget.dart';
+import 'package:handyman_provider_flutter/components/background_component.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/service_model.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
-import 'package:handyman_provider_flutter/provider/dashboard/widgets/service_widget.dart';
+import 'package:handyman_provider_flutter/provider/components/service_widget.dart';
 import 'package:handyman_provider_flutter/provider/services/add_service_screen.dart';
 import 'package:handyman_provider_flutter/provider/services/service_detail_screen.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
-import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
-import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class ServiceListScreen extends StatefulWidget {
@@ -58,7 +58,6 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
           fetchAllServices();
         }
       }
-      setState(() {});
     });
 
     fetchAllServices();
@@ -73,7 +72,7 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
       }
       appStore.setLoading(false);
 
-      isLastPage = value.data!.length != perPageItem;
+      isLastPage = value.data!.length != PER_PAGE_ITEM;
 
       mainList.addAll(value.data!);
 
@@ -118,9 +117,9 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
               bool? res;
 
               if (widget.categoryId != null) {
-                res = await AddServiceScreen(categoryId: widget.categoryId).launch(context, pageRouteAnimation: PageRouteAnimation.Slide);
+                res = await AddServiceScreen(categoryId: widget.categoryId).launch(context, pageRouteAnimation: PageRouteAnimation.Fade);
               } else {
-                res = await AddServiceScreen().launch(context, pageRouteAnimation: PageRouteAnimation.Slide);
+                res = await AddServiceScreen().launch(context, pageRouteAnimation: PageRouteAnimation.Fade);
               }
 
               if (res ?? false) {
@@ -165,15 +164,17 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
                       fillColor: appStore.isDarkMode ? cardDarkColor : cardColor,
                     ),
                   ).paddingOnly(left: 16, right: 16, top: 24, bottom: 8),
-                  Container(
-                    alignment: Alignment.topLeft,
-                    child: Wrap(
-                      spacing: 16.0,
-                      runSpacing: 16.0,
-                      alignment: WrapAlignment.start,
-                      children: List.generate(
-                        mainList.length,
-                        (index) {
+                  if (mainList.isNotEmpty)
+                    Container(
+                      alignment: Alignment.topLeft,
+                      child: AnimatedWrap(
+                        spacing: 16.0,
+                        runSpacing: 16.0,
+                        scaleConfiguration: ScaleConfiguration(duration: 400.milliseconds, delay: 50.milliseconds),
+                        listAnimationType: ListAnimationType.Scale,
+                        alignment: WrapAlignment.start,
+                        itemCount: mainList.length,
+                        itemBuilder: (context, index) {
                           return ServiceComponent(
                             data: mainList[index],
                             width: changeList ? context.width() : context.width() * 0.5 - 24,
@@ -184,13 +185,12 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
                             borderRadius: radius(),
                           );
                         },
-                      ),
-                    ).paddingOnly(left: 16, right: 16, top: 16, bottom: 8),
-                  ),
+                      ).paddingSymmetric(horizontal: 16, vertical: 24),
+                    ),
                 ],
               ),
             ),
-            Observer(builder: (context) => noDataFound(context).center().visible(!appStore.isLoading && mainList.validate().isEmpty && isApiCalled)),
+            Observer(builder: (context) => BackgroundComponent().center().visible(!appStore.isLoading && mainList.validate().isEmpty && isApiCalled)),
             Observer(builder: (context) => LoaderWidget().visible(appStore.isLoading))
           ],
         ),

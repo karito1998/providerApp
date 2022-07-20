@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:handyman_provider_flutter/auth/sign_in_screen.dart';
-import 'package:handyman_provider_flutter/handyman/screen/dashboard/handyman_dashboard_screen.dart';
+import 'package:handyman_provider_flutter/handyman/handyman_dashboard_screen.dart';
 import 'package:handyman_provider_flutter/main.dart';
-import 'package:handyman_provider_flutter/provider/dashboard/dashboard_screen.dart';
-import 'package:handyman_provider_flutter/utils/colors.dart';
+import 'package:handyman_provider_flutter/provider/provider_dashboard_screen.dart';
+import 'package:handyman_provider_flutter/screens/maintenance_mode_screen.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/configs.dart';
+import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:package_info/package_info.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -29,27 +29,31 @@ class SplashScreenState extends State<SplashScreen> {
       setStatusBarColor(Colors.transparent, statusBarBrightness: Brightness.dark, statusBarIconBrightness: appStore.isDarkMode ? Brightness.light : Brightness.dark);
 
       if (isAndroid || isIOS) {
-        PackageInfo.fromPlatform().then((value) {
-          currentPackageName = value.packageName;
+        getPackageName().then((value) {
+          currentPackageName = value;
         }).catchError((e) {
           //
         });
       }
     });
 
-    if (!await isAndroid12Above()) await 2.seconds.delay;
+    if (!await isAndroid12Above()) await 500.milliseconds.delay;
 
-    if (!appStore.isLoggedIn) {
-      SignInScreen().launch(context, isNewTask: true);
+    if (remoteConfigDataModel.inMaintenanceMode.validate()) {
+      MaintenanceModeScreen().launch(context, pageRouteAnimation: PageRouteAnimation.Fade);
     } else {
-      if (isUserTypeProvider) {
-        setStatusBarColor(primaryColor);
-        DashboardScreen(index: 0).launch(context, isNewTask: true, pageRouteAnimation: PageRouteAnimation.Slide);
-      } else if (isUserTypeHandyman) {
-        setStatusBarColor(primaryColor);
-        HandyDashboardScreen(index: 0).launch(context, isNewTask: true, pageRouteAnimation: PageRouteAnimation.Slide);
-      } else {
+      if (!appStore.isLoggedIn) {
         SignInScreen().launch(context, isNewTask: true);
+      } else {
+        if (isUserTypeProvider) {
+          setStatusBarColor(primaryColor);
+          ProviderDashboardScreen(index: 0).launch(context, isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
+        } else if (isUserTypeHandyman) {
+          setStatusBarColor(primaryColor);
+          HandymanDashboardScreen(index: 0).launch(context, isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
+        } else {
+          SignInScreen().launch(context, isNewTask: true);
+        }
       }
     }
   }

@@ -2,24 +2,24 @@ import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 // class LanguageTr extends
 class LanguageTr extends Languages {
-   //Helpi
+  //Helpi
 
-   @override
-   String lblInvalidEmail = '';
-   @override
-   String lblInvalidUsername = '';
-   @override
-   String lblRetryErr = "";
-   @override
-   String lblWrongErr = "";
-   @override
-   String lblInternetErr = "";
-   @override
-   String lblInvalidEmailSpaces = "";
-   @override
-   String tycRequired = '';
-   @override
-   String signUpSuccess = "";
+  @override
+  String lblInvalidEmail = '';
+  @override
+  String lblInvalidUsername = '';
+  @override
+  String lblRetryErr = "";
+  @override
+  String lblWrongErr = "";
+  @override
+  String lblInternetErr = "";
+  @override
+  String lblInvalidEmailSpaces = "";
+  @override
+  String tycRequired = '';
+  @override
+  String signUpSuccess = "";
 
   //Helpi
 
@@ -45,6 +45,15 @@ class LanguageTr extends Languages {
   String lblHandymanDashboard = 'Handyman Gösterge Tablosu';
 
   @override
+  String lblShowingOnly4Handyman = 'Toont slechts 4 klusjesman';
+
+  @override
+  String lblRecentlyOnlineHandyman = 'Onlangs online klusjesman';
+
+  @override
+  String lblStartDrive = 'Start rijden';
+
+  @override
   String handyman = 'Tamirci';
 
   @override
@@ -54,10 +63,10 @@ class LanguageTr extends Languages {
   String signUp = 'Üye olmak';
 
   @override
-  String signInTitle = '\ Naccount\'unuza oturum açın';
+  String signInTitle = 'Hesabınıza imzalayın';
 
   @override
-  String signUpTitle = '\ Naccount\'ınıza kaydolun';
+  String signUpTitle = 'Hesabınıza kaydolun';
 
   @override
   String hintNameTxt = 'Adınızı giriniz';
@@ -204,7 +213,7 @@ class LanguageTr extends Languages {
   String serviceDetail = 'Servis detayı';
 
   @override
-  String confirmationRequestTxt = 'Emin misin?';
+  String confirmationRequestTxt = 'Bu eylemi gerçekleştirmek istiyorsunuz?';
 
   @override
   String notAvailable = 'Müsait değil';
@@ -807,7 +816,7 @@ class LanguageTr extends Languages {
   String lblGetDirection = "Yönetmek";
 
   @override
-  String lblDeleteTitle = "Oh hayır, ayrılıyorsun!";
+  String lblDeleteTitle = "Oh hayır, gidiyorsun!";
 
   @override
   String lblDeleteSubTitle = "Çıkış yapmak ister misiniz?";
@@ -967,4 +976,67 @@ class LanguageTr extends Languages {
 
   @override
   String get lblHandymanIsOffline => "Handyman is offline";
+
+  @override
+  String get lblDoYouWantToRestore => "Wil je herstellen?";
+
+  @override
+  String get lblDoYouWantToDeleteForcefully => "Wilt u krachtig verwijderen?";
+
+  @override
+  String get lblDoYouWantToDelete => "Wil je stoppen?";
+
+  @override
+  String get lblPleaseEnterMobileNumber => "Voer het mobiele nummer in";
+
+  @override
+  String get lblContactNumberMustBe10DigitOnly => "Contactnummer mag alleen 10 cijfer zijn";
+
+  @override
+  String get lblDangerZone => "Gevarenzone";
+
+  @override
+  String get lblDeleteAccount => "Account verwijderen";
+
+  @override
+  String get lblDeleteAccountConformation => "Uw account wordt permanent verwijderd. Uw gegevens worden niet opnieuw hersteld.";
+
+  @override
+  String get lblUnderMaintenance => "In onderhoud...";
+
+  @override
+  String get lblCatchUpAfterAWhile => "Inhalen na een tijdje";
+
+  @override
+  String get lblRecheck => "Controleer opnieuw";
+
+  @override
+  String get lblTrialFor => "Trieken voor";
+
+  @override
+  String get lblDays => "Dagen";
+
+  @override
+  String get lblFreeTrial => "Gratis proefversie";
+
+  @override
+  String get lblAtLeastOneImage => "Kies op het minst één beeld";
+
+  @override
+  String get lblService => "Onderhoud";
+
+  @override
+  String get lblTransactionError => "Transactiefout";
+
+  @override
+  String get lblTransactionCancelled => "Transactie geannuleerd";
+
+  @override
+  String get lblPaymentSuccessfullyDone => "Betaling met succes gedaan";
+
+  @override
+  String get lblNewUpdate => "Nieuwe update";
+
+  @override
+  String get lblOptionalUpdateNotify => "Optioneel update melding";
 }

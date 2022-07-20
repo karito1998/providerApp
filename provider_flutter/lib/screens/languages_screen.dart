@@ -18,7 +18,9 @@ class LanguagesScreenState extends State<LanguagesScreen> {
     });
   }
 
-  Future<void> init() async {}
+  Future<void> init() async {
+    //
+  }
 
   @override
   void setState(fn) {

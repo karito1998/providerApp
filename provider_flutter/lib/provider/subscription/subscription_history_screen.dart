@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:handyman_provider_flutter/components/app_widgets.dart';
 import 'package:handyman_provider_flutter/components/back_widget.dart';
+import 'package:handyman_provider_flutter/components/background_component.dart';
+import 'package:handyman_provider_flutter/main.dart';
+import 'package:handyman_provider_flutter/models/provider_subscription_model.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
-import 'package:handyman_provider_flutter/utils/colors.dart';
-import 'package:handyman_provider_flutter/utils/common.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
-import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../main.dart';
-import '../../models/provider_subscription_model.dart';
-import 'component/subscription_widget.dart';
+import 'components/subscription_widget.dart';
 
 class SubscriptionHistoryScreen extends StatefulWidget {
   @override
@@ -96,7 +96,7 @@ class SubscriptionHistoryScreenState extends State<SubscriptionHistoryScreen> {
               return SubscriptionWidget(subscriptionHistoryList[index]);
             },
           ),
-          Observer(builder: (_) => noDataFound(context).center().visible(!appStore.isLoading && subscriptionHistoryList.isEmpty && !hasError)),
+          Observer(builder: (_) => BackgroundComponent().center().visible(!appStore.isLoading && subscriptionHistoryList.isEmpty && !hasError)),
           Text(errorSomethingWentWrong, style: secondaryTextStyle()).center().visible(hasError),
           Observer(builder: (_) => LoaderWidget().center().visible(appStore.isLoading)),
         ],

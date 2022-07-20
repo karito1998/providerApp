@@ -2,24 +2,24 @@ import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 // class LanguageHi extends
 class LanguageHi extends Languages {
-   //Helpi
+  //Helpi
 
-   @override
-   String lblInvalidEmail = '';
-   @override
-   String lblInvalidUsername = '';
-   @override
-   String lblRetryErr = "";
-   @override
-   String lblWrongErr = "";
-   @override
-   String lblInternetErr = "";
-   @override
-   String lblInvalidEmailSpaces = "";
-   @override
-   String tycRequired = '';
-   @override
-   String signUpSuccess = "";
+  @override
+  String lblInvalidEmail = '';
+  @override
+  String lblInvalidUsername = '';
+  @override
+  String lblRetryErr = "";
+  @override
+  String lblWrongErr = "";
+  @override
+  String lblInternetErr = "";
+  @override
+  String lblInvalidEmailSpaces = "";
+  @override
+  String tycRequired = '';
+  @override
+  String signUpSuccess = "";
 
   //Helpi
 
@@ -45,6 +45,15 @@ class LanguageHi extends Languages {
   String lblHandymanDashboard = 'सहायक डैशबोर्ड';
 
   @override
+  String lblShowingOnly4Handyman = 'केवल 4 अप्रेंटिस दिखा रहा है';
+
+  @override
+  String lblRecentlyOnlineHandyman = 'हाल ही में ऑनलाइन अप्रेंटिस';
+
+  @override
+  String lblStartDrive = 'स्टार्ट ड्राइव';
+
+  @override
   String handyman = 'सहायक';
 
   @override
@@ -54,10 +63,10 @@ class LanguageHi extends Languages {
   String signUp = 'साइन अप करें';
 
   @override
-  String signInTitle = 'अपने \ Naccount में साइन इन करें';
+  String signInTitle = 'अपने खाते में साइन इन करें';
 
   @override
-  String signUpTitle = 'अपने \ Naccount में साइन अप करें';
+  String signUpTitle = 'अपने खाते में साइन अप करें';
 
   @override
   String hintNameTxt = 'अपना नाम दर्ज करें';
@@ -204,7 +213,7 @@ class LanguageHi extends Languages {
   String serviceDetail = 'सेवा विवरण';
 
   @override
-  String confirmationRequestTxt = 'क्या आपको यकीन है?';
+  String confirmationRequestTxt = 'क्या आप निश्चित रूप से यह कार्रवाई करना चाहते हैं?';
 
   @override
   String notAvailable = 'उपलब्ध नहीं है';
@@ -807,7 +816,7 @@ class LanguageHi extends Languages {
   String lblGetDirection = "दिशा प्राप्त करें";
 
   @override
-  String lblDeleteTitle = "अरे नहीं, तुम्हारा छोड़ रहे हैं!";
+  String lblDeleteTitle = "अरे नहीं, आप जा रहे हैं!";
 
   @override
   String lblDeleteSubTitle = "क्या आप लॉगआउट करना चाहते हैं?";
@@ -967,4 +976,67 @@ class LanguageHi extends Languages {
 
   @override
   String get lblHandymanIsOffline => "अप्रेंटिस ऑफ़लाइन है";
+
+  @override
+  String get lblDoYouWantToRestore => "क्या आप पुनर्स्थापित करना चाहते हैं?";
+
+  @override
+  String get lblDoYouWantToDeleteForcefully => "क्या आप बलपूर्वक हटाना चाहते हैं?";
+
+  @override
+  String get lblDoYouWantToDelete => "क्या आप हटाना चाहते हैं?";
+
+  @override
+  String get lblPleaseEnterMobileNumber => "कृपया मोबाइल नंबर दर्ज करें";
+
+  @override
+  String get lblContactNumberMustBe10DigitOnly => "संपर्क नंबर केवल 10 अंक होना चाहिए";
+
+  @override
+  String get lblDangerZone => "खतरा क्षेत्र";
+
+  @override
+  String get lblDeleteAccount => "खाता हटा दो";
+
+  @override
+  String get lblDeleteAccountConformation => "आपका खाता स्थायी रूप से हटा दिया जाएगा। आपका डेटा फिर से बहाल नहीं किया जाएगा।";
+
+  @override
+  String get lblUnderMaintenance => "रखरखाव जारी...";
+
+  @override
+  String get lblCatchUpAfterAWhile => "थोड़ी देर के बाद पकड़ो";
+
+  @override
+  String get lblRecheck => "पुनः जांच करें";
+
+  @override
+  String get lblTrialFor => "परीक्षण करना";
+
+  @override
+  String get lblDays => "दिन";
+
+  @override
+  String get lblFreeTrial => "मुफ्त परीक्षण";
+
+  @override
+  String get lblAtLeastOneImage => "कम से कम एक छवि चुनें";
+
+  @override
+  String get lblService => "सेवा";
+
+  @override
+  String get lblTransactionError => "लेन -देन त्रुटि";
+
+  @override
+  String get lblTransactionCancelled => "रद्द किया गया लेनदेन";
+
+  @override
+  String get lblPaymentSuccessfullyDone => "भुगतान सफलतापूर्वक किया गया";
+
+  @override
+  String get lblNewUpdate => "नई अपडेट";
+
+  @override
+  String get lblOptionalUpdateNotify => "वैकल्पिक अद्यतन सूचित करें";
 }

@@ -31,11 +31,7 @@ abstract class BaseService {
     Query query = ref!.limit(1).where('email', isEqualTo: email);
     var res = await query.get();
 
-    if (res.docs != null) {
-      return res.docs.length == 1;
-    } else {
-      return false;
-    }
+    return res.docs.isNotEmpty;
   }
 
   Future<Iterable> getList() async {

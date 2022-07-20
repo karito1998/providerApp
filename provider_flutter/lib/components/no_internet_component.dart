@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:handyman_provider_flutter/components/cached_image_widget.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
-import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
+import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class OppsScreen extends StatefulWidget {
@@ -35,7 +36,11 @@ class _OppsScreenState extends State<OppsScreen> {
         child: Scaffold(
           body: Stack(
             children: [
-              cachedImage('images/app_images/no_internet_screen.png', fit: BoxFit.cover, height: context.height()),
+              CachedImageWidget(
+                url: noInternetImg,
+                fit: BoxFit.cover,
+                height: context.height(),
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -55,6 +60,8 @@ class _OppsScreenState extends State<OppsScreen> {
                     onTap: () async {
                       if (await isNetworkAvailable()) {
                         pop();
+                      } else {
+                        toast(errorInternetNotAvailable);
                       }
                     },
                   ),

@@ -5,27 +5,30 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:handyman_provider_flutter/components/app_widgets.dart';
 import 'package:handyman_provider_flutter/components/back_widget.dart';
+import 'package:handyman_provider_flutter/components/cached_image_widget.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/caregory_response.dart';
 import 'package:handyman_provider_flutter/models/service_address_response.dart';
 import 'package:handyman_provider_flutter/models/service_detail_response.dart';
+import 'package:handyman_provider_flutter/models/service_model.dart';
 import 'package:handyman_provider_flutter/networks/network_utils.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
-import 'package:handyman_provider_flutter/provider/services/component/dropdown_subcategory_component.dart';
+import 'package:handyman_provider_flutter/provider/services/components/dropdown_subcategory_component.dart';
 import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:handyman_provider_flutter/utils/model_keys.dart';
-import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:http/http.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class AddServiceScreen extends StatefulWidget {
   final int? categoryId;
-  final ServiceDetail? data;
+  final ServiceData? data;
 
   AddServiceScreen({this.categoryId, this.data});
 
@@ -44,7 +47,7 @@ class AddServiceScreenState extends State<AddServiceScreen> {
   TextEditingController durationContMin = TextEditingController(text: '00');
 
   ServiceDetailResponse serviceDetailResponse = ServiceDetailResponse();
-  ServiceDetail serviceDetail = ServiceDetail();
+  ServiceData serviceDetail = ServiceData();
 
   //file picker
   FilePickerResult? filePickerResult;
@@ -134,10 +137,9 @@ class AddServiceScreenState extends State<AddServiceScreen> {
 
       if (widget.data != null) selectedCategory = categoryList.where((element) => element.id == widget.data!.categoryId).first;
 
-      if (widget.categoryId != null)
-        categoryList.map((e) {
-          e.id == widget.categoryId ? selectedCategory = e : null;
-        }).toList();
+      if (widget.categoryId != null && categoryList.any((element) => element.id == widget.categoryId)) {
+        selectedCategory = categoryList.firstWhere((element) => element.id == widget.categoryId);
+      }
 
       setState(() {});
       appStore.setLoading(false);
@@ -191,7 +193,7 @@ class AddServiceScreenState extends State<AddServiceScreen> {
 
     // Check if image is selected when adding new service
     if (serviceId == null && imageFiles.isEmpty) {
-      return toast('Choose at-least one image.');
+      return toast(context.translate.lblAtLeastOneImage);
     }
 
     MultipartRequest multiPartRequest = await getMultiPartRequest('service-save');
@@ -364,7 +366,12 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                       return Stack(
                         alignment: Alignment.topRight,
                         children: [
-                          cachedImage(eAttachments[i].url, width: 90, height: 90, fit: BoxFit.cover),
+                          CachedImageWidget(
+                            url: eAttachments[i].url.validate(),
+                            width: 90,
+                            height: 90,
+                            fit: BoxFit.cover,
+                          ),
                           Container(
                             decoration: boxDecorationWithRoundedCorners(boxShape: BoxShape.circle, backgroundColor: primaryColor),
                             margin: EdgeInsets.only(right: 8, top: 8),
@@ -426,10 +433,7 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                           ),
                           16.height,
                           Container(
-                            decoration: BoxDecoration(
-                              borderRadius: radius(),
-                              color: context.scaffoldBackgroundColor,
-                            ),
+                            decoration: BoxDecoration(borderRadius: radius(), color: context.scaffoldBackgroundColor),
                             child: ExpansionTile(
                               iconColor: context.iconColor,
                               title: Text(context.translate.selectAddress, style: primaryTextStyle()),
@@ -469,16 +473,11 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                           ),
                           16.height,
                           Row(
-                            //mainAxisSize: MainAxisSize.min,
                             children: [
-                              Expanded(child:DropdownButtonFormField<String>(
-
-                                decoration: inputDecoration(
-                                  context,
-                                  fillColor: context.scaffoldBackgroundColor,
-                                  hint: context.translate.lblType,
-                                ),
-                                hint: Text(context.translate.hintSelectType, style: secondaryTextStyle(size: 1)),
+                              Expanded(child:
+                              DropdownButtonFormField<String>(
+                                decoration: inputDecoration(context, fillColor: context.scaffoldBackgroundColor, hint: context.translate.lblType),
+                                hint: Text(context.translate.hintSelectType, style: secondaryTextStyle()),
                                 value: serviceType.isNotEmpty ? serviceType : null,
                                 dropdownColor: context.cardColor,
                                 items: typeList.map((String data) {
@@ -499,7 +498,7 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                                   fillColor: context.scaffoldBackgroundColor,
                                   hint: context.translate.lblStatusType,
                                 ),
-                                hint: Text(context.translate.hintSelectStatus, style: secondaryTextStyle(size: 1)),
+                                hint: Text(context.translate.hintSelectStatus, style: secondaryTextStyle()),
                                 dropdownColor: context.cardColor,
                                 value: serviceStatus.isNotEmpty ? serviceStatus : null,
                                 items: statusList.map((String data) {
@@ -512,15 +511,13 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                                   serviceStatus = value.validate();
                                   setState(() {});
                                 },
-                              ),
-                              ),
-                              5.width,
+                              )),
                             ],
                           ),
                           24.height,
                           Row(
                             children: [
-                              AppTextField(
+                              Expanded(child:AppTextField(
                                 textFieldType: TextFieldType.PHONE,
                                 controller: priceCont,
                                 focus: priceFocus,
@@ -531,12 +528,10 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                                   hint: context.translate.hintPrice,
                                   fillColor: context.scaffoldBackgroundColor,
                                 ),
-                                keyboardType: TextInputType.numberWithOptions(
-                                  decimal: true,
-                                ),
-                              ).expand(),
+                                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                              )),
                               16.width,
-                              AppTextField(
+                              Expanded(child:AppTextField(
                                 textFieldType: TextFieldType.PHONE,
                                 controller: discountCont,
                                 focus: discountFocus,
@@ -548,13 +543,13 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                                   fillColor: context.scaffoldBackgroundColor,
                                 ),
                                 keyboardType: TextInputType.numberWithOptions(decimal: true),
-                              ).expand(),
+                              )),
                             ],
                           ),
                           24.height,
                           Row(
                             children: [
-                              Expanded(child:AppTextField(
+                              AppTextField(
                                 textFieldType: TextFieldType.PHONE,
                                 controller: durationContHr,
                                 focus: durationHrFocus,
@@ -569,17 +564,14 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                                 ),
                                 keyboardType: TextInputType.number,
                                 validator: (s) {
-                                  if (s!.isEmpty) return context.translate.lblRequired;
-                                  //if (s!.isEmpty) return errorThisFieldRequired;
+                                  if (s!.isEmpty) return errorThisFieldRequired;
 
                                   if (s.toInt() > 24) return context.translate.lblEnterHours;
-                                  if (s.toInt() == 0) return context.translate.lblRequired;
-                                  //errorThisFieldRequired;
+                                  if (s.toInt() == 0) return errorThisFieldRequired;
                                   return null;
                                 },
-                              )),
-                              16.width,
-                              Expanded(child:AppTextField(
+                              ).paddingRight(8).expand(),
+                              AppTextField(
                                 textFieldType: TextFieldType.PHONE,
                                 controller: durationContMin,
                                 focus: durationMinFocus,
@@ -594,13 +586,12 @@ class AddServiceScreenState extends State<AddServiceScreen> {
                                 ),
                                 keyboardType: TextInputType.number,
                                 validator: (s) {
-                                 if (s!.isEmpty) return context.translate.lblRequired;
-                                 // if (s!.isEmpty) return errorThisFieldRequired;
+                                  if (s!.isEmpty) return errorThisFieldRequired;
 
                                   if (s.toInt() > 60) return context.translate.lblEnterMinute;
                                   return null;
                                 },
-                              )),
+                              ).expand(),
                             ],
                           ),
                           24.height,

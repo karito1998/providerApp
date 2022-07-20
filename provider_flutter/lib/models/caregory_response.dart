@@ -36,12 +36,12 @@ class CategoryData {
   int? isFeatured;
   String? color;
   String? categoryImage;
-  int? category_id;
-  String? category_extension;
-  String? category_name;
+  int? categoryId;
+  String? categoryExtension;
+  String? categoryName;
   int? services;
 
-  CategoryData(this.id, this.name, this.status, this.description, this.isFeatured, this.color, this.categoryImage, this.category_id, this.category_extension, this.category_name, this.services);
+  CategoryData(this.id, this.name, this.status, this.description, this.isFeatured, this.color, this.categoryImage, this.categoryId, this.categoryExtension, this.categoryName, this.services);
 
   //CategoryData({this.id, this.name, this.status, this.description, this.isFeatured, this.color, this.categoryImage});
 
@@ -53,9 +53,9 @@ class CategoryData {
     isFeatured = json['is_featured'];
     color = json['color'];
     categoryImage = json['category_image'];
-    category_id = json['category_id'];
-    category_extension = json['category_extension'];
-    category_name = json['category_name'];
+    categoryId = json['category_id'];
+    categoryExtension = json['category_extension'];
+    categoryName = json['category_name'];
     services = json['services'];
   }
 
@@ -68,9 +68,9 @@ class CategoryData {
     data['is_featured'] = this.isFeatured;
     data['color'] = this.color;
     data['category_image'] = this.categoryImage;
-    data['category_id'] = this.category_id;
-    data['category_extension'] = this.category_extension;
-    data['category_name'] = this.category_name;
+    data['category_id'] = this.categoryId;
+    data['category_extension'] = this.categoryExtension;
+    data['category_name'] = this.categoryName;
     data['services'] = this.services;
     return data;
   }

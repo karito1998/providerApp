@@ -11,9 +11,8 @@ class ProviderSubscriptionModel {
   int? trialPeriod;
   String? description;
   String? duration;
-  PlanLimitation? plan_limitation;
-  String? plan_type;
-  String? trial_period;
+  PlanLimitation? planLimitation;
+  String? planType;
 
   ProviderSubscriptionModel({
     this.id,
@@ -28,16 +27,15 @@ class ProviderSubscriptionModel {
     this.trialPeriod,
     this.description,
     this.duration,
-    this.plan_limitation,
-    this.plan_type,
-    this.trial_period,
+    this.planLimitation,
+    this.planType,
   });
 
   factory ProviderSubscriptionModel.fromJson(Map<String, dynamic> json) {
     return ProviderSubscriptionModel(
       amount: json['amount'],
       endAt: json['end_at'],
-      plan_limitation: json['plan_limitation'] != null ? PlanLimitation.fromJson(json['plan_limitation']) : null,
+      planLimitation: json['plan_limitation'] != null ? PlanLimitation.fromJson(json['plan_limitation']) : null,
       id: json['id'],
       identifier: json['identifier'],
       planId: json['plan_id'],
@@ -48,7 +46,7 @@ class ProviderSubscriptionModel {
       trialPeriod: json['trial_period'],
       description: json['description'],
       duration: json['duration'],
-      plan_type: json['plan_type'],
+      planType: json['plan_type'],
     );
   }
 
@@ -66,25 +64,25 @@ class ProviderSubscriptionModel {
     data['trial_period'] = this.trialPeriod;
     data['description'] = this.description;
     data['duration'] = this.duration;
-    data['plan_limitation'] = this.plan_limitation;
-    data['plan_type'] = this.plan_type;
-    if (this.plan_limitation != null) {
-      data['plan_limitation'] = this.plan_limitation!.toJson();
+    data['plan_limitation'] = this.planLimitation;
+    data['plan_type'] = this.planType;
+    if (this.planLimitation != null) {
+      data['plan_limitation'] = this.planLimitation!.toJson();
     }
     return data;
   }
 }
 
 class PlanLimitation {
-  LimitData? featured_service;
+  LimitData? featuredService;
   LimitData? handyman;
   LimitData? service;
 
-  PlanLimitation({this.featured_service, this.handyman, this.service});
+  PlanLimitation({this.featuredService, this.handyman, this.service});
 
   factory PlanLimitation.fromJson(Map<String, dynamic> json) {
     return PlanLimitation(
-      featured_service: json['featured_service'] != null ? LimitData.fromJson(json['featured_service']) : null,
+      featuredService: json['featured_service'] != null ? LimitData.fromJson(json['featured_service']) : null,
       handyman: json['handyman'] != null ? LimitData.fromJson(json['handyman']) : null,
       service: json['service'] != null ? LimitData.fromJson(json['service']) : null,
     );
@@ -92,8 +90,8 @@ class PlanLimitation {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.featured_service != null) {
-      data['featured_service'] = this.featured_service!.toJson();
+    if (this.featuredService != null) {
+      data['featured_service'] = this.featuredService!.toJson();
     }
     if (this.handyman != null) {
       data['handyman'] = this.handyman!.toJson();

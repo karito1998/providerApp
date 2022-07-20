@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:handyman_provider_flutter/components/booking_list_component.dart';
-import 'package:handyman_provider_flutter/components/dropdown_status_component.dart';
+import 'package:handyman_provider_flutter/components/app_widgets.dart';
+import 'package:handyman_provider_flutter/components/background_component.dart';
+import 'package:handyman_provider_flutter/components/booking_item_component.dart';
+import 'package:handyman_provider_flutter/components/booking_status_dropdown.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/booking_list_response.dart';
 import 'package:handyman_provider_flutter/models/booking_status_response.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
-import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/model_keys.dart';
-import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 // ignore: must_be_immutable
@@ -42,37 +42,29 @@ class BookingFragmentState extends State<BookingFragment> with SingleTickerProvi
   }
 
   void init() async {
-    LiveStream().on(HandyBoardStream, (index) {
+    LiveStream().on(LIVESTREAM_HANDY_BOARD, (index) {
       if (index == 1) {
         selectedValue = BookingStatusKeys.accept;
         fetchAllBookingList(status: selectedValue);
       }
     });
-    LiveStream().on(handymanAllBooking, (index) {
+    LiveStream().on(LIVESTREAM_HANDYMAN_ALL_BOOKING, (index) {
       if (index == 1) {
         selectedValue = '';
         fetchAllBookingList(status: selectedValue);
       }
     });
 
-    LiveStream().on(LiveStreamUpdateBookings, (p0) {
+    LiveStream().on(LIVESTREAM_UPDATE_BOOKINGS, (p0) {
       page = 1;
       fetchAllBookingList(status: selectedValue);
     });
+
     if (widget.statusType.validate().isNotEmpty) {
       selectedValue = widget.statusType.validate();
     }
 
     fetchAllBookingList(status: selectedValue, loading: true);
-
-    scrollController.addListener(() {
-      if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
-        if (!isLastPage) {
-          page++;
-          fetchAllBookingList(status: selectedValue);
-        }
-      }
-    });
   }
 
   Future<void> fetchAllBookingList({required String status, bool loading = true}) async {
@@ -107,10 +99,9 @@ class BookingFragmentState extends State<BookingFragment> with SingleTickerProvi
 
   @override
   void dispose() {
-    scrollController.dispose();
-
-    LiveStream().dispose(LiveStreamUpdateBookings);
-    LiveStream().dispose(HandyBoardStream);
+    LiveStream().dispose(LIVESTREAM_UPDATE_BOOKINGS);
+    LiveStream().dispose(LIVESTREAM_HANDY_BOARD);
+    LiveStream().dispose(LIVESTREAM_HANDYMAN_ALL_BOOKING);
     super.dispose();
   }
 
@@ -119,37 +110,43 @@ class BookingFragmentState extends State<BookingFragment> with SingleTickerProvi
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async {
-          setState(() {});
           page = 1;
           return await fetchAllBookingList(status: selectedValue, loading: true);
         },
         child: Stack(
           children: [
             if (mainList.isNotEmpty)
-              ListView.builder(
+              AnimatedListView(
                 controller: scrollController,
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 itemCount: mainList.length,
                 shrinkWrap: true,
                 physics: AlwaysScrollableScrollPhysics(),
-                itemBuilder: (_, index) => BookingListComponent(bookingData: mainList[index], index: index),
+                slideConfiguration: SlideConfiguration(verticalOffset: 400, delay: 50.milliseconds),
+                itemBuilder: (_, index) => BookingItemComponent(bookingData: mainList[index], index: index),
+                onNextPage: () {
+                  if (!isLastPage) {
+                    page++;
+                    fetchAllBookingList(status: selectedValue);
+                  }
+                },
               ).paddingOnly(left: 0, right: 0, bottom: 0, top: 76),
             Positioned(
               left: 16,
               right: 16,
               top: 16,
-              child: DropdownStatusComponent(
+              child: BookingStatusDropdown(
                 isValidate: false,
                 statusType: selectedValue,
                 onValueChanged: (BookingStatusResponse value) {
                   page = 1;
-                  scrollController.animToTop();
+                  scrollController.animateTo(0, duration: 1.seconds, curve: Curves.easeOutQuart);
                   fetchAllBookingList(status: value.value.toString());
                 },
               ),
             ),
             Observer(
-              builder: (_) => noDataFound(context).center().visible(!appStore.isLoading && mainList.validate().isEmpty && isApiCalled),
+              builder: (_) => BackgroundComponent().center().visible(!appStore.isLoading && mainList.validate().isEmpty && isApiCalled),
             ),
             Observer(
               builder: (context) => LoaderWidget().visible(appStore.isLoading),

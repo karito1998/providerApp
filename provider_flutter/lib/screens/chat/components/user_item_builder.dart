@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:handyman_provider_flutter/components/last_messege_chat.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/user_data.dart';
+import 'package:handyman_provider_flutter/screens/chat/components/last_messege_chat.dart';
 import 'package:handyman_provider_flutter/screens/chat/user_chat_screen.dart';
-import 'package:handyman_provider_flutter/utils/colors.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class UserItemBuilder extends StatefulWidget {

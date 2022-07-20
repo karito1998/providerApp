@@ -1,26 +1,27 @@
 import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 class LanguageDe extends Languages {
-   //Helpi
+  //Helpi
 
-   @override
-   String lblInvalidEmail = '';
-   @override
-   String lblInvalidUsername = '';
-   @override
-   String lblRetryErr = "";
-   @override
-   String lblWrongErr = "";
-   @override
-   String lblInternetErr = "";
-   @override
-   String lblInvalidEmailSpaces = "";
-   @override
-   String tycRequired = '';
-   @override
-   String signUpSuccess = "";
+  @override
+  String lblInvalidEmail = '';
+  @override
+  String lblInvalidUsername = '';
+  @override
+  String lblRetryErr = "";
+  @override
+  String lblWrongErr = "";
+  @override
+  String lblInternetErr = "";
+  @override
+  String lblInvalidEmailSpaces = "";
+  @override
+  String tycRequired = '';
+  @override
+  String signUpSuccess = "";
 
   //Helpi
+
   @override
   String planAboutToExpire(int days) => 'Your Plan Is About to Expire In $days Days';
 
@@ -43,6 +44,15 @@ class LanguageDe extends Languages {
   String lblHandymanDashboard = 'Handwerker Dashboard';
 
   @override
+  String lblShowingOnly4Handyman = 'Nur 4 Handwerker zeigen';
+
+  @override
+  String lblRecentlyOnlineHandyman = 'Kürzlich Online -Handwerker';
+
+  @override
+  String lblStartDrive = 'Start Laufwerk';
+
+  @override
   String handyman = 'Heimwerker';
 
   @override
@@ -52,10 +62,10 @@ class LanguageDe extends Languages {
   String signUp = 'Anmeldung';
 
   @override
-  String signInTitle = 'Unterschreiben Sie in Ihre \ naccount';
+  String signInTitle = 'In Ihrem Konto unterschreiben';
 
   @override
-  String signUpTitle = 'Melden Sie sich in Ihre \ naccount an';
+  String signUpTitle = 'Melden Sie sich in Ihrem Konto an';
 
   @override
   String hintNameTxt = 'Gib deinen Namen ein';
@@ -202,7 +212,7 @@ class LanguageDe extends Languages {
   String serviceDetail = 'Service-Detail';
 
   @override
-  String confirmationRequestTxt = 'Bist du sicher?';
+  String confirmationRequestTxt = 'Möchten Sie diese Aktion sicher ausführen?';
 
   @override
   String notAvailable = 'Nicht verfügbar';
@@ -805,7 +815,7 @@ class LanguageDe extends Languages {
   String lblGetDirection = "Richtungsrichtung";
 
   @override
-  String lblDeleteTitle = "Oh nein, du bleibst!";
+  String lblDeleteTitle = "Oh nein, du gehst!";
 
   @override
   String lblDeleteSubTitle = "Möchten Sie sich abmelden?";
@@ -965,4 +975,67 @@ class LanguageDe extends Languages {
 
   @override
   String get lblHandymanIsOffline => "Handwerker ist offline";
+
+  @override
+  String get lblDoYouWantToRestore => "Möchten Sie wiederherstellen?";
+
+  @override
+  String get lblDoYouWantToDeleteForcefully => "Möchten Sie zwangsläufig löschen?";
+
+  @override
+  String get lblDoYouWantToDelete => "Möchten Sie löschen?";
+
+  @override
+  String get lblPleaseEnterMobileNumber => "Bitte geben Sie Handynummer ein";
+
+  @override
+  String get lblContactNumberMustBe10DigitOnly => "Die Kontaktnummer muss nur 10 Ziffer sein";
+
+  @override
+  String get lblDangerZone => "Gefahrenzone";
+
+  @override
+  String get lblDeleteAccount => "Konto löschen";
+
+  @override
+  String get lblDeleteAccountConformation => "Ihr Konto wird dauerhaft gelöscht. Ihre Daten werden nicht wieder wiederhergestellt.";
+
+  @override
+  String get lblUnderMaintenance => "Wird gewartet...";
+
+  @override
+  String get lblCatchUpAfterAWhile => "Nach einer Weile aufholen";
+
+  @override
+  String get lblRecheck => "Überprüfung";
+
+  @override
+  String get lblTrialFor => "Versuch für";
+
+  @override
+  String get lblDays => "Tage";
+
+  @override
+  String get lblFreeTrial => "Kostenlose Testphase";
+
+  @override
+  String get lblAtLeastOneImage => "Wählen Sie mindestens ein Bild";
+
+  @override
+  String get lblService => "Service";
+
+  @override
+  String get lblTransactionError => "Transaktionsfehler";
+
+  @override
+  String get lblTransactionCancelled => "Transaktion abgesagt";
+
+  @override
+  String get lblPaymentSuccessfullyDone => "Zahlung erfolgreich erledigt";
+
+  @override
+  String get lblNewUpdate => "Neues Update";
+
+  @override
+  String get lblOptionalUpdateNotify => "Optionales Update Benachrichtigung";
 }

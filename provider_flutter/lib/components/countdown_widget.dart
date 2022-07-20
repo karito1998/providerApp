@@ -11,7 +11,7 @@ class CountdownWidget extends StatefulWidget {
   final String? text;
   final BookingDetailResponse bookingDetailResponse;
 
-  CountdownWidget({this.text, required this.bookingDetailResponse});
+  CountdownWidget({this.text, required this.bookingDetailResponse, Key? key}) : super(key: key);
 
   @override
   _CountdownWidgetState createState() => _CountdownWidgetState();
@@ -30,11 +30,12 @@ class _CountdownWidgetState extends State<CountdownWidget> {
           "${(widget.bookingDetailResponse.bookingDetail!.durationDiff.toInt() + DateTime.now().difference(DateTime.parse(widget.bookingDetailResponse.bookingDetail!.startAt.validate())).inSeconds)}"
               .toInt();
       stopTimer = false;
+
       init();
     } else {
       value = widget.bookingDetailResponse.bookingDetail!.durationDiff.validate().toInt();
     }
-    LiveStream().on(startTimer, (value) {
+    LiveStream().on(LIVESTREAM_START_TIMER, (value) {
       Map<String, dynamic> data = value as Map<String, dynamic>;
 
       if (data['status'] == BookingStatusKeys.hold || data['status'] == BookingStatusKeys.complete) {
@@ -49,7 +50,7 @@ class _CountdownWidgetState extends State<CountdownWidget> {
       //
     });
 
-    LiveStream().on(pauseTimer, (value) {
+    LiveStream().on(LIVESTREAM_PAUSE_TIMER, (value) {
       timer?.cancel();
       //
     });
@@ -94,6 +95,8 @@ class _CountdownWidgetState extends State<CountdownWidget> {
   void dispose() {
     timer?.cancel();
 
+    LiveStream().dispose(LIVESTREAM_START_TIMER);
+    LiveStream().dispose(LIVESTREAM_PAUSE_TIMER);
     super.dispose();
   }
 
@@ -103,9 +106,10 @@ class _CountdownWidgetState extends State<CountdownWidget> {
       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
       color: context.dividerColor,
       child: Row(
+        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(widget.text ?? '${context.translate.lblServiceTotalTime}: ', style: primaryTextStyle(size: 14)),
-          Text(calculateTimer(value), style: boldTextStyle(color: Colors.red, size: 14)),
+          Text(calculateTimer(value), style: boldTextStyle(color: Colors.red, size: 16)),
         ],
       ),
     ).withWidth(context.width()).paddingSymmetric(vertical: 8);

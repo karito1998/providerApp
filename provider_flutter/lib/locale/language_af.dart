@@ -1,26 +1,27 @@
 import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 class LanguageAf extends Languages {
-   //Helpi
+  //Helpi
 
-   @override
-   String lblInvalidEmail = '';
-   @override
-   String lblInvalidUsername = '';
-   @override
-   String lblRetryErr = "";
-   @override
-   String lblWrongErr = "";
-   @override
-   String lblInternetErr = "";
-   @override
-   String lblInvalidEmailSpaces = "";
-   @override
-   String tycRequired = '';
-   @override
-   String signUpSuccess = "";
+  @override
+  String lblInvalidEmail = '';
+  @override
+  String lblInvalidUsername = '';
+  @override
+  String lblRetryErr = "";
+  @override
+  String lblWrongErr = "";
+  @override
+  String lblInternetErr = "";
+  @override
+  String lblInvalidEmailSpaces = "";
+  @override
+  String tycRequired = '';
+  @override
+  String signUpSuccess = "";
 
   //Helpi
+
   @override
   String planAboutToExpire(int days) => 'Your Plan Is About to Expire In $days Days';
 
@@ -43,6 +44,15 @@ class LanguageAf extends Languages {
   String lblHandymanDashboard = 'Handyman Dashboard';
 
   @override
+  String lblShowingOnly4Handyman = 'Wys slegs 4 handyman';
+
+  @override
+  String lblRecentlyOnlineHandyman = 'Onlangs Online Handyman';
+
+  @override
+  String lblStartDrive = 'Begin Drive';
+
+  @override
   String handyman = 'Handyman';
 
   @override
@@ -52,10 +62,10 @@ class LanguageAf extends Languages {
   String signUp = 'Teken aan';
 
   @override
-  String signInTitle = 'Signin in jou \ nccount';
+  String signInTitle = 'Meld u in u rekening aan';
 
   @override
-  String signUpTitle = 'Teken in in jou \ nccount';
+  String signUpTitle = 'Teken in by u rekening';
 
   @override
   String hintNameTxt = 'Gee jou naam';
@@ -202,7 +212,7 @@ class LanguageAf extends Languages {
   String serviceDetail = 'Diensdetail';
 
   @override
-  String confirmationRequestTxt = 'Is jy seker?';
+  String confirmationRequestTxt = 'Wil u seker hierdie aksie uitvoer?';
 
   @override
   String notAvailable = 'Nie beskikbaar nie';
@@ -805,7 +815,7 @@ class LanguageAf extends Languages {
   String lblGetDirection = "Kry rigting";
 
   @override
-  String lblDeleteTitle = "O nee, jou vertrek!";
+  String lblDeleteTitle = "Ag nee, jy vertrek!";
 
   @override
   String lblDeleteSubTitle = "Wil jy inteken?";
@@ -965,4 +975,67 @@ class LanguageAf extends Languages {
 
   @override
   String get lblHandymanIsOffline => "Handyman is vanlyn";
+
+  @override
+  String get lblDoYouWantToRestore => "Wil u herstel?";
+
+  @override
+  String get lblDoYouWantToDeleteForcefully => "Wil u met geweld uitvee?";
+
+  @override
+  String get lblDoYouWantToDelete => "Wil u uitvee?";
+
+  @override
+  String get lblPleaseEnterMobileNumber => "Voer asseblief die mobiele nommer in";
+
+  @override
+  String get lblContactNumberMustBe10DigitOnly => "Kontaknommer moet slegs 10 -syfer wees";
+
+  @override
+  String get lblDangerZone => "Gevaarsone";
+
+  @override
+  String get lblDeleteAccount => "Verwyder rekening";
+
+  @override
+  String get lblDeleteAccountConformation => "U rekening sal permanent verwyder word. U data sal nie weer herstel word nie.";
+
+  @override
+  String get lblUnderMaintenance => "Onder onderhoud ...";
+
+  @override
+  String get lblCatchUpAfterAWhile => "Haal na 'n rukkie in";
+
+  @override
+  String get lblRecheck => "Nagaan";
+
+  @override
+  String get lblTrialFor => "Verhoor vir";
+
+  @override
+  String get lblDays => "Dae";
+
+  @override
+  String get lblFreeTrial => "Gratis toets";
+
+  @override
+  String get lblAtLeastOneImage => "Kies een-oog op een beeld";
+
+  @override
+  String get lblService => "Versiening";
+
+  @override
+  String get lblTransactionError => "Transaksiefout";
+
+  @override
+  String get lblTransactionCancelled => "Transaksie gekanselleer";
+
+  @override
+  String get lblPaymentSuccessfullyDone => "Betaling suksesvol gedoen";
+
+  @override
+  String get lblNewUpdate => "Nuwe opdatering";
+
+  @override
+  String get lblOptionalUpdateNotify => "Opsionele opdatering kennisgewing";
 }

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:handyman_provider_flutter/components/cached_image_widget.dart';
+import 'package:handyman_provider_flutter/screens/zoom_image_screen.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class ImageBorder extends StatelessWidget {
-  final Widget child;
+  final String src;
+  final double height;
+  final double? width;
 
-  ImageBorder({required this.child});
+  ImageBorder({required this.src, required this.height, this.width});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +17,15 @@ class ImageBorder extends StatelessWidget {
         border: Border.all(color: context.dividerColor, width: 1),
         shape: BoxShape.circle,
       ),
-      child: child,
+      child: CachedImageWidget(
+        url: src,
+        circle: true,
+        height: height,
+        width: width,
+        fit: BoxFit.cover,
+      ).onTap(() {
+        if (src.isNotEmpty) ZoomImageScreen(galleryImages: [src], index: 0).launch(context);
+      }),
     );
   }
 }

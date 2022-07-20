@@ -1,57 +1,192 @@
 import 'dart:convert';
 
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart' as custom_tabs;
 import 'package:geocoding/geocoding.dart';
 import 'package:handyman_provider_flutter/components/html_widget.dart';
+import 'package:handyman_provider_flutter/components/new_update_dialog.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/booking_detail_response.dart';
 import 'package:handyman_provider_flutter/models/booking_list_response.dart';
 import 'package:handyman_provider_flutter/models/dashboard_response.dart';
+import 'package:handyman_provider_flutter/models/remote_config_data_model.dart';
 import 'package:handyman_provider_flutter/models/service_model.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/model_keys.dart';
-import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'colors.dart';
-import 'images.dart';
+//region App Default Settings
+void defaultSettings() {
+  passwordLengthGlobal = 6;
+  appButtonBackgroundColorGlobal = primaryColor;
+  defaultRadius = 12;
+  defaultAppButtonTextColorGlobal = Colors.white;
+  defaultElevation = 0;
+  defaultBlurRadius = 0;
+  defaultSpreadRadius = 0;
+}
+//endregion
+
+//region Set User Values when user is logged In
+Future<void> setLoginValues() async {
+  if (appStore.isLoggedIn) {
+    await appStore.setUserId(getIntAsync(USER_ID), isInitializing: true);
+    await appStore.setFirstName(getStringAsync(FIRST_NAME), isInitializing: true);
+    await appStore.setLastName(getStringAsync(LAST_NAME), isInitializing: true);
+    await appStore.setUserEmail(getStringAsync(USER_EMAIL), isInitializing: true);
+    await appStore.setUserName(getStringAsync(USERNAME), isInitializing: true);
+    await appStore.setContactNumber(getStringAsync(CONTACT_NUMBER), isInitializing: true);
+    await appStore.setUserProfile(getStringAsync(PROFILE_IMAGE), isInitializing: true);
+    await appStore.setCountryId(getIntAsync(COUNTRY_ID), isInitializing: true);
+    await appStore.setStateId(getIntAsync(STATE_ID), isInitializing: true);
+    await appStore.setUId(getStringAsync(UID), isInitializing: true);
+    await appStore.setCityId(getIntAsync(CITY_ID), isInitializing: true);
+    await appStore.setUserType(getStringAsync(USER_TYPE), isInitializing: true);
+    await appStore.setServiceAddressId(getIntAsync(SERVICE_ADDRESS_ID), isInitializing: true);
+    await appStore.setProviderId(getIntAsync(PROVIDER_ID), isInitializing: true);
+
+    await appStore.setCurrencyCode(getStringAsync(CURRENCY_COUNTRY_CODE), isInitializing: true);
+    await appStore.setCurrencyCountryId(getStringAsync(CURRENCY_COUNTRY_ID), isInitializing: true);
+    await appStore.setCurrencySymbol(getStringAsync(CURRENCY_COUNTRY_SYMBOL), isInitializing: true);
+    await appStore.setCreatedAt(getStringAsync(CREATED_AT), isInitializing: true);
+    await appStore.setTotalBooking(getIntAsync(TOTAL_BOOKING), isInitializing: true);
+
+    await appStore.setToken(getStringAsync(TOKEN), isInitializing: true);
+
+    await appStore.setTester(getBoolAsync(IS_TESTER), isInitializing: true);
+    await appStore.setPrivacyPolicy(getStringAsync(PRIVACY_POLICY), isInitializing: true);
+    await appStore.setTermConditions(getStringAsync(TERM_CONDITIONS), isInitializing: true);
+    await appStore.setInquiryEmail(getStringAsync(INQUIRY_EMAIL), isInitializing: true);
+    await appStore.setHelplineNumber(getStringAsync(HELPLINE_NUMBER), isInitializing: true);
+    await setSaveSubscription();
+
+    await appStore.setDesignation(getStringAsync(DESIGNATION), isInitializing: true);
+  }
+}
+
+Future<void> setSaveSubscription({int? isSubscribe, String? title, String? identifier, String? endAt}) async {
+  await appStore.setPlanTitle(title ?? getStringAsync(PLAN_TITLE), isInitializing: title == null);
+  await appStore.setIdentifier(identifier ?? getStringAsync(PLAN_IDENTIFIER), isInitializing: identifier == null);
+  await appStore.setPlanEndDate(endAt ?? getStringAsync(PLAN_END_DATE), isInitializing: endAt == null);
+  await appStore.setPlanSubscribeStatus(isSubscribe.validate() == 1, isInitializing: isSubscribe == null);
+}
+
+//endregion
+
+//region OneSignal Setup
+setOneSignal() async {
+  OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
+
+  await OneSignal.shared.setAppId(ONESIGNAL_APP_ID).then((value) {
+    OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
+      print("Accepted permission: $accepted");
+    });
+
+    OneSignal.shared.setNotificationWillShowInForegroundHandler((OSNotificationReceivedEvent? event) {
+      return event?.complete(event.notification);
+    });
+
+    OneSignal.shared.getDeviceState().then((value) async {
+      if (value!.userId.validate().isNotEmpty) await setValue(PLAYERID, value.userId.validate());
+    });
+
+    OneSignal.shared.disablePush(false);
+
+    OneSignal.shared.consentGranted(true);
+    OneSignal.shared.requiresUserPrivacyConsent();
+    OneSignal.shared.consentGranted(true);
+    OneSignal.shared.promptUserForPushNotificationPermission();
+
+    OneSignal.shared.setSubscriptionObserver((changes) async {
+      if (!changes.to.userId.isEmptyOrNull) await setValue(PLAYERID, changes.to.userId);
+    });
+  });
+}
+
+//endregion
+
+Decoration cardDecoration(BuildContext context, {Color? color, bool showBorder = true}) {
+  return boxDecorationWithRoundedCorners(
+    borderRadius: radius(),
+    backgroundColor: color ?? context.scaffoldBackgroundColor,
+    border: showBorder ? Border.all(color: context.dividerColor, width: 1.0) : null,
+  );
+}
+
+Decoration categoryDecoration(BuildContext context, {Color? color, bool showBorder = true}) {
+  return boxDecorationWithRoundedCorners(
+    borderRadius: radius(),
+    backgroundColor: color ?? context.cardColor,
+    border: showBorder ? Border.all(color: context.dividerColor, width: 1.0) : null,
+  );
+}
+
+int getRemainingPlanDays() {
+  if (appStore.planEndDate.isNotEmpty) {
+    var now = DateTime.now();
+    DateTime date = DateTime(now.year, now.month, now.day);
+    DateTime endAt = DateFormat(DATE_FORMAT_7).parse(appStore.planEndDate);
+
+    return (date.difference(endAt).inDays).abs();
+  } else {
+    return 0;
+  }
+}
 
 List<LanguageDataModel> languageList() {
-  if (getStringAsync(SERVER_LANGUAGES).isNotEmpty) {
+  return [
+    LanguageDataModel(id: 1, name: 'Ingles', languageCode: 'en', fullLanguageCode: 'en US', flag: 'images/flag/ic_us.png'), //English
+    LanguageDataModel(id: 2, name: 'Hindi', languageCode: 'hi', fullLanguageCode: 'hi IN', flag: 'images/flag/ic_india.png'),
+    LanguageDataModel(id: 3, name: 'Guyarati', languageCode: 'gu', fullLanguageCode: 'gu IN', flag: 'images/flag/ic_india.png'), //Gujarati
+    LanguageDataModel(id: 4, name: 'Afrikáans', languageCode: 'af', fullLanguageCode: 'ar AF', flag: 'images/flag/ic_ar.png'),//Afrikaans
+    LanguageDataModel(id: 5, name: 'Arabe', languageCode: 'ar', fullLanguageCode: 'ar AR', flag: 'images/flag/ic_ar.png'), //Arabic
+    LanguageDataModel(id: 6, name: 'Neerlandés', languageCode: 'nl', fullLanguageCode: 'nl NL', flag: 'images/flag/ic_nl.png'), //Dutch
+    LanguageDataModel(id: 7, name: 'Francés', languageCode: 'fr', fullLanguageCode: 'fr FR', flag: 'images/flag/ic_fr.png'), //French
+    LanguageDataModel(id: 8, name: 'Aleman', languageCode: 'de', fullLanguageCode: 'de DE', flag: 'images/flag/ic_de.png'), //German
+    LanguageDataModel(id: 9, name: 'Indonesio', languageCode: 'id', fullLanguageCode: 'id ID', flag: 'images/flag/ic_id.png'),//Indonesian
+    LanguageDataModel(id: 10, name: 'Portugués', languageCode: 'pt', fullLanguageCode: 'pt PT', flag: 'images/flag/ic_pt.png'),//Portugal
+    LanguageDataModel(id: 11, name: 'Español ', languageCode: 'es', fullLanguageCode: 'es ES', flag: 'images/flag/ic_es.png'),//Spanish
+    LanguageDataModel(id: 12, name: 'Turco', languageCode: 'tr', fullLanguageCode: 'tr TR', flag: 'images/flag/ic_tr.png'),//Turkish
+    LanguageDataModel(id: 13, name: 'Vietnamita', languageCode: 'vi', fullLanguageCode: 'vi VI', flag: 'images/flag/ic_vi.png'),//Vietnam
+    LanguageDataModel(id: 14, name: 'Albanés', languageCode: 'sq', fullLanguageCode: 'sq SQ', flag: 'images/flag/ic_arbanian.png'),//Albanian
+  ];
+
+  /*if (getStringAsync(SERVER_LANGUAGES).isNotEmpty) {
     Iterable it = jsonDecode(getStringAsync(SERVER_LANGUAGES));
     var res = it.map((e) => LanguageOption.fromJson(e)).toList();
 
     localeLanguageList.clear();
 
     res.forEach((element) {
-      localeLanguageList.add(LanguageDataModel(languageCode: element.id.validate().toString(), flag: element.flag_image, name: element.title));
+      localeLanguageList.add(LanguageDataModel(languageCode: element.id.validate().toString(), flag: element.flagImage, name: element.title));
     });
 
     return localeLanguageList;
   } else {
     return [
-       LanguageDataModel(id: 1, name: 'Ingles', languageCode: 'en', fullLanguageCode: 'en-US', flag: 'images/flag/ic_us.png'), //English
-          LanguageDataModel(id: 2, name: 'Hindi', languageCode: 'hi', fullLanguageCode: 'hi-IN', flag: 'images/flag/ic_india.png'),
-          LanguageDataModel(id: 3, name: 'Guyaratí', languageCode: 'gu', fullLanguageCode: 'gu-IN', flag: 'images/flag/ic_india.png'), //Gujarati
-          LanguageDataModel(id: 4, name: 'Afrikáans', languageCode: 'af', fullLanguageCode: 'ar-AF', flag: 'images/flag/ic_ar.png'),//Afrikaans
-          LanguageDataModel(id: 5, name: 'Árabe', languageCode: 'ar', fullLanguageCode: 'ar-AR', flag: 'images/flag/ic_ar.png'), //Arabic
-          LanguageDataModel(id: 6, name: 'Neerlandés', languageCode: 'nl', fullLanguageCode: 'nl-NL', flag: 'images/flag/ic_nl.png'), //Dutch
-          LanguageDataModel(id: 7, name: 'Francés', languageCode: 'fr', fullLanguageCode: 'fr-FR', flag: 'images/flag/ic_fr.png'), //French
-          LanguageDataModel(id: 8, name: 'Alemán', languageCode: 'de', fullLanguageCode: 'de-DE', flag: 'images/flag/ic_de.png'), //German
-          LanguageDataModel(id: 9, name: 'Indonesio', languageCode: 'id', fullLanguageCode: 'id-ID', flag: 'images/flag/ic_id.png'),//Indonesian
-          LanguageDataModel(id: 10, name: 'Portugués', languageCode: 'pt', fullLanguageCode: 'pt-PT', flag: 'images/flag/ic_pt.png'),//Portugal
-          LanguageDataModel(id: 11, name: 'Español ', languageCode: 'es', fullLanguageCode: 'es-ES', flag: 'images/flag/ic_es.png'),//Spanish
-          LanguageDataModel(id: 12, name: 'Turco', languageCode: 'tr', fullLanguageCode: 'tr-TR', flag: 'images/flag/ic_tr.png'),//Turkish
-          LanguageDataModel(id: 13, name: 'Vietnamita', languageCode: 'vi', fullLanguageCode: 'vi-VI', flag: 'images/flag/ic_vi.png'),//Vietnam
-          LanguageDataModel(id: 14, name: 'Albanés', languageCode: 'sq', fullLanguageCode: 'sq-SQ', flag: 'images/flag/ic_arbanian.png'),//Albanian
+      LanguageDataModel(id: 1, name: 'Ingles', languageCode: 'en', fullLanguageCode: 'en US', flag: 'images/flag/ic_us.png'), //English
+           LanguageDataModel(id: 2, name: 'Hindi', languageCode: 'hi', fullLanguageCode: 'hi IN', flag: 'images/flag/ic_india.png'),
+           LanguageDataModel(id: 3, name: 'GuyaratÃ­', languageCode: 'gu', fullLanguageCode: 'gu IN', flag: 'images/flag/ic_india.png'), //Gujarati
+           LanguageDataModel(id: 4, name: 'AfrikÃ¡ans', languageCode: 'af', fullLanguageCode: 'ar AF', flag: 'images/flag/ic_ar.png'),//Afrikaans
+           LanguageDataModel(id: 5, name: 'Ãrabe', languageCode: 'ar', fullLanguageCode: 'ar AR', flag: 'images/flag/ic_ar.png'), //Arabic
+           LanguageDataModel(id: 6, name: 'NeerlandÃ©s', languageCode: 'nl', fullLanguageCode: 'nl NL', flag: 'images/flag/ic_nl.png'), //Dutch
+           LanguageDataModel(id: 7, name: 'FrancÃ©s', languageCode: 'fr', fullLanguageCode: 'fr FR', flag: 'images/flag/ic_fr.png'), //French
+           LanguageDataModel(id: 8, name: 'AlemÃ¡n', languageCode: 'de', fullLanguageCode: 'de DE', flag: 'images/flag/ic_de.png'), //German
+           LanguageDataModel(id: 9, name: 'Indonesio', languageCode: 'id', fullLanguageCode: 'id ID', flag: 'images/flag/ic_id.png'),//Indonesian
+           LanguageDataModel(id: 10, name: 'PortuguÃ©s', languageCode: 'pt', fullLanguageCode: 'pt PT', flag: 'images/flag/ic_pt.png'),//Portugal
+           LanguageDataModel(id: 11, name: 'EspaÃ±ol ', languageCode: 'es', fullLanguageCode: 'es ES', flag: 'images/flag/ic_es.png'),//Spanish
+           LanguageDataModel(id: 12, name: 'Turco', languageCode: 'tr', fullLanguageCode: 'tr TR', flag: 'images/flag/ic_tr.png'),//Turkish
+           LanguageDataModel(id: 13, name: 'Vietnamita', languageCode: 'vi', fullLanguageCode: 'vi VI', flag: 'images/flag/ic_vi.png'),//Vietnam
+           LanguageDataModel(id: 14, name: 'AlbanÃ©s', languageCode: 'sq', fullLanguageCode: 'sq SQ', flag: 'images/flag/ic_arbanian.png'),//Albanian
     ];
-  }
+  }*/
 }
 
 InputDecoration inputDecoration(BuildContext context, {Widget? prefixIcon, String? hint, Color? fillColor, String? counterText, double? borderRadius}) {
@@ -102,17 +237,6 @@ void setCurrencies({required List<Configurations>? value, List<PaymentSetting>? 
 
 String parseHtmlString(String? htmlString) {
   return parse(parse(htmlString).body!.text).documentElement!.text;
-}
-
-Widget noDataFound(BuildContext context) {
-  return Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      cachedImage(notDataFoundImg, height: 200, width: 200),
-      8.height,
-      Text(context.translate.noDataFound, style: boldTextStyle()),
-    ],
-  );
 }
 
 String formatDate(String? dateTime, {String format = DATE_FORMAT_1}) {
@@ -214,7 +338,7 @@ calculateLatLong(String address) async {
   }
 }
 
-bool get isRTL => RTLLanguage.contains(appStore.selectedLanguageCode);
+bool get isRTL => RTL_LANGUAGES.contains(appStore.selectedLanguageCode);
 
 num calculateTotalAmount({
   required num servicePrice,
@@ -222,7 +346,7 @@ num calculateTotalAmount({
   required num? serviceDiscountPercent,
   CouponData? couponData,
   ServiceData? detail,
-  required List<Taxes>? taxes,
+  required List<TaxData>? taxes,
 }) {
   double totalAmount = 0.0;
   double discountPrice = 0.0;
@@ -234,7 +358,7 @@ num calculateTotalAmount({
       detail.couponId = couponData.id.toString();
       detail.appliedCouponData = couponData;
     }
-    if (couponData.discount_type == DiscountTypeFixed) {
+    if (couponData.discountType == DISCOUNT_TYPE_FIXED) {
       totalAmount = totalAmount - couponData.discount.validate();
       couponDiscountAmount = couponData.discount.validate().toDouble();
     } else {
@@ -277,15 +401,11 @@ String calculateExperience() {
   return exp.toString();
 }
 
-bool isCommissionTypePercent(String? type) => type.validate() == CommissionTypePercent;
+bool isCommissionTypePercent(String? type) => type.validate() == COMMISSION_TYPE_PERCENT;
 
-bool get isUserTypeHandyman => appStore.userType == UserTypeHandyman;
+bool get isUserTypeHandyman => appStore.userType == USER_TYPE_HANDYMAN;
 
-bool get isUserTypeProvider => appStore.userType == UserTypeProvider;
-
-Widget circleImage({required String image, double size = 24}) {
-  return cachedImage(image, width: size, height: size, fit: BoxFit.cover).cornerRadiusWithClipRRect(90);
-}
+bool get isUserTypeProvider => appStore.userType == USER_TYPE_PROVIDER;
 
 void launchUrlCustomTab(String? url) {
   if (url.validate().isNotEmpty) {
@@ -392,13 +512,16 @@ Brightness getStatusBrightness({required bool val}) {
   return val ? Brightness.light : Brightness.dark;
 }
 
-String getPaymentStatusText(String? status) {
-  if (status == SERVICE_PAYMENT_STATUS_PAID) {
-    return 'Paid';
-  } else if (status == SERVICE_PAYMENT_STATUS_PENDING) {
+String getPaymentStatusText(String? status, String? method) {
+  if (status!.isEmpty) {
     return 'Pending';
-  } else if (status != null) {
+  } else if (status == SERVICE_PAYMENT_STATUS_PAID) {
+    return 'Paid';
+  } else if (status == SERVICE_PAYMENT_STATUS_PENDING && method == PAYMENT_METHOD_COD) {
     return 'Pending Approval';
+  }
+  if (status == SERVICE_PAYMENT_STATUS_PENDING) {
+    return 'Pending';
   } else {
     return "";
   }
@@ -415,7 +538,7 @@ String getReasonText(BuildContext context, String val) {
   return '';
 }
 
-bool get isIqonicProduct => currentPackageName == packageName;
+bool get isIqonicProduct => currentPackageName == APP_PACKAGE_NAME;
 
 void checkIfLink(BuildContext context, String value, {String? title}) {
   String temp = parseHtmlString(value.validate());
@@ -433,7 +556,7 @@ void checkIfLink(BuildContext context, String value, {String? title}) {
 }
 
 String buildPaymentStatusWithMethod(String status, String method) {
-  return '${getPaymentStatusText(status)}${status == SERVICE_PAYMENT_STATUS_PAID ? ' by $method' : ''}';
+  return '${getPaymentStatusText(status, method)}${status == SERVICE_PAYMENT_STATUS_PAID ? ' by $method' : ''}';
 }
 
 Color getRatingBarColor(int rating) {
@@ -448,10 +571,53 @@ Color getRatingBarColor(int rating) {
   }
 }
 
+Future<FirebaseRemoteConfig> setupFirebaseRemoteConfig() async {
+  final FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.instance;
+
+  remoteConfig.setConfigSettings(RemoteConfigSettings(fetchTimeout: Duration.zero, minimumFetchInterval: Duration.zero));
+  await remoteConfig.fetch();
+  await remoteConfig.fetchAndActivate();
+
+  remoteConfigDataModel = RemoteConfigDataModel.fromJson(jsonDecode(remoteConfig.getString(PROVIDER_CHANGE_LOG)));
+
+  setValue(PROVIDER_CHANGE_LOG, remoteConfig.getString(PROVIDER_CHANGE_LOG));
+
+  if (isIOS) {
+    await setValue(HAS_IN_REVIEW, remoteConfig.getBool(HAS_IN_APP_STORE_REVIEW));
+  } else if (isAndroid) {
+    await setValue(HAS_IN_REVIEW, remoteConfig.getBool(HAS_IN_PLAY_STORE_REVIEW));
+  }
+
+  return remoteConfig;
+}
+
 void ifNotTester(BuildContext context, VoidCallback callback) {
   if (!appStore.isTester) {
     callback.call();
   } else {
     toast(context.translate.lblUnAuthorized);
+  }
+}
+
+void forceUpdate(BuildContext context) async {
+  showInDialog(
+    context,
+    contentPadding: EdgeInsets.zero,
+    barrierDismissible: !remoteConfigDataModel.isForceUpdate.validate(),
+    builder: (_) {
+      return NewUpdateDialog();
+    },
+  );
+}
+
+Future<void> showForceUpdateDialog(BuildContext context) async {
+  if (getBoolAsync(UPDATE_NOTIFY, defaultValue: true)) {
+    getPackageInfo().then((value) {
+      if (isAndroid && remoteConfigDataModel.android!.versionCode.validate().toInt() > value.versionCode.validate().toInt()) {
+        forceUpdate(context);
+      } else if (isIOS && remoteConfigDataModel.iOS!.versionCode.validate() != value.versionCode.validate()) {
+        forceUpdate(context);
+      }
+    });
   }
 }

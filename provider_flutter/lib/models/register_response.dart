@@ -22,15 +22,15 @@ class RegisterResponse {
 }
 
 class RegisterData {
-  String? api_token;
-  String? contact_number;
-  String? display_name;
+  String? apiToken;
+  String? contactNumber;
+  String? displayName;
   String? email;
-  String? first_name;
-  String? last_name;
-  String? user_type;
+  String? firstName;
+  String? lastName;
+  String? userType;
   String? username;
-  int? provider_id;
+  int? providerId;
   var status;
   String? address;
   String? uid;
@@ -38,16 +38,16 @@ class RegisterData {
   int? id;
 
   RegisterData({
-    this.api_token,
-    this.contact_number,
-    this.display_name,
+    this.apiToken,
+    this.contactNumber,
+    this.displayName,
     this.email,
     this.password,
-    this.first_name,
-    required this.last_name,
-    this.user_type,
+    this.firstName,
+    required this.lastName,
+    this.userType,
     required this.username,
-    this.provider_id,
+    this.providerId,
     this.status,
     this.address,
     this.uid,
@@ -56,15 +56,15 @@ class RegisterData {
 
   factory RegisterData.fromJson(Map<String, dynamic> json) {
     return RegisterData(
-      api_token: json['api_token'],
-      contact_number: json['contact_number'],
-      display_name: json['display_name'],
+      apiToken: json['api_token'],
+      contactNumber: json['contact_number'],
+      displayName: json['display_name'],
       email: json['email'],
-      first_name: json['first_name'],
-      last_name: json['last_name'],
-      user_type: json['user_type'],
+      firstName: json['first_name'],
+      lastName: json['last_name'],
+      userType: json['user_type'],
       username: json['username'],
-      provider_id: json['provider_id'],
+      providerId: json['provider_id'],
       status: json['status'],
       address: json['address'],
       uid: json['uid'],
@@ -74,15 +74,15 @@ class RegisterData {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['api_token'] = this.api_token;
-    data['contact_number'] = this.contact_number;
-    data['display_name'] = this.display_name;
+    data['api_token'] = this.apiToken;
+    data['contact_number'] = this.contactNumber;
+    data['display_name'] = this.displayName;
     data['email'] = this.email;
-    data['first_name'] = this.first_name;
-    data['last_name'] = this.last_name;
-    data['user_type'] = this.user_type;
+    data['first_name'] = this.firstName;
+    data['last_name'] = this.lastName;
+    data['user_type'] = this.userType;
     data['username'] = this.username;
-    data['provider_id'] = this.provider_id;
+    data['provider_id'] = this.providerId;
     data['status'] = this.status;
     data['address'] = this.address;
     data['uid'] = this.uid;

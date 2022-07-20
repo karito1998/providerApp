@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:handyman_provider_flutter/components/app_widgets.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
-import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/model_keys.dart';
-import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
@@ -45,9 +45,9 @@ class ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
           pop();
         }).catchError((e) {
-        if(e.toString() == "We can't find a user with that email address." )
-                  toast("No pudimos encontrar un usuario con este correo electronico", print: true);
-                else
+          if(e.toString() == "We can't find a user with that email address." )
+                            toast("No pudimos encontrar un usuario con este correo electronico", print: true);
+                         else
           appStore.setLoading(false);
           toast(e.toString(), print: true);
         });

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:handyman_provider_flutter/components/app_widgets.dart';
 import 'package:handyman_provider_flutter/components/back_widget.dart';
+import 'package:handyman_provider_flutter/components/background_component.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/chat_message_model.dart';
 import 'package:handyman_provider_flutter/models/user_data.dart';
 import 'package:handyman_provider_flutter/networks/firebase_services/chat_messages_service.dart';
-import 'package:handyman_provider_flutter/screens/chat/widget/chat_item_widget.dart';
-import 'package:handyman_provider_flutter/utils/colors.dart';
+import 'package:handyman_provider_flutter/screens/chat/components/chat_item_widget.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
-import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 
@@ -114,10 +115,10 @@ class _UserChatScreenState extends State<UserChatScreen> {
     await chatMessageService.addMessage(data).then((value) async {
       log("--Message Successfully Added--");
 
-      /// Send Notification
+   /*   /// Send Notification
       notificationService.sendPushNotifications(getStringAsync(DISPLAY_NAME), messageCont.text, receiverPlayerId: widget.receiverUser.playerId).catchError((e) {
         log("Notification Error ${e.toString()}");
-      });
+      });*/
 
       await chatMessageService.addMessageToDb(senderRef: value, chatData: data, sender: senderUser, receiverUser: widget.receiverUser).then((value) {
         //
@@ -185,7 +186,7 @@ class _UserChatScreenState extends State<UserChatScreen> {
                 onEmpty: Text(context.translate.lblNoChatFound, style: boldTextStyle(size: 20)).center(),
                 shrinkWrap: true,
                 onError: (e) {
-                  return noDataFound(context);
+                  return BackgroundComponent();
                 },
                 itemBuilderType: PaginateBuilderType.listView,
                 itemBuilder: (context, snap, index) {

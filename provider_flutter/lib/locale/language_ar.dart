@@ -1,29 +1,30 @@
 import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 class LanguageAr extends Languages {
-   //Helpi
+  //Helpi
 
-   @override
-   String lblInvalidEmail = '';
-   @override
-   String lblInvalidUsername = '';
-   @override
-   String lblRetryErr = "";
-   @override
-   String lblWrongErr = "";
-   @override
-   String lblInternetErr = "";
-   @override
-   String lblInvalidEmailSpaces = "";
-   @override
-   String tycRequired = '';
-   @override
-   String signUpSuccess = "";
+  @override
+  String lblInvalidEmail = '';
+  @override
+  String lblInvalidUsername = '';
+  @override
+  String lblRetryErr = "";
+  @override
+  String lblWrongErr = "";
+  @override
+  String lblInternetErr = "";
+  @override
+  String lblInvalidEmailSpaces = "";
+  @override
+  String tycRequired = '';
+  @override
+  String signUpSuccess = "";
 
   //Helpi
 
   @override
   String planAboutToExpire(int days) => 'Your Plan Is About to Expire In $days Days';
+
 
   @override
   String appName = 'مزود';
@@ -44,6 +45,15 @@ class LanguageAr extends Languages {
   String lblHandymanDashboard = 'لوحة القيادة العالية';
 
   @override
+  String lblShowingOnly4Handyman = 'يظهر فقط 4امان';
+
+  @override
+  String lblRecentlyOnlineHandyman = 'مؤخرا على الانترنت الماهر';
+
+  @override
+  String lblStartDrive = 'ابدأ القيادة';
+
+  @override
   String handyman = 'عامل يدوي';
 
   @override
@@ -53,10 +63,10 @@ class LanguageAr extends Languages {
   String signUp = 'اشتراك';
 
   @override
-  String signInTitle = 'signin في \ naccount الخاص بك';
+  String signInTitle = 'تسجيل الدخول إلى حسابك';
 
   @override
-  String signUpTitle = 'الاشتراك في \ Naccount الخاص بك';
+  String signUpTitle = 'اشترك في حسابك';
 
   @override
   String hintNameTxt = 'أدخل أسمك';
@@ -203,7 +213,7 @@ class LanguageAr extends Languages {
   String serviceDetail = 'تفاصيل الخدمة';
 
   @override
-  String confirmationRequestTxt = 'هل أنت متأكد؟';
+  String confirmationRequestTxt = 'هل أنت متأكد من أن تنفيذ هذا الإجراء؟';
 
   @override
   String notAvailable = 'غير متوفر';
@@ -806,7 +816,7 @@ class LanguageAr extends Languages {
   String lblGetDirection = "احصل على اتجاه";
 
   @override
-  String lblDeleteTitle = "أوه لا، تغادر!";
+  String lblDeleteTitle = "أوه لا ، أنت تغادر!";
 
   @override
   String lblDeleteSubTitle = "هل ترغب بالخروج؟";
@@ -966,4 +976,67 @@ class LanguageAr extends Languages {
 
   @override
   String get lblHandymanIsOffline => "هانيدان غير متصل";
+
+  @override
+  String get lblDoYouWantToRestore => "هل تريد استعادة؟";
+
+  @override
+  String get lblDoYouWantToDeleteForcefully => "هل تريد الحذف بقوة؟";
+
+  @override
+  String get lblDoYouWantToDelete => "هل تريد أن تحذف؟";
+
+  @override
+  String get lblPleaseEnterMobileNumber => "الرجاء إدخال رقم الهاتف المحمول";
+
+  @override
+  String get lblContactNumberMustBe10DigitOnly => "يجب أن يكون رقم الاتصال 10 أرقام فقط";
+
+  @override
+  String get lblDangerZone => "منطقة الخطر";
+
+  @override
+  String get lblDeleteAccount => "حذف الحساب";
+
+  @override
+  String get lblDeleteAccountConformation => "سيتم حذف حسابك بشكل دائم. لن تتم استعادة بياناتك مرة أخرى.";
+
+  @override
+  String get lblUnderMaintenance => "تحت الصيانة...";
+
+  @override
+  String get lblCatchUpAfterAWhile => "اللحاق بعد فترة من الوقت";
+
+  @override
+  String get lblRecheck => "إعادة فحص";
+
+  @override
+  String get lblTrialFor => "محاكمة";
+
+  @override
+  String get lblDays => "أيام";
+
+  @override
+  String get lblFreeTrial => "تجربة مجانية";
+
+  @override
+  String get lblAtLeastOneImage => "اختر صورة واحدة على at-east";
+
+  @override
+  String get lblService => "خدمة";
+
+  @override
+  String get lblTransactionError => "خطأ في المعاملة";
+
+  @override
+  String get lblTransactionCancelled => "تم إلغاء المعاملة";
+
+  @override
+  String get lblPaymentSuccessfullyDone => "الدفع بنجاح";
+
+  @override
+  String get lblNewUpdate => "تحديث جديد";
+
+  @override
+  String get lblOptionalUpdateNotify => "تحديث اختياري إخطار";
 }

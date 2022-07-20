@@ -2,13 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:handyman_provider_flutter/auth/sign_in_screen.dart';
-import 'package:handyman_provider_flutter/handyman/screen/dashboard/handyman_dashboard_screen.dart';
+import 'package:handyman_provider_flutter/handyman/handyman_dashboard_screen.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/login_response.dart';
 import 'package:handyman_provider_flutter/models/register_response.dart';
 import 'package:handyman_provider_flutter/models/user_data.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
-import 'package:handyman_provider_flutter/provider/dashboard/dashboard_screen.dart';
+import 'package:handyman_provider_flutter/provider/provider_dashboard_screen.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -35,13 +35,13 @@ class AuthServices {
           userModel: UserData(
             id: registerData.id.validate(),
             uid: value.user!.uid,
-            apiToken: registerData.api_token,
-            contactNumber: registerData.contact_number,
-            displayName: registerData.display_name,
+            apiToken: registerData.apiToken,
+            contactNumber: registerData.contactNumber,
+            displayName: registerData.displayName,
             email: registerData.email,
-            firstName: registerData.first_name,
-            lastName: registerData.last_name,
-            userType: registerData.user_type,
+            firstName: registerData.firstName,
+            lastName: registerData.lastName,
+            userType: registerData.userType,
             username: registerData.username,
           ),
           isLogin: true,
@@ -53,19 +53,19 @@ class AuthServices {
 
     if (userCredential.user != null) {
       User currentUser = userCredential.user!;
-      String displayName = registerData.first_name.validate() + registerData.last_name.validate();
+      String displayName = registerData.firstName.validate() + registerData.lastName.validate();
 
       UserData userModel = UserData()
         ..id = registerData.id
-        ..apiToken = registerData.api_token.validate()
+        ..apiToken = registerData.apiToken.validate()
         ..uid = currentUser.uid
         ..email = currentUser.email
-        ..contactNumber = registerData.contact_number
-        ..firstName = registerData.first_name.validate()
-        ..lastName = registerData.last_name.validate()
+        ..contactNumber = registerData.contactNumber
+        ..firstName = registerData.firstName.validate()
+        ..lastName = registerData.lastName.validate()
         ..username = registerData.username.validate()
         ..displayName = displayName
-        ..userType = registerData.user_type.validate()
+        ..userType = registerData.userType.validate()
         ..createdAt = Timestamp.now().toDate().toString()
         ..updatedAt = Timestamp.now().toDate().toString()
         ..playerId = getStringAsync(PLAYERID);
@@ -84,15 +84,15 @@ class AuthServices {
 
             appStore.setTester(loginResponse.data!.email == DEFAULT_PROVIDER_EMAIL || loginResponse.data!.email == DEFAULT_HANDYMAN_EMAIL);
 
-            if (loginResponse.data!.userType == UserTypeProvider) {
+            if (loginResponse.data!.userType == USER_TYPE_PROVIDER) {
               /// if User type id Provider
               if (loginResponse.data != null) await saveUserData(loginResponse.data!);
-              DashboardScreen(index: 0).launch(context, isNewTask: true, pageRouteAnimation: PageRouteAnimation.Slide);
+              ProviderDashboardScreen(index: 0).launch(context, isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
               toast(context.translate.loginSuccessfully);
-            } else if (loginResponse.data!.userType == UserTypeHandyman) {
+            } else if (loginResponse.data!.userType == USER_TYPE_HANDYMAN) {
               /// if User type id Handyman
               if (loginResponse.data != null) await saveUserData(loginResponse.data!);
-              HandyDashboardScreen().launch(context, isNewTask: true, pageRouteAnimation: PageRouteAnimation.Slide);
+              HandymanDashboardScreen().launch(context, isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
               toast(context.translate.loginSuccessfully);
             } else {
               toast(context.translate.cantLogin, print: true);
@@ -101,13 +101,13 @@ class AuthServices {
             appStore.setLoading(false);
             toast(context.translate.cantLogin, print: true);
 
-            push(SignInScreen(), isNewTask: true, pageRouteAnimation: PageRouteAnimation.Slide);
+            push(SignInScreen(), isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
           }
         }
       } else {
         appStore.setLoading(false);
 
-        push(SignInScreen(), isNewTask: true, pageRouteAnimation: PageRouteAnimation.Slide);
+        push(SignInScreen(), isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
       }
     }).catchError((e) {
       log(e.toString());

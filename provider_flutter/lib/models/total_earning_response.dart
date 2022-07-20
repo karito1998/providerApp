@@ -27,29 +27,29 @@ class TotalEarningResponse {
 
 class TotalData {
   num? amount;
-  String? created_at;
+  String? createdAt;
   String? description;
   int? id;
-  String? payment_method;
+  String? paymentMethod;
 
-  TotalData({this.amount, this.created_at, this.description, this.id, this.payment_method});
+  TotalData({this.amount, this.createdAt, this.description, this.id, this.paymentMethod});
 
   factory TotalData.fromJson(Map<String, dynamic> json) {
     return TotalData(
       amount: json['amount'],
-      created_at: json['created_at'],
+      createdAt: json['created_at'],
       description: json['description'],
       id: json['id'],
-      payment_method: json['payment_method'],
+      paymentMethod: json['payment_method'],
     );
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['amount'] = this.amount;
-    data['created_at'] = this.created_at;
+    data['created_at'] = this.createdAt;
     data['id'] = this.id;
-    data['payment_method'] = this.payment_method;
+    data['payment_method'] = this.paymentMethod;
     data['description'] = this.description;
     return data;
   }

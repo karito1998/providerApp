@@ -1,5 +1,7 @@
 import 'package:handyman_provider_flutter/models/booking_detail_response.dart';
 import 'package:handyman_provider_flutter/models/service_detail_response.dart';
+import 'package:handyman_provider_flutter/utils/constant.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 class ServiceData {
   int? id;
@@ -18,9 +20,9 @@ class ServiceData {
   String? providerImage;
   int? cityId;
   String? categoryName;
-  List<String>? image_attchments;
+  List<String>? imageAttachments;
   List<Attachments>? attchments;
-  int? totalReview;
+  num? totalReview;
   num? totalRating;
   int? isFavourite;
   List<ServiceAddressMapping>? serviceAddressMapping;
@@ -37,10 +39,15 @@ class ServiceData {
   int? bookingAddressId;
   CouponData? appliedCouponData;
 
+  //Local
+  bool get isHourlyService => type.validate() == SERVICE_TYPE_HOURLY;
+
+  String? subCategoryName;
+
   ServiceData(
       {this.id,
       this.name,
-      this.image_attchments,
+      this.imageAttachments,
       this.categoryId,
       this.providerId,
       this.price,
@@ -91,7 +98,7 @@ class ServiceData {
     cityId = json['city_id'];
     categoryName = json['category_name'];
     //image_attchments = json['attchments'];
-    image_attchments = json['attchments'] != null ? List<String>.from(json['attchments']) : null;
+    imageAttachments = json['attchments'] != null ? List<String>.from(json['attchments']) : null;
     attchments = json['attchments_array'] != null ? (json['attchments_array'] as List).map((i) => Attachments.fromJson(i)).toList() : null;
 
     totalReview = json['total_review'];
@@ -123,8 +130,8 @@ class ServiceData {
     data['provider_name'] = this.providerName;
     data['city_id'] = this.cityId;
     data['category_name'] = this.categoryName;
-    if (this.image_attchments != null) {
-      data['attchments'] = this.image_attchments;
+    if (this.imageAttachments != null) {
+      data['attchments'] = this.imageAttachments;
     }
     data['total_review'] = this.totalReview;
     data['total_rating'] = this.totalRating;

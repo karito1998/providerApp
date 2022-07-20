@@ -27,17 +27,17 @@ class TaxListResponse {
 
 class TaxData {
   int? id;
-  int? provider_id;
+  int? providerId;
   String? title;
   String? type;
   int? value;
 
-  TaxData({this.id, this.provider_id, this.title, this.type, this.value});
+  TaxData({this.id, this.providerId, this.title, this.type, this.value});
 
   factory TaxData.fromJson(Map<String, dynamic> json) {
     return TaxData(
       id: json['id'],
-      provider_id: json['provider_id'],
+      providerId: json['provider_id'],
       title: json['title'],
       type: json['type'],
       value: json['value'],
@@ -47,7 +47,7 @@ class TaxData {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['provider_id'] = this.provider_id;
+    data['provider_id'] = this.providerId;
     data['title'] = this.title;
     data['type'] = this.type;
     data['value'] = this.value;

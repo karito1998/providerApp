@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:handyman_provider_flutter/components/app_widgets.dart';
 import 'package:handyman_provider_flutter/components/back_widget.dart';
+import 'package:handyman_provider_flutter/components/background_component.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/wallet_history_list_response.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
-import 'package:handyman_provider_flutter/provider/wallet/component/wallet_widget.dart';
-import 'package:handyman_provider_flutter/utils/colors.dart';
-import 'package:handyman_provider_flutter/utils/common.dart';
+import 'package:handyman_provider_flutter/provider/wallet/components/wallet_widget.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../widgets/app_widgets.dart';
-
 class WalletHistoryScreen extends StatefulWidget {
-  static String tag = '/WalletHistoryScreen';
-
   @override
   WalletHistoryScreenState createState() => WalletHistoryScreenState();
 }
 
 class WalletHistoryScreenState extends State<WalletHistoryScreen> {
-  ScrollController scrollController = ScrollController();
   List<WalletHistory> walletHistoryList = [];
 
   int totalPage = 0;
@@ -34,16 +30,6 @@ class WalletHistoryScreenState extends State<WalletHistoryScreen> {
     super.initState();
     afterBuildCreated(() {
       init();
-    });
-    scrollController.addListener(() {
-      if (currentPage <= totalPage) {
-        if (scrollController.position.pixels == scrollController.position.maxScrollExtent) {
-          currentPage++;
-          init();
-        } else {
-          appStore.setLoading(false);
-        }
-      }
     });
   }
 
@@ -80,15 +66,22 @@ class WalletHistoryScreenState extends State<WalletHistoryScreen> {
       appBar: appBarWidget(context.translate.lblWalletHistory, backWidget: BackWidget(), elevation: 0, color: primaryColor, textColor: Colors.white),
       body: Stack(
         children: [
-          ListView.builder(
-            controller: scrollController,
-            shrinkWrap: true,
-            physics: AlwaysScrollableScrollPhysics(),
-            padding: EdgeInsets.all(8),
-            itemCount: walletHistoryList.length,
-            itemBuilder: (_, i) => WalletWidget(walletHistoryList[i]),
-          ),
-          Observer(builder: (_) => noDataFound(context).center().visible(!appStore.isLoading && walletHistoryList.isEmpty && !hasError)),
+          if (walletHistoryList.isNotEmpty)
+            AnimatedListView(
+              shrinkWrap: true,
+              physics: AlwaysScrollableScrollPhysics(),
+              slideConfiguration: SlideConfiguration(duration: 400.milliseconds, delay: 50.milliseconds),
+              padding: EdgeInsets.all(8),
+              itemCount: walletHistoryList.length,
+              itemBuilder: (_, i) => WalletWidget(walletHistoryList[i]),
+              onNextPage: () {
+                if (currentPage <= totalPage) {
+                  currentPage++;
+                  init();
+                }
+              },
+            ),
+          Observer(builder: (_) => BackgroundComponent().center().visible(!appStore.isLoading && walletHistoryList.isEmpty && !hasError)),
           Text(errorSomethingWentWrong, style: secondaryTextStyle()).center().visible(hasError),
           Observer(builder: (_) => LoaderWidget().center().visible(appStore.isLoading)),
         ],

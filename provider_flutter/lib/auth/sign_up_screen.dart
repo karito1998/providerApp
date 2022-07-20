@@ -5,11 +5,11 @@ import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:handyman_provider_flutter/auth/component/dropdown_user_type_component.dart';
 import 'package:handyman_provider_flutter/auth/sign_in_screen.dart';
+import 'package:handyman_provider_flutter/components/app_widgets.dart';
 import 'package:handyman_provider_flutter/components/selected_item_widget.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/user_type_response.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
-import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
@@ -17,7 +17,6 @@ import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/extensions/string_extension.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:handyman_provider_flutter/utils/model_keys.dart';
-import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 bool isNew = false;
@@ -140,15 +139,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
           textFieldType: TextFieldType.PHONE,
           controller: mobileCont,
           focus: mobileFocus,
+          maxLength: 13,
+          buildCounter: (_, {required int currentLength, required bool isFocused, required int? maxLength}) {
+            return Offstage();
+          },
           nextFocus: designationFocus,
           errorThisFieldRequired: context.translate.hintRequired,
           decoration: inputDecoration(context, hint: context.translate.hintContactNumber),
           suffix: calling.iconImage(size: 10).paddingAll(14),
+          validator: (mobileCont) {
+            if (mobileCont!.isEmpty) {
+              return context.translate.lblPleaseEnterMobileNumber;
+            }
+            return null;
+          },
         ),
         16.height,
         AppTextField(
           textFieldType: TextFieldType.USERNAME,
           controller: designationCont,
+          isValidationRequired: false,
           focus: designationFocus,
           nextFocus: passwordFocus,
           decoration: inputDecoration(context, hint: context.translate.lblDesignation),
@@ -159,11 +169,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
           items: [
             DropdownMenuItem(
               child: Text(context.translate.provider, style: primaryTextStyle()),
-              value: UserTypeProvider,
+              value: USER_TYPE_PROVIDER,
             ),
             DropdownMenuItem(
               child: Text(context.translate.handyman, style: primaryTextStyle()),
-              value: UserTypeHandyman,
+              value: USER_TYPE_HANDYMAN,
             ),
           ],
           focusNode: userTypeFocus,
@@ -172,6 +182,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           value: selectedUserTypeValue,
           validator: (value) {
             if (value == null) return context.translate.lblRequired;
+            //if (value == null) return errorThisFieldRequired;
             return null;
           },
           onChanged: (c) {
@@ -224,29 +235,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
       children: [
         16.height,
         Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text("${context.translate.alreadyHaveAccountTxt}?",
-                        style: secondaryTextStyle()),
-                    TextButton(
-                      onPressed: () {
-                        finish(context);
-                      },
-                      child: Text(
-                        context.translate.signIn,
-                        style: boldTextStyle(
-                          color: primaryColor,
-                          decoration: TextDecoration.underline,
-                          fontStyle: FontStyle.italic,
-                        ),
-                      ),
-                    ),
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                            Text("${context.translate.alreadyHaveAccountTxt}?",
+                            style: secondaryTextStyle()),
+                        TextButton(
+                          onPressed: () {
+                            finish(context);
+                          },
+                          child: Text(
+                            context.translate.signIn,
+                            style: boldTextStyle(
+                              color: primaryColor,
+                              decoration: TextDecoration.underline,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                       ),
+    ]),
       ],
-    )]);
+    );
   }
 
   Widget _buildTcAcceptWidget() {
-    return Column(children:[Row(
+    //TODO: VERIFICAR
+    return  Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -256,51 +269,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
         }),
         16.width,
         RichTextWidget(
-                maxLines: 2,
-                overflow: TextOverflow.clip,
-                        list: [
-                  TextSpan(
-                      text: '${context.translate.lblIAgree} ',
-                      style: secondaryTextStyle()),
-                  TextSpan(
-                    text: context.translate.lblTermsOfService,
-                    style: boldTextStyle(color: primaryColor, size: 14),
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = () {
-                        launch(termsConditionUrl);
-                      },
-                  ),
-                ]),
-            ]),
-              10.height,
-            Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-                SelectedItemWidget(isSelected: isAcceptedPol).onTap(() async {
-                  isAcceptedPol = !isAcceptedPol;
-                  setState(() {});
-                }),
-                16.width,
-        RichTextWidget(
-          maxLines: 2,
-                      overflow: TextOverflow.clip,
-                      list: [
-                        TextSpan(
-                            text: '${context.translate.lblIAgree} ',
-                            style: secondaryTextStyle()),
-                        TextSpan(
-                          text: context.translate.lblPrivacyPolicy,
-                          style: boldTextStyle(color: primaryColor, size: 14),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              launch(privacyPolicyUrl);
-                            },
-                        ),
-                      ]),
-              ]),
+          list: [
+            TextSpan(text: '${context.translate.lblIAgree} ', style: secondaryTextStyle()),
+            TextSpan(
+              text: context.translate.lblTermsOfService,
+              style: boldTextStyle(color: primaryColor, size: 14),
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  launch(TERMS_CONDITION_URL);
+                },
+            ),
+            TextSpan(text: ' & ', style: secondaryTextStyle()),
+            TextSpan(
+              text: context.translate.lblPrivacyPolicy,
+              style: boldTextStyle(color: primaryColor, size: 14),
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  launch(PRIVACY_POLICY_URL);
+                },
+            ),
+          ],
+        ).flexible(flex: 2),
       ],
     ).paddingAll(16);
+
   }
 
   //endregion
@@ -325,7 +317,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           UserKeys.status: "1"
         };
 
-        if (selectedUserTypeValue == UserTypeProvider) {
+        if (selectedUserTypeValue == USER_TYPE_PROVIDER) {
           request.putIfAbsent(UserKeys.providerTypeId, () => selectedUserTypeData!.id.toString());
         } else {
           request.putIfAbsent(UserKeys.handymanTypeId, () => selectedUserTypeData!.id.toString());
@@ -335,7 +327,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
         await registerUser(request).then((value) async {
           value.data!.password = passwordCont.text.trim();
-          value.data!.user_type = selectedUserTypeValue;
+          value.data!.userType = selectedUserTypeValue;
 
           await authService.signUpWithEmailPassword(context, registerData: value.data!, isLogin: false).then((value) {
 //
@@ -347,24 +339,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
               toast(context.translate.lblLoginAgain);
               SignInScreen().launch(context, isNewTask: true);
             }
-            SignInScreen().launch(context, isNewTask: true);
           });
           appStore.setLoading(false);
         }).catchError((e) {
           appStore.setLoading(false);
           if (e.toString() == "El username ya ha sido tomado.")
-                     toast("El usuario ya existe.", print: true);
-                    if (e.toString() ==
-                        "The contact number must be between 10 and 12 digits.")
-                      toast("El numero de contacto debe contener entre 10 y 12 digitos",
-                          print: true);
-                    else
-                      log(e.toString());
-                      //toast(e.toString());
+                                 toast("El usuario ya existe.", print: true);
+                              if (e.toString() ==
+                                  "The contact number must be between 10 and 12 digits.")
+                                toast("El numero de contacto debe contener entre 10 y 12 digitos",
+                                    print: true);
+                              else
+                                log(e.toString());
 
+          //toast(e.toString(), print: true);
         });
       } else {
-       toast(context.translate.tycRequired+" "+context.translate.lblTermCondition+" & "+ context.translate.lblPrivacyPolicy);
+        toast(context.translate.tycRequired+" "+context.translate.lblTermCondition+" & "+ context.translate.lblPrivacyPolicy);
         appStore.setLoading(false);
         toast(context.translate.lblTermCondition);
       }
@@ -388,6 +379,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           children: [
             Form(
               key: formKey,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
               child: SingleChildScrollView(
                 padding: EdgeInsets.all(16),
                 child: Column(

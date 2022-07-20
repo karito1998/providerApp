@@ -1,11 +1,10 @@
 import 'package:handyman_provider_flutter/models/booking_list_response.dart';
+import 'package:handyman_provider_flutter/models/service_detail_response.dart';
 import 'package:handyman_provider_flutter/models/service_model.dart';
 import 'package:handyman_provider_flutter/models/user_data.dart';
-import 'package:handyman_provider_flutter/utils/constant.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 class BookingDetailResponse {
-  BookingDetail? bookingDetail;
+  BookingData? bookingDetail;
   ServiceData? service;
   UserData? customer;
   List<BookingActivity>? bookingActivity;
@@ -13,10 +12,8 @@ class BookingDetailResponse {
   UserData? providerData;
   List<UserData>? handymanData;
   CouponData? couponData;
-  List<Taxes>? taxes;
+  List<TaxData>? taxes;
   List<ServiceProof>? serviceProof;
-
-  // List<Null>? handymanData;
 
   BookingDetailResponse({
     this.bookingDetail,
@@ -32,7 +29,7 @@ class BookingDetailResponse {
   });
 
   BookingDetailResponse.fromJson(Map<String, dynamic> json) {
-    bookingDetail = json['booking_detail'] != null ? new BookingDetail.fromJson(json['booking_detail']) : null;
+    bookingDetail = json['booking_detail'] != null ? new BookingData.fromJson(json['booking_detail']) : null;
     service = json['service'] != null ? new ServiceData.fromJson(json['service']) : null;
     customer = json['customer'] != null ? new UserData.fromJson(json['customer']) : null;
     if (json['booking_activity'] != null) {
@@ -98,175 +95,41 @@ class BookingDetailResponse {
 }
 
 class CouponData {
-  int? booking_id;
+  int? bookingId;
   String? code;
-  String? created_at;
-  String? deleted_at;
+  String? createdAt;
+  String? deletedAt;
   int? discount;
-  String? discount_type;
+  String? discountType;
   int? id;
-  String? updated_at;
+  String? updatedAt;
   num? totalCalculatedValue;
 
-  CouponData({this.booking_id, this.code, this.created_at, this.deleted_at, this.discount, this.discount_type, this.id, this.updated_at, this.totalCalculatedValue});
+  CouponData({this.bookingId, this.code, this.createdAt, this.deletedAt, this.discount, this.discountType, this.id, this.updatedAt, this.totalCalculatedValue});
 
   factory CouponData.fromJson(Map<String, dynamic> json) {
     return CouponData(
-      booking_id: json['booking_id'],
+      bookingId: json['booking_id'],
       code: json['code'],
-      created_at: json['created_at'],
-      deleted_at: json['deleted_at'],
+      createdAt: json['created_at'],
+      deletedAt: json['deleted_at'],
       discount: json['discount'],
-      discount_type: json['discount_type'],
+      discountType: json['discount_type'],
       id: json['id'],
-      updated_at: json['updated_at'],
+      updatedAt: json['updated_at'],
     );
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['booking_id'] = this.booking_id;
+    data['booking_id'] = this.bookingId;
     data['code'] = this.code;
-    data['created_at'] = this.created_at;
+    data['created_at'] = this.createdAt;
     data['discount'] = this.discount;
-    data['deleted_at'] = this.deleted_at;
-    data['discount_type'] = this.discount_type;
+    data['deleted_at'] = this.deletedAt;
+    data['discount_type'] = this.discountType;
     data['id'] = this.id;
-    data['updated_at'] = this.updated_at;
-    return data;
-  }
-}
-
-class BookingDetail {
-  int? id;
-  String? address;
-  int? customerId;
-  int? serviceId;
-  int? providerId;
-  num? price;
-  int? quantity;
-  String? type;
-  num? discount;
-  String? status;
-  String? statusLabel;
-  String? description;
-  String? providerName;
-  String? customerName;
-  String? serviceName;
-  String? paymentStatus;
-  String? paymentMethod;
-  int? totalReview;
-  num? totalRating;
-  int? isCancelled;
-  String? reason;
-  String? date;
-  String? startAt;
-  String? endAt;
-  String? durationDiff;
-  int? paymentId;
-  int? booking_address_id;
-  List<Taxes>? taxes;
-  num? totalAmount;
-
-  bool get isHourlyService => type.validate() == ServiceTypeHourly;
-
-  BookingDetail({
-    this.id,
-    this.address,
-    this.customerId,
-    this.serviceId,
-    this.providerId,
-    this.price,
-    this.quantity,
-    this.type,
-    this.discount,
-    this.status,
-    this.statusLabel,
-    this.description,
-    this.providerName,
-    this.customerName,
-    this.serviceName,
-    this.paymentStatus,
-    this.paymentMethod,
-    this.totalReview,
-    this.totalRating,
-    this.isCancelled,
-    this.reason,
-    this.date,
-    this.startAt,
-    this.endAt,
-    this.durationDiff,
-    this.paymentId,
-    this.taxes,
-    this.booking_address_id,
-    this.totalAmount,
-  });
-
-  BookingDetail.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    address = json['address'];
-    customerId = json['customer_id'];
-    serviceId = json['service_id'];
-    providerId = json['provider_id'];
-    price = json['price'];
-    quantity = json['quantity'];
-    type = json['type'];
-    discount = json['discount'];
-    status = json['status'];
-    statusLabel = json['status_label'];
-    description = json['description'];
-    providerName = json['provider_name'];
-    customerName = json['customer_name'];
-    serviceName = json['service_name'];
-    paymentStatus = json['payment_status'];
-    paymentMethod = json['payment_method'];
-    totalReview = json['total_review'];
-    totalRating = json['total_rating'];
-    isCancelled = json['is_cancelled'];
-    reason = json['reason'];
-    date = json['date'];
-    startAt = json['start_at'];
-    taxes = json['taxes'] != null ? (json['taxes'] as List).map((i) => Taxes.fromJson(i)).toList() : null;
-    endAt = json['end_at'];
-    durationDiff = json['duration_diff'];
-    paymentId = json['payment_id'];
-    booking_address_id = json['booking_address_id'];
-    totalAmount = json['total_amount'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['address'] = this.address;
-    data['customer_id'] = this.customerId;
-    data['service_id'] = this.serviceId;
-    data['provider_id'] = this.providerId;
-    data['price'] = this.price;
-    data['quantity'] = this.quantity;
-    data['type'] = this.type;
-    data['discount'] = this.discount;
-    data['status'] = this.status;
-    data['status_label'] = this.statusLabel;
-    data['description'] = this.description;
-    data['provider_name'] = this.providerName;
-    data['customer_name'] = this.customerName;
-    data['service_name'] = this.serviceName;
-    data['payment_status'] = this.paymentStatus;
-    data['payment_method'] = this.paymentMethod;
-    data['total_review'] = this.totalReview;
-    data['total_rating'] = this.totalRating;
-    data['is_cancelled'] = this.isCancelled;
-    data['reason'] = this.reason;
-    if (this.taxes != null) {
-      data['taxes'] = this.taxes!.map((v) => v.toJson()).toList();
-    }
-    data['date'] = this.date;
-    data['start_at'] = this.startAt;
-    data['end_at'] = this.endAt;
-    data['duration_diff'] = this.durationDiff;
-    data['payment_id'] = this.paymentId;
-    data['booking_address_id'] = this.booking_address_id;
-    data['total_amount'] = this.totalAmount;
+    data['updated_at'] = this.updatedAt;
     return data;
   }
 }
@@ -309,16 +172,22 @@ class BookingActivity {
 }
 
 class RatingData {
-  int? id;
+  num? id;
   num? rating;
   String? review;
-  int? serviceId;
-  int? bookingId;
+  num? serviceId;
+  num? bookingId;
   String? createdAt;
   String? customerName;
   String? profileImage;
   String? customerProfileImage;
   String? handymanProfileImage;
+
+  String? serviceName;
+  num? handymanId;
+  num? customerId;
+  String? handymanName;
+  List<Attachments>? attachments;
 
   RatingData({
     this.id,
@@ -331,6 +200,11 @@ class RatingData {
     this.profileImage,
     this.customerProfileImage,
     this.handymanProfileImage,
+    this.serviceName,
+    this.handymanId,
+    this.customerId,
+    this.handymanName,
+    this.attachments,
   });
 
   RatingData.fromJson(Map<String, dynamic> json) {
@@ -344,6 +218,11 @@ class RatingData {
     profileImage = json['profile_image'];
     customerProfileImage = json['customer_profile_image'];
     handymanProfileImage = json['handyman_profile_image'];
+    serviceName = json['service_name'];
+    handymanId = json['handyman_id'];
+    customerId = json['customer_id'];
+    handymanName = json['handyman_name'];
+    attachments = json['attchments_array'] != null ? (json['attchments_array'] as List).map((i) => Attachments.fromJson(i)).toList() : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -358,6 +237,13 @@ class RatingData {
     data['profile_image'] = this.profileImage;
     data['customer_profile_image'] = this.customerProfileImage;
     data['handyman_profile_image'] = this.handymanProfileImage;
+    data['service_name'] = this.serviceName;
+    data['handyman_id'] = this.handymanId;
+    data['customer_id'] = this.customerId;
+    data['handyman_name'] = this.handymanName;
+    if (this.attachments != null) {
+      data['attchments_array'] = this.attachments!.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }

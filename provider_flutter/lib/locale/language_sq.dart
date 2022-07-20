@@ -1,24 +1,24 @@
 import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 class LanguageSq extends Languages {
-   //Helpi
+  //Helpi
 
-   @override
-   String lblInvalidEmail = '';
-   @override
-   String lblInvalidUsername = '';
-   @override
-   String lblRetryErr = "";
-   @override
-   String lblWrongErr = "";
-   @override
-   String lblInternetErr = "";
-   @override
-   String lblInvalidEmailSpaces = "";
-   @override
-   String tycRequired = '';
-   @override
-   String signUpSuccess = "";
+  @override
+  String lblInvalidEmail = '';
+  @override
+  String lblInvalidUsername = '';
+  @override
+  String lblRetryErr = "";
+  @override
+  String lblWrongErr = "";
+  @override
+  String lblInternetErr = "";
+  @override
+  String lblInvalidEmailSpaces = "";
+  @override
+  String tycRequired = '';
+  @override
+  String signUpSuccess = "";
 
   //Helpi
 
@@ -44,6 +44,15 @@ class LanguageSq extends Languages {
   String lblHandymanDashboard = 'Pult i dorës';
 
   @override
+  String lblShowingOnly4Handyman = 'Duke treguar vetëm 4 punëtorë';
+
+  @override
+  String lblRecentlyOnlineHandyman = 'Kohët e fundit Handyman Online';
+
+  @override
+  String lblStartDrive = 'Filloj me makinë';
+
+  @override
   String handyman = 'Mbrapa!';
 
   @override
@@ -53,10 +62,10 @@ class LanguageSq extends Languages {
   String signUp = 'Hyni në';
 
   @override
-  String signInTitle = 'Regjistrohem';
+  String signInTitle = 'Nënshkrimi në llogarinë tuaj';
 
   @override
-  String signUpTitle = 'Signin në \ naccount tuaj';
+  String signUpTitle = 'Regjistrohuni në llogarinë tuaj';
 
   @override
   String hintNameTxt = 'Regjistrohuni në \ naccount tuaj';
@@ -203,7 +212,7 @@ class LanguageSq extends Languages {
   String serviceDetail = 'Modaliteti i sistemit';
 
   @override
-  String confirmationRequestTxt = 'Detaj';
+  String confirmationRequestTxt = 'A jeni i sigurt që doni ta kryeni këtë veprim?';
 
   @override
   String notAvailable = 'A je i sigurt?';
@@ -805,7 +814,7 @@ class LanguageSq extends Languages {
   String lblGetDirection = "Merr drejtim";
 
   @override
-  String lblDeleteTitle = "Oh jo, po largoheni!";
+  String lblDeleteTitle = "Oh jo, ju po largoheni!";
 
   @override
   String lblDeleteSubTitle = "A doni të dilni?";
@@ -965,4 +974,67 @@ class LanguageSq extends Languages {
 
   @override
   String get lblHandymanIsOffline => "Handyman është jashtë linje";
+
+  @override
+  String get lblDoYouWantToRestore => "A doni të rivendosni?";
+
+  @override
+  String get lblDoYouWantToDeleteForcefully => "A doni të fshini me forcë?";
+
+  @override
+  String get lblDoYouWantToDelete => "A doni të fshini?";
+
+  @override
+  String get lblPleaseEnterMobileNumber => "Ju lutemi shkruani numrin celular";
+
+  @override
+  String get lblContactNumberMustBe10DigitOnly => "Numri i kontaktit duhet të jetë vetëm 10 shifror";
+
+  @override
+  String get lblDangerZone => "Zone e rrezikshme";
+
+  @override
+  String get lblDeleteAccount => "Fshij llogarine";
+
+  @override
+  String get lblDeleteAccountConformation => "Llogaria juaj do të fshihet përgjithmonë. Të dhënat tuaja nuk do të rikthehen përsëri.";
+
+  @override
+  String get lblUnderMaintenance => "Nën mirëmbajtje...";
+
+  @override
+  String get lblCatchUpAfterAWhile => "Kap pas një kohe";
+
+  @override
+  String get lblRecheck => "Kontrolloj";
+
+  @override
+  String get lblTrialFor => "Gjyq për";
+
+  @override
+  String get lblDays => "Ditë";
+
+  @override
+  String get lblFreeTrial => "Prove falas";
+
+  @override
+  String get lblAtLeastOneImage => "Zgjidhni të paktën një imazh";
+
+  @override
+  String get lblService => "Shërbej";
+
+  @override
+  String get lblTransactionError => "Gabim në transaksion";
+
+  @override
+  String get lblTransactionCancelled => "Transaksioni u anulua";
+
+  @override
+  String get lblPaymentSuccessfullyDone => "Pagesa e bërë me sukses";
+
+  @override
+  String get lblNewUpdate => "Përditësim i ri";
+
+  @override
+  String get lblOptionalUpdateNotify => "Përditësimi opsional Njofto";
 }

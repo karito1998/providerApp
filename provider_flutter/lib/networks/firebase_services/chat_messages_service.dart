@@ -66,7 +66,7 @@ class ChatMessageService extends BaseService {
     userRef.doc(chatData.receiverId).update({"lastMessageTime": chatData.createdAt});
   }
 
-  DocumentReference? updateChatDocument(DocumentReference data, {File? image, String? imageUrl}) {
+  void updateChatDocument(DocumentReference data, {File? image, String? imageUrl}) async {
     Map<String, dynamic> sendData = {'id': data.id};
 
     if (image != null) {
@@ -174,6 +174,7 @@ class ChatMessageService extends BaseService {
     try {
       ref!.doc(senderId).collection(receiverId).doc(documentId).delete();
     } on Exception catch (e) {
+      log(e);
       throw 'Something went wrong';
     }
   }

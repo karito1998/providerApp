@@ -1,29 +1,29 @@
 import 'package:flutter/material.dart';
 
 abstract class Languages {
-  static Languages of(BuildContext context) => Localizations.of<Languages>(context, Languages)!;
-
   //Helpi
 
-  
+
   String get lblInvalidEmail ;
-  
+
   String get lblInvalidUsername ;
-  
+
   String get lblRetryErr ;
-  
+
   String get lblWrongErr ;
-  
+
   String get lblInternetErr ;
- 
+
   String get lblInvalidEmailSpaces ;
- 
+
   String get tycRequired ;
 
   String get signUpSuccess ;
 
   //Helpi
-  
+
+  static Languages of(BuildContext context) => Localizations.of<Languages>(context, Languages)!;
+
   String planAboutToExpire(int days);
 
   String get appName;
@@ -37,6 +37,12 @@ abstract class Languages {
   String get back;
 
   String get lblHandymanDashboard;
+
+  String get lblShowingOnly4Handyman;
+
+  String get lblRecentlyOnlineHandyman;
+
+  String get lblStartDrive;
 
   String get handyman;
 
@@ -654,4 +660,46 @@ abstract class Languages {
   String get lblDesignation;
 
   String get lblHandymanIsOffline;
+
+  String get lblDoYouWantToRestore;
+
+  String get lblDoYouWantToDeleteForcefully;
+
+  String get lblDoYouWantToDelete;
+
+  String get lblPleaseEnterMobileNumber;
+
+  String get lblContactNumberMustBe10DigitOnly;
+
+  String get lblDangerZone;
+
+  String get lblDeleteAccount;
+
+  String get lblDeleteAccountConformation;
+
+  String get lblUnderMaintenance;
+
+  String get lblCatchUpAfterAWhile;
+
+  String get lblRecheck;
+
+  String get lblTrialFor;
+
+  String get lblDays;
+
+  String get lblFreeTrial;
+
+  String get lblAtLeastOneImage;
+
+  String get lblService;
+
+  String get lblTransactionError;
+
+  String get lblTransactionCancelled;
+
+  String get lblPaymentSuccessfullyDone;
+
+  String get lblNewUpdate;
+
+  String get lblOptionalUpdateNotify;
 }

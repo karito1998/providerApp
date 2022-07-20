@@ -16,41 +16,15 @@ class BackgroundComponent extends StatelessWidget {
     return SizedBox(
       height: context.height(),
       width: context.width(),
-      child: Stack(
-        alignment: Alignment.center,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Positioned(
-            left: 56,
-            top: -304,
-            child: Container(
-              height: context.height() * 0.90,
-              width: context.width() * 1.9,
-              decoration: boxDecorationDefault(
-                shape: BoxShape.circle,
-                boxShadow: defaultBoxShadow(blurRadius: 0, spreadRadius: 0),
-                color: context.cardColor,
-              ),
-            ),
-          ),
-          Positioned(
-            top: 180,
-            width: context.width(),
-            height: context.height(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.asset(
-                  image ?? notDataFoundImg,
-                  width: size ?? context.width() / 0.35,
-                ),
-                30.height,
-                Text(text ?? context.translate.lblNoDataFound, style: boldTextStyle(size: 24), textAlign: TextAlign.center),
-              ],
-            ),
-          ),
+          Image.asset(image ?? notDataFoundImg, height: size ?? 100),
+          30.height,
+          Text(text ?? context.translate.lblNoDataFound, style: boldTextStyle(size: 20), textAlign: TextAlign.center),
         ],
       ),
-    );
+    ).center();
   }
 }

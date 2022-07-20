@@ -31,138 +31,158 @@ class BookingListResponse {
 }
 
 class BookingData {
-  String? address;
-  int? customer_id;
-  String? customer_name;
-  String? date;
-  String? description;
-  num? discount;
-  String? duration_diff;
-  String? duration_diff_hour;
-  List<Handyman>? handyman;
   int? id;
-  int? payment_id;
-  String? payment_method;
-  String? payment_status;
+  String? address;
+  int? customerId;
+  int? serviceId;
+  int? providerId;
   num? price;
-  int? provider_id;
-  String? provider_name;
-  List<String>? image_attchments;
-  List<Attachments>? service_attchments;
-  List<Taxes>? taxes;
-  CouponData? couponData;
-  int? service_id;
-  String? service_name;
-  String? status;
-  String? status_label;
-  String? type;
-  int? booking_address_id;
   int? quantity;
-  num? total_calculated_price;
+  String? type;
+  num? discount;
+  String? status;
+  String? statusLabel;
+  String? description;
+  String? providerName;
+  String? customerName;
+  String? serviceName;
+  String? paymentStatus;
+  String? paymentMethod;
+  String? date;
+  String? durationDiff;
+  int? paymentId;
+  int? bookingAddressId;
+  List<TaxData>? taxes;
   num? totalAmount;
 
+  String? durationDiffHour;
+  List<Handyman>? handyman;
+  List<String>? imageAttachments;
+  List<Attachments>? serviceAttachments;
+  CouponData? couponData;
+  num? totalCalculatedPrice;
+
+  int? totalReview;
+  num? totalRating;
+  int? isCancelled;
+  String? reason;
+  String? startAt;
+  String? endAt;
+
   //Local
-  bool get isHourlyService => type.validate() == ServiceTypeHourly;
+  bool get isHourlyService => type.validate() == SERVICE_TYPE_HOURLY;
 
   BookingData({
     this.address,
-    this.image_attchments,
-    this.customer_id,
-    this.customer_name,
+    this.imageAttachments,
+    this.customerId,
+    this.customerName,
     this.date,
     this.description,
     this.discount,
-    this.duration_diff,
-    this.duration_diff_hour,
+    this.durationDiff,
+    this.durationDiffHour,
     this.handyman,
     this.couponData,
     this.id,
-    this.payment_id,
-    this.payment_method,
-    this.payment_status,
+    this.paymentId,
+    this.paymentMethod,
+    this.paymentStatus,
     this.price,
-    this.provider_id,
-    this.provider_name,
-    //this.service_attchments,
+    this.providerId,
+    this.providerName,
+    //this.serviceAttachments,
     this.taxes,
-    this.service_id,
-    this.service_name,
+    this.serviceId,
+    this.serviceName,
     this.status,
-    this.status_label,
+    this.statusLabel,
     this.type,
     this.quantity,
-    this.total_calculated_price,
-    this.booking_address_id,
+    this.totalCalculatedPrice,
+    this.bookingAddressId,
     this.totalAmount,
+    this.totalReview,
+    this.totalRating,
+    this.isCancelled,
+    this.reason,
+    this.startAt,
+    this.endAt,
   });
 
   factory BookingData.fromJson(Map<String, dynamic> json) {
     return BookingData(
       address: json['address'],
-      customer_id: json['customer_id'],
-      customer_name: json['customer_name'],
+      customerId: json['customer_id'],
+      customerName: json['customer_name'],
       date: json['date'],
       description: json['description'],
       discount: json['discount'],
-      duration_diff: json['duration_diff'],
-      duration_diff_hour: json['duration_diff_hour'],
+      durationDiff: json['duration_diff'],
+      durationDiffHour: json['duration_diff_hour'],
       handyman: json['handyman'] != null ? (json['handyman'] as List).map((i) => Handyman.fromJson(i)).toList() : [],
       id: json['id'],
-      payment_id: json['payment_id'],
-      payment_method: json['payment_method'],
-      payment_status: json['payment_status'],
+      paymentId: json['payment_id'],
+      paymentMethod: json['payment_method'],
+      paymentStatus: json['payment_status'],
       price: json['price'],
-      provider_id: json['provider_id'],
-      provider_name: json['provider_name'],
+      providerId: json['provider_id'],
+      providerName: json['provider_name'],
       // service_attchments: json['service_attchments'] != null ? (json['service_attchments'] as List).map((i) => Attachments.fromJson(i)).toList() : null,
       //  image_attchments :json['attchments'],
-      image_attchments: json['service_attchments'] != null ? List<String>.from(json['service_attchments']) : null,
+      imageAttachments: json['service_attchments'] != null ? List<String>.from(json['service_attchments']) : null,
       //service_attchments: json['service_attchments'] != null ? new List<String>.from(json['service_attchments']) : null,
-      taxes: json['taxes'] != null ? (json['taxes'] as List).map((i) => Taxes.fromJson(i)).toList() : null,
+      taxes: json['taxes'] != null ? (json['taxes'] as List).map((i) => TaxData.fromJson(i)).toList() : null,
       couponData: json['coupon_data'] != null ? CouponData.fromJson(json['coupon_data']) : null,
-      service_id: json['service_id'],
-      service_name: json['service_name'],
+      serviceId: json['service_id'],
+      serviceName: json['service_name'],
       status: json['status'],
-      status_label: json['status_label'],
+      statusLabel: json['status_label'],
       quantity: json['quantity'],
       type: json['type'],
-      booking_address_id: json['booking_address_id'],
+      bookingAddressId: json['booking_address_id'],
       totalAmount: json['total_amount'],
+      totalReview: json['total_review'],
+      totalRating: json['total_rating'],
+      isCancelled: json['is_cancelled'],
+      reason: json['reason'],
+      startAt: json['start_at'],
+      endAt: json['end_at'],
     );
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['customer_id'] = this.customer_id;
-    data['customer_name'] = this.customer_name;
+    data['customer_id'] = this.customerId;
+    data['customer_name'] = this.customerName;
     data['date'] = this.date;
     data['discount'] = this.discount;
-    data['duration_diff'] = this.duration_diff;
+    data['duration_diff'] = this.durationDiff;
     data['id'] = this.id;
     data['price'] = this.price;
-    data['provider_id'] = this.provider_id;
-    data['provider_name'] = this.provider_name;
-    data['service_id'] = this.service_id;
-    data['service_name'] = this.service_name;
+    data['provider_id'] = this.providerId;
+    data['provider_name'] = this.providerName;
+    data['service_id'] = this.serviceId;
+    data['service_name'] = this.serviceName;
     data['status'] = this.status;
-    data['status_label'] = this.status_label;
+    data['status_label'] = this.statusLabel;
     data['type'] = this.type;
     data['address'] = this.address;
     data['description'] = this.description;
-    data['duration_diff_hour'] = this.duration_diff_hour;
+    data['duration_diff_hour'] = this.durationDiffHour;
     data['handyman'] = this.handyman;
-    data['payment_id'] = this.payment_id;
-    data['payment_method'] = this.payment_method;
-    data['payment_status'] = this.payment_status;
+    data['payment_id'] = this.paymentId;
+    data['payment_method'] = this.paymentMethod;
+    data['payment_status'] = this.paymentStatus;
     // data['service_attchments'] = this.service_attchments;
     //  data['attchments'] = this.image_attchments;
-    if (this.image_attchments != null) {
-      data['service_attchments'] = this.image_attchments;
+    if (this.imageAttachments != null) {
+      data['service_attchments'] = this.imageAttachments;
     }
     /* if (this.service_attchments != null) {
       data['service_attchments'] = this.service_attchments!.map((v) => v.toJson()).toList();
     }*/
-    data['booking_address_id'] = this.booking_address_id;
+    data['booking_address_id'] = this.bookingAddressId;
     data['quantity'] = this.quantity;
     if (this.taxes != null) {
       data['taxes'] = this.taxes!.map((v) => v.toJson()).toList();
@@ -171,24 +191,30 @@ class BookingData {
       data['coupon_data'] = this.couponData!.toJson();
     }
     data['total_amount'] = this.totalAmount;
+    data['total_review'] = this.totalReview;
+    data['total_rating'] = this.totalRating;
+    data['reason'] = this.reason;
+    data['is_cancelled'] = this.isCancelled;
+    data['start_at'] = this.startAt;
+    data['end_at'] = this.endAt;
     return data;
   }
 }
 
-class Taxes {
+class TaxData {
   int? id;
-  int? provider_id;
+  int? providerId;
   String? title;
   String? type;
   int? value;
   num? totalCalculatedValue;
 
-  Taxes({this.id, this.provider_id, this.title, this.type, this.value, this.totalCalculatedValue});
+  TaxData({this.id, this.providerId, this.title, this.type, this.value, this.totalCalculatedValue});
 
-  factory Taxes.fromJson(Map<String, dynamic> json) {
-    return Taxes(
+  factory TaxData.fromJson(Map<String, dynamic> json) {
+    return TaxData(
       id: json['id'],
-      provider_id: json['provider_id'],
+      providerId: json['provider_id'],
       title: json['title'],
       type: json['type'],
       value: json['value'],
@@ -198,7 +224,7 @@ class Taxes {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['provider_id'] = this.provider_id;
+    data['provider_id'] = this.providerId;
     data['title'] = this.title;
     data['type'] = this.type;
     data['value'] = this.value;

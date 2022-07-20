@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:handyman_provider_flutter/main.dart';
-import 'package:handyman_provider_flutter/utils/colors.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -81,11 +81,11 @@ class ThemeSelectionDaiLogState extends State<ThemeSelectionDaiLog> {
                 onChanged: (dynamic val) async {
                   currentIndex = val;
 
-                  if (val == ThemeModeSystem) {
+                  if (val == THEME_MODE_SYSTEM) {
                     appStore.setDarkMode(context.platformBrightness() == Brightness.dark);
-                  } else if (val == ThemeModeLight) {
+                  } else if (val == THEME_MODE_LIGHT) {
                     appStore.setDarkMode(false);
-                  } else if (val == ThemeModeDark) {
+                  } else if (val == THEME_MODE_DARK) {
                     appStore.setDarkMode(true);
                   }
                   await setValue(THEME_MODE_INDEX, val);

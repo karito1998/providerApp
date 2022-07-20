@@ -4,17 +4,19 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:handyman_provider_flutter/components/app_widgets.dart';
+import 'package:handyman_provider_flutter/components/background_component.dart';
+import 'package:handyman_provider_flutter/components/cached_image_widget.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/document_list_response.dart';
 import 'package:handyman_provider_flutter/models/provider_document_list_response.dart';
 import 'package:handyman_provider_flutter/networks/network_utils.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
-import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/model_keys.dart';
-import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -278,12 +280,13 @@ class _VerifyProviderScreenState extends State<VerifyProviderScreen> {
                             : Stack(
                                 alignment: Alignment.bottomCenter,
                                 children: [
-                                  cachedImage(
-                                    providerDocuments[index].providerDocument,
+                                  CachedImageWidget(
+                                    url: providerDocuments[index].providerDocument.validate(),
                                     height: 200,
                                     width: context.width(),
                                     fit: BoxFit.cover,
-                                  ).cornerRadiusWithClipRRect(8),
+                                    radius: 8,
+                                  ),
                                   Container(
                                     padding: EdgeInsets.all(8),
                                     alignment: Alignment.bottomCenter,
@@ -318,11 +321,9 @@ class _VerifyProviderScreenState extends State<VerifyProviderScreen> {
                                           child: Icon(Icons.delete_forever, color: Colors.red, size: 20),
                                         ).onTap(() {
                                           showConfirmDialogCustom(context, dialogType: DialogType.DELETE, onAccept: (_) {
-                                            if (!appStore.isTester) {
+                                            ifNotTester(context, () {
                                               deleteDoc(providerDocuments[index].id);
-                                            } else {
-                                              toast(context.translate.lblUnAuthorized);
-                                            }
+                                            });
                                           });
                                         }).visible(providerDocuments[index].isVerified == 0),
                                         Icon(
@@ -338,7 +339,7 @@ class _VerifyProviderScreenState extends State<VerifyProviderScreen> {
                 ],
               ),
             ),
-            noDataFound(context).center().visible(!appStore.isLoading && documents.isEmpty && providerDocuments.isEmpty),
+            BackgroundComponent().center().visible(!appStore.isLoading && documents.isEmpty && providerDocuments.isEmpty),
             LoaderWidget().center().visible(appStore.isLoading),
           ],
         ),

@@ -1,15 +1,15 @@
 class CityListResponse {
   int? id;
   String? name;
-  int? state_id;
+  int? stateId;
 
-  CityListResponse({this.id, this.name, this.state_id});
+  CityListResponse({this.id, this.name, this.stateId});
 
   factory CityListResponse.fromJson(Map<String, dynamic> json) {
     return CityListResponse(
       id: json['id'],
       name: json['name'],
-      state_id: json['state_id'],
+      stateId: json['state_id'],
     );
   }
 
@@ -17,7 +17,7 @@ class CityListResponse {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['name'] = this.name;
-    data['state_id'] = this.state_id;
+    data['state_id'] = this.stateId;
     return data;
   }
 }

@@ -33,7 +33,7 @@ class HandymanNameWidget extends StatelessWidget {
               8.width,
             ],
           ),
-        Text(name, style: boldTextStyle(size: size), maxLines: 2, overflow: TextOverflow.ellipsis),
+        Marquee(child: Text(name, style: boldTextStyle(size: size), maxLines: 1)).flexible(),
       ],
     );
   }

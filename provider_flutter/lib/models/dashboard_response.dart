@@ -11,9 +11,9 @@ import 'revenue_chart_data.dart';
 class DashboardResponse {
   bool? status;
   int? totalBooking;
-  int? total_service;
-  int? total_handyman;
-  int? is_subscribed;
+  int? totalService;
+  int? totalHandyman;
+  int? isSubscribed;
   List<ServiceData>? service;
   List<CategoryData>? category;
   List<UserData>? handyman;
@@ -25,20 +25,20 @@ class DashboardResponse {
   List<Configurations>? configurations;
   List<PaymentSetting>? paymentSettings;
   String? earningType;
-  List<LanguageOption>? language_option;
+  List<LanguageOption>? languageOption;
 
-  List<String> months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+  List<String> months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
 
   //Local
   bool? isPlanAboutToExpire;
   bool? userNeverPurchasedPlan;
   bool? isPlanExpired;
-  PrivacyPolicy? privacy_policy;
-  PrivacyPolicy? term_conditions;
-  String? inquriy_email;
-  String? helpline_number;
+  PrivacyPolicy? privacyPolicy;
+  PrivacyPolicy? termConditions;
+  String? inquriyEmail;
+  String? helplineNumber;
   ProviderWallet? providerWallet;
-  List<String>? online_handyman;
+  List<String>? onlineHandyman;
 
   DashboardResponse({
     this.chartArray,
@@ -47,9 +47,9 @@ class DashboardResponse {
     this.totalBooking,
     this.service,
     this.category,
-    this.total_service,
-    this.total_handyman,
-    this.is_subscribed,
+    this.totalService,
+    this.totalHandyman,
+    this.isSubscribed,
     this.paymentSettings,
     this.handyman,
     this.totalRevenue,
@@ -57,30 +57,30 @@ class DashboardResponse {
     this.commission,
     this.subscription,
     this.earningType,
-    this.privacy_policy,
-    this.term_conditions,
-    this.inquriy_email,
-    this.helpline_number,
+    this.privacyPolicy,
+    this.termConditions,
+    this.inquriyEmail,
+    this.helplineNumber,
     this.providerWallet,
-    this.language_option,
-    this.online_handyman,
+    this.languageOption,
+    this.onlineHandyman,
   });
 
   DashboardResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     totalBooking = json['total_booking'];
     totalRevenue = json['total_revenue'];
-    total_service = json['total_service'];
-    total_handyman = json['total_handyman'];
-    is_subscribed = json['is_subscribed'] ?? 0;
+    totalService = json['total_service'];
+    totalHandyman = json['total_handyman'];
+    isSubscribed = json['is_subscribed'] ?? 0;
     subscription = json['subscription'] != null ? ProviderSubscriptionModel.fromJson(json['subscription']) : null;
     commission = json['commission'] != null ? Commission.fromJson(json['commission']) : null;
     configurations = json['configurations'] != null ? (json['configurations'] as List).map((i) => Configurations.fromJson(i)).toList() : null;
     paymentSettings = json['payment_settings'] != null ? (json['payment_settings'] as List).map((i) => PaymentSetting.fromJson(i)).toList() : null;
-    privacy_policy = json['privacy_policy'] != null ? PrivacyPolicy.fromJson(json['privacy_policy']) : null;
-    term_conditions = json['term_conditions'] != null ? PrivacyPolicy.fromJson(json['term_conditions']) : null;
-    inquriy_email = json['inquriy_email'];
-    helpline_number = json['helpline_number'];
+    privacyPolicy = json['privacy_policy'] != null ? PrivacyPolicy.fromJson(json['privacy_policy']) : null;
+    termConditions = json['term_conditions'] != null ? PrivacyPolicy.fromJson(json['term_conditions']) : null;
+    inquriyEmail = json['inquriy_email'];
+    helplineNumber = json['helpline_number'];
     if (json['service'] != null) {
       service = [];
       json['service'].forEach((v) {
@@ -114,31 +114,31 @@ class DashboardResponse {
       }
     });
 
-    isPlanAboutToExpire = is_subscribed == 1;
-    userNeverPurchasedPlan = is_subscribed == 0 && subscription == null;
-    isPlanExpired = is_subscribed == 0 && subscription != null;
+    isPlanAboutToExpire = isSubscribed == 1;
+    userNeverPurchasedPlan = isSubscribed == 0 && subscription == null;
+    isPlanExpired = isSubscribed == 0 && subscription != null;
     earningType = json['earning_type'];
     providerWallet = json['provider_wallet'] != null ? ProviderWallet.fromJson(json['provider_wallet']) : null;
 
     // providerWallet = json['provider_wallet'] != null ? (json['provider_wallet'] as List).map((i) => ProviderWallet.fromJson(i)).toList() : null;
-    language_option = json['language_option'] != null ? (json['language_option'] as List).map((i) => LanguageOption.fromJson(i)).toList() : null;
-    online_handyman = json['online_handyman'] != null ? json['online_handyman'].cast<String>() : null;
+    languageOption = json['language_option'] != null ? (json['language_option'] as List).map((i) => LanguageOption.fromJson(i)).toList() : null;
+    onlineHandyman = json['online_handyman'] != null ? json['online_handyman'].cast<String>() : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
     data['total_booking'] = this.totalBooking;
-    data['is_subscribed'] = this.is_subscribed;
-    data['total_service'] = this.total_service;
-    if (this.privacy_policy != null) {
-      data['privacy_policy'] = this.privacy_policy;
+    data['is_subscribed'] = this.isSubscribed;
+    data['total_service'] = this.totalService;
+    if (this.privacyPolicy != null) {
+      data['privacy_policy'] = this.privacyPolicy;
     }
-    if (this.term_conditions != null) {
-      data['term_conditions'] = this.term_conditions;
+    if (this.termConditions != null) {
+      data['term_conditions'] = this.termConditions;
     }
-    data['inquriy_email'] = this.inquriy_email;
-    data['helpline_number'] = this.helpline_number;
+    data['inquriy_email'] = this.inquriyEmail;
+    data['helpline_number'] = this.helplineNumber;
     if (this.commission != null) {
       data['commission'] = this.commission!.toJson();
     }
@@ -148,7 +148,7 @@ class DashboardResponse {
     if (this.configurations != null) {
       data['configurations'] = this.configurations!.map((v) => v.toJson()).toList();
     }
-    data['total_handyman'] = this.total_handyman;
+    data['total_handyman'] = this.totalHandyman;
     if (this.service != null) {
       data['service'] = this.service!.map((v) => v.toJson()).toList();
     }
@@ -163,13 +163,13 @@ class DashboardResponse {
     }
     data['total_revenue'] = this.totalRevenue;
     data['earning_type'] = this.earningType;
-    data['online_handyman'] = this.online_handyman;
+    data['online_handyman'] = this.onlineHandyman;
     if (this.providerWallet != null) {
       data['provider_wallet'] = this.providerWallet!.toJson();
     }
 
-    if (this.language_option != null) {
-      data['language_option'] = this.language_option!.map((v) => v.toJson()).toList();
+    if (this.languageOption != null) {
+      data['language_option'] = this.languageOption!.map((v) => v.toJson()).toList();
     }
 
     return data;
@@ -204,60 +204,70 @@ class PrivacyPolicy {
 }
 
 class LiveValue {
-  String? stripe_url;
-  String? stripe_key;
-  String? stripe_publickey;
-  String? razor_url;
-  String? razor_key;
-  String? razor_secret;
-  String? flutterwave_public;
-  String? flutterwave_secret;
-  String? flutterwave_encryption;
-  String? paystack_public;
+  String? stripeUrl;
+  String? stripeKey;
+  String? stripePublickey;
+  String? razorUrl;
+  String? razorKey;
+  String? razorSecret;
+  String? flutterwavePublic;
+  String? flutterwaveSecret;
+  String? flutterwaveEncryption;
+  String? paystackPublic;
 
-  LiveValue({this.stripe_url, this.stripe_key, this.stripe_publickey, this.razor_url, this.razor_key, this.razor_secret, this.flutterwave_public, this.flutterwave_secret, this.flutterwave_encryption, this.paystack_public});
+  LiveValue(
+      {this.stripeUrl,
+      this.stripeKey,
+      this.stripePublickey,
+      this.razorUrl,
+      this.razorKey,
+      this.razorSecret,
+      this.flutterwavePublic,
+      this.flutterwaveSecret,
+      this.flutterwaveEncryption,
+      this.paystackPublic});
 
   factory LiveValue.fromJson(Map<String, dynamic> json) {
     return LiveValue(
-      stripe_url: json['stripe_url'],
-      stripe_key: json['stripe_key'],
-      stripe_publickey: json['stripe_publickey'],
-      razor_url: json['razor_url'],
-      razor_key: json['razor_key'],
-      razor_secret: json['razor_secret'],
-      flutterwave_public: json['flutterwave_public'],
-      flutterwave_secret: json['flutterwave_secret'],
-      flutterwave_encryption: json['flutterwave_encryption'],
-      paystack_public: json['paystack_public'],
+      stripeUrl: json['stripe_url'],
+      stripeKey: json['stripe_key'],
+      stripePublickey: json['stripe_publickey'],
+      razorUrl: json['razor_url'],
+      razorKey: json['razor_key'],
+      razorSecret: json['razor_secret'],
+      flutterwavePublic: json['flutterwave_public'],
+      flutterwaveSecret: json['flutterwave_secret'],
+      flutterwaveEncryption: json['flutterwave_encryption'],
+      paystackPublic: json['paystack_public'],
     );
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['stripe_url'] = this.stripe_url;
-    data['stripe_key'] = this.stripe_key;
-    data['stripe_publickey'] = this.stripe_publickey;
-    data['razor_url'] = this.razor_url;
-    data['razor_key'] = this.razor_key;
-    data['razor_secret'] = this.razor_secret;
-    data['flutterwave_public'] = this.flutterwave_public;
-    data['flutterwave_secret'] = this.flutterwave_secret;
-    data['flutterwave_encryption'] = this.flutterwave_encryption;
-    data['paystack_public'] = this.paystack_public;
+    data['stripe_url'] = this.stripeUrl;
+    data['stripe_key'] = this.stripeKey;
+    data['stripe_publickey'] = this.stripePublickey;
+    data['razor_url'] = this.razorUrl;
+    data['razor_key'] = this.razorKey;
+    data['razor_secret'] = this.razorSecret;
+    data['flutterwave_public'] = this.flutterwavePublic;
+    data['flutterwave_secret'] = this.flutterwaveSecret;
+    data['flutterwave_encryption'] = this.flutterwaveEncryption;
+    data['paystack_public'] = this.paystackPublic;
     return data;
   }
 }
 
 class PaymentSetting {
   int? id;
-  int? is_test;
-  LiveValue? live_value;
+  int? isTest;
+  LiveValue? liveValue;
   int? status;
   String? title;
   String? type;
-  LiveValue? test_value;
+  LiveValue? testValue;
 
-  PaymentSetting({this.id, this.is_test, this.live_value, this.status, this.title, this.type, this.test_value});
+  PaymentSetting({this.id, this.isTest, this.liveValue, this.status, this.title, this.type, this.testValue});
 
   static String encode(List<PaymentSetting> paymentList) {
     return json.encode(paymentList.map<Map<String, dynamic>>((payment) => payment.toJson()).toList());
@@ -270,27 +280,27 @@ class PaymentSetting {
   factory PaymentSetting.fromJson(Map<String, dynamic> json) {
     return PaymentSetting(
       id: json['id'],
-      is_test: json['is_test'],
-      live_value: json['live_value'] != null ? LiveValue.fromJson(json['live_value']) : null,
+      isTest: json['is_test'],
+      liveValue: json['live_value'] != null ? LiveValue.fromJson(json['live_value']) : null,
       status: json['status'],
       title: json['title'],
       type: json['type'],
-      test_value: json['value'] != null ? LiveValue.fromJson(json['value']) : null,
+      testValue: json['value'] != null ? LiveValue.fromJson(json['value']) : null,
     );
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['is_test'] = this.is_test;
+    data['is_test'] = this.isTest;
     data['status'] = this.status;
     data['title'] = this.title;
     data['type'] = this.type;
-    if (this.live_value != null) {
-      data['live_value'] = this.live_value?.toJson();
+    if (this.liveValue != null) {
+      data['live_value'] = this.liveValue?.toJson();
     }
-    if (this.test_value != null) {
-      data['value'] = this.test_value?.toJson();
+    if (this.testValue != null) {
+      data['value'] = this.testValue?.toJson();
     }
     return data;
   }
@@ -479,39 +489,39 @@ class Configurations {
 
 class Commission {
   int? commission;
-  String? created_at;
-  String? deleted_at;
+  String? createdAt;
+  String? deletedAt;
   int? id;
   String? name;
   int? status;
   String? type;
-  String? updated_at;
+  String? updatedAt;
 
-  Commission({this.commission, this.created_at, this.deleted_at, this.id, this.name, this.status, this.type, this.updated_at});
+  Commission({this.commission, this.createdAt, this.deletedAt, this.id, this.name, this.status, this.type, this.updatedAt});
 
   factory Commission.fromJson(Map<String, dynamic> json) {
     return Commission(
       commission: json['commission'],
-      created_at: json['created_at'],
-      deleted_at: json['deleted_at'],
+      createdAt: json['created_at'],
+      deletedAt: json['deleted_at'],
       id: json['id'],
       name: json['name'],
       status: json['status'],
       type: json['type'],
-      updated_at: json['updated_at'],
+      updatedAt: json['updated_at'],
     );
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['commission'] = this.commission;
-    data['created_at'] = this.created_at;
+    data['created_at'] = this.createdAt;
     data['id'] = this.id;
     data['name'] = this.name;
     data['status'] = this.status;
     data['type'] = this.type;
-    data['updated_at'] = this.updated_at;
-    data['deleted_at'] = this.deleted_at;
+    data['updated_at'] = this.updatedAt;
+    data['deleted_at'] = this.deletedAt;
     return data;
   }
 }
@@ -585,15 +595,15 @@ class ProviderWallet {
 }
 
 class LanguageOption {
-  String? flag_image;
+  String? flagImage;
   String? id;
   String? title;
 
-  LanguageOption({this.flag_image, this.id, this.title});
+  LanguageOption({this.flagImage, this.id, this.title});
 
   factory LanguageOption.fromJson(Map<String, dynamic> json) {
     return LanguageOption(
-      flag_image: json['flag_image'],
+      flagImage: json['flag_image'],
       id: json['id'],
       title: json['title'],
     );
@@ -601,7 +611,7 @@ class LanguageOption {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['flag_image'] = this.flag_image;
+    data['flag_image'] = this.flagImage;
     data['id'] = this.id;
     data['title'] = this.title;
     return data;

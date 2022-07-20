@@ -9,15 +9,15 @@ import 'package:handyman_provider_flutter/components/no_internet_component.dart'
 import 'package:handyman_provider_flutter/locale/applocalizations.dart';
 import 'package:handyman_provider_flutter/locale/base_language.dart';
 import 'package:handyman_provider_flutter/models/file_model.dart';
+import 'package:handyman_provider_flutter/models/remote_config_data_model.dart';
 import 'package:handyman_provider_flutter/models/revenue_chart_data.dart';
 import 'package:handyman_provider_flutter/networks/firebase_services/auth_services.dart';
 import 'package:handyman_provider_flutter/networks/firebase_services/chat_messages_service.dart';
 import 'package:handyman_provider_flutter/networks/firebase_services/notification_service.dart';
 import 'package:handyman_provider_flutter/networks/firebase_services/user_services.dart';
-import 'package:handyman_provider_flutter/provider/booking/p_booking_detail_screen.dart';
+import 'package:handyman_provider_flutter/screens/booking_detail_screen.dart';
 import 'package:handyman_provider_flutter/screens/splash_screen.dart';
 import 'package:handyman_provider_flutter/store/AppStore.dart';
-import 'package:handyman_provider_flutter/utils/app_common.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
 import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
@@ -50,10 +50,11 @@ List<RevenueChartData> chartData = [];
 //endregion
 
 //region Chat Variable
-String mSelectedImage = "assets/default_wallpaper.png";
 bool mIsEnterKey = false;
 String currentPackageName = '';
 //endregion
+
+RemoteConfigDataModel remoteConfigDataModel = RemoteConfigDataModel();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -63,14 +64,20 @@ void main() async {
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
     }).catchError((e) {
       log(e.toString());
-      return e;
     });
   }
 
+  defaultSettings();
+
   await initialize();
+
   localeLanguageList = languageList();
 
-  defaultSettings();
+  Firebase.initializeApp().then((value) async {
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
+    await setupFirebaseRemoteConfig();
+  });
 
   appStore.setLanguage(DEFAULT_LANGUAGE);
   await appStore.setLoggedIn(getBoolAsync(IS_LOGGED_IN));
@@ -100,7 +107,7 @@ class _MyAppState extends State<MyApp> {
     OneSignal.shared.setNotificationOpenedHandler((OSNotificationOpenedResult notification) {
       try {
         var notId = notification.notification.additionalData!.containsKey('id') ? notification.notification.additionalData!['id'] : 0;
-        push(BookingDetailScreen(bookingId: notId.toString().toInt()));
+        push(CommonBookingDetailScreen(bookingId: notId.toString().toInt()));
       } catch (e) {
         throw errorSomethingWentWrong;
       }
@@ -108,9 +115,9 @@ class _MyAppState extends State<MyApp> {
     afterBuildCreated(() {
       int val = getIntAsync(THEME_MODE_INDEX);
 
-      if (val == ThemeModeLight) {
+      if (val == THEME_MODE_LIGHT) {
         appStore.setDarkMode(false);
-      } else if (val == ThemeModeDark) {
+      } else if (val == THEME_MODE_DARK) {
         appStore.setDarkMode(true);
       }
 
@@ -141,25 +148,57 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(
-      builder: (_) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        navigatorKey: navigatorKey,
-        home: SplashScreen(),
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        themeMode: appStore.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-        scrollBehavior: SBehavior(),
-        supportedLocales: LanguageDataModel.languageLocales(),
-        localizationsDelegates: [
-          AppLocalizations(),
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        localeResolutionCallback: (locale, supportedLocales) => locale,
-        locale: Locale(appStore.selectedLanguageCode),
+    return RestartWidget(
+      child: Observer(
+        builder: (_) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          navigatorKey: navigatorKey,
+          home: SplashScreen(),
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: appStore.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+          supportedLocales: LanguageDataModel.languageLocales(),
+          localizationsDelegates: [
+            AppLocalizations(),
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          localeResolutionCallback: (locale, supportedLocales) => locale,
+          locale: Locale(appStore.selectedLanguageCode),
+        ),
       ),
+    );
+  }
+}
+
+class RestartWidget extends StatefulWidget {
+  final Widget child;
+
+  RestartWidget({required this.child});
+
+  static void restartApp(BuildContext context) {
+    context.findAncestorStateOfType<_RestartWidgetState>()?.restartApp();
+  }
+
+  @override
+  _RestartWidgetState createState() => _RestartWidgetState();
+}
+
+class _RestartWidgetState extends State<RestartWidget> {
+  Key key = UniqueKey();
+
+  void restartApp() {
+    setState(() {
+      key = UniqueKey();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return KeyedSubtree(
+      key: key,
+      child: widget.child,
     );
   }
 }

@@ -26,28 +26,28 @@ class UserTypeResponse {
 }
 
 class UserTypeData {
-  String? created_at;
+  String? createdAt;
   int? id;
   String? name;
-  String? updated_at;
+  String? updatedAt;
 
-  UserTypeData({this.created_at, this.id, this.name, this.updated_at});
+  UserTypeData({this.createdAt, this.id, this.name, this.updatedAt});
 
   factory UserTypeData.fromJson(Map<String, dynamic> json) {
     return UserTypeData(
-      created_at: json['created_at'],
+      createdAt: json['created_at'],
       id: json['id'],
       name: json['name'],
-      updated_at: json['updated_at'],
+      updatedAt: json['updated_at'],
     );
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['created_at'] = this.created_at;
+    data['created_at'] = this.createdAt;
     data['id'] = this.id;
     data['name'] = this.name;
-    data['updated_at'] = this.updated_at;
+    data['updated_at'] = this.updatedAt;
     return data;
   }
 }

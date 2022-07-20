@@ -2,24 +2,24 @@ import 'package:handyman_provider_flutter/locale/base_language.dart';
 // class LanguageFr extends Languages{}
 
 class LanguageFr extends Languages {
-   //Helpi
+  //Helpi
 
-   @override
-   String lblInvalidEmail = '';
-   @override
-   String lblInvalidUsername = '';
-   @override
-   String lblRetryErr = "";
-   @override
-   String lblWrongErr = "";
-   @override
-   String lblInternetErr = "";
-   @override
-   String lblInvalidEmailSpaces = "";
-   @override
-   String tycRequired = '';
-   @override
-   String signUpSuccess = "";
+  @override
+  String lblInvalidEmail = '';
+  @override
+  String lblInvalidUsername = '';
+  @override
+  String lblRetryErr = "";
+  @override
+  String lblWrongErr = "";
+  @override
+  String lblInternetErr = "";
+  @override
+  String lblInvalidEmailSpaces = "";
+  @override
+  String tycRequired = '';
+  @override
+  String signUpSuccess = "";
 
   //Helpi
 
@@ -45,6 +45,15 @@ class LanguageFr extends Languages {
   String lblHandymanDashboard = 'Tableau de tableau de bord';
 
   @override
+  String lblShowingOnly4Handyman = 'Montrant seulement 4 bricoles';
+
+  @override
+  String lblRecentlyOnlineHandyman = 'Handyman récemment en ligne';
+
+  @override
+  String lblStartDrive = 'Démarrer';
+
+  @override
   String handyman = 'Bricoleur';
 
   @override
@@ -54,10 +63,10 @@ class LanguageFr extends Languages {
   String signUp = 'S\'inscrire';
 
   @override
-  String signInTitle = 'Signin dans votre \ Nocount';
+  String signInTitle = 'Signe dans votre compte';
 
   @override
-  String signUpTitle = 'Inscrivez-vous dans votre \ Nocount';
+  String signUpTitle = 'Inscrivez-vous à votre compte';
 
   @override
   String hintNameTxt = 'Entrez votre nom';
@@ -204,7 +213,7 @@ class LanguageFr extends Languages {
   String serviceDetail = 'Détail de service';
 
   @override
-  String confirmationRequestTxt = 'Es-tu sûr?';
+  String confirmationRequestTxt = 'Êtes-vous sûr de vouloir effectuer cette action?';
 
   @override
   String notAvailable = 'Pas disponible';
@@ -967,4 +976,67 @@ class LanguageFr extends Languages {
 
   @override
   String get lblHandymanIsOffline => "Handyman est hors ligne";
+
+  @override
+  String get lblDoYouWantToRestore => "Voulez-vous restaurer?";
+
+  @override
+  String get lblDoYouWantToDeleteForcefully => "Voulez-vous supprimer avec force?";
+
+  @override
+  String get lblDoYouWantToDelete => "Voulez-vous supprimer?";
+
+  @override
+  String get lblPleaseEnterMobileNumber => "Veuillez saisir le numéro de mobile";
+
+  @override
+  String get lblContactNumberMustBe10DigitOnly => "Le numéro de contact doit être à 10 chiffres uniquement";
+
+  @override
+  String get lblDangerZone => "Zone dangereuse";
+
+  @override
+  String get lblDeleteAccount => "Supprimer le compte";
+
+  @override
+  String get lblDeleteAccountConformation => "Votre compte sera supprimé en permanence. Vos données ne seront plus restaurées.";
+
+  @override
+  String get lblUnderMaintenance => "En maintenance...";
+
+  @override
+  String get lblCatchUpAfterAWhile => "Rattraper après un moment";
+
+  @override
+  String get lblRecheck => "Revérifier";
+
+  @override
+  String get lblTrialFor => "Juger";
+
+  @override
+  String get lblDays => "Journées";
+
+  @override
+  String get lblFreeTrial => "Essai gratuit";
+
+  @override
+  String get lblAtLeastOneImage => "Choisissez au moins une image";
+
+  @override
+  String get lblService => "Service";
+
+  @override
+  String get lblTransactionError => "Erreur de transaction";
+
+  @override
+  String get lblTransactionCancelled => "Transaction annulée";
+
+  @override
+  String get lblPaymentSuccessfullyDone => "Paiement avec succès effectué";
+
+  @override
+  String get lblNewUpdate => "Nouvelle mise à jour";
+
+  @override
+  String get lblOptionalUpdateNotify => "Mise à jour facultative notification";
 }

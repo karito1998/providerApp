@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:handyman_provider_flutter/components/app_widgets.dart';
 import 'package:handyman_provider_flutter/components/back_widget.dart';
+import 'package:handyman_provider_flutter/components/background_component.dart';
+import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/service_address_response.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
-import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/model_keys.dart';
-import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../../main.dart';
-import 'component/service_addresses_component.dart';
+import 'components/service_addresses_component.dart';
 
 class ServiceAddressesScreen extends StatefulWidget {
   final bool? isUpdate;
@@ -163,7 +164,7 @@ class ServiceAddressesScreenState extends State<ServiceAddressesScreen> {
                       controller: addressNameCont,
                       validator: (s) {
                         if (s!.isEmpty)
-                           return context.translate.lblRequired;
+                          return errorThisFieldRequired;
                         else
                           return null;
                       },
@@ -232,24 +233,25 @@ class ServiceAddressesScreenState extends State<ServiceAddressesScreen> {
         },
         child: Stack(
           children: [
-            ListView.builder(
-              physics: AlwaysScrollableScrollPhysics(),
-              controller: scrollController,
-              itemCount: serviceAddressList.length,
-              shrinkWrap: true,
-              padding: EdgeInsets.all(16),
-              itemBuilder: (_, i) {
-                AddressResponse data = serviceAddressList[i];
-                return ServiceAddressesComponent(
-                  data,
-                  onUpdate: () async {
-                    serviceAddressList.removeAt(i);
-                    setState(() {});
-                  },
-                );
-              },
-            ),
-            Observer(builder: (_) => noDataFound(context).center().visible(!appStore.isLoading && serviceAddressList.isEmpty)),
+            if (serviceAddressList.isNotEmpty)
+              AnimatedListView(
+                physics: AlwaysScrollableScrollPhysics(),
+                controller: scrollController,
+                itemCount: serviceAddressList.length,
+                slideConfiguration: SlideConfiguration(duration: 400.milliseconds, delay: 50.milliseconds),
+                shrinkWrap: true,
+                padding: EdgeInsets.all(16),
+                itemBuilder: (_, i) {
+                  return ServiceAddressesComponent(
+                    serviceAddressList[i],
+                    onUpdate: () async {
+                      serviceAddressList.removeAt(i);
+                      setState(() {});
+                    },
+                  );
+                },
+              ),
+            Observer(builder: (_) => BackgroundComponent().center().visible(!appStore.isLoading && serviceAddressList.isEmpty)),
             Observer(builder: (_) => LoaderWidget().center().visible(appStore.isLoading)),
           ],
         ),

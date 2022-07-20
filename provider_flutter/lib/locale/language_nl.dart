@@ -1,24 +1,24 @@
 import 'package:handyman_provider_flutter/locale/base_language.dart';
 
 class LanguageNl extends Languages {
-   //Helpi
+  //Helpi
 
-   @override
-   String lblInvalidEmail = '';
-   @override
-   String lblInvalidUsername = '';
-   @override
-   String lblRetryErr = "";
-   @override
-   String lblWrongErr = "";
-   @override
-   String lblInternetErr = "";
-   @override
-   String lblInvalidEmailSpaces = "";
-   @override
-   String tycRequired = '';
-   @override
-   String signUpSuccess = "";
+  @override
+  String lblInvalidEmail = '';
+  @override
+  String lblInvalidUsername = '';
+  @override
+  String lblRetryErr = "";
+  @override
+  String lblWrongErr = "";
+  @override
+  String lblInternetErr = "";
+  @override
+  String lblInvalidEmailSpaces = "";
+  @override
+  String tycRequired = '';
+  @override
+  String signUpSuccess = "";
 
   //Helpi
 
@@ -44,6 +44,15 @@ class LanguageNl extends Languages {
   String lblHandymanDashboard = 'Handig dashboard';
 
   @override
+  String lblShowingOnly4Handyman = 'Sadece 4 tamirci gösteriyor';
+
+  @override
+  String lblRecentlyOnlineHandyman = 'Son zamanlarda çevrimiçi tamirci';
+
+  @override
+  String lblStartDrive = 'Sürüşe Başla';
+
+  @override
   String handyman = 'Klusjesman';
 
   @override
@@ -53,10 +62,10 @@ class LanguageNl extends Languages {
   String signUp = 'Inschrijven';
 
   @override
-  String signInTitle = 'Signineren in je \ Naccount';
+  String signInTitle = 'Tograin in uw account';
 
   @override
-  String signUpTitle = 'Meld u aan bij uw \ NAccount';
+  String signUpTitle = 'Meld u aan bij uw account';
 
   @override
   String hintNameTxt = 'Vul uw naam in';
@@ -203,7 +212,7 @@ class LanguageNl extends Languages {
   String serviceDetail = 'Service detail';
 
   @override
-  String confirmationRequestTxt = 'Weet je zeker dat?';
+  String confirmationRequestTxt = 'Wilt u deze actie zeker uitvoeren?';
 
   @override
   String notAvailable = 'Niet beschikbaar';
@@ -965,4 +974,67 @@ class LanguageNl extends Languages {
 
   @override
   String get lblHandymanIsOffline => "Tamirci çevrimdışı";
+
+  @override
+  String get lblDoYouWantToRestore => "Geri yüklemek ister misin?";
+
+  @override
+  String get lblDoYouWantToDeleteForcefully => "Zorla silmek ister misiniz?";
+
+  @override
+  String get lblDoYouWantToDelete => "Silmek istiyor musunuz?";
+
+  @override
+  String get lblPleaseEnterMobileNumber => "Lütfen cep telefonu numarasını girin";
+
+  @override
+  String get lblContactNumberMustBe10DigitOnly => "İletişim numarası sadece 10 haneli olmalıdır";
+
+  @override
+  String get lblDangerZone => "Tehlikeli bölge";
+
+  @override
+  String get lblDeleteAccount => "Hesabı sil";
+
+  @override
+  String get lblDeleteAccountConformation => "Hesabınız kalıcı olarak silinecektir. Verileriniz tekrar geri yüklenmeyecektir.";
+
+  @override
+  String get lblUnderMaintenance => "Bakımda...";
+
+  @override
+  String get lblCatchUpAfterAWhile => "Bir süre sonra yetiş";
+
+  @override
+  String get lblRecheck => "Tekrar kontrol etmek";
+
+  @override
+  String get lblTrialFor => "Yargılamak";
+
+  @override
+  String get lblDays => "Günler";
+
+  @override
+  String get lblFreeTrial => "Ücretsiz deneme";
+
+  @override
+  String get lblAtLeastOneImage => "Bir görüntüyü seçin";
+
+  @override
+  String get lblService => "Hizmet";
+
+  @override
+  String get lblTransactionError => "İşlem hatası";
+
+  @override
+  String get lblTransactionCancelled => "İşlem iptal edildi";
+
+  @override
+  String get lblPaymentSuccessfullyDone => "Ödeme başarıyla yapıldı";
+
+  @override
+  String get lblNewUpdate => "Yeni güncelleme";
+
+  @override
+  String get lblOptionalUpdateNotify => "İsteğe bağlı güncelleme bildirimi";
 }

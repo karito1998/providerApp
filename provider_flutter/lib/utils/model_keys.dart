@@ -52,6 +52,7 @@ class BookingStatusKeys {
   static String complete = 'completed';
   static String cancelled = 'cancelled';
   static String all = 'all';
+  static String paid = 'paid';
 }
 
 class BookingUpdateKeys {

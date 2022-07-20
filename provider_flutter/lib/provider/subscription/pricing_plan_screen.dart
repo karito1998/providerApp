@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:handyman_provider_flutter/components/app_widgets.dart';
 import 'package:handyman_provider_flutter/components/back_widget.dart';
+import 'package:handyman_provider_flutter/components/background_component.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/plan_request_model.dart';
 import 'package:handyman_provider_flutter/models/provider_subscription_model.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
-import 'package:handyman_provider_flutter/provider/dashboard/dashboard_screen.dart';
-import 'package:handyman_provider_flutter/provider/payment/PaymentScreen.dart';
-import 'package:handyman_provider_flutter/utils/colors.dart';
-import 'package:handyman_provider_flutter/utils/common.dart';
+import 'package:handyman_provider_flutter/provider/payment/payment_screen.dart';
+import 'package:handyman_provider_flutter/provider/provider_dashboard_screen.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
-import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class PricingPlanScreen extends StatefulWidget {
@@ -141,11 +141,11 @@ class _PricingPlanScreenState extends State<PricingPlanScreen> {
                                             if (data.trialPeriod.validate() != 0 && data.identifier == FREE)
                                               RichText(
                                                 text: TextSpan(
-                                                  text: ' (Prueba por ',
+                                                  text: ' ( ${context.translate.lblTrialFor} ',
                                                   style: secondaryTextStyle(),
                                                   children: <TextSpan>[
                                                     TextSpan(text: '${data.trialPeriod.validate()}', style: boldTextStyle()),
-                                                    TextSpan(text: '  dias)', style: secondaryTextStyle()),
+                                                    TextSpan(text: '  ${context.translate.lblDays} )', style: secondaryTextStyle()),
                                                   ],
                                                 ),
                                               ),
@@ -162,14 +162,14 @@ class _PricingPlanScreenState extends State<PricingPlanScreen> {
                                   padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                                   child: Text(
                                     data.identifier == FREE
-                                        ? 'Gratuito'
-                                        : "${appStore.currencySymbol}${data.amount.validate().toStringAsFixed(decimalPoint).formatNumberWithComma()}/${data.type.validate()}",
+                                        ? '${context.translate.lblFreeTrial}'
+                                        : "${appStore.currencySymbol}${data.amount.validate().toStringAsFixed(DECIMAL_POINT).formatNumberWithComma()}/${data.type.validate()}",
                                     style: boldTextStyle(color: white, size: 12),
                                   ),
                                 ),
                               ],
                             ),
-                            if (data.plan_limitation != null)
+                            if (data.planLimitation != null)
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -186,25 +186,25 @@ class _PricingPlanScreenState extends State<PricingPlanScreen> {
                                       children: [
                                         Row(
                                           children: [
-                                            Image.asset(getPlanStatusImage(limitData: data.plan_limitation!.service!), width: 14, height: 14),
+                                            Image.asset(getPlanStatusImage(limitData: data.planLimitation!.service!), width: 14, height: 14),
                                             8.width,
-                                            getPlanStatus(limitData: data.plan_limitation!.service!, name: 'Services'),
+                                            getPlanStatus(limitData: data.planLimitation!.service!, name: 'Services'),
                                           ],
                                         ),
                                         8.height,
                                         Row(
                                           children: [
-                                            Image.asset(getPlanStatusImage(limitData: data.plan_limitation!.handyman!), width: 14, height: 14),
+                                            Image.asset(getPlanStatusImage(limitData: data.planLimitation!.handyman!), width: 14, height: 14),
                                             8.width,
-                                            getPlanStatus(limitData: data.plan_limitation!.handyman!, name: 'Handyman'),
+                                            getPlanStatus(limitData: data.planLimitation!.handyman!, name: 'Handyman'),
                                           ],
                                         ),
                                         8.height,
                                         Row(
                                           children: [
-                                            Image.asset(getPlanStatusImage(limitData: data.plan_limitation!.featured_service!), width: 14, height: 14),
+                                            Image.asset(getPlanStatusImage(limitData: data.planLimitation!.featuredService!), width: 14, height: 14),
                                             8.width,
-                                            getPlanStatus(limitData: data.plan_limitation!.featured_service!, name: 'Featured Services'),
+                                            getPlanStatus(limitData: data.planLimitation!.featuredService!, name: 'Featured Services'),
                                           ],
                                         )
                                       ],
@@ -231,8 +231,7 @@ class _PricingPlanScreenState extends State<PricingPlanScreen> {
                 left: 16,
                 right: 16,
                 child: AppButton(
-                  child:
-                      Text(selectedPricingPlan!.identifier == FREE ? context.translate.lblProceed.toUpperCase() : context.translate.lblMakePayment.toUpperCase(), style: boldTextStyle(color: white)),
+                  child: Text(selectedPricingPlan!.identifier == FREE ? context.translate.lblProceed.toUpperCase() : context.translate.lblMakePayment.toUpperCase(), style: boldTextStyle(color: white)),
                   color: primaryColor,
                   onTap: () async {
                     if (selectedPricingPlan!.identifier == FREE) {
@@ -241,16 +240,16 @@ class _PricingPlanScreenState extends State<PricingPlanScreen> {
                         ..description = selectedPricingPlan!.description
                         ..duration = selectedPricingPlan!.duration
                         ..identifier = selectedPricingPlan!.identifier
-                        ..other_transaction_detail = ''
-                        ..payment_status = 'paid'
-                        ..payment_type = ""
-                        ..plan_id = selectedPricingPlan!.id
-                        ..plan_limitation = selectedPricingPlan!.plan_limitation
-                        ..plan_type = selectedPricingPlan!.plan_type
+                        ..otherTransactionDetail = ''
+                        ..paymentStatus = 'paid'
+                        ..paymentType = ""
+                        ..planId = selectedPricingPlan!.id
+                        ..planLimitation = selectedPricingPlan!.planLimitation
+                        ..planType = selectedPricingPlan!.planType
                         ..title = selectedPricingPlan!.title
-                        ..txn_id = ''
+                        ..txnId = ''
                         ..type = selectedPricingPlan!.type
-                        ..user_id = appStore.userId;
+                        ..userId = appStore.userId;
 
                       log('Request : ${planRequestModel.toJson()}');
                       appStore.setLoading(true);
@@ -259,7 +258,7 @@ class _PricingPlanScreenState extends State<PricingPlanScreen> {
                         appStore.setLoading(false);
                         toast("${selectedPricingPlan!.title.validate()} is successFully activated");
 
-                        push(DashboardScreen(index: 0), isNewTask: true);
+                        push(ProviderDashboardScreen(index: 0), isNewTask: true, pageRouteAnimation: PageRouteAnimation.Fade);
                       }).catchError((e) {
                         appStore.setLoading(false);
                         log(e.toString());
@@ -270,7 +269,7 @@ class _PricingPlanScreenState extends State<PricingPlanScreen> {
                   },
                 ),
               ),
-            Observer(builder: (_) => noDataFound(context).center().visible(!appStore.isLoading && pricingPlanList.isEmpty && !hasError)),
+            Observer(builder: (_) => BackgroundComponent().center().visible(!appStore.isLoading && pricingPlanList.isEmpty && !hasError)),
             Text(errorSomethingWentWrong, style: secondaryTextStyle()).center().visible(hasError),
             Observer(builder: (_) => LoaderWidget().center().visible(appStore.isLoading)),
           ],

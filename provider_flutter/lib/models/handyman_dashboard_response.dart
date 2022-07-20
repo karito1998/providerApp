@@ -1,62 +1,62 @@
 import 'package:handyman_provider_flutter/main.dart';
+import 'package:handyman_provider_flutter/models/booking_detail_response.dart';
 import 'package:handyman_provider_flutter/models/dashboard_response.dart';
-import 'package:handyman_provider_flutter/models/handyman_review_response.dart';
 import 'package:handyman_provider_flutter/models/revenue_chart_data.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class HandymanDashBoardResponse {
   Commission? commission;
 
-  List<HandymanReview>? handyman_reviews;
+  List<RatingData>? handymanReviews;
   bool? status;
-  num? today_booking;
-  num? total_booking;
-  num? total_revenue;
-  num? upcomming_booking;
+  num? todayBooking;
+  num? totalBooking;
+  num? totalRevenue;
+  num? upcommingBooking;
   List<Configurations>? configurations;
   List<double>? chartArray;
   List<int>? monthData;
-  PrivacyPolicy? privacy_policy;
-  PrivacyPolicy? term_conditions;
-  String? inquriy_email;
-  String? helpline_number;
-  List<LanguageOption>? language_option;
+  PrivacyPolicy? privacyPolicy;
+  PrivacyPolicy? termConditions;
+  String? inquriyEmail;
+  String? helplineNumber;
+  List<LanguageOption>? languageOption;
   int? isHandymanAvailable;
 
   HandymanDashBoardResponse({
     this.commission,
-    this.handyman_reviews,
+    this.handymanReviews,
     this.status,
-    this.today_booking,
-    this.total_booking,
+    this.todayBooking,
+    this.totalBooking,
     this.configurations,
-    this.total_revenue,
-    this.upcomming_booking,
+    this.totalRevenue,
+    this.upcommingBooking,
     this.chartArray,
     this.monthData,
-    this.privacy_policy,
-    this.term_conditions,
-    this.inquriy_email,
-    this.helpline_number,
-    this.language_option,
+    this.privacyPolicy,
+    this.termConditions,
+    this.inquriyEmail,
+    this.helplineNumber,
+    this.languageOption,
     this.isHandymanAvailable,
   });
 
   HandymanDashBoardResponse.fromJson(Map<String, dynamic> json) {
     commission = json['commission'] != null ? Commission.fromJson(json['commission']) : null;
     configurations = json['configurations'] != null ? (json['configurations'] as List).map((i) => Configurations.fromJson(i)).toList() : null;
-    handyman_reviews = json['handyman_reviews'] != null ? (json['handyman_reviews'] as List).map((i) => HandymanReview.fromJson(i)).toList() : null;
+    handymanReviews = json['handyman_reviews'] != null ? (json['handyman_reviews'] as List).map((i) => RatingData.fromJson(i)).toList() : null;
     status = json['status'];
-    today_booking = json['today_booking'];
-    total_booking = json['total_booking'];
-    total_revenue = json['total_revenue'];
-    upcomming_booking = json['upcomming_booking'];
-    privacy_policy = json['privacy_policy'] != null ? PrivacyPolicy.fromJson(json['privacy_policy']) : null;
-    term_conditions = json['term_conditions'] != null ? PrivacyPolicy.fromJson(json['term_conditions']) : null;
-    inquriy_email = json['inquriy_email'];
-    helpline_number = json['helpline_number'];
+    todayBooking = json['today_booking'];
+    totalBooking = json['total_booking'];
+    totalRevenue = json['total_revenue'];
+    upcommingBooking = json['upcomming_booking'];
+    privacyPolicy = json['privacy_policy'] != null ? PrivacyPolicy.fromJson(json['privacy_policy']) : null;
+    termConditions = json['term_conditions'] != null ? PrivacyPolicy.fromJson(json['term_conditions']) : null;
+    inquriyEmail = json['inquriy_email'];
+    helplineNumber = json['helpline_number'];
     List<String> months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-    language_option = json['language_option'] != null ? (json['language_option'] as List).map((i) => LanguageOption.fromJson(i)).toList() : null;
+    languageOption = json['language_option'] != null ? (json['language_option'] as List).map((i) => LanguageOption.fromJson(i)).toList() : null;
     isHandymanAvailable = json['isHandymanAvailable'];
 
     chartArray = [];
@@ -77,31 +77,31 @@ class HandymanDashBoardResponse {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
-    data['today_booking'] = this.today_booking;
-    data['total_booking'] = this.total_booking;
-    data['total_revenue'] = this.total_revenue;
-    if (this.privacy_policy != null) {
-      data['privacy_policy'] = this.privacy_policy;
+    data['today_booking'] = this.todayBooking;
+    data['total_booking'] = this.totalBooking;
+    data['total_revenue'] = this.totalRevenue;
+    if (this.privacyPolicy != null) {
+      data['privacy_policy'] = this.privacyPolicy;
     }
-    if (this.term_conditions != null) {
-      data['term_conditions'] = this.term_conditions;
+    if (this.termConditions != null) {
+      data['term_conditions'] = this.termConditions;
     }
-    data['inquriy_email'] = this.inquriy_email;
-    data['helpline_number'] = this.helpline_number;
+    data['inquriy_email'] = this.inquriyEmail;
+    data['helpline_number'] = this.helplineNumber;
     if (this.configurations != null) {
       data['configurations'] = this.configurations!.map((v) => v.toJson()).toList();
     }
-    data['upcomming_booking'] = this.upcomming_booking;
+    data['upcomming_booking'] = this.upcommingBooking;
     if (this.commission != null) {
       data['commission'] = this.commission!.toJson();
     }
 
-    if (this.handyman_reviews != null) {
-      data['handyman_reviews'] = this.handyman_reviews!.map((v) => v.toJson()).toList();
+    if (this.handymanReviews != null) {
+      data['handyman_reviews'] = this.handymanReviews!.map((v) => v.toJson()).toList();
     }
 
-    if (this.language_option != null) {
-      data['language_option'] = this.language_option!.map((v) => v.toJson()).toList();
+    if (this.languageOption != null) {
+      data['language_option'] = this.languageOption!.map((v) => v.toJson()).toList();
     }
     data['isHandymanAvailable'] = this.isHandymanAvailable;
 
@@ -111,39 +111,39 @@ class HandymanDashBoardResponse {
 
 class Commission {
   int? commission;
-  String? created_at;
-  String? deleted_at;
+  String? createdAt;
+  String? deletedAt;
   int? id;
   String? name;
   int? status;
   String? type;
-  String? updated_at;
+  String? updatedAt;
 
-  Commission({this.commission, this.created_at, this.deleted_at, this.id, this.name, this.status, this.type, this.updated_at});
+  Commission({this.commission, this.createdAt, this.deletedAt, this.id, this.name, this.status, this.type, this.updatedAt});
 
   factory Commission.fromJson(Map<String, dynamic> json) {
     return Commission(
       commission: json['commission'],
-      created_at: json['created_at'],
-      deleted_at: json['deleted_at'],
+      createdAt: json['created_at'],
+      deletedAt: json['deleted_at'],
       id: json['id'],
       name: json['name'],
       status: json['status'],
       type: json['type'],
-      updated_at: json['updated_at'],
+      updatedAt: json['updated_at'],
     );
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['commission'] = this.commission;
-    data['created_at'] = this.created_at;
+    data['created_at'] = this.createdAt;
     data['id'] = this.id;
     data['name'] = this.name;
     data['status'] = this.status;
     data['type'] = this.type;
-    data['updated_at'] = this.updated_at;
-    data['deleted_at'] = this.deleted_at;
+    data['updated_at'] = this.updatedAt;
+    data['deleted_at'] = this.deletedAt;
     return data;
   }
 }

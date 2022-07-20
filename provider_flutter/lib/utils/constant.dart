@@ -1,68 +1,36 @@
-import 'package:nb_utils/nb_utils.dart';
-
-//region App Name
-const mAppName = 'HelpiRD';
-//endregion
-
-//region AppBase URl
-const url = 'https://helpird.com'; // Don't add slash at the end of the url
-const mBaseUrl = "$url/api/";
-
-const termsConditionUrl = 'https://helpird.com/#/term-conditions';
-const privacyPolicyUrl = 'https://helpird.com/#/privacy-policy';
-const purchaseUrl = 'https://codecanyon.net/item/handyman-service-flutter-ondemand-home-services-app-with-complete-solution/33776097?s_rank=5';
-const helpSupportUrl = 'https://helpird.com/#/contact-us';
-const packageName = "com.iqonic.provider"; // Don't Change it.
-//endregion
+/// DO NOT CHANGE THIS PACKAGE NAME
+const APP_PACKAGE_NAME = "com.iqonic.provider";
 
 //region Configs
-const decimalPoint = 2;
-const defaultLanguage = 'es';
-const perPageItem = 25;
-const planRemainingDays = 15;
+const DECIMAL_POINT = 2;
+const PER_PAGE_ITEM = 25;
+const PLAN_REMAINING_DAYS = 15;
+const LABEL_TEXT_SIZE = 18;
 //endregion
 
 //region Commission Types
-const CommissionTypePercent = 'percent';
-const CommissionTypeFixed = 'fixed';
+const COMMISSION_TYPE_PERCENT = 'percent';
+const COMMISSION_TYPE_FIXED = 'fixed';
 //endregion
 
-const DiscountTypeFixed = 'fixed';
-
-//region One Signal Configuration
-const mOneSignalAppId = '01e97a22-4721-475e-a96d-62948ebfbaf4';
-const mOneSignalChannelId = "0ee01f0d-2e1c-4554-9050-27dd9c020292";
-const mOneSignalRestKey = "NzFhNDZjYTEtOWUzYS00NzgxLThlZDktODYyYWZmOTQ1ODJk";
-//endregion
-
-//region Messages
-var passwordLengthMsg = 'Password length should be more than $passwordLengthGlobal';
-//endregion
-
-//region MapKey
-const API_KEY = 'AIzaSyCHJwjZjGSOBc18-3mJM8tCqDYoV3Nk9tQ';
-//endregion
-
-//region Countdown
-const startTimer = "startTimer";
-const pauseTimer = "pauseTimer";
-const resumeTimer = "resumeTimer";
+//region Discount Type
+const DISCOUNT_TYPE_FIXED = 'fixed';
 //endregion
 
 //region LiveStream Keys
-const tokenStream = 'tokenStream';
-const streamTab = 'streamTab';
-const LiveStreamUpdateBookings = 'LiveStreamUpdateBookings';
-const HandyBoardStream = 'HandyBoardStream';
-const handymanAllBooking = "handymanAllBooking";
-const providerAllBooking = "providerAllBooking";
-
+const LIVESTREAM_TOKEN = 'tokenStream';
+const LIVESTREAM_UPDATE_BOOKINGS = 'LiveStreamUpdateBookings';
+const LIVESTREAM_HANDY_BOARD = 'HandyBoardStream';
+const LIVESTREAM_HANDYMAN_ALL_BOOKING = "handymanAllBooking";
+const LIVESTREAM_PROVIDER_ALL_BOOKING = "providerAllBooking";
+const LIVESTREAM_START_TIMER = "startTimer";
+const LIVESTREAM_PAUSE_TIMER = "pauseTimer";
 //endregion
 
 //region Theme Mode Type
-const ThemeModeLight = 0;
-const ThemeModeDark = 1;
-const ThemeModeSystem = 2;
+const THEME_MODE_LIGHT = 0;
+const THEME_MODE_DARK = 1;
+const THEME_MODE_SYSTEM = 2;
 //endregion
 
 //region SharedPreferences Keys
@@ -102,45 +70,44 @@ const TERM_CONDITIONS = 'TERM_CONDITIONS';
 const INQUIRY_EMAIL = 'INQUIRY_EMAIL';
 const HELPLINE_NUMBER = 'HELPLINE_NUMBER';
 const PASSWORD = 'PASSWORD';
-const IN_MAINTENANCE_MODE = 'inMaintenanceMode';
 const HAS_IN_APP_STORE_REVIEW = 'hasInAppStoreReview1';
 const HAS_IN_PLAY_STORE_REVIEW = 'hasInPlayStoreReview1';
 const HAS_IN_REVIEW = 'hasInReview';
 const SERVER_LANGUAGES = 'SERVER_LANGUAGES';
 const HANDYMAN_AVAILABLE_STATUS = 'HANDYMAN_AVAILABLE_STATUS';
 const DESIGNATION = 'DESIGNATION';
+const UPDATE_NOTIFY = 'UPDATE_NOTIFY';
+//endregion
+
+//region FORCE UPDATE
+const PROVIDER_CHANGE_LOG = 'providerChangeLog';
 //endregion
 
 //region  Login Type
-const UserTypeProvider = 'provider';
-const UserTypeHandyman = 'handyman';
-const UserStatusCode = 1;
+const USER_TYPE_PROVIDER = 'provider';
+const USER_TYPE_HANDYMAN = 'handyman';
+const USER_STATUS_CODE = 1;
 //endregion
 
 //region ProviderType
-const ProviderTypeFreelance = 'freelance';
-const ProviderTypeCompany = 'company';
+const PROVIDER_TYPE_FREELANCE = 'freelance';
+const PROVIDER_TYPE_COMPANY = 'company';
 //endregion
 
 //region Notification Mark as Read
-const MarkAsRead = 'markas_read';
+const MARK_AS_READ = 'markas_read';
 //endregion
 
 //region SERVICE TYPE
 
-const ServiceTypeHourly = 'hourly';
-const ServiceTypeFixed = 'fixed';
-const TXT_HOURLY = 'hr';
+const SERVICE_TYPE_HOURLY = 'hourly';
+const SERVICE_TYPE_FIXED = 'fixed';
 //endregion
 
 //region Errors
 const USER_NOT_CREATED = "User not created";
 const USER_CANNOT_LOGIN = "User can't login";
 const USER_NOT_FOUND = "User not found";
-//endregion
-
-//region service payment method
-const COD = 'cash';
 //endregion
 
 //region service payment status
@@ -192,7 +159,7 @@ const AUDIO = "AUDIO";
 //endregion
 
 //region RTLLanguage
-List<String> RTLLanguage = ['ar', 'ur'];
+const List<String> RTL_LANGUAGES = ['ar', 'ur'];
 //endregion
 
 //region MessageType
@@ -261,6 +228,8 @@ const FREE = 'gratis';
 const ADD_WALLET = 'add_wallet';
 const UPDATE_WALLET = 'update_wallet';
 const WALLET_PAYOUT_TRANSFER = 'wallet_payout_transfer';
+const PAYOUT = 'payout';
+
 //endregion
 
 const GOOGLE_MAP_PREFIX = 'https://www.google.com/maps/search/?api=1&query=';

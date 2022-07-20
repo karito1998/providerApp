@@ -5,7 +5,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:handyman_provider_flutter/components/app_widgets.dart';
 import 'package:handyman_provider_flutter/components/back_widget.dart';
+import 'package:handyman_provider_flutter/components/cached_image_widget.dart';
 import 'package:handyman_provider_flutter/main.dart';
 import 'package:handyman_provider_flutter/models/city_list_response.dart';
 import 'package:handyman_provider_flutter/models/country_list_response.dart';
@@ -14,14 +16,13 @@ import 'package:handyman_provider_flutter/models/state_list_response.dart';
 import 'package:handyman_provider_flutter/networks/network_utils.dart';
 import 'package:handyman_provider_flutter/networks/rest_apis.dart';
 import 'package:handyman_provider_flutter/screens/verify_provider_screen.dart';
-import 'package:handyman_provider_flutter/utils/colors.dart';
 import 'package:handyman_provider_flutter/utils/common.dart';
+import 'package:handyman_provider_flutter/utils/configs.dart';
 import 'package:handyman_provider_flutter/utils/constant.dart';
 import 'package:handyman_provider_flutter/utils/extensions/context_ext.dart';
 import 'package:handyman_provider_flutter/utils/extensions/string_extension.dart';
 import 'package:handyman_provider_flutter/utils/images.dart';
 import 'package:handyman_provider_flutter/utils/model_keys.dart';
-import 'package:handyman_provider_flutter/widgets/app_widgets.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -295,7 +296,7 @@ class HEditProfileScreenState extends State<HEditProfileScreen> {
             SettingItemWidget(
               title: context.translate.lblGallery,
               leading: Icon(Icons.image, color: context.iconColor),
-              onTap: () {
+              onTap: () async {
                 _getFromGallery();
                 finish(context);
               },
@@ -345,25 +346,19 @@ class HEditProfileScreenState extends State<HEditProfileScreen> {
                         children: [
                           Container(
                             decoration: boxDecorationDefault(
-                              border: Border.all(color: primaryColor, width: 2),
+                              border: Border.all(color: context.scaffoldBackgroundColor, width: 4),
                               shape: BoxShape.circle,
                             ),
-                            child: Container(
-                              decoration: boxDecorationDefault(
-                                border: Border.all(color: context.scaffoldBackgroundColor, width: 4),
-                                shape: BoxShape.circle,
-                              ),
-                              child: imageFile != null
-                                  ? Image.file(imageFile!, width: 90, height: 90, fit: BoxFit.cover).cornerRadiusWithClipRRect(45)
-                                  : Observer(
-                                      builder: (_) => cachedImage(
-                                        appStore.userProfileImage,
-                                        height: 100,
-                                        width: 100,
-                                        fit: BoxFit.cover,
-                                      ).cornerRadiusWithClipRRect(64),
+                            child: imageFile != null
+                                ? Image.file(imageFile!, width: 90, height: 90, fit: BoxFit.cover).cornerRadiusWithClipRRect(45)
+                                : Observer(
+                                    builder: (_) => CachedImageWidget(
+                                      url: appStore.userProfileImage,
+                                      height: 100,
+                                      fit: BoxFit.cover,
+                                      radius: 64,
                                     ),
-                            ),
+                                  ),
                           ),
                           Positioned(
                             bottom: 4,
@@ -423,16 +418,15 @@ class HEditProfileScreenState extends State<HEditProfileScreen> {
                         textFieldType: TextFieldType.PHONE,
                         controller: mobileCont,
                         focus: mobileFocus,
+                        maxLength: 13,
+                        buildCounter: (_, {required int currentLength, required bool isFocused, required int? maxLength}) {
+                          return Offstage();
+                        },
                         decoration: inputDecoration(context, hint: context.translate.hintContactNumberTxt),
                         suffix: calling.iconImage(size: 10).paddingAll(14),
                         validator: (mobileCont) {
-                          String value = mobileCont.toString();
-                          String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
-                          RegExp regExp = RegExp(pattern);
-                          if (value.length == 0) {
-                            return "Please enter mobile number";
-                          } else if (!regExp.hasMatch(value.toString())) {
-                            return "Contact number must be 10 digit only";
+                          if (mobileCont!.isEmpty) {
+                            return context.translate.lblPleaseEnterMobileNumber;
                           }
                           return null;
                         },
@@ -441,6 +435,7 @@ class HEditProfileScreenState extends State<HEditProfileScreen> {
                       AppTextField(
                         textFieldType: TextFieldType.NAME,
                         controller: designationCont,
+                        isValidationRequired: false,
                         focus: designationFocus,
                         decoration: inputDecoration(context, hint: context.translate.lblDesignation),
                       ),
@@ -581,7 +576,7 @@ class HEditProfileScreenState extends State<HEditProfileScreen> {
                       28.height,
                       Row(
                         children: [
-                          if (appStore.userType != UserTypeHandyman)
+                          if (appStore.userType != USER_TYPE_HANDYMAN)
                             AppButton(
                               text: context.translate.btnVerifyId,
                               height: 40,
@@ -592,7 +587,7 @@ class HEditProfileScreenState extends State<HEditProfileScreen> {
                                 VerifyProviderScreen().launch(context);
                               },
                             ).expand(),
-                          if (appStore.userType != UserTypeHandyman) 16.width,
+                          if (appStore.userType != USER_TYPE_HANDYMAN) 16.width,
                           AppButton(
                             text: context.translate.saveChanges,
                             height: 40,
